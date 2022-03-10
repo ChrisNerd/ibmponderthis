@@ -1,0 +1,118 @@
+Short answer:
+For the case n=7, d=5
+[1, 2, 5, 4, 9, 3, 7]
+[0, 1, 4, 5, 8, 2, 6]
+
+For the case n=8, d=6
+[1, 8, 2, 3, 4, 6, 7, 9]
+[0, 1, 4, 8, 2, 5, 9, 6]
+
+Long answer:
+It's funny, I thought I solved it after only a few minutes of coding and was disappointed that this month's puzzle was so easy!
+So I left it a day, with a thought in the back of my mind that it's never that easy so I must have missed something. It dawned on me in the middle of the night that I forgot to permute the elements in the circle! Ah, that'll add another 8 factorial to the time and memory complexity and make it appropriately difficult. Luckily, the only code modification I had to do was append .map(_.permutations) to a single line.
+
+I solved the n=7 case like this in about an hour but realized there were simple improvements to eliminate a lot of redundant circles.
+
+Let's get to some code.
+One of the early optimizations was instead of calling isProbablePrime(10), which is pretty fast since it using a built-in probabilistic primality test, I could just precompute the primality of all 5 and 6 digits and store them in an Boolean array for constant-time lookups.
+ def isPrime(num: Int): Boolean = Stream.from(2).takeWhile(x => x*x <= num).forall( x => num % x != 0)
+ val listOfPrimes = (0 until scala.math.pow(10, d).toInt).map( isPrime )
+
+The circles were originally and mistakenly just the subsets of size n.
+val circles = (0 to 9).toList.combinations(n)
+
+They were corrected to include all the permutations
+val circles = (0 to 9).toList.combinations(n).flatMap(_.permutations).toStream
+Unfortunately, this includes a lot of duplicate circles. To find a representative unique circle for each family of circles, we can rotate it such that the minimum element is the first one. We can then remove the "flipped" circles by selecting only circles where the clockwise position (from the minimum element) is less than the counterclockwise position.
+
+The minimum element, m, must be either 0,1,2 or 3 for the case of n=7. The remaining 6 elements must be selected from m+1 to 9.
+
+I think that's will give all the unique circles.
+val circles = for{
+  m <- (0 to (10-n)).par
+  rest <- ((m+1) to 9).combinations(n-1).flatMap(_.permutations)
+  if (rest.head < rest.last)
+ } yield (m +: rest).toList
+
+I loved how easy it was to parallelize my code with that beautiful little .par in that one line. It makes all the scoreCircle calls run in parallel.
+
+Now we can score a circle...
+ def scoreCircle( circle: (List[Int],Int)): Int = {
+  // Taking combinations(d) ensures we will have all distinct digits since circle is composed of distinct digits too.
+  val digits = circle._1.combinations(d).toList.flatMap( _.permutations )
+  val digitsWithoutLeadingZero = digits.filter( _.head !=0 )
+  val digitsThatArePrime = digitsWithoutLeadingZero.filter( digit =>  listOfPrimes(intListToInt(digit)) )
+  val scores = digitsThatArePrime.map( digit => scoreDigits(digit, circle._1))
+  if (circle._2 % scala.math.pow(10,4) == 0)
+   println(circle + " " + digits.size + " " + digitsWithoutLeadingZero.size + " " + digitsThatArePrime.size + " " + scores.sum)
+  scores.sum
+ }
+
+Now we have to score every digits with respect to its circle...
+ def scoreDigits(digits: List[Int], circle: List[Int]): Int = {
+  val indices = digits.map( digit => circle.indexOf(digit))
+  val slidingIndeces = indices.sliding(2)
+  slidingIndices.map{ pair =>
+   val diff = pair(1)-pair(0)
+   // pair(1) and pair(0) can each be from 0 to n-1
+   // so their difference can be from -(n-1) to +(n-1), excluding 0, which is -n+1 to n-1.
+   // We want to turn that into a value from 1 from floor(n/2) since the pair of indeces are distinct.
+   val absdiff = scala.math.abs(diff)
+   scala.math.min(absdiff, circle.size - absdiff)
+  }.sum
+ }
+
+I still don't really like using indexOf, since that's a tiny little search that shouldn't be really necessary, but I'm willing to live with it.
+It's made up for because I really like the ...sliding(2).map.(...).sum pattern.
+
+n=7, d=5 took 43200 circles, each with about 2160 digits, so 93 million calls to scoreDigits.
+n=8, d=6 has 113400 circles, each with about 20160 or 17640 digits, so about 2.3 billion scoreDigits calls.
+The ratio of the difficulty between the two problems is 24.5 times. The important thing is that even 113,000 elements is not too hard to hold in memory.
+
+Now we just have to make the calls to bring it all home...
+val scores = circles.zip(circles.zipWithIndex map scoreCircle)
+println("Max score when n=" + n + " and d=" + d + " is " + scores.maxBy(_._2) + " with the perms")
+println("Min score when n=" + n + " and d=" + d + " is " + scores.minBy(_._2) + " with the perms")
+
+The n=7 case runs in under a minute, and the bonus question pops out in about 10 minutes.
+Max score when n=7 and d=5 is (List(1, 2, 5, 4, 9, 3, 7),3051) with the perms
+Min score when n=7 and d=5 is (List(0, 1, 4, 5, 8, 2, 6),446) with the perms
+
+Max score when n=8 and d=6 is (List(1, 8, 2, 3, 4, 6, 7, 9),23209) with the perms
+Min score when n=8 and d=6 is (List(0, 1, 4, 8, 2, 5, 9, 6),8265) with the perms
+
+So maybe it's not so surprising that the maxes occur when we don't have a 0 (since we can't have a leading 0), and not having even numbers (since that would take out more primes out of the contemplation). The 3 and 7 were missing from both minimum circles.
+
+Looking back over my code, not sure if there's a better way to solve this. The only way I can think of is to iterate over the d digit primes and see if they are constructable from the given circle. That might give a good speedup since there are so few primes. So I tried it!
+ // Fun little recursive function
+ def intToListInt(i: Int): List[Int] = if (i==0) Nil else intToListInt(i/10) :+  i % 10
+ def scoreIfConstructable(digits: List[Int], circle: List[Int]): Option[Int] = {
+  if ( !(digits.toSet -- circle).isEmpty)
+   None
+  else
+   Some(
+    digits.map( digit => circle.indexOf(digit) ).sliding(2).map{ pair=>
+     val diff = scala.math.abs(pair(1) - pair(0))
+     scala.math.min(diff, n - diff)
+    }.sum
+   )
+ }
+ assert( scoreIfConstructable(List(2,4,1,0,3), List(4,7,3,6,2,0,1)) == Some(8))
+ 
+ def scoreCircle2( circle: (List[Int],Int)): Int = {
+  val score = dDigitPrimes.flatMap{ p =>
+   scoreIfConstructable(intToListInt(p), circle._1)
+  }.sum
+  if (circle._2 % scala.math.pow(10,4) == 0)
+   println(circle + " " + score)
+  score
+ }
+assert( scoreCircle2((List(4,7,3,6,2,0,1),0)) == 1882)
+
+I then timed the two approaches and this new one of iterating over the primes took about twice as long but thankfully produced the same results.
+
+Thanks for the fun 2022 puzzle,
+Hope you're staying safe and Omicron-free!!!
+
+Chris Shannon
+(from Calgary, Canada)
