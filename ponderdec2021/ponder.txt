@@ -1,0 +1,238 @@
+ah, the score is based on the mean...
+
+m/n is the arithmetic mean!
+
+since m= sum over a
+and n is number of elements in a.
+
+so score is
+sum over a  (a / mean(a)) ^ some power k.
+where the k is the arbitrary index permutation starting from 1.
+So reward a/mean(a) if >1 and high k.
+Now, it appears that maybe we should normalize the score by dividing it by n? Maybe that gives us 1.25
+
+Solution!!!
+List(L, R, R, L, L, R, <, R, R, >, <, <, L, >, >, <, <, <, >, >, >, <, <, <, >, L, >, >, <, <, R, <, R, R, >, >)
+"LRRLLR<RR><<L>><<<>>><<<>L>><<R<RR>>"
+        
+       L
+      R R
+     L L R
+    < R R >
+   < < L > >
+  < < < > > >
+ < < < > L > >
+< < R < R R > >
+        
+       L
+      L L
+     R R R
+    < R R >
+   < < L > >
+  < < < > > >
+ < < < > L > >
+< < R < R R > >
+List(19, 28, 14, 14, 7, 14, 7, 28, 19)
+18.00704491216615
+
+
+[4, 8, 2, 7, 10, 6, 3, 9, 1, 5]
+
+
+There are positions 1 through 10 inclusive
+1 2 3 4 5 6 7 8 9 10
+
+where 5 and 6 are the peaks of the bell curve
+5 is great. it's at the k^10th power.
+6 is so so.
+4 we should stear clear from. I
+
+
+  //>          
+                                                  //|         <
+                                                  //|        < >
+                                                  //|       R < >
+                                                  //|      L R L >
+                                                  //|     L < R < R
+                                                  //|    L > R < R >
+                                                  //|   > > > L < > L
+                                                  //|  > < L > > > < L
+                                                  //| < R R > L > L R R
+                                                  //|          
+                                                  //|         <
+                                                  //|        < >
+                                                  //|       R < >
+                                                  //|      R L L >
+                                                  //|     L < R < R
+                                                  //|    R > L < R >
+                                                  //|   > > > R < > L
+                                                  //|  > < R > > > < L
+                                                  //| < R L > R > L R R
+                                                  //| List(0, 5, 7, 3, 63, 58, 14, 0, 0, 0)
+                                                  //| 0.0
+                                                  //| Solution!!!
+                                                  //| List(L, R, >, <, <, L, <, L, <, >, <, R, <, <, >, <, <, L, R, L, L, <, L, L
+                                                  //| , R, >, R, R, L, R, R, >, <, R, >, >, <, R, <, L, L, >, R, >, >)
+                                                  //| solution  : Option[Int] = Some(11)
+
+
+List('L', 'R', '>', '<', '<', 'L', '<', 'L', '<', '>', '<', 'R', '<', '<', '>', '<', '<', 'L', 'R', 'L', 'L', '<', 'L', 'L', 'R', '>', 'R', 'R', 'L', 'R', 'R', '>', '<', 'R', '>', '>', '<', 'R', '<', 'L', 'L', '>', 'R', '>', '>')
+
+LR><<L<L<><R<<><<LRLL<LLR>RRLRR><R>><R<LL>R>>
+
+
+ printBoard(bonusSolution)                        //>          
+        L
+       R >
+      < < L
+     < L < >
+    < R < < >
+   < < L R L L
+  < L L R > R R
+ L R R > < R > >
+< R < L L > R > >                      1   2   3  4   5   6  7  8  9  10 
+ runEntireMGaltons(bonusSolution)                 //> res1: (List[Int], List[Char]) = (List(19, 10, 23, 6, 30, 25, 6, 3, 19, 9),L
+                                                  //| ist(L, L, >, <, <, R, <, L, <, >, <, L, <, <, >, <, <, R, R, L, R, <, R, L,
+                                                  //|  L, >, L, R, R, L, L, >, <, L, >, >, <, R, <, R, L, >, L, >, >))
+ println(runAndScore(bonusSolution))              //> 229.58881582203665/
+ 
+
+
+Short answer:
+"LRRLLR<RR><<L>><<<>>><<<>L>><<R<RR>>"
+results in a vector:
+List(19, 28, 14, 14, 7, 14, 7, 28, 19)
+and score:
+18.00704491216615
+
+Bonus:
+"LR><<L<L<><R<<><<LRLL<LLR>RRLRR><R>><R<LL>R>>"
+results in a vector:
+List(19, 10, 23, 6, 30, 25, 6, 3, 19, 9)
+and score: 229.588881582203665
+
+
+Long answer:
+For the n=9 case we are looking at 2^8=256 different paths that the ball can take.
+Since 256>150=m, we won't necessarily reach a periodic pattern. So there's no point in getting all fancy with tracing each pegs output with explicit functions like
+"ball will go L when n=1,3,4 or 7 (mod 8), R otherwise."
+
+So it seems the straightforward approach of letting it simulate m times in the best approach. It's too bad, I like the binomial distribution.
+
+My galton function was recursive, taking in the state of the board, incrementing the row number until it gets to the last row, and outputting the "a" slot that the ball exits into.
+
+ def galton(board: List[Char], currentRow: Int = 0, currentIndex: Int = 0): (Int, List[Char]) = {
+ if (debug) {
+  println("board")
+  printBoard(board)
+  }
+  val newBoard = board(currentIndex) match {
+   case 'R' => board.updated(currentIndex, 'L')
+   case 'L' => board.updated(currentIndex, 'R')
+   case '<' => board
+   case '>' => board
+  }
+  val nextIndex =    currentIndex + (if (List('R', '>') contains board(currentIndex) ) currentRow + 2  else  currentRow + 1)
+  if (debug)
+  {
+   println("Newboard")
+   printBoard(newBoard)
+   println("currentRow " + currentRow +  " currentIndex " + currentIndex + " nextIndex " + nextIndex)
+  }
+  
+  if (currentRow == n - 2)
+   (nextIndex - n*(n-1)/2, newBoard)
+  else
+   galton(newBoard, currentRow + 1, nextIndex)
+ }
+
+
+To run it m times, I used foldLeft on a function that accumulates the results.
+def runSingleGalton( runningListOfResults_Board_pair: (List[Int], List[Char]), currentRunNumber: Int ) =
+ {
+   val (galtonIndexOut, newBoard) = galton( runningListOfResults_Board_pair._2 )
+   (runningListOfResults_Board_pair._1.updated( galtonIndexOut, runningListOfResults_Board_pair._1(galtonIndexOut) + 1), newBoard)
+ }                                               
+ 
+ def runEntireMGaltons( in: List[Char] ) = (1 to m).foldLeft( List.fill(n)(0), in )( runSingleGalton )
+
+My scoring routine needed a slight adjustment to account for Scala's 0-indexing.
+def score(a: List[Int],  sigma: List[Int]): Double =
+  sigma.zipWithIndex.map{ case(sigmak, k) => scala.math.pow( a(sigmak-1).toDouble * n /m, k.toDouble + 1) }.product
+
+
+Now all that's left is the optimizer!
+I just used old code for a simulating annealing optimizer, but it didn't produce a result overnight. I think it too often got a score of 0.
+
+I tried to reverse engineer the scoring metric and realized that the n/m term is actually 1/ the average of a. So really our terms are <1 if ak is below average and >1 if ak is above average. The ones with the highest k and the most important since the ratio is raised to the power k.
+I gave it some thought and realized that the most of the left side must form a channel of < to get many balls into the 1 position.
+Likewise, we need a lot of > in the right side to get them in the 9 slot, since 1 and 9 are the highest ks in the given sigma.
+I also studied the scoring function to see what's the maximum score possible, subject to the constain of sum(a)=m.
+This is a constrained optimization problem solvable via lagrangian multipliers.
+
+We have the function we want to maximize, score = f(a), and the constraint g(a) = 0 = -m + sum(a)
+ L(a,lambda) = f(a) - lambda * g(a)
+ 
+ f(a) = a_1^1 * a_2^2 * a_3^3 .... a_9^9 (ignoring the m and n terms since they are constants)
+ 
+ We solve the lagrangian by setting the gradiant to 0.
+ The gradiant is just d/da1, d/da2,... d/da9, d/d lambda
+ 
+ d/da1 (f - lambda g) = a_2^2 *a_3^3...a_9^9 - lambda   // the lambda term is because g(a) = -m + a_1 + a_2 + a_3...+ a_9, so dg/da_i = 1
+
+We'll end up with 9 equations like
+a_2^2 *a_3^3...a_9^9 = lambda (1)
+a_1 * 2 a_2 *a_3^3...a_9^9 = lambda  (2)
+a_1 * a_2^2 *3a_3^2...a_9^9 = lambda  (3)
+...
+
+We can do (2)/(1) to get a_2/2a_1 = 1  => a_2=2a_1
+and likewise (3)/(1)  gives a_3 = 3a1
+and (i)/(1) gives =a_i = i * a_1
+
+So the a terms are linear! Surprised, I would have guessed they were geometric.
+Anyways, we can use the constraint m= sum(a) to finish up.
+m=a_1 + 2a_1 + 3a_1 + ... 9a_1 = 45 a_1.
+So a_1 = m/45, a_2= 2m/45, a_3 = 3m/45.
+
+Letting m=150 like the first question, we round our a values to
+[3 7 10 13 17 20 23 27 30],
+which gives a score of 750.616...
+Not limiting ourselves to integers,
+a1=10/3, a2=20/3 a3=30/3=10 etc gives
+score=f=759.2063128989328779502486372232936728559616
+
+I modified my initial guess and my neighbour function to "set in stone" a bunch of <s and >s, and also restrict certain positions from becoming a < or >.
+
+ val changeableList = List(
+            'x',            // 1
+          'x','x',          // 2
+        'x','x','x',        // 3
+      '<','L','R','>',          // 4 need the channels to start after the 3rd row to force 1/8 of the 150 into slots 1 and 9.
+    '<','L','L','R','>',          // 5
+  '<','<','L','R','>','>',          // 6
+ '<','<','L','L','R','>','>',          // 7
+'<','<','x','L','L','x','>','>',          // 8
+)
+
+// x can be only L or R.
+// L and R can also be < and >.
+
+With that simple change, it produced a solution almost immediately.
+       L
+      R R
+     L L R
+    < R R >
+   < < L > >
+  < < < > > >
+ < < < > L > >
+< < R < R R > >
+Looks a bit like a Christmas tree!
+
+When I moved onto the bonus question I had to undo this ad hoc approach and reinitialize it with a random string, and use a purely random substitition in my neighbour routine. But for whatever reason, it produced a solution after only 11 resets, within a minute. Maybe that good luck was my Christmas present!
+
+Thanks for another fun puzzle,
+
+Chris Shannon
+
+(from Calgary, Canada)
