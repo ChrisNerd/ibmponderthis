@@ -1,0 +1,54 @@
+Short answer:
+[(0,3), "C3", (4,6), "R5", (5,6), "C6"]
+For the 10x10 bonus maze:
+["C0", (1,3), "R1", (2,5), "R2", (1,7), "R5", (2,7), "R2", (3,8), "C8", (7,7), "C8", (9,9)]
+
+Long answer:
+Not too bad this month. Glad to solve one again after a bit of a dry spell this summer.
+The 7x7 grid I solved by pen and paper. My first easy solution involved two consecutive shifts down column 6, but when I re-read the rules, that was not allowed. But a simple "stop short" move fixed that. The answer present is one found by my algorithm later.
+
+I thought I solved the 10x10 grid with paper as well but, again, that was before I noticed the "no consecutive shifts" rule. I could have done it with only 12 moves if consecutive row or column shifts were allowed.
+
+So I figured I had to resort to programming after all.
+
+Working it out with pen and paper let me realize that we don't need to keep track of where the mouse is, we only need to mark which cells are visitable. If (9,9) ends up being visitable, then we can simply work backwards to find out how it got there. This keeps the search space down, as we only need to consider the 20 possible row or column shifts, 7 times. So 20^7 is the total search space size. Not too small either. Definitely still need to be cleaver to short circuit the searches, or do a randomized search like Simulated Annealing (which is what I ended up doing).
+
+So a candidate solution might look like:
+List(1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 8, 0, 9), which is a size 14 vector
+where the numbers come in pairs, where (1,2) means shift column 2, and (0,8) means shift row 8. This was an input format that was amenable to the optimization algorithm as it has the property that we can reach the entire space by a series of simple "neighbour" moves. That is we can change any row to a column (0,8) to (1,8), or change any row or column number e.g. (0,8) to (0,9).
+Scoring this candidate solution involves performing a "walk" (marking all the visitable cells) followed by the given shift, and repeating this pair of operations 7 times.
+This will show all the visitable cells in the maze. I decided a good metric for the quality of this input would be the manhattan distance from the bottom right.
+def score( input: List[Int] ): Int = {
+ val finalmaze = input.grouped(2).foldLeft(mazeOriginalWithVisitedInitialized)(shiftRowOrColumn)
+ val furthestReach = (for{
+  i <- 0 until m
+  j <- 0 until m
+  if (finalmaze(i)(j)._2)
+  } yield i+j ).max
+ 
+  2*(m-1) - furthestReach
+ } 
+
+When this score returns 0, we have a solution.
+Unfortunately, it didn't return a solution even after I left it running overnight. I double-checked the algorithm was correct and at least somewhat efficient as it solved the 7x7 grid nearly instantly.
+I pondered it for a day, then when I re-read the rules, I noticed it said we had to alternate "moving" and "shifting" but didn't say which one we had to start with. A quick change to my program to swap the order:
+ def shiftRowOrColumn( maze: List[List[(List[Char], Boolean)]], input: List[Int]) = {
+  if (m==7)  // The bonus question goes shift-move-shift-move
+            // while the 7x7 grid goes move-shift-move-shift
+   if (input(0) == 0)
+    shiftRow(input(1), walk(maze))
+   else
+    shiftColumn(input(1), walk(maze))
+  else
+   if (input(0) == 0)
+    walk(shiftRow(input(1), maze))
+   else
+    walk(shiftColumn(input(1), maze))
+ }
+
+And just for fun, I was able to reuse some SVG code from a previous ponder this to create some animations of the solutions (attached).
+
+Thanks for another fun puzzle!!!
+
+Chris Shannon
+(from Calgary, Canada)
