@@ -1,0 +1,19 @@
+Short answer:
+
+["D8", "R11", "D14", "R10", "R9", "D13", "L10", "D4", "D1", "D11", "D3", "R5", "R13", "D3", "D13", "L4", "D6", "L2", "U6", "L5", "U8", "D1", "D11", (2,0), "D6", "D8", "D2", "L4", "D1", (1,2), "R13", "D4", "R2", "D8", "D1", "U13", (2,1), "U12", "L12", "D3", "D4", "L3", "L14", "L8", (3,3), "R2", "D13", "D9", "L9", "U4", "R4", "L14", (8,6), "D7", (14,14)]
+
+Bonus:
+["R8", "R3", "R1", "D2", "R9", "L4", "R2", "L1", "D1", "R4", "R2", "R4", "D1", "R9", "U7", "R1", "D9", "L2", (9,9)]
+
+Long answer:
+Only minor modifications from last month's code to solve this one.
+The main conceptual difference was that instead of simply having "walkable" or visitable cells, after every shift, I blanked the cells along the moved row or column. They could be re-visited from any visited cell after that.
+
+I used the same simulated annealing solver. Noticed both the main and bonus question could be slightly improved up, such as removing the last D9 in the bonus solution.
+
+But yeah, nice to build on the work from last month.
+
+Chris Shannon
+(from Calgary, Canada)
+
+
