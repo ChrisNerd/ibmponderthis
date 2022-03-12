@@ -1,0 +1,40 @@
+Short answer:
+Solution to N=9
+ 
+5, 1, 3
+5, 4
+1, 6, 2
+1, 3, 4
+
+
+
+Long answer:
+Power sets of power sets! I sort of brute forced this, but it looked so clean that I couldn't resist.
+
+subsets returns the powerset of the 1 to 9. We filter for experiments that sum to less than 9.5. We further filter out the experiments that contain the empty set and a single balloon, as those would give no discriminatory power to Bob. With our set of valid individual experiments, we take the power set of that! This gives a set of "presentations" for Alice to give to Bob.
+
+That's all in the first line of code:
+
+val presentations = (1 to MAXBALLOON).toSet.subsets.filter(_.sum < MAXBALLOON + .5).filter(_.size >= 2).toSet.subsets
+
+
+// Bob's job is to look for failing tests amoungst all the possible permutations.
+
+  /// We're looking for if all the permutations, 1 maps to 1 are the only ones that pass all aliceTests
+  // In other words, we're looking for if 1 maps to anything else, it shouldn't pass at least one of the tests.
+ def bobDiscriminator(alice: Set[Set[Int]]): Boolean = {
+  (1 to MAXBALLOON).permutations.forall(bobCandidate => bobCandidate(0) == 1 ||  alice.exists {
+    aliceTest => aliceTest.map(i => bobCandidate(i-1)).sum > MAXBALLOON + .5 })
+  
+  } 
+
+// And because presentations is sorted by subset size, the first found set will be the smallest, which happens to be of size ==4.
+  presentations.find( bobDiscriminator )  
+// Set(5, 1, 3), Set(5, 4), Set(1, 6, 2), Set(1, 3, 4))
+
+
+Thanks for another fun puzzle!
+
+Chris Shannon
+
+(from Calgary Canada)

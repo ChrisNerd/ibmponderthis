@@ -1,0 +1,58 @@
+w_1=2 // Alice had 2 litres
+w_2=3 // Bob had 3 litres
+w=5 // Sum
+ contribute(w_i) withdraw net (g_i/3) n*net=g_i
+a   2            -5/3     2-5/3       1
+b   3            -5/3     3-5/3       4
+c   0            -5/3      -5/3       -5
+net 5            -5       0
+
+net is what's owed
+2-5/3 = wi - w/n, (where n=10 in the Sauron case)
+(2*3 - 5)/3
+(6-5)/3
+1/3
+
+(3*3 - 5)/3
+(9-5)/3
+4/3
+
+-5/3
+
+Now for sum of w_i == sum of g_i
+sum of net = w - (n-1)*w/n
+           = w(1-(n-1)/n)
+	   = w(n-n+1)/n
+	   = w(1)/n
+	   = w/n
+n*sum of net = w
+
+g_i = n*wi-w
+
+
+So when it says "each one of the ring holders got G_i (G_1, G_2, G_3, ..., G_9) tiny nuggets of gold in return." it implies that all g_i>0. That means that
+g_i >0
+n*wi-w > 0
+n*wi > w
+wi > w/n
+With n=10, and 9 humans (1<=i<=9)
+Let w_avg = w/9 be the average w_i
+then 9 * w_avg = w
+and wi > 9/10 * w_avg
+Each w_i is greater than 9/10 * the average.
+That means that they are all clustered far away from 0, and at least 8 of them are prime?
+
+Hmmm, looks like we're looking for a consecutive set of primes.
+
+Find a prime, make it w_1.
+Find the next 8 primes.
+Calculate w = sum w_i
+g_1 = 10*w_1 - w
+if g_1 < 0
+continue
+else
+calculate g_i = n*w_i -w
+
+if g_i.countif( isPrime ) >= 8
+found solution --> print out w_i
+

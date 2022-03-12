@@ -1,0 +1,160 @@
+Short answer
+Solution
+(3,-3)
+(-1,-1)
+(0,0)
+(4,-2)
+(2,-1)
+(4,0)
+(2,0)
+(1,-2)
+(3,0)
+(0,-2)
+(1,-1)
+(-1,0)
+(4,-1)
+(3,-4)
+(1,0)
+(-1,-2)
+(3,-2)
+(0,-1)
+(3,-1)
+(2,-2)
+(See attached jpg image)
+
+Long answer:
+I iterated through all the ways to join 5 L shapes, and filtered for the desired requirements:
+"find an asymmetrical shape without holes that can be constructed both from five "L"s and from five "J"s"
+val solutions = createBlob(Iterator(L), 1).filter(b=> isConstructableByJ(b) && !hasHoles(b) && !isSymmetric(b))
+
+Starting with one L, createBlob creates all the combinations of 5 Ls.
+ def createBlob(blocks: Iterator[Set[(Int,Int)]], depth: Int): Iterator[Set[(Int,Int)]] = {
+  if (depth == 5 )
+   blocks
+  else
+   createBlob (
+    for {
+     block <- blocks
+     Js <- (0 to 3) map { r => rotNTimes(block,r) }
+     newL <- (0 to 3) map { r => rotNTimes(L, r) }
+     os <- (Js.minBy(_._2)._2 - newL.maxBy(_._2)._2) to (Js.maxBy(_._2)._2 - newL.minBy(_._2)._2)
+     if (!hasHoles(addL(Js, newL, os)))
+    } yield addL(Js, newL, os),
+   depth + 1
+  )
+ }
+
+ // Returns a new block made out of n+1 L shaped tetrominos (Set with 4*(n+1) elements, where n is the block.size/4)
+ // Since createBlob rotates both block and newJ, (accounting for all 16 combinations w.r.t. rotations) we will always slide in from right to left.
+We are given the positions of the block, and the y coordinate of the new tetromino to add. We just have to start it on the right, and slide it to the left one unit at a time until we see a collision (block.intersect(t...).nonEmpty)
+We then back off one unit to the right to the uncollided state and merge the two.
+
+ def addL(block: Set[(Int,Int)], tToAdd: Set[(Int,Int)], offset: Int): Set[(Int,Int)]  = {
+  val maxBx = block.maxBy(_._1)._1
+  val mintx = tToAdd.minBy(_._1)._1
+  val mint = Stream.from(0).find{ t => block.intersect( tToAdd.map{case (x,y) => (x - t + maxBx-mintx, y+offset ) } ).nonEmpty}
+  mint match {
+   case Some(t) => block ++ {tToAdd.map{ case (x,y) => (x + 1 - t + maxBx - mintx, y + offset) } }
+   case None => {
+    println("Missed")
+    block
+   }
+  }
+ } 
+
+
+isConstructableByJ is a test to see if a block (which is made from Ls) can be constructed by Js. It does this by going through all the elements in the block, finding the only that has the fewest candidate J that pass through it, iterating through those candidate, subtracting the 4 J blocks (composing that candidate) from the original, and recursively testing the remaining blocks.
+
+def isConstructableByJ(block: Set[(Int,Int)]): Boolean = {
+  if (block.size == 0)
+   true
+  else
+  {
+   val bMin = block.minBy( el => JsPerElement(el,block).size)
+   JsPerElement(bMin, block).exists(Jblock => isConstructableByJ(block -- Jblock))
+  }
+ }
+
+Returns a sequence of all the Js that can pass through element el.
+There are a maximum of 16 Js (4 rotations, and 4 translation (shifting) possibilities)
+ def JsPerElement( el: (Int,Int) , block: Set[(Int,Int)] ) : IndexedSeq[Set[(Int,Int)]] = {
+  for {
+  rotatedJ <- ((0 to 3) map { r => rotNTimes(J,r) })
+  pieceOfJ <- rotatedJ
+  val shiftedJ = rotatedJ map { p => (el._1 + p._1- pieceOfJ._1, el._2 + p._2 - pieceOfJ._2) }
+  if ( block.intersect(shiftedJ) == shiftedJ)
+ } yield shiftedJ
+ }
+
+
+Test for symmetry
+ def isSymmetric(block: Set[(Int,Int)]) : Boolean = {
+  Set('H','V','\\','/') exists { sym =>
+   sym match {
+    case 'H' =>  normalize(block) == normalize(multiply2X2(block, List((-1,0),(0,1))))
+    case 'V' =>  normalize(block) == normalize(multiply2X2(block, List((1,0),(0,-1))))
+    case '\\' => normalize(block) == normalize(multiply2X2(block, List((0,-1),(-1,0))))
+    case '/' =>  normalize(block) == normalize(multiply2X2(block, List((0,1),(1,0))))
+   }
+  }
+ } 
+
+normalize just puts it in the upper right quadrant (makes it so the lowest element is (0,0)).
+That way two blocks can be compared after rotations and flips.
+ def normalize(block: Set[(Int,Int)]) = {
+   val minx = block.minBy(_._1)._1
+   val miny = block.minBy(_._2)._2
+   block.map{ case (x,y) => (x-minx,y-miny)}
+  }
+   
+
+To determine if the shape has holes, we basically do a flood fill, starting from the borders.
+When we are done, we see if the whole area is flooded.
+We use the concept of a "frontier", which are initialized as the border points that are not occupied ( -- b).
+
+  def hasHoles(b: Set[(Int,Int)]) : Boolean = {
+   val minx = b.minBy(_._1)._1
+   val maxx = b.maxBy(_._1)._1
+   val miny = b.minBy(_._2)._2
+   val maxy = b.maxBy(_._2)._2
+   
+   val fro = ((minx to maxx) map (x => (x,miny))).toSet ++
+   ((minx to maxx) map (x => (x,maxy))).toSet ++
+   ((miny to maxy) map (y => (minx,y))).toSet ++
+   ((miny to maxy) map (y => (maxx,y))).toSet
+   
+   hasHolesR(fro -- b, b)
+  } 
+
+The frontier advances recursively, each time adding the old frontier to the block, and the new frontier is only empty neighbours of the old frontier.
+The size of the area is a rectancle, so we can tell if it's full by doing an area calculation.
+  def hasHolesR( frontier: Set[(Int,Int)], b: Set[(Int,Int)]) : Boolean = frontier.size match {
+  // Are there holes
+  case 0 => b.size != (b.maxBy(_._1)._1 - b.minBy(_._1)._1 + 1) *
+                      (b.maxBy(_._2)._2 - b.minBy(_._2)._2 + 1)
+  case _ => hasHolesR( (frontier flatMap { case (x,y) => Set((x+1,y),(x-1,y),(x,y-1),(x,y+1)) }).filter{ case(x,y) =>
+   x >= b.minBy(_._1)._1 &&
+   x <= b.maxBy(_._1)._1 &&
+   y >= b.minBy(_._2)._2 &&
+   y <= b.maxBy(_._2)._2
+   } -- b , b ++ frontier)
+  }                                           
+  
+val L = Set((0,0),(0,1),(1,0),(0,2))          
+  
+  def multiply2X2(b: Set[(Int,Int)], m: List[(Int,Int)]) : Set[(Int,Int)] = {
+   b map { case (x,y) => ( m(0)._1 * x + m(0)._2 * y , m(1)._1 * x + m(1)._2 *y) }
+  }                                              
+  val J = multiply2X2(L, List((1,0),(0,-1))) 
+                                                  //> J  : Set[(Int, Int)] = Set((0,0), (0,-1), (1,0), (0,-2))
+  
+Quick and dirty and very inefficient rotation, but I love recursion so much.
+  def rotNTimes(b: Set[(Int,Int)], n: Int): Set[(Int,Int)] = n match {
+   case 0 => b
+   case _ => multiply2X2(rotNTimes(b,n-1), List( (0,1), (-1,0)))
+  }
+
+Thanks for another fun puzzle,
+
+Chris Shannon
+from Calgary, Canada

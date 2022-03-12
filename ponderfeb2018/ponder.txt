@@ -1,0 +1,121 @@
+The original question was "Find possible n_i such that the expected
+time till the end of the game, rounded to the nearest second, is
+5841."
+
+Interesting that you changed the problem to 2569.
+
+The short answer to 2569:
+The only four solutions are:
+1, 9, 13
+2, 9, 13  *** 2nd letter of the alphabet is "B", 9th is "I", 13th is
+"M".... rearranging the hidden message is BMI... IBM is concerned
+about the obesity epidemic.
+3, 9, 13
+4, 9, 13
+
+Long solution:
+
+The distribution of n1, n2, and n3, the number of rolls respectively,
+is the Coin Collector's Problem.
+
+I don't think there is any elegant way to calculate n1, n2, or n3 from
+expected maximum. One must go the other way; calculate the expected
+maximum from the ns, then search for solutions. Fortunately, the
+search space is very small, since the expected length of a single dice
+game gives the upper limit of a search. Adding other players and
+taking the maximum only increases the expected maximum.
+
+Consider a single game with a known n1. The game starts with all
+available faces, so there's a 100% chance that the game will advance
+to the state of n1-1 available faces after the first throw. The second
+throw has a 1/n1 chance of remaining in the same state (failure) and
+its complement (n1-1)/n1 chance of moving on to the next state
+(success). The number of throws required until your first success is a
+geometric distribution with probability 1/n1.
+
+As the game progresses, it will become harder and harder to advance.
+When you are are the stage with i faces taken, and n-i available, your
+chance of success on any given throw is i/n, and the distribution of
+the number of throws until success is geometric with probability i/n1.
+
+The distribution of the length of the game, which is what we're
+interested in, is the sum of these geometric distributions. Random
+variables are added by convolving their probability mass functions.
+This can be efficiently implemented by first taking the 1 sided Z
+transform of each of the distributions, then multiplying them.
+
+pNequalsn = [1];
+for i=1:n
+pNequalsn=fftconv(pNequalsn, geopdf(0:n*10, i/n));
+%pNequalsn=conv(pNequalsn, geopdf(0:n*10, i/n));
+end
+
+% Add the appropriate number of zeroes at the beginning, easier to do
+it here than in the convolution step
+pNequalsn = [zeros(1,n-1) pNequalsn];
+
+After some googling, I found a closed form of the distribution
+involving Stirling Numbers of the Second Kind. The two methods were
+compared to corroborate each other.
+
+for m=1:280
+pNequalsmExact(m) =1/n^m * n* nstir2k(m-1,n-1) * factorial(n-1);
+end
+
+
+This distribution can be called with 3 different values for n. Let M
+be the random variable that is the maximum of the 3 random variables
+that are game lengths n1, n2, n3.
+
+We're interested in the expected max = k * Pr(M=k) summed over all k.
+
+There are two ways to get the distribution of the max.
+The hard way:
+ - The probability that max is k, when 1, 2 or all 3 of n1, n2, and n3
+are k, and the rest are (strictly) less than k.
+   Pr(M=k) =
+Pr(n1=k) * Pr (n2<k) * Pr(n3<k) +
+Pr(n1<k) * Pr (n2=k) * Pr(n3<k) +
+Pr(n1<k) * Pr (n2<k) * Pr(n3=k) +
+
+Pr(n1=k) * Pr (n2=k) * Pr(n3<k) +
+Pr(n1=k) * Pr (n2<k) * Pr(n3=k) +
+Pr(n1<k) * Pr (n2=k) * Pr(n3=k) +
+
+Pr(n1=k) * Pr (n2=k) * Pr(n3=k)
+
+The easier way is to calculate the probability that the max is less
+than or equal to k, which occurs when all 3 of n1, n2, n3 are also
+less than or equal to k. This is intuitive - if and only if they are
+all at most k, then the max is at most k. That's pretty much the
+definition of maximum.
+Pr(M<=k) = Pr(n1<=k) * Pr(n2<=k) * Pr(n3<=k)
+Pr(M=k) is simply the difference between two Pr(M<=k) entries. (and is
+pretty much the fundamental theorem of calculus)
+Pr(M=k) = Pr(M<=k) - Pr(M<= k-1)
+
+The two approaches are analogous to calculating the volume of the
+outer layer of a cube. The first is to add 3 square faces, 3 skinny
+rectangles and 1 small cube.
+The second way is to subtract the volume of the larger cube from the
+smaller one.
+
+In the Octave implementation, you have to be careful with your indices
+because you lose an entry by doing the derivative, so you have to pad
+it with a single 0.
+pMaxEqualsn = diff([0 pMaxLessOrEqualsn]);
+
+Now the expected value is calculated with the usual weighted sum.
+expectMax = sum((1:length(pMaxEqualsn)) .* pMaxEqualsn);
+
+I used double precision floating points, but the striling numbers grow
+so fast that the exact form calculation overflowed (>10^100) about
+n=280, giving only about 4 or 5 significant digits. The agreement
+between the two methods both showed that 4,9,13 is a solution but each
+rounding to the desired second from the opposite way.
+
+Thanks for another fun puzzle!
+
+Chris Shannon
+
+From Calgary, Canada

@@ -1,0 +1,64 @@
+We have 11 coins, and exactly two of them are counterfeit with slightly smaller weights than the others. Find the two fake coins using just four weighings of a double-pan balance scale.
+
+Supply your answer as four lines of dash-separated lists of the letters A-K corresponding to the coins.
+
+As an example, here is a solution for the case of seven coins:
+ADE-BCG
+AG-BE
+AC-DG
+
+
+****
+
+So for each 11 choose 2 = 55 combinations, we need a unique output set
+7 choose 2 = 21.
+
+Say AB is one case we get
+0
+0
+-1.
+AC gives
+0
+-1
+-2, does double pan read -1??
+
+So how many different experiments can we run anyway?
+Makes sense to only balance equal numbers, so 1 vs 1, up to 5 vs 5.
+So 11 choose i, gives you one side, then there are 11-i remaining, of which you have to choose another i, so (11-i) choose i.
+But this will double count exactly, since you can pick set A on the left and B on the right, and then again A and B reversed sides.
+We can filter out half of them by, say, finding the lowest coin amongst both sets and only allowing it to be on the left.
+
+So if the lowest coin is on the left, we can choose 4 from 11, then find the lowest amounst those 4 then drop everything below that from the remaining 7.
+
+So 1/2 * sum from i=1 to 5 of 11 choose i * (11-i)choose i
+http://www.wolframalpha.com/input/?i=1%2F2+*+sum+from+i%3D1+to+5+of+((11+choose+i)+*+((11-i)+choose+i))
+12826.
+
+That's not bad.
+
+Now our solution will be a set of 4 of those experiments.
+12826 choose 4 = 1.12706903782935 × 10^15
+Yikes. Possible I guess. 1 Quadrillion.
+
+Hmmm, maybe there's no point in doing 1 vs 1 experiments.
+
+There's also no point in selecting a set 4 experiments that don't "cover" all 11 coins? Or 9 coins?
+
+So 1/2 * sum from i=**2** to 5 of 11 choose i * (11-i)choose i
+Haha, 12771
+
+Maybe the 5 vs 5 won't do much good either?
+
+
+
+1/2 * sum from i=2 to 4 of ((11 choose i) * ((11-i) choose i))
+= 11385
+
+11385 choose 4 = 7 X 10^14... Maybe we should just go for it.
+
+Maybe, without loss of generality we can start with ABCD vs EFGH,
+then the other 3 tests shouldn't include an exact duplicate of any set before it?
+ABCD vs EFGH
+That's only 1 out of the 12826 possibilities, so we now have to select another 3 from the 12825, so 12825 choose 3 = 3X10^11,.. better! That seems doable.
+
+

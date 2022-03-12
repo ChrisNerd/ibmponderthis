@@ -1,0 +1,27 @@
+Simulated annealing.
+
+Or, speeed up. At least 2 (but no more than 8) points are on the perimeter. 3<=x<=8. No more than 2 per side.
+
+That leaves 3 <= y <= 9 points on the interior.
+
+
+HHHmmm,
+Maybe make a hash table that we can use to make a taboo list of points based on area.
+
+So an entry will look like this:
+Given an area of 32, the following pairs of points will give it:
+((5,2),(7,9))
+((3,6),(-5,7))
+((-1,8),(-8,3))
+and all the appropriate symmetries.
+
+We can build this table by going through 600 choose 2 possibilities by fixing the third point at (0,0).
+
+So what does that get us? Say we have n points, with n*(n-1)/2 areasAlready: Set[Int], and we're looking to add another point.
+
+
+Hmm, given two points, we can do a greatest common divisor on their deltax and deltay to get their coprime direction vector. This can be used to eliminate other candidates. Say 2 points give a coprime direction vector of (5,7). Then we can eliminate allpoint.map(_+(5,7)*(1,2,3,-1,-2,...))
+
+Maybe the secret is to only add points that result in nothing but large coprime direction vectors?
+
+Given a triangle (3 points), what points can be eliminated? If you bisect each angle, you can eliminate along each of those 3 vectors. Hmm, maybe not bisect, but some sort of weighted bisect?!! Also parallel to each side but the height * -1.

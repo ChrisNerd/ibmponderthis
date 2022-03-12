@@ -1,0 +1,348 @@
+Short answer:
+get, gnu, hue, out, eon, hog, nth.
+
+Long answer:
+
+If we let n be the total number of people used, and c be the number of groups of 3 required, we're looking to find the minimum c.
+
+Clearly, n must be at least 5. If n was 4 we could have 2 men and 2 women, making a mono-gendered group of 3 impossible.
+
+There are n choose 3 ways of choosing groups of 3. So c can be at most 5 choose 3 = 10.
+
+Trying n=6, then n=7, then n=8, we can brute force try all ways of choosing c groups of 3. We must be careful because there are ((n choose 3) choose c) combinations, which is kind of scary (an iterated factorial)! Our test will be whether it can find a mono-gendered group for each of the 2^n ways of having n people. So we're looking at an O(2^n * (n!)!).
+(n=6,c=7) gives no results, neither do (n=7,c=6), (n=8,c=6), so we can be pretty confident that the minumum c is 7.
+ val n = 7
+ val c = 7
+ def binaryListOfSize(l: Int): List[List[Int]] =
+ {
+  if (l == 0)
+   List(List())
+  else
+   for {
+    first <- (0 to 1).toList
+    rest <- binaryListOfSize(l-1)
+   } yield first :: rest
+ }
+
+ val allGenderCombs = binaryListOfSize(n)
+ // = List(List(0, 0, 0, 0, 0, 0, 0), List(0, 0, 0, 0, 0, 0, 1),...List(1, 1, 1, 1, 1, 1, 1))
+ val allGroupsOf3 = (0 until n).toSet.subsets(3)
+ val pickingCGroups = allGroupsOf3.toSet.subsets(c)
+ val solutions = pickingCGroups.filter(           // all the ways to pick 7 groups, filtering for ...
+  possibleSolution => allGenderCombs.forall(      // passing the test for all the 2^n ways that the genders can be arranged ...
+   genderCombo => possibleSolution.exists(        // is there at least 1 set (group of 3) from our possible solution ...
+    _.map(                                        // that finds a mono-gendered group?
+     genderCombo(_)                               // (indexing genderCombo by the entries in possibleSolution, since the entry in possibleSolution is a Set,
+    ).size == 1                                   // the map also returns a set - eliminating duplicates
+   )
+  )                                              
+ )
+
+Great! This gives us all the solutions, here's one:
+Set(0, 2, 3), Set(5, 1, 3), Set(0, 5, 4), Set(5, 6, 2), Set(0, 1, 6), Set(6, 3, 4), Set(1, 2, 4))
+They have a really pretty matrix representation (kind of like a multiple of a binary doubly stochastic matrix), which gives further evidence that c=7 is the minimum c.
+0123456
+xxx   
+x  xx 
+x    xx
+ x x x
+ x  x x
+  xx  x
+  x xx 
+It looks like this 7x7 matrix can be generalized by a fairly simple greedy algorithm, to get mono-gendered groups of 4 or higher.
+
+Now we just have to find the words. I downloaded a scrabble list of all the 3 letter English words, (there's no challenge in using other languages), then I manually went through the list and delete all words that weren't common words (since the first run of this algorithm resulted in too many words that I'd never heard of before).
+val all3LetterWords =  Source.fromFile("3letters2.txt").getLines.toList
+val allWords = all3LetterWords.map(_.toLowerCase()).filter(_.distinct.size==3)
+Then since we only need to use 7 letters, we should rank the letter usage:
+val counts = ('a' to 'z') map ( x=> (x, allWords.count(word => word contains x)))
+counts.sortBy(- _._2)                             //> res1: scala.collection.immutable.IndexedSeq[(Char, Int)] = Vector((a,140),
+                                                  //| (o,111), (e,103), (i,98), (t,93), (r,71), (p,68), (n,66), (u,66), (g,63), (
+                                                  //| b,60), (d,59), (s,59), (y,56), (m,51), (l,47), (w,43), (h,39), (c,32), (f,3
+                                                  //| 2), (k,18), (x,16), (j,14), (v,8), (z,6), (q,0))
+
+This is not quite "etaoin shrdlu" like I thought! Interesting that 'b' and 'p' are way up there in 3-letter words (which are the voiced and voiceless bilabial stops respectively) relative to English as a whole.
+ // This gives no solutions unless we take(at least 14) (up to at least 'y')
+ // We'll go through all the 7 letter subsets of the top 20? letters.
+ val sevenLettersSubsets = counts.sortBy(- _._2).take(20).map(_._1).toSet.subsets(7)
+ // I think all solutions are the same by symmetry, so we'll just go ahead and take the first.
+ val firstSolution = solutions.take(1).toList.head.toList
+
+ val stringSolutitons = sevenLettersSubsets.filter { sevenLetters =>
+  val finalDict = allWords.filter(_.toCharArray.toSet subsetOf sevenLetters )
+  val finalDictWithPermutations = finalDict.flatMap(_.permutations)
+  sevenLetters.mkString.permutations
+  .exists( sevenLetterWord =>
+   firstSolution.forall( finalDictWithPermutations contains _.map( sevenLetterWord.toCharArray()(_)).mkString) )
+ }
+
+Now that we've found all the sets of 7 letters that give a solution. We now print a set of 7 3-letter words for each (boo for code duplication!!!)
+
+ stringSolutitons.foreach{ sevenLetters =>
+  val finalDict = allWords.filter(_.toCharArray.toSet subsetOf sevenLetters )
+  val finalDictWithPermutations = finalDict.flatMap(_.permutations)
+
+  val sevenLetterWordsSolutions = sevenLetters.mkString.permutations.filter( sevenLetterWord =>
+   firstSolution.forall{ finalDictWithPermutations contains _.map{ sevenLetterWord.toCharArray()(_)}.mkString}
+  )
+ 
+  // No point in taking more than 1 permutation, they are the same 3-letter words, just in a different order
+  sevenLetterWordsSolutions.take(1).foreach{ sevenLetterWord =>
+   println("sevenLetterWord Solutions = ", sevenLetterWord)
+   firstSolution.foreach{ setOfInts =>
+    val scrambledWord = setOfInts.map( sevenLetterWord.toCharArray()(_)).mkString
+    val unscrambledWord = finalDict.find(_.toCharArray.toSet == scrambledWord.toSet)
+    println (scrambledWord, unscrambledWord.get)
+   }
+  }
+ } 
+                                                  //> (sevenLetterWord Solutions = ,esnyotu)
+                                                  //| (eny,yen)
+                                                  //| (syt,sty)
+                                                  //| (eto,toe)
+                                                  //| (ntu,nut)
+                                                  //| (esu,sue)
+                                                  //| (yuo,you)
+                                                  //| (sno,son)
+                                                  //| (sevenLetterWord Solutions = ,esnyoht)
+                                                  //| (eny,yen)
+                                                  //| (syh,shy)
+                                                  //| (eho,hoe)
+                                                  //| (nth,nth)
+                                                  //| (est,set)
+                                                  //| (yto,toy)
+                                                  //| (sno,son)
+                                                  //| (sevenLetterWord Solutions = ,esybtou)
+                                                  //| (eyb,bye)
+                                                  //| (sbo,sob)
+                                                  //| (eto,toe)
+                                                  //| (yuo,you)
+                                                  //| (esu,sue)
+                                                  //| (tub,but)  
+                                                  //| (syt,sty) ... continued for many more
+
+I just scanned down that list until I found a good set that contained some nerdy words like nth, gnu and eon.
+
+Thanks for another fun monthly puzzle!
+
+Chris Shannon
+
+(from Calgary Canada)
+
+Once again, we'd like to chose a mono-gender group, this time of only three persons.
+
+We have 26 people, whose names starts with letters A to Z (Alex, Bailey, Chris, ...) and if we choose three with the same gender - we win. If not - we pay a GDPR fine and try again.
+
+To make it more interesting, the only teams you are allowed to test are those whose initials form a word found in the dictionary with three different letters.
+
+Find the shortest list (hint: less than 10 words) of three-letters words that ensure you'd get a mono-gender team.
+
+
+****
+First, we can definitely get there in 10.
+If we use only 4 people (the union of all sets is of size 4), then it's possible that it'd be 2 men and 2 women, making it impossible that there'd be a mono-gender subset of 3.
+If we choose 5 people, then there is at least one subset that is mono-gendered.
+5 choose 3 = 10. So we just have to iterate through all 3 subsets. But the hint is that there's less than 10. hmmm.
+
+That seems to imply that there's more than 5 people is our group. Or does it? Can we still use 5 people and choose our subsets more carefully to ensure an mono-gendered subset?
+
+Let's consider all 32 possible ways that 5 people can be male or female.
+
+Choose a subset of say size 9 of the 10 ways of choosing 3. We can ask,:
+for all 32, does there exist (of the 9) at least one mono-gendered group.
+
+
+val all32 = List(
+List(0,0,0,0,0),
+List(0,0,0,0,1),
+List(0,0,0,1,0),
+...
+List(1,1,1,1,1))
+
+val all10 = (0 to 4).toSet.subsets(3).toList
+
+all32.forall( p => all10.exist( q => p(q).distinct.size == 1))
+// p indexed by q, kind of matlab-y syntax
+
+
+Well, we can definitely do it in 7!!!
+
+To start, consider the case of it's just a mono-gendered group of size 2. We can take 3 people at random, put them in a triangle, and choose all 3 sets of 2. So 3 choices is what it takes to solve it group size 2.
+
+Now do the same thing but have a 4th person just sit there and get choosen every time. The 3 iterations will guarantee a mono-gender amounst the group of 3, but it might not match the 4th person. If that's the case, we know we have a 2 and 2.
+
+Knowing we have a 2 and 2 situation, there is no point in thinking about it as a group of 3 and a 4th. It is just a group of 4 that is 2 and 2. So choose 2 at random, either they are both mono-gender or both not.
+
+Grab a 5th. Do 125, if not then 345, now we know that both our groups of 2 are mixed-gendered. So one from each must be mono-genderde.
+So finish with 135, then 245.
+
+Bah! This fails when 123 are the same. We never choose 123 as a set, since we always have 4 or 5 in there.
+
+Setting n=7 and choosing 7 gives the following result.
+Setting n=7 and choosing 6 gives no results.
+Setting n=8 and choosing 6 gives no results.
+n=6 and choosing 7 gives no results.
+
+Set(Set(0, 2, 3), Set(5, 1, 3), Set(0, 5, 4), Set(5, 6, 2), Set(0, 1, 6), Set(6, 3, 4), Set(1, 2, 4))
+
+016
+023
+045
+124
+135
+256
+346
+
+0123456
+xx    x
+x xx
+x   xx
+ xx x
+ x x x
+  x  xx
+   xx x
+
+Set(Set(5, 1, 3), Set(0, 1, 2), Set(0, 5, 6), Set(0, 3, 4), Set(6, 2, 3), Set(1, 6, 4), Set(5, 2, 4))
+
+0123456
+ x x x
+xxx 
+x    xx
+x  xx
+  xx  x
+ x  x x
+  x xx
+
+
+
+xxx 
+x  xx
+x    xx
+ x x x
+ x  x x
+  xx  x
+  x xx
+
+This is a multiple of a binary doubly stochastic matrix!!!
+
+k, looks like we can move on to part 2.
+Make 7 3-letter words out of 016, 023, ....
+
+Can't be that hard. Make 016 = cat, so 0=c, 1=a, 6=t
+the 023 can be something like c**, so cup? 2=u, 3=p
+then 124 will be au* which is dead. So backtrack.
+
+Find a mapping from (0 to 6) to a-z, such that an anagram of each of 016, 023 ... forms an word.
+That's 26^6=308,915,776 possibilities brute force. Not that bad right off the bat!
+
+Maybe start by taking all the 3 letter words, and making their 6 (=3!) anagrams. Put those in a big dictionary.
+
+Nah, maybe assume the first word is ibm. 0=i, 1=b, 2=m
+Now find the rest. Can use backtracking. Note that there's no two entries that have 2 overlapping letters! For example 012 exists, but there's no 01x.
+So the next best candidate can only be 0xy, which is ixy.
+
+K, got a list. Can remove all words with duplicate letters.
+import scala.io.Source
+val all3LetterWords: List[String] =  Source.fromFile("3letters.txt").getLines.mkString
+val duplicateLettersRemoved = all3LetterWords.filter(_.distinct.size==3)
+
+K, then choose the 7 most common letters.
+“etaoin shrdlu” (eh-tay-oh-in shird-loo)
+Whoa, filter...
+val finalDict = duplicateLettersRemove.filter(_.toSet subsetOf "etaoins".toSet )
+val finalDict2 = finalDict.flatMap(permutations)
+
+Then there's only 7! permutations
+0123456
+etaoins
+xx    x ets -> set
+x xx    eao ???
+x   xx  ein -> is this in the finalDict2 (the one with the permutations)
+ xx x   tan 
+ x x x  ton
+  x  xx ain
+   xx x oen -> one
+
+Are they all words
+val etaPerms = "etaoins".permutations
+val solPerms = etaPerms.filter( etaPerm
+ solution.forall( indexes => etaPerm(indexes)
+ )
+)
+
+erm Solutions = ,estiohn)
+                                                  //| (eti,tie)
+                                                  //| (sih,his)
+                                                  //| (eho,hoe)
+                                                  //| (nth,nth)
+                                                  //| (esn,ens)metaphysics
+1. 
+being or existence in the most general abstract sense
+2. 
+a real thing, esp as opposed to an attribute; entity
+
+                                                  //| (nio,ion)
+                                                  //| (sto,sot late Old English sott "stupid person, fool," 
+
+
+(etaPerm Solutions = ,esnyotu)
+                                                  //| (eny,yen)
+                                                  //| (syt,sty)
+                                                  //| (eto,toe)
+                                                  //| (ntu,nut)
+                                                  //| (esu,sue)
+                                                  //| (yuo,you)
+                                                  //| (sno,son) 
+
+
+                                      //| (etaPerm Solutions = ,esyrtou)
+                                                  //| (eyr,rye)
+                                                  //| (sro,ors)  // Or operations
+                                                  //| (eto,toe)
+                                                  //| (yuo,you)
+                                                  //| (esu,sue)
+                                                  //| (tur,rut)
+                                                  //| (syt,sty)
+						  
+                                                  //| (etaPerm Solutions = ,entoury)
+                                                  //| (eto,toe)
+                                                  //| (nro,nor)
+                                                  //| (eur,rue)
+                                                  //| (ytr,try)
+                                                  //| (eny,yen)
+                                                  //| (yuo,you)
+                                                  //| (ntu,nut)
+
+
+ //| (etaPerm Solutions = ,eyumogb)
+                                                  //| (eum,emu)
+                                                  //| (ymg,gym)
+                                                  //| (ego,ego)
+                                                  //| (ubg,bug)
+                                                  //| (eyb,bye)
+                                                  //| (mbo,mob)
+                                                  //| (yuo,you)
+
+0123456
+eumbygo
+xxx     -> eum->emu
+x  xx   -> eby->bye
+x    xx -> ego->ego
+ x x x  -> ubg->bug
+ x  x x -> uyo->you
+  xx  x -> mbo->mob
+  x xx  -> myg->gym
+
+
+Nerdy words
+          //| (sevenLetterWord Solutions = ,entghuo)
+                                                  //| (etg,get)
+                                                  //| (nug,gnu)
+                                                  //| (euh,hue)
+                                                  //| (tuo,out)
+                                                  //| (eno,eon)
+                                                  //| (gho,hog)
+                                                  //| (nth,nth)
+HAHAH!!! The solution is the FANO PLANE!!!
+
+"7 points and 7 lines, with 3 points on every line and 3 lines through every point." 
