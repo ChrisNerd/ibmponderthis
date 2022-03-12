@@ -1,0 +1,120 @@
+Short answer:
+Set((7,5), (2,5), (9,10), (10,5), (11,7), (4,12), (11,6), (5,11), (7,8), (11,4), (6,2), (8,11), (6,5), (11,3), (9,8), (4,5), (2,6), (4,9), (7,11), (11,9), (11,11), (5,5), (4,8), (10,11), (2,7), (4,2), (2,4), (10,9), (8,4), (5,3), (2,11), (5,8), (2,3), (8,5), (9,2))
+Which has cardinality 35.
+
+Bonus answer:
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+414141414141
+000000000000
+000000000000
+000000000000
+000000000000
+000000000000
+
+
+Long answer:
+
+Whew, this one was tricky. I really over-estimated it. It wasn't until stepping back and giving it some thought that I came up with the breakthrough that made the computation tractable.
+
+First crack at it, which I knew would be computationally infeasible was to do a brute force search.
+
+val solution = startingSetWeGetForFree.subsets.find( s => runUntilNoFurtherProgress(startingSetWeGetForFree, s) == Set())
+
+The subsets function starts works with subsets of size 0 on up, so the first one it finds will be the smallest. This approach showed that there was no solution of size 7 or smaller. We were looking at 144 choose n, as our complexity though.
+
+I wrote some code to draw the graph in svg format. This allowed me to see that there were "islands" that can be solved independently.
+  println("Partitioning into components... " )
+  val partitions = partitionIntoComponents(unvaccinated)
+  val numComponents = partitions.size
+  println("We've got " + numComponents + " components.")
+  // Since each component is going to require at least 1 element to solve it, the total budget is going to be at least
+  // numComponets. And further, each component must now have a budget of (budget - numComponents + 1).
+  // If the original budget was 5, and we have 3 components.
+  // We can only have 3+1+1.
+  val partitionsSolutionsStream = partitions.toStream.sortBy(_.size).map( partition => solveSingleComponent(partition, offLimits, budget - numComponents + 1))
+ if (partitions.size <= budget && partitionsSolutionsStream.forall(x => x.isDefined ))
+  {
+   // val p = partitionsStream                                 // Stream(Some(Set(1, 2)), ?)
+   // val pf = partitionsStream.flatten                        // Stream(Set(1, 2), ?)
+   // val pff = partitionsStream.flatten.flatten               // Stream(1, ?)
+   val pffs = partitionsSolutionsStream.flatten.flatten.toSet  // Set(1, 2, 3, 4)
+   //val col = partitionsStream.collect(_)
+   //val pfm = pf.
+   Some(pffs)                                                  // Some(Set(1, 2, 3, 4))
+  }
+  else // we are over budget or one of the partitions is unsolvable
+   None
+
+This was a little bit ugly, but I liked the concept. Fairly straightforward to implement with a depth-first search on an undirected version of the input graph. If the components were small enough, I thought they'd yield to my following solving technique:
+
+We can bound our branches with a binary recursive search. This approach is where I spent 90% of my time, and it turned out that almost all the optimizations in here were a) unneeded (after making a later key insight) and b) insufficient (without that key insight anyway).
+
+This approach was to take a random person, and evaluate the two recursive cases:
+he is included in the minimal set
+he is excluded from the minimal set.
+
+We simply choose the best case.
+
+val included = minimumSet(simpleRun(unvaccinated - rando), offLimits, budget - 1)
+val excluded = minimumSet(simpleRun(unvaccinated)  , offLimits + rando, scala.math.min(budget, includedSize))
+
+Now, I implemented a ton of little optimizations, such as the concept of a budget, no point in searching any further if we can't beat a previously achieved result.
+While going down this path, I started reading about the concept of a Vertex Cover, which is kind of like the worst case of what we're trying to do. Tracing through some of the cases you see that cycling dependencies are what get you. The simplest of which I called "chicken and egg" pairs - two neighbours who depend on each other. Even with the rest of the grid solved, those two are in a deadlock without at least one of them being hauled away by the government and forcefully injected with the vaccine.
+So I figured I'd start by considering people involved in chicken and egg pairs. If we choose A to be in the minimumSet, then we can recurse as usual, but if we exclude A from the minimumSet, then we are forced to choose his partner (the egg), as well as any of the other 3 possible neighbours he may also be in a chicken and egg relationship with. And if any of them have previously been excluded, then we've reached a contradiction and there is no solution.
+
+So our excluded line becomes:
+val neighboursOfRando = chickenAndEggSets.filter(c => c.contains(rando)).flatten.toSet - rando
+val neighboursInOfflimits = neighboursOfRando exists offLimits
+val excluded = if (neighboursInOfflimits) None
+ else
+  minimumSet(simpleRun(unvaccinated -- neighboursOfRando), offLimits + rando, scala.math.min(budget, includedSize))
+
+So I was pretty happy with this implementation and was somewhat surprised that it didn't solve it after running overnight.
+
+But the big breakthrough was right where I was looking.
+
+In the case of a chicken and egg pair, you don't need to fully solve both recursive cases. Just take a look at the effects of choosing one or the other.
+
+A and B are a chicken and egg pair. That means that A or B or both must be chosen. If you choose A and it causes B to be vaccinated, then you might as well choose A only. We say that A "dominates" B. (Note that it's possible for B to dominate A simultaneously, such as when they have no external dependencies C. As long as we only choose one, it doesn't matter which, since we're only interested in a single minimum Set, not an exhaustive list of all minimum Sets.)
+
+Surprisingly, this insight was so powerful that the entire solution came directly. None of my previous work was needed! Haha. Oh well.
+
+  // Find a person who is in a chicken and egg pair and who dominates the other.
+  // (This is over-generalized to consider if there's a longer cycle or multiple pairs)
+  // And this finds all such people, but it turns out we'll just take the first, apply him then recurse.
+  def chickenAndEggSetsWeCanChooseOneArbitrarily(unvaccinated: Set[(Int, Int)]) =
+    for {
+      cae <- chickenAndEggSets
+      one <- cae
+      if ({
+        val caseA = simpleRun(unvaccinated - one)
+        (cae - one).forall(other => caseA.subsetOf(simpleRun(unvaccinated - other)))
+      })
+    } yield (one, cae - one)
+
+val easyChickens = chickenAndEggSetsWeCanChooseOneArbitrarily(unvaccinated)
+easyChickens.filter(e => (e._2 + e._1).subsetOf(unvaccinated) && !offLimits.contains(e._1)).headOption match {
+              case Some(easyChicken) => {
+                minimumSet(simpleRun(unvaccinated - easyChicken._1), offLimits, budget - 1) match {
+                  case Some(sol) => Some(sol + easyChicken._1)
+                  case None      => None // If we can't solve it with the easy chicken, we can't solve it at all.
+                }
+              }
+              case None => { // There were no easy chickens available. Just choose a rando, but we'll have to do 2 cases now.
+                println("No easy chickens") // Holy crap! Never gets here!!!
+             ....
+
+
+My solution just popped out after only 35 calls! No branching was necessary at all. I've attached a fun little debug video I made showing the solution, which I've also posted to my Instagram and Facebook (at the end of the month as to not spoil the solution)
+The bonus question was pretty straightforward using the chicken and egg concept. Just put 42 pairs of them anywhere and make the rest of the population free-thinking independents.
+
+Thanks for another fun covid-inspired puzzle. Something fun activity resulting from the pandemic at least.
+
+Chris Shannon
+
+(from Calgary, Canada)

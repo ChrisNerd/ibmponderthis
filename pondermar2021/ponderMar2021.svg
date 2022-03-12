@@ -1,0 +1,1205 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-1 -1 21 21" height="800" width="800">
+<style>
+  .small { font: italic 0.1px sans-serif; }
+</style>
+<circle cx="0" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.46875" />
+<text x="-0.1" y="-0.1" class="small">BC</text>"
+<text x="-0.1" y="0.0" class="small">60</text>"
+<circle cx="1" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.796875" />
+<text x="0.9" y="-0.1" class="small">E6</text>"
+<text x="0.9" y="0.0" class="small">102</text>"
+<circle cx="2" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.328125" />
+<text x="1.9" y="-0.1" class="small">56</text>"
+<text x="1.9" y="0.0" class="small">-42</text>"
+<circle cx="3" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.6796875" />
+<text x="2.9" y="-0.1" class="small">29</text>"
+<text x="2.9" y="0.0" class="small">-87</text>"
+<circle cx="4" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.1953125" />
+<text x="3.9" y="-0.1" class="small">99</text>"
+<text x="3.9" y="0.0" class="small">25</text>"
+<circle cx="5" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.1640625" />
+<text x="4.9" y="-0.1" class="small">95</text>"
+<text x="4.9" y="0.0" class="small">21</text>"
+<circle cx="6" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.359375" />
+<text x="5.9" y="-0.1" class="small">AE</text>"
+<text x="5.9" y="0.0" class="small">46</text>"
+<circle cx="7" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.6953125" />
+<text x="6.9" y="-0.1" class="small">27</text>"
+<text x="6.9" y="0.0" class="small">-89</text>"
+<circle cx="8" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.2421875" />
+<text x="7.9" y="-0.1" class="small">9F</text>"
+<text x="7.9" y="0.0" class="small">31</text>"
+<circle cx="9" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.0703125" />
+<text x="8.9" y="-0.1" class="small">89</text>"
+<text x="8.9" y="0.0" class="small">9</text>"
+<circle cx="10" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.0625" />
+<text x="9.9" y="-0.1" class="small">88</text>"
+<text x="9.9" y="0.0" class="small">8</text>"
+<circle cx="11" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.1171875" />
+<text x="10.9" y="-0.1" class="small">8F</text>"
+<text x="10.9" y="0.0" class="small">15</text>"
+<circle cx="12" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.46875" />
+<text x="11.9" y="-0.1" class="small">BC</text>"
+<text x="11.9" y="0.0" class="small">60</text>"
+<circle cx="13" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.40625" />
+<text x="12.9" y="-0.1" class="small">B4</text>"
+<text x="12.9" y="0.0" class="small">52</text>"
+<circle cx="14" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.671875" />
+<text x="13.9" y="-0.1" class="small">2A</text>"
+<text x="13.9" y="0.0" class="small">-86</text>"
+<circle cx="15" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.1171875" />
+<text x="14.9" y="-0.1" class="small">71</text>"
+<text x="14.9" y="0.0" class="small">-15</text>"
+<circle cx="16" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.46875" />
+<text x="15.9" y="-0.1" class="small">44</text>"
+<text x="15.9" y="0.0" class="small">-60</text>"
+<circle cx="17" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.0078125" />
+<text x="16.9" y="-0.1" class="small">7F</text>"
+<text x="16.9" y="0.0" class="small">-1</text>"
+<circle cx="18" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3671875" />
+<text x="17.9" y="-0.1" class="small">AF</text>"
+<text x="17.9" y="0.0" class="small">47</text>"
+<circle cx="19" cy="0" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.171875" />
+<text x="18.9" y="-0.1" class="small">96</text>"
+<text x="18.9" y="0.0" class="small">22</text>"
+<circle cx="0" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.109375" />
+<text x="-0.1" y="0.9" class="small">72</text>"
+<text x="-0.1" y="1.0" class="small">-14</text>"
+<circle cx="1" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3203125" />
+<text x="0.9" y="0.9" class="small">57</text>"
+<text x="0.9" y="1.0" class="small">-41</text>"
+<circle cx="2" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.8515625" />
+<text x="1.9" y="0.9" class="small">13</text>"
+<text x="1.9" y="1.0" class="small">-109</text>"
+<circle cx="3" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.7265625" />
+<text x="2.9" y="0.9" class="small">DD</text>"
+<text x="2.9" y="1.0" class="small">93</text>"
+<circle cx="4" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.9375" />
+<text x="3.9" y="0.9" class="small">08</text>"
+<text x="3.9" y="1.0" class="small">-120</text>"
+<circle cx="5" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.46875" />
+<text x="4.9" y="0.9" class="small">44</text>"
+<text x="4.9" y="1.0" class="small">-60</text>"
+<circle cx="6" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.234375" />
+<text x="5.9" y="0.9" class="small">9E</text>"
+<text x="5.9" y="1.0" class="small">30</text>"
+<circle cx="7" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.25" />
+<text x="6.9" y="0.9" class="small">A0</text>"
+<text x="6.9" y="1.0" class="small">32</text>"
+<circle cx="8" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.8515625" />
+<text x="7.9" y="0.9" class="small">13</text>"
+<text x="7.9" y="1.0" class="small">-109</text>"
+<circle cx="9" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.9296875" />
+<text x="8.9" y="0.9" class="small">09</text>"
+<text x="8.9" y="1.0" class="small">-119</text>"
+<circle cx="10" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.5078125" />
+<text x="9.9" y="0.9" class="small">3F</text>"
+<text x="9.9" y="1.0" class="small">-65</text>"
+<circle cx="11" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6640625" />
+<text x="10.9" y="0.9" class="small">D5</text>"
+<text x="10.9" y="1.0" class="small">85</text>"
+<circle cx="12" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.328125" />
+<text x="11.9" y="0.9" class="small">AA</text>"
+<text x="11.9" y="1.0" class="small">42</text>"
+<circle cx="13" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.953125" />
+<text x="12.9" y="0.9" class="small">06</text>"
+<text x="12.9" y="1.0" class="small">-122</text>"
+<circle cx="14" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.265625" />
+<text x="13.9" y="0.9" class="small">5E</text>"
+<text x="13.9" y="1.0" class="small">-34</text>"
+<circle cx="15" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.7109375" />
+<text x="14.9" y="0.9" class="small">DB</text>"
+<text x="14.9" y="1.0" class="small">91</text>"
+<circle cx="16" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.7578125" />
+<text x="15.9" y="0.9" class="small">E1</text>"
+<text x="15.9" y="1.0" class="small">97</text>"
+<circle cx="17" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.8671875" />
+<text x="16.9" y="0.9" class="small">EF</text>"
+<text x="16.9" y="1.0" class="small">111</text>"
+<circle cx="18" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.84375" />
+<text x="17.9" y="0.9" class="small">14</text>"
+<text x="17.9" y="1.0" class="small">-108</text>"
+<circle cx="19" cy="1" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.9140625" />
+<text x="18.9" y="0.9" class="small">0B</text>"
+<text x="18.9" y="1.0" class="small">-117</text>"
+<circle cx="0" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.484375" />
+<text x="-0.1" y="1.9" class="small">42</text>"
+<text x="-0.1" y="2.0" class="small">-62</text>"
+<circle cx="1" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4375" />
+<text x="0.9" y="1.9" class="small">B8</text>"
+<text x="0.9" y="2.0" class="small">56</text>"
+<circle cx="2" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.8984375" />
+<text x="1.9" y="1.9" class="small">F3</text>"
+<text x="1.9" y="2.0" class="small">115</text>"
+<circle cx="3" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.109375" />
+<text x="2.9" y="1.9" class="small">8E</text>"
+<text x="2.9" y="2.0" class="small">14</text>"
+<circle cx="4" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3125" />
+<text x="3.9" y="1.9" class="small">58</text>"
+<text x="3.9" y="2.0" class="small">-40</text>"
+<circle cx="5" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.875" />
+<text x="4.9" y="1.9" class="small">F0</text>"
+<text x="4.9" y="2.0" class="small">112</text>"
+<circle cx="6" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.953125" />
+<text x="5.9" y="1.9" class="small">FA</text>"
+<text x="5.9" y="2.0" class="small">122</text>"
+<circle cx="7" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.0078125" />
+<text x="6.9" y="1.9" class="small">7F</text>"
+<text x="6.9" y="2.0" class="small">-1</text>"
+<circle cx="8" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.03125" />
+<text x="7.9" y="1.9" class="small">7C</text>"
+<text x="7.9" y="2.0" class="small">-4</text>"
+<circle cx="9" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4765625" />
+<text x="8.9" y="1.9" class="small">BD</text>"
+<text x="8.9" y="2.0" class="small">61</text>"
+<circle cx="10" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9921875" />
+<text x="9.9" y="1.9" class="small">FF</text>"
+<text x="9.9" y="2.0" class="small">127</text>"
+<circle cx="11" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3671875" />
+<text x="10.9" y="1.9" class="small">AF</text>"
+<text x="10.9" y="2.0" class="small">47</text>"
+<circle cx="12" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.7109375" />
+<text x="11.9" y="1.9" class="small">DB</text>"
+<text x="11.9" y="2.0" class="small">91</text>"
+<circle cx="13" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6953125" />
+<text x="12.9" y="1.9" class="small">D9</text>"
+<text x="12.9" y="2.0" class="small">89</text>"
+<circle cx="14" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.8515625" />
+<text x="13.9" y="1.9" class="small">13</text>"
+<text x="13.9" y="2.0" class="small">-109</text>"
+<circle cx="15" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.515625" />
+<text x="14.9" y="1.9" class="small">3E</text>"
+<text x="14.9" y="2.0" class="small">-66</text>"
+<circle cx="16" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.2734375" />
+<text x="15.9" y="1.9" class="small">5D</text>"
+<text x="15.9" y="2.0" class="small">-35</text>"
+<circle cx="17" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.65625" />
+<text x="16.9" y="1.9" class="small">D4</text>"
+<text x="16.9" y="2.0" class="small">84</text>"
+<circle cx="18" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.625" />
+<text x="17.9" y="1.9" class="small">30</text>"
+<text x="17.9" y="2.0" class="small">-80</text>"
+<circle cx="19" cy="2" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9609375" />
+<text x="18.9" y="1.9" class="small">FB</text>"
+<text x="18.9" y="2.0" class="small">123</text>"
+<circle cx="0" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.25" />
+<text x="-0.1" y="2.9" class="small">60</text>"
+<text x="-0.1" y="3.0" class="small">-32</text>"
+<circle cx="1" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.578125" />
+<text x="0.9" y="2.9" class="small">CA</text>"
+<text x="0.9" y="3.0" class="small">74</text>"
+<circle cx="2" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.40625" />
+<text x="1.9" y="2.9" class="small">B4</text>"
+<text x="1.9" y="3.0" class="small">52</text>"
+<circle cx="3" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.2578125" />
+<text x="2.9" y="2.9" class="small">A1</text>"
+<text x="2.9" y="3.0" class="small">33</text>"
+<circle cx="4" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.1015625" />
+<text x="3.9" y="2.9" class="small">73</text>"
+<text x="3.9" y="3.0" class="small">-13</text>"
+<circle cx="5" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.78125" />
+<text x="4.9" y="2.9" class="small">E4</text>"
+<text x="4.9" y="3.0" class="small">100</text>"
+<circle cx="6" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.6171875" />
+<text x="5.9" y="2.9" class="small">31</text>"
+<text x="5.9" y="3.0" class="small">-79</text>"
+<circle cx="7" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4140625" />
+<text x="6.9" y="2.9" class="small">B5</text>"
+<text x="6.9" y="3.0" class="small">53</text>"
+<circle cx="8" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3984375" />
+<text x="7.9" y="2.9" class="small">B3</text>"
+<text x="7.9" y="3.0" class="small">51</text>"
+<circle cx="9" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.90625" />
+<text x="8.9" y="2.9" class="small">0C</text>"
+<text x="8.9" y="3.0" class="small">-116</text>"
+<circle cx="10" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.0390625" />
+<text x="9.9" y="2.9" class="small">85</text>"
+<text x="9.9" y="3.0" class="small">5</text>"
+<circle cx="11" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.7265625" />
+<text x="10.9" y="2.9" class="small">DD</text>"
+<text x="10.9" y="3.0" class="small">93</text>"
+<circle cx="12" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.6953125" />
+<text x="11.9" y="2.9" class="small">27</text>"
+<text x="11.9" y="3.0" class="small">-89</text>"
+<circle cx="13" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.484375" />
+<text x="12.9" y="2.9" class="small">42</text>"
+<text x="12.9" y="3.0" class="small">-62</text>"
+<circle cx="14" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3828125" />
+<text x="13.9" y="2.9" class="small">4F</text>"
+<text x="13.9" y="3.0" class="small">-49</text>"
+<circle cx="15" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.625" />
+<text x="14.9" y="2.9" class="small">D0</text>"
+<text x="14.9" y="3.0" class="small">80</text>"
+<circle cx="16" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.8671875" />
+<text x="15.9" y="2.9" class="small">11</text>"
+<text x="15.9" y="3.0" class="small">-111</text>"
+<circle cx="17" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.9296875" />
+<text x="16.9" y="2.9" class="small">09</text>"
+<text x="16.9" y="3.0" class="small">-119</text>"
+<circle cx="18" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.6875" />
+<text x="17.9" y="2.9" class="small">28</text>"
+<text x="17.9" y="3.0" class="small">-88</text>"
+<circle cx="19" cy="3" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5546875" />
+<text x="18.9" y="2.9" class="small">39</text>"
+<text x="18.9" y="3.0" class="small">-71</text>"
+<circle cx="0" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.7890625" />
+<text x="-0.1" y="3.9" class="small">1B</text>"
+<text x="-0.1" y="4.0" class="small">-101</text>"
+<circle cx="1" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.5" />
+<text x="0.9" y="3.9" class="small">40</text>"
+<text x="0.9" y="4.0" class="small">-64</text>"
+<circle cx="2" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.03125" />
+<text x="1.9" y="3.9" class="small">7C</text>"
+<text x="1.9" y="4.0" class="small">-4</text>"
+<circle cx="3" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3828125" />
+<text x="2.9" y="3.9" class="small">B1</text>"
+<text x="2.9" y="4.0" class="small">49</text>"
+<circle cx="4" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.9921875" />
+<text x="3.9" y="3.9" class="small">01</text>"
+<text x="3.9" y="4.0" class="small">-127</text>"
+<circle cx="5" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.0546875" />
+<text x="4.9" y="3.9" class="small">79</text>"
+<text x="4.9" y="4.0" class="small">-7</text>"
+<circle cx="6" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.359375" />
+<text x="5.9" y="3.9" class="small">52</text>"
+<text x="5.9" y="4.0" class="small">-46</text>"
+<circle cx="7" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3515625" />
+<text x="6.9" y="3.9" class="small">53</text>"
+<text x="6.9" y="4.0" class="small">-45</text>"
+<circle cx="8" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.2109375" />
+<text x="7.9" y="3.9" class="small">65</text>"
+<text x="7.9" y="4.0" class="small">-27</text>"
+<circle cx="9" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.2109375" />
+<text x="8.9" y="3.9" class="small">65</text>"
+<text x="8.9" y="4.0" class="small">-27</text>"
+<circle cx="10" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.484375" />
+<text x="9.9" y="3.9" class="small">BE</text>"
+<text x="9.9" y="4.0" class="small">62</text>"
+<circle cx="11" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.8828125" />
+<text x="10.9" y="3.9" class="small">0F</text>"
+<text x="10.9" y="4.0" class="small">-113</text>"
+<circle cx="12" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.421875" />
+<text x="11.9" y="3.9" class="small">4A</text>"
+<text x="11.9" y="4.0" class="small">-54</text>"
+<circle cx="13" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.4765625" />
+<text x="12.9" y="3.9" class="small">43</text>"
+<text x="12.9" y="4.0" class="small">-61</text>"
+<circle cx="14" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6015625" />
+<text x="13.9" y="3.9" class="small">CD</text>"
+<text x="13.9" y="4.0" class="small">77</text>"
+<circle cx="15" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6796875" />
+<text x="14.9" y="3.9" class="small">D7</text>"
+<text x="14.9" y="4.0" class="small">87</text>"
+<circle cx="16" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.296875" />
+<text x="15.9" y="3.9" class="small">A6</text>"
+<text x="15.9" y="4.0" class="small">38</text>"
+<circle cx="17" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.984375" />
+<text x="16.9" y="3.9" class="small">FE</text>"
+<text x="16.9" y="4.0" class="small">126</text>"
+<circle cx="18" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0078125" />
+<text x="17.9" y="3.9" class="small">7F</text>"
+<text x="17.9" y="4.0" class="small">-1</text>"
+<circle cx="19" cy="4" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3671875" />
+<text x="18.9" y="3.9" class="small">51</text>"
+<text x="18.9" y="4.0" class="small">-47</text>"
+<circle cx="0" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.7109375" />
+<text x="-0.1" y="4.9" class="small">25</text>"
+<text x="-0.1" y="5.0" class="small">-91</text>"
+<circle cx="1" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3359375" />
+<text x="0.9" y="4.9" class="small">AB</text>"
+<text x="0.9" y="5.0" class="small">43</text>"
+<circle cx="2" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.59375" />
+<text x="1.9" y="4.9" class="small">CC</text>"
+<text x="1.9" y="5.0" class="small">76</text>"
+<circle cx="3" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.75" />
+<text x="2.9" y="4.9" class="small">20</text>"
+<text x="2.9" y="5.0" class="small">-96</text>"
+<circle cx="4" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9453125" />
+<text x="3.9" y="4.9" class="small">F9</text>"
+<text x="3.9" y="5.0" class="small">121</text>"
+<circle cx="5" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.59375" />
+<text x="4.9" y="4.9" class="small">CC</text>"
+<text x="4.9" y="5.0" class="small">76</text>"
+<circle cx="6" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.0078125" />
+<text x="5.9" y="4.9" class="small">7F</text>"
+<text x="5.9" y="5.0" class="small">-1</text>"
+<circle cx="7" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.5390625" />
+<text x="6.9" y="4.9" class="small">3B</text>"
+<text x="6.9" y="5.0" class="small">-69</text>"
+<circle cx="8" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3828125" />
+<text x="7.9" y="4.9" class="small">4F</text>"
+<text x="7.9" y="5.0" class="small">-49</text>"
+<circle cx="9" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.734375" />
+<text x="8.9" y="4.9" class="small">22</text>"
+<text x="8.9" y="5.0" class="small">-94</text>"
+<circle cx="10" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.21875" />
+<text x="9.9" y="4.9" class="small">9C</text>"
+<text x="9.9" y="5.0" class="small">28</text>"
+<circle cx="11" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.109375" />
+<text x="10.9" y="4.9" class="small">72</text>"
+<text x="10.9" y="5.0" class="small">-14</text>"
+<circle cx="12" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9140625" />
+<text x="11.9" y="4.9" class="small">F5</text>"
+<text x="11.9" y="5.0" class="small">117</text>"
+<circle cx="13" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.984375" />
+<text x="12.9" y="4.9" class="small">FE</text>"
+<text x="12.9" y="5.0" class="small">126</text>"
+<circle cx="14" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9453125" />
+<text x="13.9" y="4.9" class="small">F9</text>"
+<text x="13.9" y="5.0" class="small">121</text>"
+<circle cx="15" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4921875" />
+<text x="14.9" y="4.9" class="small">BF</text>"
+<text x="14.9" y="5.0" class="small">63</text>"
+<circle cx="16" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.2890625" />
+<text x="15.9" y="4.9" class="small">A5</text>"
+<text x="15.9" y="5.0" class="small">37</text>"
+<circle cx="17" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3125" />
+<text x="16.9" y="4.9" class="small">58</text>"
+<text x="16.9" y="5.0" class="small">-40</text>"
+<circle cx="18" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7578125" />
+<text x="17.9" y="4.9" class="small">1F</text>"
+<text x="17.9" y="5.0" class="small">-97</text>"
+<circle cx="19" cy="5" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5546875" />
+<text x="18.9" y="4.9" class="small">C7</text>"
+<text x="18.9" y="5.0" class="small">71</text>"
+<circle cx="0" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.828125" />
+<text x="-0.1" y="5.9" class="small">EA</text>"
+<text x="-0.1" y="6.0" class="small">106</text>"
+<circle cx="1" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.390625" />
+<text x="0.9" y="5.9" class="small">B2</text>"
+<text x="0.9" y="6.0" class="small">50</text>"
+<circle cx="2" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.78125" />
+<text x="1.9" y="5.9" class="small">E4</text>"
+<text x="1.9" y="6.0" class="small">100</text>"
+<circle cx="3" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.9375" />
+<text x="2.9" y="5.9" class="small">F8</text>"
+<text x="2.9" y="6.0" class="small">120</text>"
+<circle cx="4" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.109375" />
+<text x="3.9" y="5.9" class="small">72</text>"
+<text x="3.9" y="6.0" class="small">-14</text>"
+<circle cx="5" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.0390625" />
+<text x="4.9" y="5.9" class="small">7B</text>"
+<text x="4.9" y="6.0" class="small">-5</text>"
+<circle cx="6" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.0" />
+<text x="5.9" y="5.9" class="small">80</text>"
+<text x="5.9" y="6.0" class="small">0</text>"
+<circle cx="7" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.265625" />
+<text x="6.9" y="5.9" class="small">A2</text>"
+<text x="6.9" y="6.0" class="small">34</text>"
+<circle cx="8" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6796875" />
+<text x="7.9" y="5.9" class="small">D7</text>"
+<text x="7.9" y="6.0" class="small">87</text>"
+<circle cx="9" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.5078125" />
+<text x="8.9" y="5.9" class="small">C1</text>"
+<text x="8.9" y="6.0" class="small">65</text>"
+<circle cx="10" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3828125" />
+<text x="9.9" y="5.9" class="small">4F</text>"
+<text x="9.9" y="6.0" class="small">-49</text>"
+<circle cx="11" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.453125" />
+<text x="10.9" y="5.9" class="small">46</text>"
+<text x="10.9" y="6.0" class="small">-58</text>"
+<circle cx="12" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.6328125" />
+<text x="11.9" y="5.9" class="small">D1</text>"
+<text x="11.9" y="6.0" class="small">81</text>"
+<circle cx="13" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.265625" />
+<text x="12.9" y="5.9" class="small">5E</text>"
+<text x="12.9" y="6.0" class="small">-34</text>"
+<circle cx="14" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.953125" />
+<text x="13.9" y="5.9" class="small">FA</text>"
+<text x="13.9" y="6.0" class="small">122</text>"
+<circle cx="15" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.3359375" />
+<text x="14.9" y="5.9" class="small">AB</text>"
+<text x="14.9" y="6.0" class="small">43</text>"
+<circle cx="16" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.859375" />
+<text x="15.9" y="5.9" class="small">12</text>"
+<text x="15.9" y="6.0" class="small">-110</text>"
+<circle cx="17" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5" />
+<text x="16.9" y="5.9" class="small">40</text>"
+<text x="16.9" y="6.0" class="small">-64</text>"
+<circle cx="18" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.015625" />
+<text x="17.9" y="5.9" class="small">82</text>"
+<text x="17.9" y="6.0" class="small">2</text>"
+<circle cx="19" cy="6" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.015625" />
+<text x="18.9" y="5.9" class="small">7E</text>"
+<text x="18.9" y="6.0" class="small">-2</text>"
+<circle cx="0" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.359375" />
+<text x="-0.1" y="6.9" class="small">52</text>"
+<text x="-0.1" y="7.0" class="small">-46</text>"
+<circle cx="1" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4921875" />
+<text x="0.9" y="6.9" class="small">BF</text>"
+<text x="0.9" y="7.0" class="small">63</text>"
+<circle cx="2" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="yellow" fill-opacity="0.3984375" />
+<text x="1.9" y="6.9" class="small">4D</text>"
+<text x="1.9" y="7.0" class="small">-51</text>"
+<circle cx="3" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5703125" />
+<text x="2.9" y="6.9" class="small">37</text>"
+<text x="2.9" y="7.0" class="small">-73</text>"
+<circle cx="4" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.546875" />
+<text x="3.9" y="6.9" class="small">C6</text>"
+<text x="3.9" y="7.0" class="small">70</text>"
+<circle cx="5" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.2578125" />
+<text x="4.9" y="6.9" class="small">5F</text>"
+<text x="4.9" y="7.0" class="small">-33</text>"
+<circle cx="6" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5234375" />
+<text x="5.9" y="6.9" class="small">3D</text>"
+<text x="5.9" y="7.0" class="small">-67</text>"
+<circle cx="7" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.8671875" />
+<text x="6.9" y="6.9" class="small">EF</text>"
+<text x="6.9" y="7.0" class="small">111</text>"
+<circle cx="8" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.328125" />
+<text x="7.9" y="6.9" class="small">56</text>"
+<text x="7.9" y="7.0" class="small">-42</text>"
+<circle cx="9" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8671875" />
+<text x="8.9" y="6.9" class="small">11</text>"
+<text x="8.9" y="7.0" class="small">-111</text>"
+<circle cx="10" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.640625" />
+<text x="9.9" y="6.9" class="small">D2</text>"
+<text x="9.9" y="7.0" class="small">82</text>"
+<circle cx="11" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1796875" />
+<text x="10.9" y="6.9" class="small">69</text>"
+<text x="10.9" y="7.0" class="small">-23</text>"
+<circle cx="12" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.28125" />
+<text x="11.9" y="6.9" class="small">A4</text>"
+<text x="11.9" y="7.0" class="small">36</text>"
+<circle cx="13" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.984375" />
+<text x="12.9" y="6.9" class="small">02</text>"
+<text x="12.9" y="7.0" class="small">-126</text>"
+<circle cx="14" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8984375" />
+<text x="13.9" y="6.9" class="small">0D</text>"
+<text x="13.9" y="7.0" class="small">-115</text>"
+<circle cx="15" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3125" />
+<text x="14.9" y="6.9" class="small">58</text>"
+<text x="14.9" y="7.0" class="small">-40</text>"
+<circle cx="16" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8671875" />
+<text x="15.9" y="6.9" class="small">11</text>"
+<text x="15.9" y="7.0" class="small">-111</text>"
+<circle cx="17" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.3046875" />
+<text x="16.9" y="6.9" class="small">A7</text>"
+<text x="16.9" y="7.0" class="small">39</text>"
+<circle cx="18" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.234375" />
+<text x="17.9" y="6.9" class="small">9E</text>"
+<text x="17.9" y="7.0" class="small">30</text>"
+<circle cx="19" cy="7" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.953125" />
+<text x="18.9" y="6.9" class="small">06</text>"
+<text x="18.9" y="7.0" class="small">-122</text>"
+<circle cx="0" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.921875" />
+<text x="-0.1" y="7.9" class="small">F6</text>"
+<text x="-0.1" y="8.0" class="small">118</text>"
+<circle cx="1" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.390625" />
+<text x="0.9" y="7.9" class="small">B2</text>"
+<text x="0.9" y="8.0" class="small">50</text>"
+<circle cx="2" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.25" />
+<text x="1.9" y="7.9" class="small">60</text>"
+<text x="1.9" y="8.0" class="small">-32</text>"
+<circle cx="3" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.3671875" />
+<text x="2.9" y="7.9" class="small">AF</text>"
+<text x="2.9" y="8.0" class="small">47</text>"
+<circle cx="4" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0234375" />
+<text x="3.9" y="7.9" class="small">83</text>"
+<text x="3.9" y="8.0" class="small">3</text>"
+<circle cx="5" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9375" />
+<text x="4.9" y="7.9" class="small">08</text>"
+<text x="4.9" y="8.0" class="small">-120</text>"
+<circle cx="6" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.390625" />
+<text x="5.9" y="7.9" class="small">4E</text>"
+<text x="5.9" y="8.0" class="small">-50</text>"
+<circle cx="7" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8671875" />
+<text x="6.9" y="7.9" class="small">11</text>"
+<text x="6.9" y="8.0" class="small">-111</text>"
+<circle cx="8" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1171875" />
+<text x="7.9" y="7.9" class="small">71</text>"
+<text x="7.9" y="8.0" class="small">-15</text>"
+<circle cx="9" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.6953125" />
+<text x="8.9" y="7.9" class="small">27</text>"
+<text x="8.9" y="8.0" class="small">-89</text>"
+<circle cx="10" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.25" />
+<text x="9.9" y="7.9" class="small">60</text>"
+<text x="9.9" y="8.0" class="small">-32</text>"
+<circle cx="11" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1328125" />
+<text x="10.9" y="7.9" class="small">6F</text>"
+<text x="10.9" y="8.0" class="small">-17</text>"
+<circle cx="12" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.234375" />
+<text x="11.9" y="7.9" class="small">9E</text>"
+<text x="11.9" y="8.0" class="small">30</text>"
+<circle cx="13" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.921875" />
+<text x="12.9" y="7.9" class="small">0A</text>"
+<text x="12.9" y="8.0" class="small">-118</text>"
+<circle cx="14" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6484375" />
+<text x="13.9" y="7.9" class="small">D3</text>"
+<text x="13.9" y="8.0" class="small">83</text>"
+<circle cx="15" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8046875" />
+<text x="14.9" y="7.9" class="small">19</text>"
+<text x="14.9" y="8.0" class="small">-103</text>"
+<circle cx="16" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.75" />
+<text x="15.9" y="7.9" class="small">20</text>"
+<text x="15.9" y="8.0" class="small">-96</text>"
+<circle cx="17" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.921875" />
+<text x="16.9" y="7.9" class="small">F6</text>"
+<text x="16.9" y="8.0" class="small">118</text>"
+<circle cx="18" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.2734375" />
+<text x="17.9" y="7.9" class="small">A3</text>"
+<text x="17.9" y="8.0" class="small">35</text>"
+<circle cx="19" cy="8" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5" />
+<text x="18.9" y="7.9" class="small">40</text>"
+<text x="18.9" y="8.0" class="small">-64</text>"
+<circle cx="0" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="red" fill-opacity="0.4296875" />
+<text x="-0.1" y="8.9" class="small">B7</text>"
+<text x="-0.1" y="9.0" class="small">55</text>"
+<circle cx="1" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.703125" />
+<text x="0.9" y="8.9" class="small">26</text>"
+<text x="0.9" y="9.0" class="small">-90</text>"
+<circle cx="2" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7890625" />
+<text x="1.9" y="8.9" class="small">1B</text>"
+<text x="1.9" y="9.0" class="small">-101</text>"
+<circle cx="3" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.546875" />
+<text x="2.9" y="8.9" class="small">3A</text>"
+<text x="2.9" y="9.0" class="small">-70</text>"
+<circle cx="4" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8125" />
+<text x="3.9" y="8.9" class="small">18</text>"
+<text x="3.9" y="9.0" class="small">-104</text>"
+<circle cx="5" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.984375" />
+<text x="4.9" y="8.9" class="small">FE</text>"
+<text x="4.9" y="9.0" class="small">126</text>"
+<circle cx="6" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7734375" />
+<text x="5.9" y="8.9" class="small">E3</text>"
+<text x="5.9" y="9.0" class="small">99</text>"
+<circle cx="7" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.53125" />
+<text x="6.9" y="8.9" class="small">3C</text>"
+<text x="6.9" y="9.0" class="small">-68</text>"
+<circle cx="8" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9609375" />
+<text x="7.9" y="8.9" class="small">FB</text>"
+<text x="7.9" y="9.0" class="small">123</text>"
+<circle cx="9" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.703125" />
+<text x="8.9" y="8.9" class="small">DA</text>"
+<text x="8.9" y="9.0" class="small">90</text>"
+<circle cx="10" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.015625" />
+<text x="9.9" y="8.9" class="small">7E</text>"
+<text x="9.9" y="9.0" class="small">-2</text>"
+<circle cx="11" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0625" />
+<text x="10.9" y="8.9" class="small">78</text>"
+<text x="10.9" y="9.0" class="small">-8</text>"
+<circle cx="12" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.578125" />
+<text x="11.9" y="8.9" class="small">CA</text>"
+<text x="11.9" y="9.0" class="small">74</text>"
+<circle cx="13" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4296875" />
+<text x="12.9" y="8.9" class="small">49</text>"
+<text x="12.9" y="9.0" class="small">-55</text>"
+<circle cx="14" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8984375" />
+<text x="13.9" y="8.9" class="small">F3</text>"
+<text x="13.9" y="9.0" class="small">115</text>"
+<circle cx="15" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.984375" />
+<text x="14.9" y="8.9" class="small">FE</text>"
+<text x="14.9" y="9.0" class="small">126</text>"
+<circle cx="16" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.84375" />
+<text x="15.9" y="8.9" class="small">14</text>"
+<text x="15.9" y="9.0" class="small">-108</text>"
+<circle cx="17" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.046875" />
+<text x="16.9" y="8.9" class="small">86</text>"
+<text x="16.9" y="9.0" class="small">6</text>"
+<circle cx="18" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3515625" />
+<text x="17.9" y="8.9" class="small">53</text>"
+<text x="17.9" y="9.0" class="small">-45</text>"
+<circle cx="19" cy="9" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8203125" />
+<text x="18.9" y="8.9" class="small">E9</text>"
+<text x="18.9" y="9.0" class="small">105</text>"
+<circle cx="0" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.796875" />
+<text x="-0.1" y="9.9" class="small">1A</text>"
+<text x="-0.1" y="10.0" class="small">-102</text>"
+<circle cx="1" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8046875" />
+<text x="0.9" y="9.9" class="small">19</text>"
+<text x="0.9" y="10.0" class="small">-103</text>"
+<circle cx="2" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.34375" />
+<text x="1.9" y="9.9" class="small">54</text>"
+<text x="1.9" y="10.0" class="small">-44</text>"
+<circle cx="3" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4765625" />
+<text x="2.9" y="9.9" class="small">BD</text>"
+<text x="2.9" y="10.0" class="small">61</text>"
+<circle cx="4" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.796875" />
+<text x="3.9" y="9.9" class="small">1A</text>"
+<text x="3.9" y="10.0" class="small">-102</text>"
+<circle cx="5" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3359375" />
+<text x="4.9" y="9.9" class="small">55</text>"
+<text x="4.9" y="10.0" class="small">-43</text>"
+<circle cx="6" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.75" />
+<text x="5.9" y="9.9" class="small">20</text>"
+<text x="5.9" y="10.0" class="small">-96</text>"
+<circle cx="7" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5390625" />
+<text x="6.9" y="9.9" class="small">3B</text>"
+<text x="6.9" y="10.0" class="small">-69</text>"
+<circle cx="8" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3046875" />
+<text x="7.9" y="9.9" class="small">59</text>"
+<text x="7.9" y="10.0" class="small">-39</text>"
+<circle cx="9" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.484375" />
+<text x="8.9" y="9.9" class="small">42</text>"
+<text x="8.9" y="10.0" class="small">-62</text>"
+<circle cx="10" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.09375" />
+<text x="9.9" y="9.9" class="small">8C</text>"
+<text x="9.9" y="10.0" class="small">12</text>"
+<circle cx="11" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9453125" />
+<text x="10.9" y="9.9" class="small">07</text>"
+<text x="10.9" y="10.0" class="small">-121</text>"
+<circle cx="12" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.453125" />
+<text x="11.9" y="9.9" class="small">BA</text>"
+<text x="11.9" y="10.0" class="small">58</text>"
+<circle cx="13" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5390625" />
+<text x="12.9" y="9.9" class="small">C5</text>"
+<text x="12.9" y="10.0" class="small">69</text>"
+<circle cx="14" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.6953125" />
+<text x="13.9" y="9.9" class="small">27</text>"
+<text x="13.9" y="10.0" class="small">-89</text>"
+<circle cx="15" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.296875" />
+<text x="14.9" y="9.9" class="small">A6</text>"
+<text x="14.9" y="10.0" class="small">38</text>"
+<circle cx="16" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.6171875" />
+<text x="15.9" y="9.9" class="small">31</text>"
+<text x="15.9" y="10.0" class="small">-79</text>"
+<circle cx="17" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0546875" />
+<text x="16.9" y="9.9" class="small">87</text>"
+<text x="16.9" y="10.0" class="small">7</text>"
+<circle cx="18" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.671875" />
+<text x="17.9" y="9.9" class="small">2A</text>"
+<text x="17.9" y="10.0" class="small">-86</text>"
+<circle cx="19" cy="10" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.765625" />
+<text x="18.9" y="9.9" class="small">E2</text>"
+<text x="18.9" y="10.0" class="small">98</text>"
+<circle cx="0" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.578125" />
+<text x="-0.1" y="10.9" class="small">36</text>"
+<text x="-0.1" y="11.0" class="small">-74</text>"
+<circle cx="1" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.015625" />
+<text x="0.9" y="10.9" class="small">82</text>"
+<text x="0.9" y="11.0" class="small">2</text>"
+<circle cx="2" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.75" />
+<text x="1.9" y="10.9" class="small">E0</text>"
+<text x="1.9" y="11.0" class="small">96</text>"
+<circle cx="3" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.84375" />
+<text x="2.9" y="10.9" class="small">14</text>"
+<text x="2.9" y="11.0" class="small">-108</text>"
+<circle cx="4" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.421875" />
+<text x="3.9" y="10.9" class="small">B6</text>"
+<text x="3.9" y="11.0" class="small">54</text>"
+<circle cx="5" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9296875" />
+<text x="4.9" y="10.9" class="small">09</text>"
+<text x="4.9" y="11.0" class="small">-119</text>"
+<circle cx="6" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5703125" />
+<text x="5.9" y="10.9" class="small">C9</text>"
+<text x="5.9" y="11.0" class="small">73</text>"
+<circle cx="7" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9140625" />
+<text x="6.9" y="10.9" class="small">F5</text>"
+<text x="6.9" y="11.0" class="small">117</text>"
+<circle cx="8" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3203125" />
+<text x="7.9" y="10.9" class="small">57</text>"
+<text x="7.9" y="11.0" class="small">-41</text>"
+<circle cx="9" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.2890625" />
+<text x="8.9" y="10.9" class="small">5B</text>"
+<text x="8.9" y="11.0" class="small">-37</text>"
+<circle cx="10" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.828125" />
+<text x="9.9" y="10.9" class="small">16</text>"
+<text x="9.9" y="11.0" class="small">-106</text>"
+<circle cx="11" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.796875" />
+<text x="10.9" y="10.9" class="small">1A</text>"
+<text x="10.9" y="11.0" class="small">-102</text>"
+<circle cx="12" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.953125" />
+<text x="11.9" y="10.9" class="small">FA</text>"
+<text x="11.9" y="11.0" class="small">122</text>"
+<circle cx="13" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.78125" />
+<text x="12.9" y="10.9" class="small">1C</text>"
+<text x="12.9" y="11.0" class="small">-100</text>"
+<circle cx="14" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.078125" />
+<text x="13.9" y="10.9" class="small">8A</text>"
+<text x="13.9" y="11.0" class="small">10</text>"
+<circle cx="15" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.390625" />
+<text x="14.9" y="10.9" class="small">B2</text>"
+<text x="14.9" y="11.0" class="small">50</text>"
+<circle cx="16" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7109375" />
+<text x="15.9" y="10.9" class="small">DB</text>"
+<text x="15.9" y="11.0" class="small">91</text>"
+<circle cx="17" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.890625" />
+<text x="16.9" y="10.9" class="small">F2</text>"
+<text x="16.9" y="11.0" class="small">114</text>"
+<circle cx="18" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4921875" />
+<text x="17.9" y="10.9" class="small">41</text>"
+<text x="17.9" y="11.0" class="small">-63</text>"
+<circle cx="19" cy="11" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.359375" />
+<text x="18.9" y="10.9" class="small">52</text>"
+<text x="18.9" y="11.0" class="small">-46</text>"
+<circle cx="0" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0546875" />
+<text x="-0.1" y="11.9" class="small">87</text>"
+<text x="-0.1" y="12.0" class="small">7</text>"
+<circle cx="1" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.34375" />
+<text x="0.9" y="11.9" class="small">AC</text>"
+<text x="0.9" y="12.0" class="small">44</text>"
+<circle cx="2" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.2421875" />
+<text x="1.9" y="11.9" class="small">9F</text>"
+<text x="1.9" y="12.0" class="small">31</text>"
+<circle cx="3" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.59375" />
+<text x="2.9" y="11.9" class="small">CC</text>"
+<text x="2.9" y="12.0" class="small">76</text>"
+<circle cx="4" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.2109375" />
+<text x="3.9" y="11.9" class="small">65</text>"
+<text x="3.9" y="12.0" class="small">-27</text>"
+<circle cx="5" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.921875" />
+<text x="4.9" y="11.9" class="small">0A</text>"
+<text x="4.9" y="12.0" class="small">-118</text>"
+<circle cx="6" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.40625" />
+<text x="5.9" y="11.9" class="small">4C</text>"
+<text x="5.9" y="12.0" class="small">-52</text>"
+<circle cx="7" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1328125" />
+<text x="6.9" y="11.9" class="small">6F</text>"
+<text x="6.9" y="12.0" class="small">-17</text>"
+<circle cx="8" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0546875" />
+<text x="7.9" y="11.9" class="small">87</text>"
+<text x="7.9" y="12.0" class="small">7</text>"
+<circle cx="9" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9765625" />
+<text x="8.9" y="11.9" class="small">FD</text>"
+<text x="8.9" y="12.0" class="small">125</text>"
+<circle cx="10" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.625" />
+<text x="9.9" y="11.9" class="small">30</text>"
+<text x="9.9" y="12.0" class="small">-80</text>"
+<circle cx="11" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0234375" />
+<text x="10.9" y="11.9" class="small">7D</text>"
+<text x="10.9" y="12.0" class="small">-3</text>"
+<circle cx="12" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.40625" />
+<text x="11.9" y="11.9" class="small">B4</text>"
+<text x="11.9" y="12.0" class="small">52</text>"
+<circle cx="13" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.953125" />
+<text x="12.9" y="11.9" class="small">FA</text>"
+<text x="12.9" y="12.0" class="small">122</text>"
+<circle cx="14" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5859375" />
+<text x="13.9" y="11.9" class="small">CB</text>"
+<text x="13.9" y="12.0" class="small">75</text>"
+<circle cx="15" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1484375" />
+<text x="14.9" y="11.9" class="small">6D</text>"
+<text x="14.9" y="12.0" class="small">-19</text>"
+<circle cx="16" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9765625" />
+<text x="15.9" y="11.9" class="small">03</text>"
+<text x="15.9" y="12.0" class="small">-125</text>"
+<circle cx="17" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.21875" />
+<text x="16.9" y="11.9" class="small">64</text>"
+<text x="16.9" y="12.0" class="small">-28</text>"
+<circle cx="18" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6015625" />
+<text x="17.9" y="11.9" class="small">CD</text>"
+<text x="17.9" y="12.0" class="small">77</text>"
+<circle cx="19" cy="12" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8046875" />
+<text x="18.9" y="11.9" class="small">19</text>"
+<text x="18.9" y="12.0" class="small">-103</text>"
+<circle cx="0" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.71875" />
+<text x="-0.1" y="12.9" class="small">DC</text>"
+<text x="-0.1" y="13.0" class="small">92</text>"
+<circle cx="1" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.734375" />
+<text x="0.9" y="12.9" class="small">22</text>"
+<text x="0.9" y="13.0" class="small">-94</text>"
+<circle cx="2" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9609375" />
+<text x="1.9" y="12.9" class="small">FB</text>"
+<text x="1.9" y="13.0" class="small">123</text>"
+<circle cx="3" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.3828125" />
+<text x="2.9" y="12.9" class="small">B1</text>"
+<text x="2.9" y="13.0" class="small">49</text>"
+<circle cx="4" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.609375" />
+<text x="3.9" y="12.9" class="small">32</text>"
+<text x="3.9" y="13.0" class="small">-78</text>"
+<circle cx="5" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.1875" />
+<text x="4.9" y="12.9" class="small">98</text>"
+<text x="4.9" y="13.0" class="small">24</text>"
+<circle cx="6" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0859375" />
+<text x="5.9" y="12.9" class="small">75</text>"
+<text x="5.9" y="13.0" class="small">-11</text>"
+<circle cx="7" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.234375" />
+<text x="6.9" y="12.9" class="small">62</text>"
+<text x="6.9" y="13.0" class="small">-30</text>"
+<circle cx="8" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8671875" />
+<text x="7.9" y="12.9" class="small">EF</text>"
+<text x="7.9" y="13.0" class="small">111</text>"
+<circle cx="9" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.796875" />
+<text x="8.9" y="12.9" class="small">1A</text>"
+<text x="8.9" y="13.0" class="small">-102</text>"
+<circle cx="10" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.84375" />
+<text x="9.9" y="12.9" class="small">14</text>"
+<text x="9.9" y="13.0" class="small">-108</text>"
+<circle cx="11" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.71875" />
+<text x="10.9" y="12.9" class="small">DC</text>"
+<text x="10.9" y="13.0" class="small">92</text>"
+<circle cx="12" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.265625" />
+<text x="11.9" y="12.9" class="small">5E</text>"
+<text x="11.9" y="13.0" class="small">-34</text>"
+<circle cx="13" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.921875" />
+<text x="12.9" y="12.9" class="small">0A</text>"
+<text x="12.9" y="13.0" class="small">-118</text>"
+<circle cx="14" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.265625" />
+<text x="13.9" y="12.9" class="small">A2</text>"
+<text x="13.9" y="13.0" class="small">34</text>"
+<circle cx="15" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8515625" />
+<text x="14.9" y="12.9" class="small">ED</text>"
+<text x="14.9" y="13.0" class="small">109</text>"
+<circle cx="16" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.859375" />
+<text x="15.9" y="12.9" class="small">12</text>"
+<text x="15.9" y="13.0" class="small">-110</text>"
+<circle cx="17" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4140625" />
+<text x="16.9" y="12.9" class="small">B5</text>"
+<text x="16.9" y="13.0" class="small">53</text>"
+<circle cx="18" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.578125" />
+<text x="17.9" y="12.9" class="small">CA</text>"
+<text x="17.9" y="13.0" class="small">74</text>"
+<circle cx="19" cy="13" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5" />
+<text x="18.9" y="12.9" class="small">C0</text>"
+<text x="18.9" y="13.0" class="small">64</text>"
+<circle cx="0" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9609375" />
+<text x="-0.1" y="13.9" class="small">05</text>"
+<text x="-0.1" y="14.0" class="small">-123</text>"
+<circle cx="1" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.484375" />
+<text x="0.9" y="13.9" class="small">BE</text>"
+<text x="0.9" y="14.0" class="small">62</text>"
+<circle cx="2" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8984375" />
+<text x="1.9" y="13.9" class="small">F3</text>"
+<text x="1.9" y="14.0" class="small">115</text>"
+<circle cx="3" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7578125" />
+<text x="2.9" y="13.9" class="small">1F</text>"
+<text x="2.9" y="14.0" class="small">-97</text>"
+<circle cx="4" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5859375" />
+<text x="3.9" y="13.9" class="small">CB</text>"
+<text x="3.9" y="14.0" class="small">75</text>"
+<circle cx="5" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4296875" />
+<text x="4.9" y="13.9" class="small">B7</text>"
+<text x="4.9" y="14.0" class="small">55</text>"
+<circle cx="6" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.078125" />
+<text x="5.9" y="13.9" class="small">8A</text>"
+<text x="5.9" y="14.0" class="small">10</text>"
+<circle cx="7" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.1171875" />
+<text x="6.9" y="13.9" class="small">8F</text>"
+<text x="6.9" y="14.0" class="small">15</text>"
+<circle cx="8" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.234375" />
+<text x="7.9" y="13.9" class="small">62</text>"
+<text x="7.9" y="14.0" class="small">-30</text>"
+<circle cx="9" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.453125" />
+<text x="8.9" y="13.9" class="small">BA</text>"
+<text x="8.9" y="14.0" class="small">58</text>"
+<circle cx="10" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8671875" />
+<text x="9.9" y="13.9" class="small">11</text>"
+<text x="9.9" y="14.0" class="small">-111</text>"
+<circle cx="11" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.859375" />
+<text x="10.9" y="13.9" class="small">12</text>"
+<text x="10.9" y="14.0" class="small">-110</text>"
+<circle cx="12" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.25" />
+<text x="11.9" y="13.9" class="small">A0</text>"
+<text x="11.9" y="14.0" class="small">32</text>"
+<circle cx="13" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.921875" />
+<text x="12.9" y="13.9" class="small">F6</text>"
+<text x="12.9" y="14.0" class="small">118</text>"
+<circle cx="14" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0546875" />
+<text x="13.9" y="13.9" class="small">79</text>"
+<text x="13.9" y="14.0" class="small">-7</text>"
+<circle cx="15" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.96875" />
+<text x="14.9" y="13.9" class="small">FC</text>"
+<text x="14.9" y="14.0" class="small">124</text>"
+<circle cx="16" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3984375" />
+<text x="15.9" y="13.9" class="small">4D</text>"
+<text x="15.9" y="14.0" class="small">-51</text>"
+<circle cx="17" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.1796875" />
+<text x="16.9" y="13.9" class="small">97</text>"
+<text x="16.9" y="14.0" class="small">23</text>"
+<circle cx="18" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.09375" />
+<text x="17.9" y="13.9" class="small">74</text>"
+<text x="17.9" y="14.0" class="small">-12</text>"
+<circle cx="19" cy="14" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.421875" />
+<text x="18.9" y="13.9" class="small">4A</text>"
+<text x="18.9" y="14.0" class="small">-54</text>"
+<circle cx="0" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.53125" />
+<text x="-0.1" y="14.9" class="small">3C</text>"
+<text x="-0.1" y="15.0" class="small">-68</text>"
+<circle cx="1" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4453125" />
+<text x="0.9" y="14.9" class="small">B9</text>"
+<text x="0.9" y="15.0" class="small">57</text>"
+<circle cx="2" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.921875" />
+<text x="1.9" y="14.9" class="small">0A</text>"
+<text x="1.9" y="15.0" class="small">-118</text>"
+<circle cx="3" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.140625" />
+<text x="2.9" y="14.9" class="small">92</text>"
+<text x="2.9" y="15.0" class="small">18</text>"
+<circle cx="4" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.265625" />
+<text x="3.9" y="14.9" class="small">5E</text>"
+<text x="3.9" y="15.0" class="small">-34</text>"
+<circle cx="5" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.078125" />
+<text x="4.9" y="14.9" class="small">8A</text>"
+<text x="4.9" y="15.0" class="small">10</text>"
+<circle cx="6" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7265625" />
+<text x="5.9" y="14.9" class="small">DD</text>"
+<text x="5.9" y="15.0" class="small">93</text>"
+<circle cx="7" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.296875" />
+<text x="6.9" y="14.9" class="small">A6</text>"
+<text x="6.9" y="15.0" class="small">38</text>"
+<circle cx="8" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9296875" />
+<text x="7.9" y="14.9" class="small">09</text>"
+<text x="7.9" y="15.0" class="small">-119</text>"
+<circle cx="9" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9921875" />
+<text x="8.9" y="14.9" class="small">FF</text>"
+<text x="8.9" y="15.0" class="small">127</text>"
+<circle cx="10" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1875" />
+<text x="9.9" y="14.9" class="small">68</text>"
+<text x="9.9" y="15.0" class="small">-24</text>"
+<circle cx="11" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.015625" />
+<text x="10.9" y="14.9" class="small">82</text>"
+<text x="10.9" y="15.0" class="small">2</text>"
+<circle cx="12" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.890625" />
+<text x="11.9" y="14.9" class="small">F2</text>"
+<text x="11.9" y="15.0" class="small">114</text>"
+<circle cx="13" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.859375" />
+<text x="12.9" y="14.9" class="small">EE</text>"
+<text x="12.9" y="15.0" class="small">110</text>"
+<circle cx="14" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.2421875" />
+<text x="13.9" y="14.9" class="small">9F</text>"
+<text x="13.9" y="15.0" class="small">31</text>"
+<circle cx="15" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8203125" />
+<text x="14.9" y="14.9" class="small">17</text>"
+<text x="14.9" y="15.0" class="small">-105</text>"
+<circle cx="16" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.640625" />
+<text x="15.9" y="14.9" class="small">D2</text>"
+<text x="15.9" y="15.0" class="small">82</text>"
+<circle cx="17" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6640625" />
+<text x="16.9" y="14.9" class="small">D5</text>"
+<text x="16.9" y="15.0" class="small">85</text>"
+<circle cx="18" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.28125" />
+<text x="17.9" y="14.9" class="small">5C</text>"
+<text x="17.9" y="15.0" class="small">-36</text>"
+<circle cx="19" cy="15" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.109375" />
+<text x="18.9" y="14.9" class="small">72</text>"
+<text x="18.9" y="15.0" class="small">-14</text>"
+<circle cx="0" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.078125" />
+<text x="-0.1" y="15.9" class="small">76</text>"
+<text x="-0.1" y="16.0" class="small">-10</text>"
+<circle cx="1" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6015625" />
+<text x="0.9" y="15.9" class="small">CD</text>"
+<text x="0.9" y="16.0" class="small">77</text>"
+<circle cx="2" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.1015625" />
+<text x="1.9" y="15.9" class="small">8D</text>"
+<text x="1.9" y="16.0" class="small">13</text>"
+<circle cx="3" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9609375" />
+<text x="2.9" y="15.9" class="small">05</text>"
+<text x="2.9" y="16.0" class="small">-123</text>"
+<circle cx="4" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.2421875" />
+<text x="3.9" y="15.9" class="small">61</text>"
+<text x="3.9" y="16.0" class="small">-31</text>"
+<circle cx="5" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4609375" />
+<text x="4.9" y="15.9" class="small">BB</text>"
+<text x="4.9" y="16.0" class="small">59</text>"
+<circle cx="6" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4921875" />
+<text x="5.9" y="15.9" class="small">41</text>"
+<text x="5.9" y="16.0" class="small">-63</text>"
+<circle cx="7" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.15625" />
+<text x="6.9" y="15.9" class="small">94</text>"
+<text x="6.9" y="16.0" class="small">20</text>"
+<circle cx="8" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9453125" />
+<text x="7.9" y="15.9" class="small">F9</text>"
+<text x="7.9" y="16.0" class="small">121</text>"
+<circle cx="9" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9765625" />
+<text x="8.9" y="15.9" class="small">FD</text>"
+<text x="8.9" y="16.0" class="small">125</text>"
+<circle cx="10" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.28125" />
+<text x="9.9" y="15.9" class="small">5C</text>"
+<text x="9.9" y="16.0" class="small">-36</text>"
+<circle cx="11" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.109375" />
+<text x="10.9" y="15.9" class="small">72</text>"
+<text x="10.9" y="16.0" class="small">-14</text>"
+<circle cx="12" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.1171875" />
+<text x="11.9" y="15.9" class="small">71</text>"
+<text x="11.9" y="16.0" class="small">-15</text>"
+<circle cx="13" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7421875" />
+<text x="12.9" y="15.9" class="small">21</text>"
+<text x="12.9" y="16.0" class="small">-95</text>"
+<circle cx="14" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.34375" />
+<text x="13.9" y="15.9" class="small">54</text>"
+<text x="13.9" y="16.0" class="small">-44</text>"
+<circle cx="15" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5078125" />
+<text x="14.9" y="15.9" class="small">3F</text>"
+<text x="14.9" y="16.0" class="small">-65</text>"
+<circle cx="16" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5390625" />
+<text x="15.9" y="15.9" class="small">3B</text>"
+<text x="15.9" y="16.0" class="small">-69</text>"
+<circle cx="17" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.609375" />
+<text x="16.9" y="15.9" class="small">32</text>"
+<text x="16.9" y="16.0" class="small">-78</text>"
+<circle cx="18" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.796875" />
+<text x="17.9" y="15.9" class="small">E6</text>"
+<text x="17.9" y="16.0" class="small">102</text>"
+<circle cx="19" cy="16" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.1171875" />
+<text x="18.9" y="15.9" class="small">8F</text>"
+<text x="18.9" y="16.0" class="small">15</text>"
+<circle cx="0" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4609375" />
+<text x="-0.1" y="16.9" class="small">45</text>"
+<text x="-0.1" y="17.0" class="small">-59</text>"
+<circle cx="1" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5078125" />
+<text x="0.9" y="16.9" class="small">3F</text>"
+<text x="0.9" y="17.0" class="small">-65</text>"
+<circle cx="2" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="1.0" />
+<text x="1.9" y="16.9" class="small">00</text>"
+<text x="1.9" y="17.0" class="small">-128</text>"
+<circle cx="3" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4765625" />
+<text x="2.9" y="16.9" class="small">43</text>"
+<text x="2.9" y="17.0" class="small">-61</text>"
+<circle cx="4" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.4609375" />
+<text x="3.9" y="16.9" class="small">BB</text>"
+<text x="3.9" y="17.0" class="small">59</text>"
+<circle cx="5" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9453125" />
+<text x="4.9" y="16.9" class="small">07</text>"
+<text x="4.9" y="17.0" class="small">-121</text>"
+<circle cx="6" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7734375" />
+<text x="5.9" y="16.9" class="small">1D</text>"
+<text x="5.9" y="17.0" class="small">-99</text>"
+<circle cx="7" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0390625" />
+<text x="6.9" y="16.9" class="small">85</text>"
+<text x="6.9" y="17.0" class="small">5</text>"
+<circle cx="8" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.96875" />
+<text x="7.9" y="16.9" class="small">FC</text>"
+<text x="7.9" y="17.0" class="small">124</text>"
+<circle cx="9" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.765625" />
+<text x="8.9" y="16.9" class="small">E2</text>"
+<text x="8.9" y="17.0" class="small">98</text>"
+<circle cx="10" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.71875" />
+<text x="9.9" y="16.9" class="small">24</text>"
+<text x="9.9" y="17.0" class="small">-92</text>"
+<circle cx="11" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.609375" />
+<text x="10.9" y="16.9" class="small">CE</text>"
+<text x="10.9" y="17.0" class="small">78</text>"
+<circle cx="12" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.078125" />
+<text x="11.9" y="16.9" class="small">76</text>"
+<text x="11.9" y="17.0" class="small">-10</text>"
+<circle cx="13" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.65625" />
+<text x="12.9" y="16.9" class="small">2C</text>"
+<text x="12.9" y="17.0" class="small">-84</text>"
+<circle cx="14" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.171875" />
+<text x="13.9" y="16.9" class="small">96</text>"
+<text x="13.9" y="17.0" class="small">22</text>"
+<circle cx="15" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5" />
+<text x="14.9" y="16.9" class="small">40</text>"
+<text x="14.9" y="17.0" class="small">-64</text>"
+<circle cx="16" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.875" />
+<text x="15.9" y="16.9" class="small">10</text>"
+<text x="15.9" y="17.0" class="small">-112</text>"
+<circle cx="17" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9609375" />
+<text x="16.9" y="16.9" class="small">FB</text>"
+<text x="16.9" y="17.0" class="small">123</text>"
+<circle cx="18" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.21875" />
+<text x="17.9" y="16.9" class="small">64</text>"
+<text x="17.9" y="17.0" class="small">-28</text>"
+<circle cx="19" cy="17" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0625" />
+<text x="18.9" y="16.9" class="small">88</text>"
+<text x="18.9" y="17.0" class="small">8</text>"
+<circle cx="0" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9609375" />
+<text x="-0.1" y="17.9" class="small">FB</text>"
+<text x="-0.1" y="18.0" class="small">123</text>"
+<circle cx="1" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0703125" />
+<text x="0.9" y="17.9" class="small">89</text>"
+<text x="0.9" y="18.0" class="small">9</text>"
+<circle cx="2" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6328125" />
+<text x="1.9" y="17.9" class="small">D1</text>"
+<text x="1.9" y="18.0" class="small">81</text>"
+<circle cx="3" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7734375" />
+<text x="2.9" y="17.9" class="small">E3</text>"
+<text x="2.9" y="18.0" class="small">99</text>"
+<circle cx="4" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0078125" />
+<text x="3.9" y="17.9" class="small">81</text>"
+<text x="3.9" y="18.0" class="small">1</text>"
+<circle cx="5" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.90625" />
+<text x="4.9" y="17.9" class="small">0C</text>"
+<text x="4.9" y="18.0" class="small">-116</text>"
+<circle cx="6" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7578125" />
+<text x="5.9" y="17.9" class="small">E1</text>"
+<text x="5.9" y="18.0" class="small">97</text>"
+<circle cx="7" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.40625" />
+<text x="6.9" y="17.9" class="small">4C</text>"
+<text x="6.9" y="18.0" class="small">-52</text>"
+<circle cx="8" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5703125" />
+<text x="7.9" y="17.9" class="small">37</text>"
+<text x="7.9" y="18.0" class="small">-73</text>"
+<circle cx="9" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.390625" />
+<text x="8.9" y="17.9" class="small">B2</text>"
+<text x="8.9" y="18.0" class="small">50</text>"
+<circle cx="10" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.7734375" />
+<text x="9.9" y="17.9" class="small">1D</text>"
+<text x="9.9" y="18.0" class="small">-99</text>"
+<circle cx="11" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.25" />
+<text x="10.9" y="17.9" class="small">60</text>"
+<text x="10.9" y="18.0" class="small">-32</text>"
+<circle cx="12" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5" />
+<text x="11.9" y="17.9" class="small">40</text>"
+<text x="11.9" y="18.0" class="small">-64</text>"
+<circle cx="13" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6328125" />
+<text x="12.9" y="17.9" class="small">D1</text>"
+<text x="12.9" y="18.0" class="small">81</text>"
+<circle cx="14" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.2890625" />
+<text x="13.9" y="17.9" class="small">A5</text>"
+<text x="13.9" y="18.0" class="small">37</text>"
+<circle cx="15" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.6484375" />
+<text x="14.9" y="17.9" class="small">2D</text>"
+<text x="14.9" y="18.0" class="small">-83</text>"
+<circle cx="16" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.5390625" />
+<text x="15.9" y="17.9" class="small">3B</text>"
+<text x="15.9" y="18.0" class="small">-69</text>"
+<circle cx="17" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.78125" />
+<text x="16.9" y="17.9" class="small">E4</text>"
+<text x="16.9" y="18.0" class="small">100</text>"
+<circle cx="18" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0390625" />
+<text x="17.9" y="17.9" class="small">85</text>"
+<text x="17.9" y="18.0" class="small">5</text>"
+<circle cx="19" cy="18" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0546875" />
+<text x="18.9" y="17.9" class="small">87</text>"
+<text x="18.9" y="18.0" class="small">7</text>"
+<circle cx="0" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.7890625" />
+<text x="-0.1" y="18.9" class="small">E5</text>"
+<text x="-0.1" y="19.0" class="small">101</text>"
+<circle cx="1" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6796875" />
+<text x="0.9" y="18.9" class="small">D7</text>"
+<text x="0.9" y="19.0" class="small">87</text>"
+<circle cx="2" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9609375" />
+<text x="1.9" y="18.9" class="small">05</text>"
+<text x="1.9" y="19.0" class="small">-123</text>"
+<circle cx="3" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.6796875" />
+<text x="2.9" y="18.9" class="small">D7</text>"
+<text x="2.9" y="19.0" class="small">87</text>"
+<circle cx="4" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0234375" />
+<text x="3.9" y="18.9" class="small">7D</text>"
+<text x="3.9" y="19.0" class="small">-3</text>"
+<circle cx="5" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.21875" />
+<text x="4.9" y="18.9" class="small">9C</text>"
+<text x="4.9" y="19.0" class="small">28</text>"
+<circle cx="6" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.5703125" />
+<text x="5.9" y="18.9" class="small">C9</text>"
+<text x="5.9" y="19.0" class="small">73</text>"
+<circle cx="7" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.9140625" />
+<text x="6.9" y="18.9" class="small">F5</text>"
+<text x="6.9" y="19.0" class="small">117</text>"
+<circle cx="8" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.125" />
+<text x="7.9" y="18.9" class="small">70</text>"
+<text x="7.9" y="19.0" class="small">-16</text>"
+<circle cx="9" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.9140625" />
+<text x="8.9" y="18.9" class="small">0B</text>"
+<text x="8.9" y="19.0" class="small">-117</text>"
+<circle cx="10" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8203125" />
+<text x="9.9" y="18.9" class="small">17</text>"
+<text x="9.9" y="19.0" class="small">-105</text>"
+<circle cx="11" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0390625" />
+<text x="10.9" y="18.9" class="small">7B</text>"
+<text x="10.9" y="19.0" class="small">-5</text>"
+<circle cx="12" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.8671875" />
+<text x="11.9" y="18.9" class="small">EF</text>"
+<text x="11.9" y="19.0" class="small">111</text>"
+<circle cx="13" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8125" />
+<text x="12.9" y="18.9" class="small">18</text>"
+<text x="12.9" y="19.0" class="small">-104</text>"
+<circle cx="14" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="blue" fill-opacity="0.0234375" />
+<text x="13.9" y="18.9" class="small">83</text>"
+<text x="13.9" y="19.0" class="small">3</text>"
+<circle cx="15" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.453125" />
+<text x="14.9" y="18.9" class="small">46</text>"
+<text x="14.9" y="19.0" class="small">-58</text>"
+<circle cx="16" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.0546875" />
+<text x="15.9" y="18.9" class="small">79</text>"
+<text x="15.9" y="19.0" class="small">-7</text>"
+<circle cx="17" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.8984375" />
+<text x="16.9" y="18.9" class="small">0D</text>"
+<text x="16.9" y="19.0" class="small">-115</text>"
+<circle cx="18" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.4296875" />
+<text x="17.9" y="18.9" class="small">49</text>"
+<text x="17.9" y="19.0" class="small">-55</text>"
+<circle cx="19" cy="19" r="0.4" stroke="black" stroke-width="0.03" fill="grey" fill-opacity="0.3046875" />
+<text x="18.9" y="18.9" class="small">59</text>"
+<text x="18.9" y="19.0" class="small">-39</text>"
+</svg>

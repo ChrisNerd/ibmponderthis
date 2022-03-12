@@ -1,0 +1,108 @@
+Short answer:
+n=20
+Elements of the unwinnable set:
+{1, 2, 3, 4, 5, 6, 7, 8, 11, 14, 15, 16, 17}
+
+Long answer:
+This one wasn't too bad. Although I'm pretty sure I'm doing it the hard way. There's got to be some connection with permutation groups or some mathy way of going about it.
+
+We start by making a function that plays a round of wheel of fortune.
+ def remaining( pieces: Seq[Int], k: Int, q: Int, current_Position: Int  = 0, current_Step_Number: Int  = 0): (Seq[Int],Int) =
+  if (current_Step_Number == k)
+   (pieces, current_Position)
+  else
+  {
+   // We start by advancing the position, wrapping around pieces.size if necessary.
+   val advancedPosition = (current_Position - 1 + q ) % pieces.size
+   // maintain the first advancedPosition indices.
+   val advancedPieceRemoved = pieces.patch(advancedPosition, Nil, 1)
+   // Now advancedPieceRemoved should be of 1 shorter length.
+   // We should wrap advancedPosition around advancedPieceRemoved.size to get it at the 0th index instead of the nth.
+   remaining(advancedPieceRemoved, k, q,
+     advancedPosition % advancedPieceRemoved.size, current_Step_Number + 1)
+   } 
+
+Test it
+ val p = 1 to 8                                   //> p  : scala.collection.immutable.Range.Inclusive = Range 1 to 8
+ 
+ remaining(p, 1, 5)                               //> res0: (Seq[Int], Int) = (Vector(1, 2, 3, 4, 6, 7, 8),4)
+ remaining(p, 2, 5)                               //> res1: (Seq[Int], Int) = (Vector(1, 3, 4, 6, 7, 8),1)
+ remaining(p, 3, 5)                               //> res2: (Seq[Int], Int) = (Vector(1, 3, 4, 6, 7),0)
+ remaining(p, 4, 5)                               //> res3: (Seq[Int], Int) = (Vector(1, 3, 4, 6),0)
+ remaining(p, 5, 5)                               //> res4: (Seq[Int], Int) = (Vector(3, 4, 6),0)
+ remaining(p, 6, 5)                               //> res5: (Seq[Int], Int) = (Vector(3, 6),1)
+ remaining(p, 7, 5)                               //> res6: (Seq[Int], Int) = (Vector(3),0)
+
+Now we give some thought to what our possible q values can take on. If q = 0 mod a, where 0<a <=n, then that would be the highest q we need to check. That would mean that no matter how many prizes remain, it would be as if we didn't spin it at all, that is q=0.
+This upper limit on q will be the lowest common multiple of the numbers 1,2,3...n.
+
+My first crack at this was to just make q range up to n!, which would work but we can do better. We can prime factorize the numbers, and realize we only have to worry about the largest powers of primes. Just focus on the set of numbers that are relatively prime to each other.
+
+ // Let f(N)=LCM{1,2,3..,N}
+ // f(N) = product from k=1 to n of pk^ floor( ln N / ln pk )
+ // where pk is the kth prime, and n is the largest natural number such than pn <= N.
+ lazy val primes: Stream[Int] = 2 #:: Stream.from(3).filter(i =>
+  primes.takeWhile{j => j * j <= i}.forall{ k => i % k > 0});
+                                                  //> ps: => Stream[Int] = <lazy>
+ def f(N: Int): Int = {
+  primes.takeWhile(_ <= N).map( pk =>
+   scala.math.pow(pk.toDouble, scala.math.floor( scala.math.log(N) / scala.math.log(pk))))
+  .product.toInt
+ }                                                //> f: (N: Int)Int
+ 
+ f(2)                                             //> res7: Int = 2
+ f(3)                                             //> res8: Int = 6
+ f(4)                                             //> res9: Int = 12
+ f(5)                                             //> res10: Int = 60
+ f(6)                                             //> res11: Int = 60
+ 
+Now to come up with an algorithm to see if we can get win all sets of size k.
+First, create all the sets of size k using a built-in function.
+all_Possible_Prize_Sets = (1 to n).toSeq.combinations(k)
+
+My first crack at this problem was to then generate all possible winnable prize sets, then doing a set difference to see if there were any unwinnable prizes.
+  unWinnable_Prizes = all_Possible_Prize_Sets -- winnable_Prize_Sets
+  if (!unWinnable_Prizes.isEmpty)...
+
+This worked to verify the case when n=9, but crashed around n=15 because the winnable_prize_set grows too large to fit in memory all at once.
+
+So I googled how to combine fold with takeWhile to try a purely functional solution with immutable variables, but it was way more confusing than the mutable approach. Simply iterate through the winnable prizes and remove them from the all_possible_prize_set one at a time until it's either empty or we're out of winnable prizes.
+
+for{
+  n <- Stream.from(9)
+  k = n-7
+  all_Possible_Prize_Sets = (1 to n).toSeq.combinations(k).to[collection.mutable.Set]
+  x = (0 until f(n)).takeWhile{ q =>
+   all_Possible_Prize_Sets -= remaining(1 to n, n - k, q)._1.toIndexedSeq
+   !all_Possible_Prize_Sets.isEmpty
+  }
+  if (!all_Possible_Prize_Sets.isEmpty)
+ } yield (n, all_Possible_Prize_Sets)
+
+We're using the fact that the combinations() function and the remaining(....) function both reserve the ordering of the original 1 to n seq.
+
+This pretty quickly spits out two solutions at n=20
+Stream((20,Set(Vector(1, 2, 3, 4, 5, 6, 7, 8, 11, 14, 15, 16, 17),
+   Vector(4, 5, 6, 7, 10, 13, 14, 15, 16, 17, 18, 19, 20))), ?)
+  
+The bonus took a tad longer, it had to run through 232 million values of q, but all I had to change was k=n-7 to k=n-8 and it eventually spit out
+Stream((21,Set(Vector(1, 2, 4, 5, 7, 8, 9, 11, 12, 15, 16, 17, 19),
+Vector(2, 3, 6, 7, 8, 9, 10, 11, 13, 15, 16, 18, 21),
+Vector(1, 2, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17, 21),
+....
+There are 675 solutions with k=n-8 at n=21.
+
+
+For n=k-9 we have 30 unwinnable sets at n=28.
+println(sol2.head._2.size) //> 30
+ println(sol2.head._2) //> Set(Vector(1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 15, 18, 20, 22, 23, 24, 26, 
+                                                  //| 27), Vector(2, 5, 6, 7, 8, 9, 10, 11, 12, 16, 17, 18, 19, 20, 21, 22, 23, 2
+                                                  //| 4, 27), Vector(1, 2, 3, 4, 5, 6, 7, 8, 13, 14, 15, 16, 17, 18, 19, 24, 25, 
+                                                  //| 26, 28),...
+
+n=k-10 crashed with a garbage collector error at n=28. Not too concerned, but a good time to call it quits.
+
+Thanks for another fun one,
+Chris Shannon
+(from Calgary, Canada)
+

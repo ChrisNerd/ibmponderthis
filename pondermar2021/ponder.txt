@@ -1,0 +1,99 @@
+Short answer:
+We can achieve a score of 1424 with the following set:
+[(0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (0,6), (0,7), (0,8), (0,9), (0,10), (0,11), (0,12), (0,13), (0,14), (0,15), (0,16), (0,17), (0,18), (0,19), (1,0), (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12), (1,13), (1,14), (1,15), (1,16), (1,17), (1,18), (1,19), (2,0), (2,1), (2,2), (2,3), (2,4), (2,5), (2,6), (2,7), (2,8), (2,9), (2,10), (2,11), (2,12), (2,13), (2,14), (2,15), (2,16), (2,17), (2,18), (2,19), (3,0), (3,1), (3,2), (3,3), (3,4), (3,5), (3,6), (3,7), (3,8), (3,9), (3,10), (3,11), (3,12), (3,13), (3,14), (3,15), (3,16), (3,17), (3,18), (4,0), (4,1), (4,2), (4,3), (4,4), (4,5), (4,6), (4,7), (4,8), (4,9), (4,10), (4,11), (4,12), (4,13), (4,14), (4,15), (4,16), (4,17), (5,0), (5,1), (5,2), (5,3), (5,4), (5,5), (5,6), (5,7), (5,8), (5,9), (5,10), (5,11), (5,12), (5,13), (5,14), (5,15), (5,16), (6,0), (6,1), (6,2), (6,3), (6,4), (6,5), (6,6), (6,7), (6,8), (6,9), (6,12), (6,14), (6,15), (7,0), (7,1), (7,2), (7,4), (7,7), (8,0), (8,1), (9,0)]
+
+Bonus:
+59 d2 e5 78 3b
+d3 fb 7e 41 a3
+a5 bc 76 4c 5c
+4b 8b 38 c6 f2
+92 fe 25 84 8e
+
+This grid allows for the maximum number of distinct scores, which is 340.
+
+Long answer:
+We got to reuse a lot of code from last month.
+The guts of the recursive algorithm were pretty much unchanged.
+Last month, we added a node to our solution set if it was one of a chicken and egg pair - no branching needed. This month, we add a node to our set if it is positive (after subtracting 128).
+We have a decision to make when the node to consider is negative. We run two recursions; one with it included, and one with it excluded. We choose the case that returns the highest score.
+To A-star this, we apply the heuristic that under a best-case scenario we're able to select all the positive nodes only. If including them still does not allow us to better a previously found high score, then we don't recurse any further.
+
+
+ def canBeVisit(exploredSoFar: Set[(Int,Int)], maxColumn: Int ) : ((Int,Int)) => Boolean =  { case (a, b) => a == 0 ||
+       // (a-1,b-1), (a-1,b), (a-1,b+1)
+   (b < 1 || exploredSoFar((a - 1), (b - 1))) && exploredSoFar((a - 1), (b)) && (b >= maxColumn - 1 || exploredSoFar((a - 1), (b + 1))) }
+
+
+ // Find the set of included nodes that will return the maximum sum, given the set of nodes exploredSoFar already included in the set.
+ // Will return the input if no solution was found or if we couldn't find a better solution
+ def find_maximal_set(grid: List[Array[Int]], exploredSoFar: Set[(Int, Int)] = Set(),
+  scoreSoFar: Int = 0, offLimits: Set[(Int, Int)] = Set(), scoreToBeat: Int = 0): (Set[(Int, Int)], Int) = {
+   val remaining = (for {
+    i <- (0 until grid.size).toSet[Int]
+    j <- 0 until grid.head.size
+   } yield (i, j)) -- exploredSoFar -- offLimits
+
+   val remainingThatCanBeVisited = remaining filter canBeVisit(exploredSoFar, grid.size)
+   val bestCase = remaining.map( f => grid(f._1)(f._2) ).filter( _ > 0).sum
+   if ( scoreSoFar + bestCase <= scoreToBeat || remainingThatCanBeVisited.isEmpty )
+    (exploredSoFar, scoreSoFar)
+   else {
+    val areaToConsider = remainingThatCanBeVisited.maxBy(f => grid(f._1)(f._2))
+    val areasScore = grid(areaToConsider._1)(areaToConsider._2)
+    if (areasScore >= 0)
+      find_maximal_set(grid, exploredSoFar + areaToConsider, scoreSoFar + areasScore, offLimits, scala.math.max(scoreSoFar + areasScore, scoreToBeat))
+    else {
+     val included = find_maximal_set(grid, exploredSoFar + areaToConsider, scoreSoFar + areasScore, offLimits,                  List(scoreSoFar, scoreToBeat).max)
+     val excluded = find_maximal_set(grid, exploredSoFar,                  scoreSoFar,              offLimits + areaToConsider, List(scoreSoFar, scoreToBeat, included._2).max)
+     if (included._2 > excluded._2) included else excluded
+    }
+   }
+  }
+
+I was expected a repeat of last month's when this didn't return right away. So I let it run over-night and pondered a new approach, one that involved descending row by row. To my surprised, the program terminated successfully by morning, with a nice-looking solution.
+I reused a lot of last month's svg plotting code to visualize the solution, which I've attached. It looks good. I manually verified that a large chunk in the 6th and 7th row of negative numbers should be included to allow access to the large positive numbers on rows 8 and 9.
+
+The bonus question required a bit of a different approach.
+My first attempt was mathematical. Thinking that each node needed to be a different power of 2, i.e. 1,2,4,8.... This will allow any subset of them to sum to a unique number, while also using numbers as small as possible.
+But this doesn't let us use negative numbers.
+Each row can be operated on fairly independently. The powerset of each row, all 32 of them, needs to be unique, and also not overlap with any rows before them. The second row we can reuse 1,2,4,8 and 16, but just add 32 to each. So 33,34,36,40,48. This approach looks good when you consider the numbers in binary. The problem is we run out of bits.
+I couldn't think of an easy way to generate the rows, so I started by creating random 5x5 grids and see how many duplicate sums we'd get from our valid sets.
+I generated the valid sets by taking all 2^25 combinations and filtering them for validity since 2^25 = 33 million, isn't terribly large for a computer. This took a while and only generated 340 valid sets, so I copied and pasted the results into a hard-coded variable.
+ val allCoods = for {
+      i <- (0 until 5).toSet
+      j <- 0 until 5
+    } yield (i, j)
+ val allValidCombos = allCoods.subsets().filter( s => s.forall(canBeVisit(s, 5)) )
+ val allValidCombosString  : List[String] = List("0000000000000000000000000", "0010000000000000000000000",....
+ def numberOfDistinctSums(grid: List[Int]): Int = allValidCombosString.map{ _.zip(grid).map{ case(char, n) =>
+  { if (char == '0') 0 else n }  - 128 }.sum }.distinct.size
+
+From here I noticed that using random grids generated pretty good results. Enough to convince me that using a genetic algorithm as an optimizer was worth a shot. Instead of using one I've used before for a previous Ponder This, I googled a few, and settled on modifying the code explained here:
+http://hugosereno.eu/blog/2013/03/01/genetic-algorithm-in-scala/
+It uses a Monte Carlo sampling to do its crossover, which I like, and also used scala's parallel-capable data structures to do the evaluations, which is cool.
+With very few modifications I ran it:
+
+ val petri = new GeneticExploration[Int, List[Int]](
+    0.01, 500, genePool,    // rate of mutation, max population and gene pool
+    cs => cs.toList,        // how to build a specimen from genes
+    numberOfDistinctSums,   // the fitness function
+    _.exists(x => numberOfDistinctSums(x) == 340)          // the stop condition
+ )
+
+ val archetype = List.fill(25)(42)                //> archetype  : List[Int] = List(42, 42, 42, 42...
+ val evolvedSpecimens = petri.evolution(petri.randomPool(archetype))
+ val newBonusSolution = evolvedSpecimens._1.find(x => numberOfDistinctSums(x)  == 340).get
+ 
+ // Here's a sample solution...
+ val sampleSolution =List(89, 210, 229, 120, 59, 211, 251, 126, 65, 163, 165, 188, 118, 76, 92, 75, 139, 56, 198, 242, 146, 254, 37, 132, 142)
+ numberOfDistinctSums(sampleSolution) // 340
+ def printInHexFormat(l : List[Int]) = l.grouped(5).map(_.map( i => i.toHexString).mkString(" ") ).foreach(println)
+ printInHexFormat(sampleSolution) // output as seen at the top of the submitted solution email.
+
+And it returned a solution within a few seconds. Another pleasant surprise. A quick glance at a solution you notice that it selects large numbers. It would be interesting to generate a bunch of solutions, and plot them on a histogram. Maybe a heatmap of their locations on the grid? Those are some of my ideas on how to reverse engineer the "proper" solution to the bonus.
+
+That was a really satisfying puzzle.
+Thanks again,
+
+Chris Shannon
+(from Calgary, Canada)
