@@ -1,0 +1,187 @@
+First off, Oded, I hope you are doing well during the pandemic. The Ponder This challenges have been a welcome distraction. Thank you.
+
+Short answer for the ** bonus:
+
+X.+OX.O+O.X+X.+
+.+O.+X+.OXOO+X.
+OX+XOO+X+O.X+OO
+XO+O.XOOXX++X.+
+.OXX+O.X++O.X+O
+O+O.X++OX.+OOX.
+X.O+OOX.+OOXX++
++X+O.X+XOX.+X.O
+.O+X+X.+O+XXOO+
+OXO.X+OOX.O++X.
+X.O+O+X.+OXO.+X
+X++O.X+X+X.+XXO
+OOXX+O+OOXOXO++
+.X+.O+X.+O+.OX.
++.X+O.X+X.+O+.X
+
+counts Map(X -> 61, O -> 61, + -> 62)
+
+For the single asterisk bonus question just replace any '.' with X, O or + .
+
+Short answer for the 10x10 question:
+
++.O+.XOX+.
+.OXOXO.+OX
+X+XO++X+.O
++.O+O.+OXX
+OXO.+XXO+.
+.O+XXO.+X+
+XX+O.+O+.O
++.OXOO+XOX
+X+O.+X+X+.
+.OX+X.O+.O
+
+Long answer:
+Well, this one was a toughy. When my program returned with no solutions I thought it must have been a trick question so I was stumped for quite a while.
+
+I started down a dead-end path too. After playing a game or two with pen and paper, I quickly realized that we should start with the 20 "holes" in mind (for the 10x10 board). Clearly, a pair of holes can not be adjacent to each other*. Also, we can't have just a single cell between a pair. These two conditions push the holes apart. But seeing as we have to have 20 of them amongst of 100 candidates, you can wave your hands and say that quadrilaterals formed by 4 of them must have an area of (100/20)=5, therefore the average distance between pairs should be sqrt(5), or a knights move.
+
+So off I went, down this knights move depth-first search algorithm to generate my 20 holes. Spoiler alert, it failed due to an exponential time complexity. But I still haven't addressed the unseen bug in the assumption (*).
+
+On to the next approach, divide and conquer. I broke the 10x10 grid into quadrants; 4 5x5 equal squares. Each 5x5 square can be brute-forced.  Putting 5 holes in each of the 4 grids seems like a sensible way of distributing the holes. There are only 25 choose 5, approximately 50,000 arrangements, each of which can be quickly checked. Furthermore, we can check all 25 choose 6 (< 200,000) ways of putting 6 holes a 5x5 grid to ensure that there's no way to put 6 in a 5x5. Therefore, all 4 quadrants must contain exactly 5 holes.
+
+def mapOffset(point: (Int, Int)) =
+{
+ Set(
+  (-2, -2), (-1, -1), (1, 1),  (2, 2), // up and to the right
+  (-2, 0),  (-1, 0),  (1, 0),  (2, 0), // horizontal
+  (-2, 2),  (-1, 1),  (1, -1), (2, -2), // down and to the right
+  (0, -2),  (0, -1),  (0, 1),  (0, 2) // vertical
+ )
+ .map(o => (o._1 + point._1, o._2 + point._2))
+}
+
+def notTooClose(holesSoFar: Set[(Int, Int)], point: (Int, Int)): Boolean =
+      mapOffset(point) intersect(holesSoFar) isEmpty
+   
+Do you see the problem with notTooClose??? It has to do with "Clearly, a pair of holes can not be adjacent to each other*".
+There is one place on the grid where a pair of holes can safely be adjacent to each other, and that place is the diagonals of length 2, right next to the corners.
+
+So the notTooClose function needed to be modified.
+ if ( cornerPoints contains point )
+  mapOffset(point) intersect(holesSoFar -- cornerPoints) isEmpty
+
+I didn't discover that corner points bugs until mid-April, when I revisited the problem with the extended deadline.
+
+The second half of the problem was to take a set of holes as input and try to fill it with 1's, 2's and 3's. This findOneTwoThrees function was a fairly straightforward recursive search. An optimization I found useful was to choose the cell with the fewest candidates as well as the most "neighbours", at each recursion point.
+
+val lowestCandidateCount = remaining.filter(cell => cell._2.size == remaining.minBy { _._2.size }._2.size).maxBy(cell => neighbours(holes, cell._1).size)
+
+Choosing random candidates would lead to an exponential run time, but with this judicious choosing of the candidate the run time was acceptable, despite the added O(n) cost of making the choice.
+
+A quick rewrite of the findOneTwoThrees that returns an Option[Solution] into listAllOneTwoThrees which returns an Iterator[Solution] and ensures that each player places a min of floor(n/3) and a max of ceil(n/3) cells.
+
+But finding or listing solutions given the hole set, wasn't working (before I corrected for the corner holes bug). I spent a great deal of time tracing the execution of my findOneTwoThrees, even writing svg files of the board at each step, and the recursively generated tree of all the boards (see attached images), without realizing that there were no bugs in that part of the code. On the plus side, while tracing unsolvable problems I distilled certain subsets of holes that were impossible to solve.
+
+It turns out that it is almost isomorphic to the graph colour problem.
+
+Consider the following set of holes on the 5x5 grid.
+
+...x.
+x....
+..x..
+....x
+.x...
+
+5 holes, all knights moves away from each other. Now look at the 4 cells labelled 1 through 4:
+...x.
+x.1..
+.2x3.
+..4.x
+.x...
+
+All pairs of them must be different (due to their alignment with a hole). They form a clique of size 4 (a complete graph) and therefore require 4 colours to colour them all. This simple case can not be solved with just 1s, 2s and 3s.
+
+Unfortunately identifying cliques is a bit of a hard problem, but I decided it's worth it to avoid a fruitless exponential search, (trading an (O(n^3) for an O(3^n)).  So I decided to screen for holes with cliques of size 4.
+
+  def hasCliqueOfSize4(holes: Set[(Int, Int)]) =
+   (grid15x15FullGrid -- holes).exists { point =>
+    val n1s = neighbours(holes, point)
+    //println("point" + point)
+    //println("neighbours of point " + n1s)
+    // Is there a set of 3 neighbours who are all neighbours with each other
+    n1s.subsets(3).exists { n2 =>
+     //println("n2 " + n2)
+     n2.subsets(2).forall { setof2 =>
+      // println("setof2 " + setof2)
+      val listOf2 = setof2.toList
+      val a = listOf2(0)
+      val b = listOf2(1)
+      // println("a b " + a + " " + b)
+      // println("neighbours a " + neighbours(holes, a))
+      neighbours(holes, a).contains(b)
+     }
+    }
+   }
+
+Now all the pieces were in place to solve the bonus question. Except for one thing: a 15x15 grid can't be divided into 4 equal subgrids. I decided on the following partitioning of the problem:
+
+___________________
+|       |    |    |
+|       |    |    |
+|       |    |    |
+|_______|    |    |
+|       |    |    |
+|    7x4|    |    |
+|       |____|____|
+|_______|_|       |
+|    |    |       |
+|    |    |       |
+| 4x7|    |_______|
+|bottom   |       |
+|left|    |       |
+| 1  | 2  |       |
+|____|____|_______|
+
+
+
+Breaking it down into 8 4x7 sections and a single 1x1 in the middle. Starting with the single asterisk problem of allocating 40 holes among them I decided that each 4x7 section should get 5 holes and the central hole gets a 0. This yielded a solution!
+
+But now I needed a new allocation scheme for 41 holes, the double-asterisk bonus problem. I played around with:
+All 4x7s having 5 and adding 1 in the central square => no solutions.
+bottomLeft1 having 6 and all others having 5 => no solutions
+bottomLeft2 having 6 and all others having 5 => finally tons of solutions!
+
+This code looks like this:
+
+ val gridfull15 = for {
+   (bottomLeft, i) <- gridBottomLeftCombinedSize11Filtered.zipWithIndex.toIterator
+   // 90 degree clockwise rotation
+   topLeft <- gridBottomLeftCombinedSize10Filtered/*.drop(i)*/.map(_.map( bottomLeftElement => ( bottomLeftElement._2 , 16 - bottomLeftElement._1)))
+   if (bottomLeft.forall(notTooClose(topLeft, _ )) && !hasCliqueOfSize4(bottomLeft ++ topLeft))
+   // Then by symmetry bottomLeft will be not too close to bottom right as well.
+   // similar argument to bottomright and topright.
+   bottomRight <- gridBottomLeftCombinedSize10Filtered.map(_.map(bottomLeftElement => ( 16 - bottomLeftElement._2 , bottomLeftElement._1)))
+   if (bottomRight.forall(notTooClose(bottomLeft ++ topLeft, _ )) && !hasCliqueOfSize4(bottomLeft ++ bottomRight ++ topLeft))
+   topRight <- gridBottomLeftCombinedSize10Filtered.map(_.map(bottomLeftElement => ( 16 - bottomLeftElement._1 , 16 - bottomLeftElement._2)))
+   if (topRight.forall(notTooClose(bottomLeft ++ topLeft ++ bottomRight, _ )) && !hasCliqueOfSize4(bottomLeft ++ bottomRight ++ topLeft ++ topRight ))
+ } yield bottomLeft ++ topLeft ++ bottomRight ++ topRight
+
+ var trialsCount = 0
+ gridfull15.flatMap{holes =>
+  if (trialsCount % 1 == 0) {
+   print("\r" + trialsCount)
+  //   printGrid(holes)
+  }
+  trialsCount+=1
+  listAllOneTwoThrees((grid15x15FullGrid -- holes).map(x=> x -> Set(1,2,3)).toMap, Map(), holes)}
+   .foreach{ sol =>
+    println("Solution")
+    printGridPath(sol)
+    println("counts "  + sol.values.groupBy(identity).mapValues(_.size))
+   }
+ println("done printing solutions")
+
+So it's a little bit ugly and I tried a bunch of simplifications to avoid the super expensive 4 nested for loops, but this problem resisted simple solutions, so I just let the computer grind away at it, putting in conditional guards as early as possible. Turns out that solutions started spitting out within a minute anyway, so premature optimization and all that...
+
+Anyways, this was a classic deceptive rope-you-in kind of puzzle... "Tic-tac-toe", a child's game? How hard can this be? Nearly two months later we answered that!
+
+Thanks, and stay safe!!
+
+Chris Shannon
+(from Calgary Canada)
+

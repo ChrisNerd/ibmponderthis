@@ -1,0 +1,149 @@
+Short answer:
+[101, 101, 115, 115, 135]
+[50, 50, 57, 115, 135]
+
+For the bonus:
+[11634000,6068000,6062000,3852000,9435000,5453000,4840000,5160000,3095000,
+ 3345000,2274000,3299000,4297000,6469000,3129000,4159000,3000000,2490000,
+ 337000,3262000,1262000,15690000,2645000,1726000,397000,472000,523000,743000,
+ 3131000,1658000,1449000,2389000,2263000,828000,1599000,579000,883000,1277000,
+ 726000,916000,8553000,397000,1777000,532000,2430000,429000,3183000,1443000,
+ 343000,892000,268000]
+[11634000,6068000,6062000,3852000,9435000,5453000,4840000,5160000,3095000,
+ 3345000,2274000,3299000,4297000,6469000,3129000,4159000,3000000,1245000,
+ 168500,1631000,631000,7845000,1322500,863000,198500,236000,261500,371500,
+ 1565500,829000,724500,1194500,1131500,414000,799500,289500,441500,638500,363000,
+ 458000,4276500,198500,888500,266000,1215000,214500,1591500,721500,171500,
+ 446000,134000]
+
+Long answer:
+Starting from the fraction given: 71.781305%, of vote size / population size. We can figure out what a suitable rational approximation is. This calls for a job for... Continued Fractions!!!
+Plugging "0.71781305 in continued fractions" into wolfram Alpha returns
+[0; 1, 2, 1, 1, 5, 4, 1, 1, 1, 2712, 1, 2]
+Ahh, there's a large number following a bunch of small numbers. That must be the point where the best/lowers terms are.
+Asking wolfram for the "Convergents[0.71781305]" returns
+{0, 1, 2/3, 3/4, 5/7, 28/39, 117/163, 145/202, 262/365, 407/567, 1104046/1538069, 1104453/1538636, 3312952/4615341}
+And there we go: v=407, p=567 fits the bill nicely with 5 ps between 101 and 150.
+
+Working with p=567 = p1+p2+p3+p4+p5, and 101<=p1<=p2<=p3<=p4<=p5<=149, we can see that the sum of the 3 lowest will form a majority since they will sum to over 300.
+
+And it immediately follows that the 2 largest states can't form a majority on their own since they can only sum to 567 - 300ish, which is less than half.
+
+So we don't have to pay too much attention to the electors per state, since all we need is 3 or more states to win, doesn't matter which.
+
+If we win only 1 or 0 states, we do not have a maximal losing vote, since we can win any 2 states and still lose.
+If a state we win is not won with 100% of the votes, it is not a maximal losing vote since we could have won more in that state.
+If the two states we won are not the two largest states, it is still not the maximal losing vote, since the "excess" winning votes (i.e. the votes over 50%) can be moved over to the largest unwon state, and we'd still be able to add more votes and not win.
+In the states that we lost, we can add votes until they are just shy of 50%.
+
+Therefore the maximal losing vote will consist of the two largest states with 100% of the votes in each, and the 3 smallest states with floor(pi/2) votes each.
+
+Let's write some code. Generate all the ways of summing to 567:
+
+val all567Sums = for {
+  p1 <- 101 to 567/5 by 2
+  p2 <- p1 to (567-p1)/4 by 2
+  p3 <- p2 to (567-p1-p2)/3 by 2
+  p4 <- p3 to (567-p1-p2-p3)/2 by 2
+  val p5 = 567-p1-p2-p3-p4
+  if p5 <= 149
+ } yield List(p1,p2,p3,p4,p5)                    
+//> all567Sums  : scala.collection.immutable.IndexedSeq[List[Int]] =
+// Vector(List(101, 101, 101, 115, 149), List(101, 101, 101, 117, 147), ....
+ 
+Calculate the "vote" for each population set based on the above criteria:
+val popsWithVotes = all567Sums.map(x => (x, List(x(0)/2, x(1)/2, x(2)/2, x(3), x(4))))
+//> popsWithVotes  : scala.collection.immutable.IndexedSeq[(List[Int], List[Int])]
+//  = Vector((List(101, 101, 101, 115, 149),List(50, 50, 50, 115, 149)),...
+
+See which ones have a vote size of 407.
+ val solutions = popsWithVotes.filter(x => x._2.sum == 407)
+// solutions  : scala.collection.immutable.IndexedSeq[(List[Int], List[Int])] =
+// Vector((List(101, 101, 115, 115, 135),List(50, 50, 57, 115, 135)),
+// (List(101, 101, 115, 117, 133),List(50, 50, 57, 117, 133)), ....
+ solutions.size                                   //> res1: Int = 67
+
+67 solutions found. Take your pick.
+
+For the bonus question we can reuse the same reasoning as before. If we're going to win a state, we might as well win it with 100% of the votes. If we're going to lose a state, we can get at most 50%-1 of the votes. Our goal is the maximize the "excess" votes in the winning cases with the constraint of keeping the winning electors to 538/2.
+
+After a few days of thinking about this, it struck me as isomorphic to the 0/1 knapsack problem! That was exciting for me.
+
+We want to put the most valuable states (by population) in our knapsack subject to their combined electoral "weight" not exceeding 538/2.
+
+I found a nice implementation of the 0/1 knapsack problem algorithm on rosettacode, and after finding and fixing a subtle bug involving the misuse of Sets on their code (Set.map( to return an integer).sum does not do what you intend. It de-duplicates first), I updated their webpage.
+The code I used is here:
+https://rosettacode.org/wiki/Knapsack_problem/0-1#Scala
+
+I found the electoral counts here:
+https://en.wikipedia.org/wiki/United_States_Electoral_College#Chronological_table
+and while I couldn't find the *eligible* voter counts, I found this list of *registered* voters.
+https://www.kff.org/other/state-indicator/number-of-voters-and-voter-registration-in-thousands-as-a-share-of-the-voter-population/?currentTimeframe=0&sortModel=%7B%22colId%22:%22Location%22,%22sort%22:%22asc%22%7D
+Finding a more current list would probably not change the overall state win-lose categorizations, which are presented below:
+
+The results of a split-second run were:
+Texas: weight=38 value=11634000
+Illinois: weight=20 value=6068000
+Ohio: weight=18 value=6062000
+Washington: weight=12 value=3852000
+Florida: weight=29 value=9435000
+Michigan: weight=16 value=5453000
+Georgia: weight=16 value=4840000
+NorthCarolina: weight=15 value=5160000
+Maryland: weight=10 value=3095000
+Massachusetts: weight=11 value=3345000
+Oregon: weight=7 value=2274000
+Missouri: weight=10 value=3299000
+NewJersey: weight=14 value=4297000
+Pennsylvania: weight=20 value=6469000
+Wisconsin: weight=10 value=3129000
+Virginia: weight=13 value=4159000
+Minnesota: weight=10 value=3000000
+
+resulting items: 17 of 51
+total weight: 269, total value: 85571000
+total weight: 269, total value: 85571000
+Excluded
+Alabama: electors=9 half population=1245000
+Alaska: electors=3 half population=168500
+Arizona: electors=11 half population=1631000
+Arkansas: electors=6 half population=631000
+California: electors=55 half population=7845000
+Colorado: electors=9 half population=1322500
+Connecticut: electors=7 half population=863000
+D.,C.: electors=3 half population=198500
+Delaware: electors=3 half population=236000
+Hawaii: electors=4 half population=261500
+Idaho: electors=4 half population=371500
+Indiana: electors=11 half population=1565500
+Iowa: electors=6 half population=829000
+Kansas: electors=6 half population=724500
+Kentucky: electors=8 half population=1194500
+Louisiana: electors=8 half population=1131500
+Maine: electors=4 half population=414000
+Mississippi: electors=6 half population=799500
+Montana: electors=3 half population=289500
+Nebraska: electors=5 half population=441500
+Nevada: electors=6 half population=638500
+NewHampshire: electors=4 half population=363000
+NewMexico: electors=5 half population=458000
+NewYork: electors=29 half population=4276500
+NorthDakota: electors=3 half population=198500
+Oklahoma: electors=7 half population=888500
+RhodeIsland: electors=4 half population=266000
+SouthCarolina: electors=9 half population=1215000
+SouthDakota: electors=3 half population=214500
+Tennessee: electors=11 half population=1591500
+Utah: electors=6 half population=721500
+Vermont: electors=3 half population=171500
+WestVirginia: electors=5 half population=446000
+Wyoming: electors=3 half population=134000
+total weight of excluded: 269, total value (half of each population before summing): 33746000
+excluded items count: 34 of 51
+
+This results in a maximal losing vote size of 85571000 + 33746000 = 119317000, and a population size of 153063000.
+In conclusion, the electoral college system sucks so bad, that you can get 119317000 / 153063000 = 77.952...% of the popular vote and still lose.
+Thanks for another fun puzzle, and Merry Christmas!!!
+
+Chris Shannon
+(from Calgary, Canada)

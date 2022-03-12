@@ -1,0 +1,115 @@
+Short answer (for the bonus question):
+RPS(11) game with at least 50 automorphisms
+0 -> 1, 2, 3, 4, 5
+1 -> 2, 3, 6, 7, 8
+2 -> 3, 4, 6, 9, 10
+3 -> 4, 5, 7, 8, 9
+4 -> 1, 5, 6, 7, 10
+5 -> 1, 2, 8, 9, 10
+6 -> 0, 3, 5, 8, 10
+7 -> 0, 2, 5, 6, 9
+8 -> 0, 2, 4, 7, 10
+9 -> 0, 1, 4, 6, 8
+10 -> 0, 1, 3, 7, 9
+
+Long answer:
+First off, this is my first submitted solution since April with Oded. So welcome, and thanks for taking on this role as puzzlemaster Gadi! If you have a chance to wish Oded well for me and thank him, I'd appreciate it, even though we've never met.
+
+This solution process is pretty similar to other combinatorial problems from Ponder This. I can represent the RPS(n) graph as an nxn binary skew matrix, where 1 indicates "row beats column", -1 for vice versa and 0 for a tie.
+There are (n*n-n)/2 independent entries (the upper triangular) corresponding to the n Choose 2 directional edges in the graph.
+My approach was to just fill those entries out, in order, checking to see if we're under the limits of wins or losses allowed at each point. We use recursion and backtracking to run through all the combinations and it's kind of neat and tidy.
+(There is a more efficient way to do this, keeping track of candidate entries remaining, and I thought it would be necessary to implement it for the bonus question, but simply going through the matrix in left to right, top to bottom order worked fine)
+
+val n = 11
+
+// Housekeeping to represent the upper triangular portion of a matrix as a 1D vector.
+def ijToIndex(i: Int, j: Int): Int =
+  n*(n-1)/2 - (n-i)*(n-i-1)/2 + j-i-1
+
+// The matrix is skew, reflecting the fact that if Rock beats Scissors, then Scissors losses to Rock. And 0s on the diagonal.
+ def matFromIndex(m: Vector[Int], i: Int, j: Int): Int =
+  if (i > j)
+   -matFromIndex(m,j, i)
+  else if (i == j)
+   0
+  else
+   m(ijToIndex(i, j))
+
+ // Can we insert the entry into position (i,j)?
+ def canTake(mat: Vector[Int], entry: Int, i : Int, j: Int): Boolean =
+  ((0 until j).map( jIndex => matFromIndex(mat, i, jIndex)).sum + entry).abs <= n - 1 - j &&
+  ((0 until i).map( iIndex => matFromIndex(mat, iIndex, j)).sum + entry).abs <= n - 1 - i
+
+ def generateMatrices(matSoFar: Vector[Int], i: Int, j: Int): Iterator[Vector[Int]] = {
+  if (matSoFar.size == (n*n - n )/2)
+   Iterator(matSoFar)
+  else
+   for { entry <- Iterator(1,-1)
+    if (canTake(matSoFar, entry, i,j))
+    rest <- generateMatrices(matSoFar :+ entry, if (j == n -1) i+1 else i, if (j== n-1) i+2 else j+1)
+   } yield rest
+ }                                                //> generateMatrices: (matSoFar: Vector[Int], i: Int, j: Int)Iterator[Vector[In
+ 
+Good, so now we have a way to iterate exhaustively through all possible matrix representations of RPS(n). Now we just have to check each of them for the number of isomorphism.
+
+A very similar approach can be used to efficiently run this check too, namely backtracking and recursion. We grow a Vector to represent the mapping, i.e. its value gets mapped to its index. When we append a new value (at index = vector.size) we only have to check against the size-1 other entries so far.
+
+ def generatePermutationAndCheckForIsomorphism(mat: Vector[Int], permSoFar: Vector[Int], remaining: Set[Int]): Iterator[Vector[Int]] =
+ {
+  if (remaining.isEmpty)
+   Iterator( permSoFar )
+  else
+   for { entry <- remaining.toIterator
+       if (permSoFar.zipWithIndex.forall{ case(p,i) => matFromIndex(mat, p, entry) == matFromIndex(mat, i, permSoFar.size)} )
+       rest <- generatePermutationAndCheckForIsomorphism(mat, permSoFar :+ entry, remaining - entry)
+   } yield rest
+ }              
+
+Now all that remains is to glue the two functions together and to count the isomorphisms.
+val out = generateMatrices(Vector(), 0, 1).filter{ m =>
+ val isos = generatePermutationAndCheckForIsomorphism(m, Vector(), (0 until n).toSet)
+ val isoList = isos.toList
+ val isSolution = isoList.size >= 50 // 10
+ if (isSolution)
+ {
+  println("solution ")
+  printMat(m)
+  println("with isos ")
+  isoList.foreach(println)
+  }
+  isSolution
+ }                                                //> solution
+                                                  //| Vector(1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1,
+                                                  //|  1, -1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1,
+                                                  //|  1, 1, 1, -1, 1, -1, 1, -1, 1, -1, -1, 1, -1)
+                                                  //| 0 1 1 1 1 1 -1 -1 -1 -1 -1
+                                                  //| -1 0 1 1 -1 -1 1 1 1 -1 -1
+                                                  //| -1 -1 0 1 1 -1 1 -1 -1 1 1
+                                                  //| -1 -1 -1 0 1 1 -1 1 1 1 -1
+                                                  //| -1 1 -1 -1 0 1 1 1 -1 -1 1
+                                                  //| -1 1 1 -1 -1 0 -1 -1 1 1 1
+                                                  //| 1 -1 -1 1 -1 1 0 -1 1 -1 1
+                                                  //| 1 -1 1 -1 -1 1 1 0 -1 1 -1
+                                                  //| 1 -1 1 -1 1 -1 -1 1 0 -1 1
+                                                  //| 1 1 -1 -1 1 -1 1 -1 1 0 -1
+                                                  //| 1 1 -1 1 -1 -1 -1 1 -1 1 0
+                                                  //| 0 -> Vector(1, 2, 3, 4, 5)
+                                                  //| 1 -> Vector(2, 3, 6, 7, 8)
+                                                  //| 2 -> Vector(3, 4, 6, 9, 10)
+                                                  //| 3 -> Vector(4, 5, 7, 8, 9)
+                                                  //| 4 -> Vector(1, 5, 6, 7, 10)
+                                                  //| 5 -> Vector(1, 2, 8, 9, 10)
+                                                  //| 6 -> Vector(0, 3, 5, 8, 10)
+                                                  //| 7 -> Vector(0, 2, 5, 6, 9)
+                                                  //| 8 -> Vector(0, 2, 4, 7, 10)
+                                                  //| 9 -> Vector(0, 1, 4, 6, 8)
+                                                  //| 10 -> Vector(0, 1, 3, 7, 9)
+                                                  //| with isos
+                                                  //| Vector(0, 5, 1, 2, 3, 4, 8, 9, 10, 6, 7)
+                                                  //| ....
+ out.take(2).foreach(println)
+
+Thanks for a fun puzzle, and welcome to Ponder This! So glad to have you,
+Chris Shannon
+
+(from Calgary, Canada)

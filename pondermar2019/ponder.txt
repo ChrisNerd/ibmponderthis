@@ -1,0 +1,331 @@
+Short answer:
+Find two non-square integers n1 and n2 such that
+b1=BAT(sqrt(n1),N1)=BAT(sqrt(n2),N1) and
+b2=BAT(sqrt(n1),N2)=BAT(sqrt(n2),N2) and both b1 and b2 are prime
+numbers.
+n1 = 53
+n2 = 477
+b1 = 5929223246159194801
+b2 = 17217982601
+
+Bonus!!
+BAT(sqrt(n1),10000)  = 9100.  This is the number of patents received
+by IBM in 2018.
+https://newsroom.ibm.com/2019-01-08-IBM-Earns-Record-9-100-Patents-in-2018-Tops-U-S-Patent-List
+
+
+Long answer:
+Oh goody, rational approximations, ... I know this!!! That means
+continued fractions.
+Let's start by finding N1 and N2.
+N1 = 1 C/e (coulomb per elementary charge) =  6.2415091×10^18
+
+For N2, I read the wikipedia article on Nuclear Fusion.
+https://en.wikipedia.org/wiki/Nuclear_fusion#Criteria_and_candidates_for_terrestrial_reactions
+ // (1)     2 1D +     3  1T     →     4 2He (     3.5 MeV     )     +
+    n0     (     14.1 MeV     )
+ // Where (2 1) and (3 1) and (4 2) are (superscript subscript) for
+(mass number and proton count (atomic number)), so n0 should have (1
+0).
+ // So N2 = 1000*(3.5E6+14.1E6)
+
+With N1 being so massive, let's hope that we're using efficient algorithms.
+Reading the wikipedia page on continued fractions, it turns out there
+are two kinds of approximations, and we're interested in the "first
+kind", which involves semiconvergents
+https://en.wikipedia.org/wiki/Continued_fraction#Best_rational_approximations
+
+The denominator of the approximation grows exponentially as we walk
+along the continued fractions coefficients linearly. We only have to
+watch for overflows, so we just sidestep that landmine by using
+BigIntegers.
+
+It turns out to be necessary to not only find the continued fractions
+for sqrt(n), but a bit more of a general form (sqrt(n) +ki)/di
+ def confinuedFractionCoefficientsOfRootNplusKoverD(n: Int , ki: Int ,
+di: Int): Stream[Int] = {
+   val a1 = math.floor(math.sqrt(n)).toInt
+   val ai1 = math.floor((a1+ki)/di).toInt
+   ai1 #:: confinuedFractionCoefficientsOfRootNplusKoverD(n, -ki +
+ai1*di, (n - math.pow(ki -ai1*di,2).toInt)/di)
+  }
+
+This identity is fairly straightforward (and fun!) to derive, and it's
+a bit of a trick to show that the last term (di+1) is always an
+integer.
+You can show that
+ d_{i+1}=d_{i-1}+-c_{i}^{2}d_{i}+2c_{i}a_{i}, where everything is an
+integer provided the d values start at 0,1
+but that would involve keeping track of the past 2 d values, so we'll
+not use that.
+
+We're also not even looking for periods in the continued fraction
+since calculating it is linear anyway.
+
+Now we have an infinite stream of continued fraction coefficients, we
+can find the denominator values of the truncated version, starting
+with (0,1,...) and defining them recursively similar to Fibonacci's
+sequence. We have to convert from Stream to Iterator to go from O(e^n)
+to O(n).
+
+def denominatorStream(cf: Stream[Int]): Iterator[BigInt] = {
+  val cfIt = cf.iterator
+  cfIt.next
+  Iterator(BigInt(0), BigInt(1)) ++ (
+   for{
+    lastTwo <- denominatorStream(cf).sliding(2)
+   } yield cfIt.next* lastTwo(1) + lastTwo(0)
+   )
+ }
+
+So far, we've only found the denominator of the convergents, but also
+have to concern ourselves with semiconvergents.
+
+def BAT(x: Int, N: BigInt) = {
+  val dStream =
+denominatorStream(confinuedFractionCoefficientsOfRootNplusKoverD(x, 0,
+1)).toStream.span(_ < N)
+  val Stream(d1,d2) = dStream._1.takeRight(2)
+  val d3 = dStream._2.head
+  val ccalc = (d3-d1)/d2  // Verifying we've captured the right
+coeffiencients, by using the identity d1+c*d2 = d3
+  val c = confinuedFractionCoefficientsOfRootNplusKoverD(x, 0,
+1)(dStream._1.size-1)
+   // Want to find max m such that d1 + m*d2 < N.  We already know
+that d1+c*d2 = d3 >= N
+  // So m = floor( (N-d1)/d2 ), and m < c
+  val m = (N-d1)/d2
+/*
+  The simple continued fraction for x generates all of the best
+rational approximations for x according to three rules:
+  Truncate the continued fraction, and possibly reduce its last term.
+  The reduced term cannot have less than half its original value.
+  If the final term is even, half its value is admissible only if the
+corresponding semiconvergent
+  is better than the previous convergent. (See below.)
+  The "half rule" mentioned above is that when ak is even, the halved
+term ak/2 is admissible if and only if
+  |x − [a0 ; a1, …, ak − 1]| > |x − [a0 ; a1, …, ak − 1, ak/2]|[11]
+  This is equivalent[11] to:[12]
+  [ak; ak − 1, …, a1] > [ak; ak + 1, …].
+
+  [semiconvergents] are called intermediate fractions by Khinchin [1,
+pp. 13–15].
+  They are called “Nebennäherungsbrüche” and “eingeschaltete Brüche”
+by Perron [8, II.16.I, p. 47]
+
+https://books.google.ca/books?id=8CGj9_ZlFKoC&pg=PA25&redir_esc=y#v=onepage&q&f=false
+Allow ck/2 whenever d_k-2 / d_k-1 > ak / a_k-1 (where a is numerator,
+and d is denominator).
+or (since floating-point division would lose accurary) whenever
+d_k-2*a_k-1 > d_k-1 *ak.
+  */
+  if (m > c/2 || (c%2 == 0 && m == c/2 &&
+  // [ak; ak + 1, …] < [ak; ak − 1, …, a1]  // The right side, we're
+dropping the a0 term.
+   lessThanContinuedFractions(
+    confinuedFractionCoefficientsOfRootNplusKoverD(x, 0,
+1).drop(dStream._1.size-1),
+    confinuedFractionCoefficientsOfRootNplusKoverD(x, 0,
+1).drop(1).take(dStream._1.size-1).reverse
+  )))
+   d1+m*d2  // the highest semiconvergent
+  else
+   d2 // the highest convergent.
+ }                                                //> BAT: (x: Int, N:
+BigInt)scala.math.BigInt
+
+So now, we need a LessThan operator...
+ // Consider x = [a0; a1, …] and y = [b0; b1, …]. If k is the smallest
+index for which ak is unequal to bk then
+ // x < y if (−1)^k * (ak − bk) < 0 and y < x otherwise.
+ def lessThanContinuedFractions( a: Stream[Int], b: Stream[Int]): Boolean = {
+   a.zip(b).zipWithIndex.find{ case ((ak,bk),k) => ak != bk } match {
+    case Some(((ak,bk),k)) => math.pow(-1,k) * (ak-bk) < 0
+
+    // If there is no such k, but one expansion is shorter than the
+other, say x = [a0; a1, …, an] and
+    // y = [b0; b1, …, bn, bn + 1, …] with ai = bi for 0 ≤ i ≤ n, then
+x < y if n is even and y < x if n is odd.
+    // Keep in mind that size() is going to return n+1, since
+a0;a1,..an has n+1 elements.
+    case None => {
+     val s = a.zip(b).size
+     if (a.drop(s).isEmpty && !b.drop(s).isEmpty)
+      (s -1)%2 == 0
+     else if ( b.drop(s).isEmpty && !a.drop(s).isEmpty)
+     (s -1)%2 != 0
+     else // The are the same length and totally equal
+      false
+    }
+   }
+ }
+
+Now we can get down to the business of finding n1 and n2. Since N1 is
+so much greater than N2, let's start by finding solutions to N2.
+
+We'll iterate over n1, and cache all our results of b1 = BAT(n1, N2)
+in a hashtable mapping b1 -> n1... (this is actually a multimap b1->
+Set(n1's). This will allow O(1) lookup on b1 values, to see if we've
+got a match on two (or more) n values with the same b1.
+
+Once we have a pair of n1, n2, that satisfy N2, we'll test them on N1.
+
+// Find two non-square integers n1 and n2 such that
+b1=BAT(sqrt(n1),N1)=BAT(sqrt(n2),N1) and
+ // b2=BAT(sqrt(n1),N2)=BAT(sqrt(n2),N2) and both   b1 and b2   are
+prime numbers.
+// We'll use the builtin isProbablePrime function on BigInts, then
+double check with Wolfram Alpha.
+
+ val solutions = Stream.from(2).filter{ n => /* Filter out square numbers*/
+   math.sqrt(n) != math.sqrt(n).toInt
+  }.flatMap{ n2=>
+   val b1 = BAT(n2, N2)
+   if (b1.isProbablePrime(100))
+   {
+    b1To_n_MultiMap.get(b1) match {
+     case Some(n1Set) => {
+         // Now see if n1 and n2 work for N1.
+            val b2 = BAT(n2, N1)
+      if (b2.isProbablePrime(100) && n1Set.exists(n1 => b2 == BAT(n1, N1)))
+      {
+       // println("SOLUTION FOUND n", n1, "b1", b1, "b2 ", b2 , "n2 ", n2)
+       n1Set.find(n1 => b2 == BAT(n1,N1)) match {
+       case Some(n1) =>  Some((n1, n2, n2.toDouble/n1, b1, b2))
+       case _ => None
+       }
+      }
+      else
+       None
+      }
+     case None =>
+     {
+      b1To_n_MultiMap.addBinding(b1, n2)
+      None
+     }
+    }
+   }
+   else
+    None
+  }  //> solutions  : scala.collection.immutable.Stream[(Int, Int,
+Double, scala.ma
+                                                  //| th.BigInt,
+scala.math.BigInt)] = Stream((53,212,4.0,17217982601,5929223246
+                                                  //| 159194801), ?)
+ solutions.take(20).foreach(println)
+//> (53,212,4.0,17217982601,5929223246159194801)
+//| (53,477,9.0,17217982601,5929223246159194801)
+...
+This is very surprising that solutions appear almost instantly, since
+the output range of BAT(x,N2) is O(N2), N2 being of the order 10^18.
+Luckily, the collisions must be due to the small input space, that is,
+continued fractions are like super compressors, turning sqrt(x) into a
+short repeating sequence of small integers.
+
+For the question we're looking "for the smallest solution that also
+satisfy BAT(sqrt(n1),10000)=BAT(sqrt(n2),10000)"
+
+solutions.find{ case (n1,n2,_,_,_) => BAT(n1,10000) == BAT(n2,10000) }
+                                                  //> res15:
+Option[(Int, Int, Double, scala.math.BigInt, scala.math.BigInt)] =
+                                                  //|
+Some((53,477,9.0,17217982601,5929223246159194801))
+
+ BAT(53,10000)                                   //> res12:
+scala.math.BigInt = 9100
+
+Looking at the hint from the bonus question on April 2011, I looked up
+the number of IBM patents and sure enough, 9100 in 2018.
+
+Thanks for another fun problem!!!
+
+Chris Shannon
+(from Calgary Canada)
+
+
+http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/cfINTRO.html
+
+find the continuing fraction of sqrt(n)
+sqrt(n) = sqrt(n) + a - a
+= a + sqrt(n) - a
+= a + 1/1/(sqrt(n)-a)
+multiply the top and bottom by the conjugate
+= a + 1/((sqrt(n)+a)/(n - a^2))
+= a + (n-a^2)/(sqrt(n)+a)
+
+That's the identity we work with.
+Start with a as the floor(sqrt(a)).
+Evaluate n-a^2
+sqrt(n)=a + (n-a^2)/(x+a)
+Want it in the form of
+sqrt(n) = a + 1 / x1
+So flip the second term.
+sqrt(n)=a + 1/((sqrt(n)+a)/(n-a^2))
+
+Now we recurse:
+With x1=(sqrt(n)+a)/(n-a^2)
+We want that in the form
+x1 = (sqrt(n)+a)/(n-a^2)= b + 1/x2
+Since we know a is the floor(sqrt(n)) make
+b=floor(2*a/(n-a^2))
+Then
+(sqrt(n)+a)/(n-a^2)- b = 1/x2
+(sqrt(n)+a- b(n-a^2))/(n-a^2) = 1/x2
+(n-a^2)/(sqrt(n)+a- b(n-a^2)) = x2
+It's not that complicated since n, a, b are known.
+Rationalize the demonitator again.
+
+OK, so the recursive formula is
+Take in (sqrt(n)+ki)/di, with n unchanging, ki and di are integers, and we know floor(sqrt(n))=a1.
+
+Output a_(i+1), k_(i+1) and d_(i+1).
+with 
+(sqrt(n)+ki)/di = a_(i+1)+ 1/((sqrt(n)+ k_(i+1))/d_(i+1))
+So a_(i+1) = floor((a1+ki)/di)
+(sqrt(n)+ki)/di - a_(i+1) = 1/((sqrt(n)+ k_(i+1))/d_(i+1))
+(sqrt(n)+ki - a_(i+1)*di)/di = 1/((sqrt(n)+ k_(i+1))/d_(i+1))
+
+Reciprical of both sides
+di/(sqrt(n)+ki - a_(i+1)*di) = (sqrt(n)+ k_(i+1))/d_(i+1)
+
+Rationalize the denominator on the left
+di ((sqrt(n)-ki + a_(i+1)*di)) /(n - (ki - a_(i+1)*di)^2) = (sqrt(n)+ k_(i+1))/d_(i+1)
+
+
+So there we have it. With some luck (exercise for the reader) di somehow divides
+(n - (ki -a_(i+1)*di)^2)
+and we get k_(i+1) = -ki + a_(i+1)*di
+and d_(i+1) = (n - (ki -a_(i+1)*di)^2)/di
+
+So we could scala this up:
+def cfOfRootNplusKoverD(n, ki, di): Stream[Int] = {
+val a1 = floor(sqrt(n))
+val ai1 = floor((a1+ki)/di)
+ai1 +: cfOfRootNplusKoverD(n, -ki + ai1*di,  (n - math.pow((ki -ai1*di,2)).toInt/di)
+}
+
+2 = -3 + 1*5
+and 2 = (14 - (3 -1*5)^2)/5
+Wow, it works.
+
+2 = -2 + 2*2
+and 5 = (14 - (2 -2*2)^2)/2
+
+Let's look at ki -a_(i+1)*di
+We got
+a_(i+1) = floor((a1+ki)/di)
+
+So ki - floor((a1+ki)/di) *di
+
+This is sort of going to be a1???
+
+floor(n/m) * m ???
+
+Which sort of leaves us with n - a1^2, which was the original approx a1=floor(sqrt(n)).
+
+
+
+denominator: 
+c × the previous denominator + the denominator before that
+= c (b) + 1

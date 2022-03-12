@@ -1,0 +1,192 @@
+Short answer (for 19 days):
+01100101
+10001010
+10000011
+00000111
+01000001
+10010000
+01110000
+10111000
+
+If Patient 0 is the first row, then after 19 days there is a 0.700000865315691 probability of everyone infected, and that is the closest graph one can get to 70% from an exhaustive search of all non-isomorphic graphs of size 8.
+
+Long answer:
+I made a classic mistake in probabilistic modelling at the beginning. I forgot to account for correlated probabilities.
+What I mean is consider the following network:
+A is connected to B and C.
+B and C are both connected to D.
+From D's point of view, he has two neighbours, each of which have a possibility of infecting him.
+The naive and incorrect approach I started with was to assign B and C's probability of being infected, and use that to determine D's.
+The reason that is incorrect is because B and C are highly correlated! They are both getting infected by A.
+Contrast that with the network where B and C have totally different neighbours. Now their probabilities of being infected are less correlated even if they are equal in value.
+
+This changes D's situation. When B and C are correlated we have a much higher possibility of D getting "doubly infected", which our model throws away. The double infection is wasted! It's like beating a dead horse.
+
+As soon as I realized my mistake I remember it being mentioned in The Signal and the Noise, about how financial risk modelling failed to account for the dependence between neighbours losing their jobs, and how that was partially contributory to the 2008 financial crisis.
+
+So, we've gone down one dead end. How do we account for all dependencies? The answer is a full Markov network. (Sounds like a perfect application of quantum computers with all the entangling).
+With n=8 nodes, and each node having 2 possible states (infected and uninfected), there are 2^8 states.
+Starting with the assumption that one of the nodes is Patient Zero (already infected at time=0), we can reduce it to 2^7 =128 states.
+Now we can make a transition matrix between all directional pairs. 128x128.
+Of course, a lot of these transitions will be impossible (there's no going from any node being infected to not for example).
+But once we have this transition matrix, applying d days is just multiplying it d times, which is matrix exponentiation. Matrix exponentiation can be done in O(log(d)) steps.
+def matrixToPower19(m: Vector[Vector[Double]]): Vector[Vector[Double]] = {
+ val A2  = mult(m,m)
+ val A4  = mult(A2, A2)
+ val A8  = mult(A4, A4)
+ val A16 = mult(A8, A8)
+ mult(mult(A16, A2),m)
+}
+As it turns out, making the matrix is computationally less expensive than doing the exponentiation. The exponentiation is 6 matrix multiplications, which are O(n^3) each, where n= is 2^7. So we're looking at 6* 2^21! The sparseness of the original matrix doesn't even help us much since the matrix is pretty dense by the end. Our only hope to speed this up is through parallelism like the GPU or some fancy algorithm (Strassen algorithm seems doable and would do it in half the time). At the end of the day I just decided to suck it up and wait. If we tried to take a shortcut to do all 8 patient zeros at once, we'd end up with no savings, since the matrix would be twice the rows and twice the columns, and multiplications would be (2^8)^3, which is 8 times longer. So the code is simpler to just iterate through the 8 patient zeros individually.
+
+So how do we create this matrix? Say we're given the network.
+def createMarkovMatrixFromPairs( setOfPairs: Set[Set[Int]], patientZero: Int ): Vector[Vector[Double]] = {
+   val n = if (setOfPairs.isEmpty) -1 else setOfPairs.map( _.max).max
+   val adjacencyList = (0 to n).map( y=> setOfPairs.filter( _.contains(y)).flatten - y)
+....
+
+The matrix represents transitions between states. There are 2^7 states. So it's a 128x128 matrix. The matrix can be indexed by:
+val allStates = ((0 to n).toSet - patientZero).subsets.toList
+
+This relies on the powerSet iterating from the empty set first to the full set last.
+
+Next, divide the network into 3 sets. The infected. The neighbours of at least 1 infected. Everyone else.
+The transition will infect 0,1,2... up to all of the neighbours. That is the Power Set of the neighbours. We can iterate through all these transitions with this:
+allStates.toVector.map{ infectedSet =>
+
+ // Create the neighbours set
+ val neighboursOfInfected = (infectedSet + patientZero).map( adjacencyList )
+ val neighboursOfInfectedflattend = neighboursOfInfected.flatten - patientZero -- infectedSet
+
+ // For each neighbour, find out how many infected people they are neighbours with.
+ // Their chance of being infected is 10% from a single neighbour. We can use the generalized de Morgans theorem
+ // A + B + C + ... E = (A' && B' && C' && ... && E')'
+ // So left side is (at least 1 infection, or-ing them all together), and the right side is
+ // not infected by A and not infected by B and ... not infected by E, is the chance we'll be not infected, so we have to take the complement.
+ // Probability of infection for with n neighbours is therefore 1 - .9^n. Otherwise we're dealing the messy inclusion-exclusion principal.
+ val neighboursWithInfectedCount = neighboursOfInfectedflattend.map( x => (x, 1.0 - math.pow(.9,adjacencyList(x).intersect(infectedSet+patientZero).size))).toMap
+
+ // So now we have probabilities of individuals being infected. How does that relate to the transitions between states?
+ // Well, if a state transition involves A and B being infected and C not being infected, the transition probability would be
+ // P(A)*P(B) * (1-P(C)), where all the neighbours are accounted for.
+ // We iterate through the Power Set of the neighbours to get all the combinations.
+ val transitionAmounts = neighboursOfInfectedflattend.subsets.map( newlyInfectedSet =>
+(newlyInfectedSet ++ infectedSet,
+/*
+There was a hard-to-find bug here. Without the .toList, the neighbours was a Set, so we intended the mapping to produced something like List(.1,.9,.9,.1) then we'd do a product on that.
+ But because it was a Set, it got deduplicated and it got compacted to Set(.1,.9). The product was obviously wrong since repeated terms were thrown away by the Set.
+*/
+      neighboursOfInfectedflattend.toList.map( neighbour =>  
+        if (newlyInfectedSet.contains(neighbour))
+         neighboursWithInfectedCount(neighbour)
+        else
+         1- neighboursWithInfectedCount(neighbour) ).product )).toMap
+
+ // The ones we missed get a 0 because they involve an infection of a non-neighbour, or a de-infection.
+ allStates.map( destinationState => transitionAmounts.getOrElse(destinationState, 0.0)).toVector
+  }
+ }
+
+And now we have our matrix!!!
+The transition we're looking for is from the empty set of infected to the full set of infected.
+val probabilityOfAllInfectedAfter19Days = matrixToPower19(createMarkovMatrixFromPairs(current,patientZero)).head.last
+
+Now the hard part....
+Iterate through all the graphs.
+My first attempt was to choose the Power Set of all the edges of the complete graph, and then filter out obvious non-connected graphs, which were the ones with fewer edges than nodes.
+This is awfully large. There are n choose 2 = n*(n-1)/2 possible edges. And therefore 2^((n*(n-1)/2) graphs! This is tractable for n=7, just over 2 million, but intractable for n=8 (270 million). Or sort of tractable.
+
+I started searching anyway using a random search, where I would choose a random graph and add a random edge to increase the probability, and remove a random edge to decrease the probability. I used a cache to avoid duplicating work since it was roughly 1 second per graph, the lion's share of that time being taken up by the matrix exponentiation.
+
+def addEdge(current: Set[Set[Int]]) =
+ current + scala.util.Random.shuffle((0 until n).toVector).take(2).toSet
+
+def removeEdge(current: Set[Set[Int]]) =
+ current - current.toVector(scala.util.Random.nextInt(current.size))
+
+var progress = 0
+def attempt(current: Set[Set[Int]]) : Set[Set[Int]] = {
+ val res = cacheOfResults.getOrElseUpdate(current, matrixToPower10(createMarkovMatrixFromPairs(current)).head.last)
+ if (progress % 100000 == 0)
+ {
+  println("progress " + progress)
+  println("current " +  current)
+  println("res " + res)
+ }
+ progress = progress+1
+ res match {
+  case res if (res < .7 - 0.00005) => attempt(addEdge(current))
+  case res if (res > .7 + 0.00005) => attempt(removeEdge(current))
+  case _ => current
+ }
+}
+
+After letting this run to no avail overnight, I thought about reducing the redundancy of the graphs. It turns out that that's a hard problem,... and that it has been solved already!
+I used the freely available package "nauty"
+http://pallini.di.uniroma1.it/
+to generate all 11,117 connected non-isomorphic graphs of size 8 (in 0.00 seconds haha!). I integrated it into my program and iterated through the 8 possible Patient Zeros for each graph.
+
+val allSimple8Graphs =  "geng -c 8" #| "showg -e -l0" lineStream
+.grouped(4).map{ groupOf4Strings =>
+  val arrayOfStrings: Array[String] = groupOf4Strings(3).split("  ")
+  val arrayOfArrayOfStrings : Array[Array[String]] = arrayOfStrings.map(_.split(" "))
+  val arrayOfPairs : Array[Set[Int]] = arrayOfArrayOfStrings.map{arrayOfS => arrayOfS.map(_.toInt).toSet}
+  arrayOfPairs.toSet
+ }
+
+// Associate each graph with the 8 possible patient zeros.
+val allGraphs = (for {
+ current <- allSimple8Graphs
+ patientZero <- 0 to 7
+} yield (current, patientZero)).toVector
+ 
+Originally I made a modified binary search to find an entry that satisfies the 70.00 condition. This would search exhaustively, but do a "best first search" on the half that was closest. If relies on the assumption that geng outputs graphs in ascending order of number of edges, and that more edges generally lead to high probabilities of total infection.
+
+def binarySearchOnMostlySorted(L: Int, R: Int): Option[(Set[Set[Int]], Int)] = {
+ if (R < L)
+  None
+ else
+ {
+  val m = L + (R-L)/2
+  val (current,patientZero) = allGraphs(m)
+  println("markovMat")
+  val markovMat = time {createMarkovMatrixFromPairs(current,patientZero) }
+  println("mat^19")
+  val res = time {matrixToPower10(markovMat).head.last }
+  res match {
+   case res if (res < .7 - 0.00005) =>
+   {
+    binarySearchOnMostlySorted(m+1, R) match
+    {
+     case Some(x) => Some(x)
+     case None => binarySearchOnMostlySorted(L, m-1)
+    }
+   }
+   case res if (res >= .7 + 0.00005) =>
+   {
+    binarySearchOnMostlySorted(L, m-1) match
+    {
+     case Some(x) => Some(x)
+     case None => binarySearchOnMostlySorted(m+1, R)
+    }
+   }
+   case _ => Some((current,patientZero))
+  }
+ }
+}
+
+While this did produce a solution after an overnight run, I noticed the * for the best solution to Ponder This. So I figured I might as well do it all.
+It was simple enough to go through all combinations exhaustively (with the help of the magic of scala's .par to make it run in parallel, which wasn't that easy to do with the binary search).
+val allGraphsWithSolution = allGraphs.par.map{ case (current, patientZero) =>
+ ((current,patientZero), matrixToPower19(createMarkovMatrixFromPairs(current,patientZero)).head.last) }
+ 
+allGraphsWithSolution.toVector.sortBy( x => (x._2 -.7).abs ).foreach(println)
+
+I could just do a min, but it's probably safer to do a sort and print them all to a file since it's so expensive to run them all again. Once they were in a file, it was easy enough to bring them over to Octave to look around at the plots.
+
+Well, that's pretty much it. It was a slow and steady one this month! Thanks for extending March's challenge. I spent so long on March's and basically gave up when my program showed that there was no solution. No there's plenty of more time to make graphs and debug.
+
+Thanks again!!!
+
+Chris Shannon
+

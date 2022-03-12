@@ -1,0 +1,43 @@
+Solution Found!!!
+Rules Vector(
+Vector(false,true, true, true, false),
+Vector(false, true, false, false, false))
+i 2648
+B123/S1V:T11,11
+From within Golly, go File->Run Script->Navigate to oscar.py
+https://github.com/jimblandy/golly/blob/master/src/Scripts/Python/oscar.py
+
+
+
+/> Solution Found!!!
+                                                  //| Rules Vector(Vector(false, true, true, true, false), Vector(false, true, fa
+                                                  //| lse, false, false))
+                                                  //| i 2648|
+
+hmmm, this was before we cleared m at i=0...
+
+
+ rulesWithSums.sortBy(_._2).take(8)
+ //> res2: scala.collection.immutable.Vector[(scala.collection.immutable.Vector[
+ Vector[Boolean]], Int)] = Vector((Vector(
+ (Vector(Vector(false, true, false, false, false), Vector(false, false, true, false, false)),220),
+ (Vector(Vector(true, true, false, false, false), Vector(false, false, false, true, false)),220 ),
+ (Vector(Vector(true, true, false, false, false), Vector(false, true, false, true, false)),220),
+ (Vector(Vector(true, true, false, false, false), Vector(false, false, true, false, true)),220),
+ (Vector(Vector(true, true, false, false, false), Vector(false, false, false, true, true)),220),
+ (Vector(Vector(true, false, true, false, false), Vector(false, false, false, false, false)),220),
+ (Vector(Vector(true, false, true, false, false), Vector(false, true, false, false, false)),220),
+ (Vector(Vector(true, false, true, false, false), Vector(false, false, true, false, false)),220))
+ 
+ rulesWithSums.sortBy(_._2).reverse.take(8)       //> res3: scala.collection.immutable.Vector[(scala.collection.immutable.Vector[
+                                                  //| Vector[Boolean]], Int)] = Vector(
+(Vector(Vector(false, true, false, true, true), Vector(false, true, false, true, true)),1004559),
+(Vector(Vector(true, true, true, true, true), Vector(true, true, true, true, true)),1000700),
+(Vector(Vector(false, false, false, false, true), Vector(true, true, true, true, true)),1000700),
+(Vector(Vector(false, false, false, false, false), Vector(true, true, true, true, true)),1000700),
+(Vector(Vector(false, false, false, false, false), Vector(true, true, true, true, false)),1000700),
+(Vector(Vector(false, false, false, false, false), Vector(true, true, true, false, false)),1000700),
+(Vector(Vector(false, false, false, false, false), Vector(true, true, false, false, false)),1000700),
+(Vector(Vector(false, false, false, false, false), Vector(true, false, false, false, false)),1000700
+))
+ 

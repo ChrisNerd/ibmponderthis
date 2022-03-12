@@ -1,0 +1,83 @@
+Short answer:
+37,27, 7,11,170156904
+37,3,3,7,11,170156904
+37,3,7^11,3,170156904
+37,3^7^11,3,170156904
+37^3^7^11,3,170156904
+37^3^7^11,3^170156904
+(37^3^7^11)^3^170156904
+// This simplifies to 37^3^ (7^11+170156904)
+// 37^3^2147483647
+37,3^2147483647
+37,3,2147483647
+
+*Bonus question.
+We can make 64 into a "2 factory"
+8^2
+8,2
+2^8  ( which is equal to 16^2)
+2,16
+2^16 (which is equal to (2^8)^2)
+2^8,2
+Now we can see that we had 2^8 a few lines back, we can repeat this as many times as we want to get an unlimited supply of 2s.
+
+Now we can make a counter using the identity
+(2^2^a)^2 = 2^2^(a+1), starting with a=0 by making the left side 2^2.
+And continue squaring to increment the topmost exponent, a.
+(2^2^(a+1))^2 = 2^2^(a+2)....
+So our algorithm would repeat that squaring 2147483647 times
+and we'll end up with
+2^2^2147483647, which we extract the topmost exponent in a couple more lines by peeling off the two 2s.
+I'm sure there's a faster way utilizing the fact that the Mersenne number is the sum of 2^30+2^29 + ... 2^0, but I like the simplicity of describing an impractical algorithm, and how it's trivially generalizable to generate any desired target number.
+
+Long answer:
+I actually got the bonus question first, since it helped to limit the numbers you're working with to just a bunch of 2s.
+One of my first realizations was the Mersenne target must appear first as an exponent, and not as a base.
+So what can you do to manipulate the exponents?
+(a^b)^c = a^(b*c).  Ok, so we can get a multiplication. But because our target number is prime, we'll not be able to reach it through multiplication.
+But what if b and c are also powers???
+b^c * d^e
+Let's just make b == d for simplicity
+b^(c+e). OK, we've just unlocked the ability to add!
+And keep in mind that a and b are arbitrary bases. I used a =37, and b I needed two of them, so I created them out of 27=3^3, I could have used 16=2^2^2 but I saved that trick for the bonus question.
+Now if we can get c+e to equal our Mersenne friend, we'll be golden.
+But since we're only allowed 1 "large" number (up to 1 billion) and we have to get to 2 billion, we can let c have an exponent. (I suppose we can let both be powers...)
+Let's replace c with c^d and solve
+c^d + e = 2^31-1 such that 1<c<=50 and 0<= e <= 1e9.
+We can iterate over c, and find the minimum non-negative e.
+We can solve for the largest integer d for a given c by setting e=0.
+d = floor( log_c (2^31-1))
+Now we solve for e and check if it's small enough.
+Implementing this in a spreadsheet (and then again in Scala) yielded the following 9 solutions (in increasing e)
+(c,d,e) =
+(7,11,170156904),
+(35,6,309218022),
+(21,7,346395106),
+(34,6,602679231),
+(14,8,671694591),
+(33,6,856015678),
+(20,7,867483647),
+(5,13,926780522),
+(3,19,985222180)
+
+Out of curiousity I wanted to see if there were solutions in a^x+e^f = 2^31-1
+val target = (scala.math.pow(2,31) -1).toInt     //> target  : Int = 2147483647
+val powers = for {
+ a <- 2 to 50
+ x <- Stream.from(1).takeWhile( scala.math.pow(a, _) <= target )
+ } yield scala.math.pow(a, x).toInt               //> powers  : Vector(2, 4, 8, 16,
+                                                  //| ... 3, 9, 27, 81, 243, 729
+                                                  //| , .... 4, 16, 64, 256, 1024,
+                                                  //| ... 9, 81, 729, 6561, ...
+
+ val remainders = powers.map( target - _)         //> remainders  : Vector(2147483645, 2147483643, 2147483639, ...
+ powers intersect remainders                      //> res6: scala.collection.immutable.IndexedSeq[Int] = Vector()
+// Empty set. No element of (2^31-1 - a^x) is in a^x. Therefore no further solutions.
+
+After checking that there's on further solutions with d=d-1 for our 9 test cases (e gets over 1 billion), we're happy that these are the only solutions.
+
+Thanks for another fun puzzle,
+
+Chris Shannon
+(from Calgary, Canada)
+
