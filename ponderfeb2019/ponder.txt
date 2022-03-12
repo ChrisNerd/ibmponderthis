@@ -1,0 +1,51 @@
+Short answer:
+
+59978
+
+Long answer:
+Downloading the spreadsheet, filtering and sorting the scores, you see there are indeed 64 distinct scores. But displaying the scores as fractions you can see that there's a 1/16, a  3/16 and a 7/15, indicating that at least 16 people were used. (see attached screenshot, it also appears that 10 people did the majority of the work).
+
+From the downloaded data instructions:
+"In this task you will be presented with two links to Wikipedia articles. You should mark “yes” if the concepts described by the articles are related to each other, and “no” otherwise."
+
+So the score is just a "count yeses" / "count yeses + noes"
+
+Taking the assumption that 14 people marked the score, there would be 65 possible scores including 0.
+
+The list of possible scores with n people is exactly the Farey sequence, which have well documented algorithms for find length.
+
+https://oeis.org/A005728
+A005728		Number of fractions in Farey series of order n. 
+
+My initial solution had an off-by-one error since I used the sum of Euler totient numbers, (was misled with 64 being the sum of the first 14 Euler Totient numbers).
+
+Having found all 50 solutions that meet the 10 distinct digits constraint, but the first one answering the literal question "how many people are needed ...", I played around with improving the efficiency of the algorithm. I tried 4 different variations of my own code and two from this page:
+https://mathproblems123.wordpress.com/2018/05/10/sum-of-the-euler-totient-function/
+It has a clear explanation of how you can get sub-linear performance by avoiding calculating unnecessary phi(n) values. For our purposes we can start our search at a high n calculated by the asymptote.
+
+But surprisingly, an order(n) algorithm beat out the O(n^(2/3)) one, with my best time being 0.4 seconds (implemented in Scala).
+
+Out of curiosity I tried implementing the following Basic code from
+https://oeis.org/A002088/a002088.pdf
+
+  10 ! Sum Euler's TOTIENT or Phi function (n) from L to U
+  20 T=0 @ INPUT 'Low &, Up Nbr. ';L,U
+  30 FOR I=L TO U
+  40 K=1 @ S=1 @ N=I
+  50 R=PRIM(N) @ IF R=1 THEN 110  // There's an implied GOTO here
+  60 P=N/R
+  70 Q=PRIM(P)
+  80 IF R=Q THEN K=K+1 @ P=P/R @ GOTO 70
+  90 S=S*(R-1)*R^(K-1)
+  100 N=P @ R=Q @ K=1 @ GOTO 50
+  110 T=T+S @ NEXT I @ DISP T @ STOP
+
+I translated it to C, and spent quite a few hours trying to figure out why its outputs were not correct. Turns out I made an incorrect assumption, and the correct version finds the solution in 0.077 seconds.
+
+(For follow-up Ponder This, maybe challenge your readers to implementing that 10 line Basic program and explaining the math it's using).
+
+The lesson I learnt from this is that a few milliseconds of performance improvement is not worth the god-awful unreadibility of old-school imperative Basic programming. But awful language constraints sometimes lead to ingenious efficiencies.
+
+Thanks,
+
+Chris Shannon

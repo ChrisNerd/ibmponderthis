@@ -1,0 +1,217 @@
+ANSWER: June 2019 Ponder This
+Chris Shannon <chris.shannon@gmail.com>
+	
+3:06 AM (5 minutes ago)
+	
+to Ponder
+Short answer:
+Set A = {2^40, 2^30, 2^26, 2^24, 2^20, 2^18, 2^16, 2^12, 2^10, 2^8, 2^6, 1254400000, 65318400}
+Set B = {32558203125, 918922725000}
+produce a distance of 3.54... * 10^-16.
+
+Bonus question: Find a smooth number that is connected to last month's bonus question.
+(Last month's bonus question: a name is hidden in the last example; she is the sixth in a list of 19 people (till today). Can you list them all?
+
+That name was, Frances E. Allen, and she was the 6th of 19 presidents of IBM Academy of Technology.
+The IBM Academy of Technology was founded in 1989 (May 31st). The smooth number 612615150, interpreted as a unix time stamp gives that date.
+
+The smooth number 1210104000, interpreted as a unix time stamp gives 2008-05-06. Fran Allen received the Erna Hamburger Distinguished Lecture Award at EPFL on May 6, 2008.
+
+An example of such a number is 1560674304, which is related (how?) to the 108th birthday of IBM.
+GMT: Sunday, June 16, 2019 8:38:24 AM
+From IBM's history on Wikipedia:
+The new company, named the Computing-Tabulating-Recording Company(CTR), was incorporated on June 16, 1911.
+
+
+Long answer:
+
+My first crack at this was to start with a set C of all the smooth numbers below a threshold (35 was the limit due to combinational explosion) and iterate through all the subsets A. Now we take the remainder set B=A-C, and iterate through all the subsets of B.
+So we've got candidate sets A and B, we'll see if a single missing element will plug the gap. Solve for the missing element Bn, round it, then see if it's already in there as in integer, and see if the rounding took off less than 10^-15.
+
+val C = (2 to 35).filter(x=> math.pow(math.sqrt(x).round,2)!= x).filter(factorsOnlyLessThan10).toSet
+val doublePowerSet = ( for {
+  A <- C.subsets().filter(_.size > 1)
+  B <- (C -- A).subsets()
+  if {
+   val bnDouble = calcSqrtBn(A, B).abs
+   val bn = bnDouble.pow(2).round(mc).toInt
+   val absDiff = (bnDouble - sqrtCache.getOrElseUpdate(bn.toInt, sqrt(new java.math.BigDecimal(bn),128))).abs
+   ! A.contains(bn) && ! B.contains(bn) && absDiff < math.pow(10,-15) && absDiff != 0 && absDiff > math.pow(10,-28) &&
+   factorsOnlyLessThan10(bn)
+  }
+ } yield (A,B,calcSqrtBn(A,B))//, (calBn(A, B) - calcBn(A, B).round(mc)).abs)
+ ).foreach(println)
+
+This gave a lot of "perfect" solution, such as sqrt(4)+sqrt(9)=sqrt(25), which is a bit of a let down when you realize it's just 2+3=5 (that's why I added the !=0). This was before I noticed (or it was updated on the site) that the requirement was d>0. But either way, those solutions I thought were too cheap anyway.
+
+But knowing that there's the potential to form integers as square roots led to the big breakthrough that came when I realized that if I just focused on the fractional part of the square root (the digits after the decimal), then I can cram them all into the 0 to 1 interval and eventually I'll get a collision! When I find one, I can then worry about creating the missing integer part from sums and differences of smooth numbers.
+
+So the first part, worst case, it would take 10^15 numbers all crammed into the unit number line before we're guaranteed to get a minimum distance of 10^-15.
+
+But what about if you cram n numbers in? What's the probability distribution of the minimum distance. I thought about just two numbers, and how it produces a linear valley distribution (absolute value) over x1, x2. Expected value is 1/3. I gave it a bit more thought for the general case before I googled and got the expected value of 1/ (n^2-1). So with about 30 million numbers, the expected minimum will be 10^-15. If it isn't, we could try a new group of 30 million numbers.
+
+Now for the implementation. I decided a binary search tree would be fine. It could be really simple since it should be balanced due to the "random" distribution of points, and no need to remove a point. The only problem was that I'd need to find the neighbours. At first I looked into maxBefore and minAfter which is exactly what I want, but not available in my version of scala (and upgrading's a bit of a pain) (and minAfter does a greater than or equals to, which I'd have to fudge with an epsilon which I didn't like).
+Then I thought I could just modify the insert method to return the neighbours along the way. This would work but I ran into implementation difficulties trying to decipher the category theory language of Scala's type signatures:
+
+case class NonEmptyBST[A <% Ordered[A]](elem: A, left: BST[A], right: BST[A]) extends BST[A] {
+def +[B >: A <% Ordered[B]](newElem: B) =
+
+I love immutable data structures, but yuck, even conceptually "inserting" is not allowed. So insert returns a new node? That's fundament to how the recursion works, so it's a bit tricky to make it return 3 nodes.
+
+But playing around with these custom-build BSTs I noticed that I had to implement my own compare method anyway. Then this great simplification hit me, I could just put the "test for smallness" in the compare function and print out when I find a solution! It's a total side-effect hack and I hope Martin Odersky never finds out but man does it ever solve all my problems.
+
+case class smoothNum(fractionalSquareRoot: BigDecimal, exponentsTuple: List[Int], n: BigInt) extends Ordered[smoothNum] {
+  def compare(that: smoothNum) = {
+   val d = this.fractionalSquareRoot - that.fractionalSquareRoot
+   if (testForSmallness(d))
+     println("Solution Found!!!", this + " " + that)
+  this.fractionalSquareRoot compare that.fractionalSquareRoot
+  }
+}
+
+It allows me to use easily use scala's built-in Red Black Tree implementation as TreeSets with no modifications to it whatsoever.
+
+TreeSet[smoothNum]() ++ (for {
+  total <- Iterator.from(1)
+  eTuple <- generateETuplesThatSumToN(total, 4)
+  if ( !eTuple.forall(_ % 2 == 0) )// filter out perfect squares
+ }
+ yield smoothNum(calcSqrtFromTuple(eTuple), eTuple, calcNFromTuple(eTuple)) )
+
+This infinite loop should do the trick.... but unfortunately, when I let it run overnight I woke up to a crashed program. It ran out of memory before finding a solution.
+
+That's ok because I thought of another method entirely. (I later realized I could do simple work in chunks of size 30 million like I explained above by adding a ".grouped(30000000)" to the for loop.)
+
+Originally (in my A, B subsets implementation)  I used an ugly Newton's Method square root routine, and a map to cache my results. I've replaced that with a more elegant exponent representation of the numbers.
+n=2^e2 * 3e^3 * 5e^5 *7^e7.
+I'm generating the tuple (e2,e3,e5,e7) such that their sum = a constant (total).
+def generateETuplesThatSumToN(n: Int, depth: Int): IndexedSeq[List[Int]] = depth match {
+  case 1 => IndexedSeq(List(n))
+  case _ => if (n > 0)
+  for {
+   i <- 0 to n
+   rest <- generateETuplesThatSumToN(n-i, depth - 1)
+  } yield i :: rest
+  else
+   IndexedSeq(List.fill(depth)(0))
+ }     
+
+sqrt(n) = n^.5 =2^e2^.5 * 3e^3^.5 * 5e^5^.5 *7^e7^.5.
+We can use the distribution of exponents (2^e2)^.5 = 2^(e2*.5) = 2^(.5*e2)=(2^.5)^e2, to get nice integer exponents.
+This allows me to calculate the square roots with using only integer powers of pre-computed constants, which is a (needless in my opinion) limitation of BigInt's pow method anyway.
+val sqrt2 = BigDecimal("1.414...to 50+ decimal places.")
+val sqrt3 = BigDecimal("1.732...")
+...
+ def calcSqrtFromTuple( exponentsTuple: List[Int]) : BigDecimal = {
+  // Could have been a bit clever and tried
+  // if (exponentsTuple(0) % 2 == 0)
+  //  BigInt(2).pow(exponentsTuple(0)/2)
+  // else
+  //  sqrt2.pow(exponentsTuple(0))
+  // *
+  // if ...
+  val sqr =
+   sqrt2.pow(exponentsTuple(0)) *
+   sqrt3.pow(exponentsTuple(1)) *
+   sqrt5.pow(exponentsTuple(2)) *
+   sqrt7.pow(exponentsTuple(3))
+  sqr - BigDecimal(sqr.toBigInt()) // Gah! This is how we round down to extract the fractional part.
+ }                                  
+
+What if I compare pairs of numbers to other pairs of numbers? I have my number line from 0 to 1 full of n numbers. For each pair, I make them an object, calculate their distance, and insert that pair in a "pair tree" (along with a partridge). I decide the best way to code this up was to define each "step" as the set of numbers where the sum of the exponents would sum to a given total. It makes for a nice recursion.
+
+def addNumbersToTreeWithExponentSumTot( treeOfPairs: TreeSet[smoothNumDiff], oldTree: TreeSet[smoothNum], tot: Int): Unit = {
+  val newNumbers = for {
+   eTuple <- generateETuplesThatSumToN(tot, 4)
+   if ( !eTuple.forall(_ % 2 == 0) ) // filter out perfect squares
+  }yield smoothNum(calcSqrtFromTuple(eTuple), eTuple, calcNFromTuple(eTuple))
+
+  addNumbersToTreeWithExponentSumTot(
+   treeOfPairs ++ ( for {
+    n <- newNumbers
+    o <- oldTree
+   } yield smoothNumDiff((n.fractionalSquareRoot - o.fractionalSquareRoot).abs, n,o))
+   , oldTree ++ newNumbers, tot +1)
+ }
+
+And I run it with empty trees initially:
+addNumbersToTreeWithExponentSumTot(TreeSet[smoothNumDiff](), TreeSet[smoothNum](), 1)
+
+And lo and behold, it's really nice to wake up to find this on your monitor:
+
+(Solution Found!!!,a: 1254400000 List(13, 0, 5, 2) b: 32558203125 List(0, 5, 8, 3) a: 918922725000 List(3, 7, 5, 5) b: 65318400 List(9, 6, 2, 1))
+
+The last little step is to find the missing integer. Plugged these numbers into wolfram alpha, and got 1095544 as the missing integer. I was thinking I'd need to do some cartesian product over 4 sets, but what if I just restrict myself to 1 set, the set of powers of 2? Well that's nothing but binary!!! And all integers can be written in binary. Oh, wow, problem solved. Convert to binary, and double each exponent to compensate for the square root.
+And while we're at it, we could have used any base, 2,3,4,5,6 or 7.
+For example 1095544 = 12212002 in base 7. = 1*7^7+ 2*7^6 ...all 7-smooth.
+Oh wait a sec, we could have used base 8 too, since base 8 is really just base 2 in disguise. And by the same logic, base 9 will be amenable to 3-smooth numbers, and base 10... is just a combination of 2 and 5, so whoa! We could have used base 10 all along. (just not base 11).
+1095544 =  1000000 + 9*10000 + 5*1000+5*100+4*10+4. Each one of these terms is 5-smooth, so their squares will be too.
+
+The following link validates the entire solution.
+https://www.wolframalpha.com/input/?i=sqrt(2%5E40)%2Bsqrt(2%5E30)%2Bsqrt(2%5E26)%2Bsqrt(2%5E24)%2Bsqrt(2%5E20)%2Bsqrt(2%5E18)%2Bsqrt(2%5E16)%2Bsqrt(2%5E12)%2Bsqrt(2%5E10)%2Bsqrt(2%5E8)%2Bsqrt(2%5E6)%2Bsqrt(2%5E13*5%5E5*7%5E2)%2Bsqrt(2%5E9*3%5E6*5%5E2*7%5E1)-sqrt(3%5E5*5%5E8*7%5E3)-sqrt(2%5E3*3%5E7*5%5E5*7%5E5)
+
+This bonus section again involved a bit of reading and research. I wasn't sure if I was to find something that relates to Frances Allen, or to the IBM Academy of Technology, so I ended up finding one for each. I actually started by putting each of the presidents into an ASCII to Hex function, then testing if that hex number was 7-smooth. I decided that there's roughly 10^-5 chance of a random name being 7-smooth so I gave up on that approach.
+Going with the unix time idea, I generated a list of all the dates that have a 7-smooth unix time until the end of 2019.
+val df:SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
+new Hamming takeWhile { _ < BigInt("1577840400") }  foreach(x => println(df.format(x * 1000L) + " " + x.toString()))
+
+Then I kept my eyes open for any date references while I read articles. I found the founding date of IBM's Academy of Technology, and Allen's Erna Hamburger Distinguished Lecture Award date were both on that list.
+
+1989-05-31 612615150
+2008-05-06 1210104000
+Erna Hamburger Distinguished Lecture Award at EPFL, May 6, 2008
+http://lists.inf.ethz.ch/pipermail/equal/2008-April/002643.html
+
+Thanks for another fun puzzle, (I'll get my survey answers to you shortly),
+
+Chris Shannon
+(from Calgary Canada)
+
+
+
+FactorInteger[1560674304] = 2^17×3^5×7^2
+
+17 5 2
+
+June 16
+incorporated on June 16, 1911
+https://en.wikipedia.org/wiki/History_of_IBM
+6, 16, 1911.
+=1560674304/(6*16) = 16257024
+FactorInteger[1911] = 3×7^2×13 (4 prime factors, 3 distinct)
+
+2^p2 * 3^p3 * 5^p5 * 7^p7
+(p2,p3,p5,p7) defines the smooth number.
+
+If the first set contains a1, a2, a3..
+and the second set contains b1 b2 b3... bN
+Calculate the nearest int to bN (
+sqrt(a1)+sqrt(a2).. - sqrt(b1) - sqrt(b2) ... )^2
+
+PS.
+The solutions on the site were pretty interesting.
+Since there are only 16 terms in
+2^p2 * 3^p3 * 5^p5 * 7^p7
+with p2,p3,p5,p7 being each odd or even.
+We are looking for an approximate solution to the integer relation
+
+An integer relation between a set of real numbers x1, x2, ..., xn is a set of integers a1, a2, ..., an, not all 0, such that
+
+    a 1 x 1 + a 2 x 2 + ... + a n x n = 0.
+
+which the lll algorithm can provide with 1 line of code in a PARI/GP.
+https://en.wikipedia.org/wiki/Lenstra%E2%80%93Lenstra%E2%80%93Lov%C3%A1sz_lattice_basis_reduction_algorithm
+
+Another solution is to find any result such that
+    a 1 x 1 + a 2 x 2 + ... + a n x n = d < 1.
+
+then do
+find nMin such that
+
+d^nMin = 10^-15
+nMin = ceiling(-15 * log_d 10)
+= ceiling(-15 * log 10 / log d)
+
+Now we use the multinomial theorem to get our coefficients.
+https://en.wikipedia.org/wiki/Multinomial_theorem
+(or we could recursively use the binomial theorem).

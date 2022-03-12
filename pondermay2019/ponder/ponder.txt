@@ -1,0 +1,165 @@
+Short answer:
+1. "Your task this month is to discover the restrictions on eight people that will make the shortest solution at least 73 trips long."
+Please supply your answer as a 32-digit hexadecimal number
+7787fb5e8b7edf7fbdbf3ffa7ff6fde7
+
+2. "By the way, there is a better solution for six people that requires 19 boat trips. What is it?
+2d7adbe9
+
+3. Bonus question: a name is hidden in the last example; she is the sixth in a list of 19 people (till today). Can you list them all?
+Presidents of IBM Academy of Technology
+
+1. 1989 Ed Sussenguth
+2. 1990 Dick Chu
+3. 1991 Al Cutaia
+4. 1992 Rick Dill
+5. 1993 Jim Brady
+6. 1994 Fran Allen
+7. 1995 Russ Lange
+8. 1996 Fred Ris
+9. 1997 Bob Guernsey
+10. 1999 Ian Brackenbury
+11. 2001 Lewis Terman
+12. 2003 Dave Ehnebuske
+13. 2005 William Tetzlaff
+14. 2007 Joanne Martin
+15. 2009 Emily Plachy
+16. 2012 Rashik Parmar
+17. 2014 Andrea Martin
+18. 2016 Susan Schreitmueller Smartt
+19. 2019 Richard Hopkins
+
+Long answer:
+Oooh boy, this was a tough one.
+The river crossing problem is a classic of recreation mathematics, going back at least to the 9th century.
+The classic problem only has one lateral thinking moment, where you have to make a seemingly counterproductive trip (returning items to the source shore), in order to satisfy the constraints. It's hard to imagine a set of constraints that will require 73 trips to move 8 people.
+
+My first thought was that the constraints would be analogous to the Tower of Hanoi, where the minimum number of steps grows exponentially.
+
+I started by drawing a graph of the states of the case with 6 people. It had two rows; the top row had nodes that represented the set of nodes with 6, 5, 4.. 0, people on shore A, and the boat on shore A, while the bottom row had the same set of set of nodes, but the boat on shore B.
+
+The edges are obviously bidirectional, and all went from top left to lower right. For example, 2 edges connected 5 people on side A, with the boat on side A, with 4 and 3 people on side A with the boat on side B.
+
+I was looking for some insight into designing an algorithm where the results of the search for the shortest path could inform the "outer" algorithm in how to update its constraints.
+
+I was mainly unsuccessful in trying to outsmart this problem, so I got to work writing a bi-directional breadth first search solver to return the minimum number of steps, while taking in a set of Allowable Coasts. I thought about adding an A* style heuristic where we can state the minimum number of trips from a given state to the end goal. For example with 4 people remaining on side A with the boat, they will need to go at best 4-2 -> 2-2 -> 3-1 -> 1-3 -> 2-2 -> 0-4, so 5 trips minimum. In general the heuristic would be 2n - 3 steps are necessary to move n people. Having a minimum (lower bound) estimate is exactly the criteria for an A* heuristic, like the classic "as the crow flies" distance.
+
+But knowing the problem has been set up to defeat a "best first search", requiring 73 moves, I thought I'd just keep it simple. But since I needed to run countless millions of searches I thought I'd compromise and do a bi-directional search since it's not too hard.
+
+val n=8   //6
+val lengthAtLeast = 73  //19
+// Length to give to unsolvable setOfCoasts
+val failedLength = 2*n + 1 //13
+type Coast = List[Boolean] // size n
+case class State(s: Coast, side: Boolean)
+
+// Implements the legal subsets of people as described in the problem:
+// think of c.head as "a" in the problem.
+def isAllowable(allowableCoasts: Set[List[Boolean]])(c: Coast) = allowableCoasts.contains(c.tail.map( _ == c.head))
+
+
+To generate the "edges" of this graph, look at our current state, say we have 4 people on side A with the boat, we take all subsets of size 2 and 1, remove them from side A and add them to side B, and also move the boat to side B. We also filter out any visited states at this point too for performance reasons.
+
+
+ def moveBoatToOppositeCoast( c: State, boat: Set[Int] ) = {
+   assert( boat.forall(p => c.s(p))) // the boat passengers are all on this coast
+   State(c.s.zipWithIndex.map{ case (a,i) => if (boat.contains(i)) true else !a } , !c.side)
+  }
+
+ def generateSetOfPossibleBoats(allowableCoasts: Set[Coast])(currentState: State): Iterator[Set[Int]] = {
+   assert(isAllowable(allowableCoasts)(currentState.s), println(allowableCoasts, currentState))
+   val indexesOfPeopleOnShore = currentState.s.zipWithIndex.filter( x => x._1 ).map(_._2)
+   val possibleBoats = indexesOfPeopleOnShore.toSet.subsets(2) ++ indexesOfPeopleOnShore.toSet.subsets(1)
+   possibleBoats.filter( b => isAllowable(allowableCoasts)(moveBoatToOppositeCoast(currentState, b).s))
+  }
+
+  def generateSetOfNewStates(allowableCoasts: Set[Coast])(statesVisitedSoFar: Set[State])( s: State): Set[State] =
+  {
+   generateSetOfPossibleBoats(allowableCoasts)(s).flatMap(boat => {
+   val p = moveBoatToOppositeCoast(s, boat)
+   if (statesVisitedSoFar.contains(p))
+    None
+   else
+   Some(p)
+   }
+  ).toSet
+   }
+
+Now we can do a nice little tail recursive bi-directional breadth first search. Distances are calculated by the depth of the recursion call, since our graph is unweighted. We also know that the parity of the depth informs the side the boat is on, because every move moves the boat to the opposite coast. So we only need to check the frontier of one side vs the visited states of the other.
+ 
+ def BreadthFirstSearchDoubleEnded(allowableCoasts: Set[List[Boolean]])(startingState: State, solutionState: State): Option[Int] = {
+     @tailrec
+     def recurse(depth: Int, frontierFromStart: Set[State], frontierFromEnd: Set[State],
+      visitedFromStart: Set[State], visitedFromEnd: Set[State]): Option[Int] = {
+      if (frontierFromStart.isEmpty || frontierFromEnd.isEmpty)
+       None
+      else
+       if (depth >= n-1 &&
+       // depth =1 can solve n= 2, in 1 move.
+       //  n=3 depth =2, in 3 moves (because this is a two sided search, the end frontier comes to meet the start frontier
+        // resulting in depth having the power of 2 moves).
+        // startingState has side = false, solutionState has side = true.
+        // at depth=0, frontierFromStart is startingState, and frontierFromEnd is solutionState
+        // at depth=1, frontierFromStart must all have side = true, and frontierFromEnd must all have side = false.
+        // in general, at depth % 2 = 0 frontierFromStart.side = false, frontierFromEnd.side = true
+        // and         at depth % 2 = 1 frontierFromStart.side = true,  frontierFromEnd.side = false
+        // So the frontiers will never get an exact match on any of their elements at the same depth.
+        // We need only look for matching elements in frontierFromStart and visitedFromEnd, or vice versa.
+         !(frontierFromStart intersect visitedFromEnd isEmpty)
+        )
+         Some( 2* depth - 1)
+       else
+       {
+        // Create the set of neighbours from the start's frontier, and another from the end
+        val newFrontierFromStart = frontierFromStart.flatMap(generateSetOfNewStates(allowableCoasts)(visitedFromStart)(_))
+        val newFrontierFromEnd =     frontierFromEnd.flatMap(generateSetOfNewStates(allowableCoasts)(visitedFromEnd)(_))
+
+        recurse(depth+1, newFrontierFromStart, newFrontierFromEnd, visitedFromStart ++ frontierFromStart, visitedFromEnd ++ frontierFromEnd)
+       }
+     }
+     recurse(0, Set(startingState), Set(solutionState), Set(), Set())
+   }
+
+So far so good. We test this on the examples given in the problem and get the expected minimum path lengths.
+
+Now for the hard part... generating the constraints. We know that 6-0 and 0-6 must be allowed. We also know that the first move must result in 4-2 (otherwise a 5-1 would result in a return to 6-0 and we would have wasted a move, hence non-minimum), and the second move must be to a 5-1. We also know that we must allow for at least one of 4-2, 3-3, 2-4, 1-5 and 0-6.
+
+But let's let the computer handle all the nitty gritty. The search space is 127 booleans, so it has size 2^127. This discrete search space lends itself well to simulated annealing, my favourite discrete search space optimizer. One snag is how to handle cases where there's no solution. I decided to assign a moderately poor value of 2*n+1 steps to those cases.
+
+Also, how do we make neighbours of a state of 127 booleans? I came up with a few approaches. We can choose uniformally amongst 127 and toggle it. This will in the limit result in 50% of them been true.
+
+We could try to keep the number of allowable states constant by removing one and adding another.
+
+We could inform the neighbour generator, if the current constraints resulted in no solution, we could add an allowable coast, and vice versa. (This approach tended to do well, then shoot way up in the number of allowed states like 120 / 127 until it could solve it again, then work its way down. The best scores occurred when there were about 1/3 of the total set to true, so roughly 40. For the first question 11/31 bools were true.)
+
+Whatever we do, we must ensure we don't remove the start and end states from the allowable states.
+
+I settled on a 40% mix of the first and 60% mix of the second, by eyeing the size of the allowable coasts vs their score. If we add too many allowable coasts the minimum solution is too small. If we make it too restrictive, it won't be solvable. I found that we the longest solutions with a size around 30 coasts.
+
+I also noticed that we got the most improvement when the temperature dropped to around 1, and saw when there was likely to be no improvement. So I sent the initial and temperatures accordingly, and the cooling rate such that it would spend a lot of time in the "improvement zone".
+
+I set an infinite stream to restart if failed, and let it buck overnight.
+Stream.from(1).find{trial =>
+   println(trial)
+   score(simulatedAnnealing(exampleAllowableCoasts, initialTemperature),  startingState, solutionState) == 0
+   }
+
+When I woke up, it had found a solution after 141 trials.
+
+2. For the second part, the n=6 case, minimum length = 19, I actually solved it first. I worked in more of a brute force solution. The search space was only 31 booleans, which is only about 2 billion. I knew that about 10 of the bools needed to be true, so I concentrated by selecting (0 to 31).subsets(10) (and varying the "10" term)... and found my solution pretty quickly. Well, the coding was quick as is the case for most brute force algorithms, but the run time could definitely be improved.
+
+Just for fun, I put the n=6 problem in the simulated annealing too.
+
+3. I thought the hex digits eecce was the clue, but I remember another Ponder This where you used ASCII encoding, so I copied in a bit of scala code to convert a hexadecimal to ascii and voila: Frances E. Allen popped out!!!
+
+Then I spent a couple hours reading about her, googling all her awards, thinking it must be something to do with her Turing Award. I noticed she was the sixth IBM scientist to win the Turing Award...
+https://researcher.watson.ibm.com/researcher/view_group.php?id=1758
+... but couldn't find the connection to 19 people. I thought it had to do with the intersection of two prizes (like the set of people who had won the Turing award and the Lovelace award.). But I came across her presidency of the IBM Academy of Technology and counted the former presidents! There we go!!! Why didn't I find it earlier,... her wikipedia page didn't mention her presidency of the IBM Academy of Technology (maybe another Ponderer removed it to make it more challenging!!). I guess I could have done a "what links here", but I got there in the end, and learnt a lot about her and her work in compiler optimization.
+
+Totally comes full circle, using a functional language like Scala that's full of compiler optimizations created by her to solve a problem where she's the solution... Cool stuff.
+
+Thanks for another fun puzzle!
+
+
+Chris Shannon
+(from Calgary Canada)

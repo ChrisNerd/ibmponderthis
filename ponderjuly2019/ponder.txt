@@ -1,0 +1,165 @@
+Short answer:
+a4 c5 b3 a1 c2 e1 d3 b2 c4 d6 b5 c7 a8 b6 a4
+a4 b6 a8 c7 e8 d6 b7 c5 e6 d4 e2 c1 a2 c3 a4
+
+The first has an area of 8, the second has an area of 15.
+
+Long answer:
+I thought I could do this one without a computer. I arranged some pieces on a board until I got a 14 piece knight tour. I found a couple solutions. I wrote them down but didn't know where to go from there. It would definitely be prudent to use a computer to avoid errors in calculating the area anyway, so I gave up and went to programming.
+
+Started by listing the 8 moves of a knight:
+  val knightMoves = Set(
+   (1,  2),  (2,1),
+   (-1, 2), (-2,1),
+   (-1,-2), (-2,-1),
+   (1, -2),  (2,-1))
+
+and give it the ability to move from a given starting point:
+ // all possible knight moves from starting position p, on board sized mXn. With (1 to m) by (1 to n) coordinates.
+ def generateMovesFrom(p: (Int,Int), m: Int, n: Int): Set[(Int,Int)] = {
+  knightMoves.map(move => (p._1 + move._1 , p._2 + move._2)).filter(p=> p._1 >= 1 && p._1 <= m && p._2 >= 1 && p._2 <= n )
+ }                                               
+
+Then I gave it some thought on how to create a tour. My first thought was to manually come up with a starting 14 move tour, then perturb it somehow to create a neighbouring tour. I could walk through all the neighbours to get all the tours. I gave up on that approach because I wasn't confident all the tours could be reachable that way.
+
+So I just implemented a straightforward backtracking algorithm. Gave it a "firstPiece" on the edge of the board. It would then generate all the moves to/from that piece, choose 2 of them, and call those piece2 and piece 14.
+From piece 2, it can generate piece 3.
+From piece 14, it can generate piece 13.
+It continues in this alternating way, until piece 7 and 9 both need to generate piece 8. This is done simply by intersecting their sets.
+
+Generated pieces are filtered such that they don't intersect the tour created thus far.
+
+So this algorithm has the horrendous running complexity of O(n^8) which is still in P, but barely. It's saved by the fact that filtering is done at every stage, leaving 0, 1 or 2 candidates per depth. I also originally used a mutable map to check for solutions while I iterated through all the tours, but since I found it ran instantly, I switched to an immutable map and checked its minimum and maximum area at the end.
+
+I would normally like to code this up recursively, but in this case, with the alternating ascending and descending piece numbers, it looks a bit simpler with some copy/pasted lines of code. (YIKES!)
+
+  val allTours = for{
+  m <- (2 to math.sqrt(40).toInt)
+  n = 40/m
+  firstPiece <- (1 to n/2).map((1,_)) // (1,1), (1,2), (1,3), (1,4), (1,5)
+  List(p2, p14) <- generateMovesFrom(firstPiece, m, n).filter(move => doesntCross(move, List(),                                                 false)).subsets(2).map(_.toList)
+  p3  <-           generateMovesFrom(p2, m,n)         .filter(move => doesntCross(move, List(p14,                 firstPiece,p2),               false))
+  p13 <-           generateMovesFrom(p14,m,n)         .filter(move => doesntCross(move, List(p14,                 firstPiece,p2,p3),            true))
+  p4  <-           generateMovesFrom(p3, m,n)         .filter(move => doesntCross(move, List(p13,p14,             firstPiece,p2,p3),            false))
+  p12 <-           generateMovesFrom(p13,m,n)         .filter(move => doesntCross(move, List(p13,p14,             firstPiece,p2,p3,p4),         true))
+  p5  <-           generateMovesFrom(p4, m,n)         .filter(move => doesntCross(move, List(p12,p13,p14,         firstPiece,p2,p3,p4),         false))
+  p11 <-           generateMovesFrom(p12,m,n)         .filter(move => doesntCross(move, List(p12,p13,p14,         firstPiece,p2,p3,p4,p5),      true))
+  p6  <-           generateMovesFrom(p5, m,n)         .filter(move => doesntCross(move, List(p11,p12,p13,p14,     firstPiece,p2,p3,p4,p5),      false))
+  p10 <-           generateMovesFrom(p11,m,n)         .filter(move => doesntCross(move, List(p11,p12,p13,p14,     firstPiece,p2,p3,p4,p5,p6),   true))
+  p7  <-           generateMovesFrom(p6, m,n)         .filter(move => doesntCross(move, List(p10,p11,p12,p13,p14, firstPiece,p2,p3,p4,p5,p6),   false))
+  p9  <-           generateMovesFrom(p10,m,n)         .filter(move => doesntCross(move, List(p10,p11,p12,p13,p14, firstPiece,p2,p3,p4,p5,p6,p7),true))
+  p8  <-          (generateMovesFrom(p7,m,n) intersect generateMovesFrom(p9,m,n)).filter(move =>
+  (doesntCross(move, List(p9,p10,p11,p12,p13,p14, firstPiece,p2,p3,p4,p5,p6,p7),false)) && // We are both prepending and appending this move onto the list, completing the tour.
+   doesntCross(move, List(p9,p10,p11,p12,p13,p14, firstPiece,p2,p3,p4,p5,p6,p7),true))
+}
+yield List(firstPiece,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14)
+
+There's nothing too fancy about calculating the area of a polygon via the shoelace method in functional programming.
+ // Shoelace formula
+ // https://en.wikipedia.org/wiki/Shoelace_formula
+ // We can get away with the /2 int division because a knight move will always result in a 2x1 (even) area contribution.
+ def calcArea(points: List[(Int,Int)]) =
+ (points zip (points.tail :+ points.head)).map{ case (p1,p2) => p1._1 * p2._2 - p1._2 * p2._1}.sum.abs / 2
+
+
+ def printChessNotation(prize: List[(Int,Int)]) =
+  (prize :+ prize.head).foreach{ case (i,j) => print(('a' to 'z')(i-1) + j.toString + ' ') }
+
+ def printWinner(prize: List[(Int,Int)]) = {
+  val lines = for (j <-10 to 1 by -1)
+   yield (1 to 10).map(i => if(prize.indexOf((i,j)) != -1) "%02d".format(prize.indexOf((i,j))+1) else "  " ).mkString
+  lines.foreach(println)
+ }                                      
+ val immMap = allTours.map( x => calcArea(x) -> x ).toMap
+
+ println(immMap.minBy(_._1)._1)                   //> 8
+ printChessNotation(immMap.minBy(_._1)._2)        //> a4 c5 b3 a1 c2 e1 d3 b2 c4 d6 b5 c7 a8 b6 a4
+ printWinner(immMap.minBy(_._1)._2)               //>                    
+                                                  //|                    
+                                                  //| 13                  
+                                                  //|     12              
+                                                  //|   14  10            
+                                                  //|   1102              
+                                                  //| 01  09              
+                                                  //|   03  07            
+                                                  //|   0805              
+                                                  //| 04      06         
+
+ println(immMap.maxBy(_._1)._1)                   //> 15
+ printChessNotation(immMap.maxBy(_._1)._2)        //> a4 b6 a8 c7 e8 d6 b7 c5 e6 d4 e2 c1 a2 c3 a4
+ printWinner(immMap.maxBy(_._1)._2)               //>                    
+                                                  //|                    
+                                                  //| 03      05          
+                                                  //|   0704              
+                                                  //|   02  0609          
+                                                  //|     08              
+                                                  //| 01    10            
+                                                  //|     14              
+                                                  //| 13      11          
+                                                  //|     12             
+
+Well, just for fun, I decided to go the recursive route. This allows me to easily modify the length of the tour
+
+ def allToursRecursive( pointsSoFar: List[(Int,Int)], m: Int, n: Int) : List[List[(Int,Int)]] = pointsSoFar.size match {
+  case 17 =>  for {
+   pointToAdd <- (generateMovesFrom(pointsSoFar.head, m, n) intersect generateMovesFrom(pointsSoFar.last, m, n)).toList
+   .filter(move => doesntCross(move, pointsSoFar, true))
+   .filter(move => doesntCross(move, pointsSoFar, false))
+  } yield pointToAdd :: pointsSoFar
+
+  case _ => for {
+   pointToAdd <- generateMovesFrom(pointsSoFar.head, m, n).toList.filter(move => doesntCross(move, pointsSoFar, true))
+   rest <- allToursRecursive( pointToAdd :: pointsSoFar, m, n)
+  } yield rest
+ }
+ val a = allToursRecursive(List((1,1), (3,2)), 5, 8)
+  a.size                                          //> res6: Int = 3
+  a.map(calcArea)                                 //> res7: List[Int] = List(12, 12, 12)
+  a.map(calcArea).min                             //> res8: Int = 12
+  a.map(calcArea).max                             //> res9: Int = 12
+
+There's nothing too exciting when the tour length is forced to be 18.
+
+Last thing to do is to play around with plotting in Octave since Scala has no built-in plotting functionality, which I've attached.
+
+Thanks for another fun puzzle
+
+Chris Shannon
+
+
+
+
+a3 b1 c3 d1 e3    d5 b4 c6 e5 d7 b6 c8 a7 b5 a3... area = 
+a2 c1 d3 b4 d5 b6 d7 c9 a10 b8 a6 c5 a4 c3 a2... area =
+a2 c1 d3 b4 d5 b6 d7 c9 a8  c7 a6 c5 a4 c3 a2... area =
+
+
+
+
+knightMoves = Set( (1,2), (2,1), (-1,2)...)
+
+val m=4 // 5
+val n=10 // 8, or 6,6
+
+for{
+firstPiece = (1,2) // or (1,1).
+(secondPiece, piece14) = generateMovesFrom(firstPiece).filter(move => doesncross(move, List()).subsets(2)
+thirdPiece = generateMovesFrom(secondPiece).filter(move => doesntcross(move, List(piece14, firstPiece,secondPiece)))
+piece13 = generateMovesFrom(piece14).filter(move => doesntcross(move, List(piece14, firstPiece,secondPiece,thirdpiece)))
+fourthPiece = generateMovesFrom(thirdPiece).filter(move => doesntcross(move, List(piece13,piece14, firstPiece,secondPiece,thirdPiece)))
+piece12 = generateMovesFrom(piece13).filter(move => doesntcross(move, List(piece13,piece14, firstPiece,secondPiece,thirdpiece,fourthPiece)))
+fifthPiece = generateMovesFrom(fourthPiece).filter(move => doesntcross(move, List(piece12,piece13,piece14, firstPiece,secondPiece,thirdPiece,fourth)))
+piece11 = generateMovesFrom(piece12).filter(move => doesntcross(move, List(piece12,piece13,piece14, firstPiece,secondPiece,thirdpiece,fourthPiece,fifthpiece)))
+sixthPiece = generateMovesFrom(fifthPiece).filter(move => doesntcross(move, List(piece11,piece12,piece13,piece14, firstPiece,secondPiece,thirdPiece,fourth,fifth)))
+piece10 = generateMovesFrom(piece11).filter(move => doesntcross(move, List(piece11,piece12,piece13,piece14, firstPiece,secondPiece,thirdpiece,fourthPiece,fifthpiece,sixth)))
+seventhPiece = generateMovesFrom(sixthPiece).filter(move => doesntcross(move, List(piece10,piece11,piece12,piece13,piece14, firstPiece,secondPiece,thirdPiece,fourth,fifth,sixth)))
+piece9 = generateMovesFrom(piece10).filter(move => doesntcross(move, List(piece10,piece11,piece12,piece13,piece14, firstPiece,secondPiece,thirdpiece,fourthPiece,fifthpiece,sixth,seventh)))
+
+piece8 = (generateMovesFrom(piece9) intersect generateMovesFrom(seventhPiece)).filter(move => doesntcross(move, List(piece9,piece10,piece11,piece12,piece13,piece14, firstPiece,secondPiece,thirdpiece,fourthPiece,fifthpiece,sixth,seventh)))
+}
+yield List(first,second....piece14)
+
+
+
+
+

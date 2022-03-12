@@ -1,0 +1,308 @@
+Short answer for the bonus question:
+A= {13660416, 102738496, 18455616, 24443136}
+B= {0, -12374460, -8570880, 107163648, -13473792}
+
+Long answer:
+First, we recognize the game as Nim-like.
+We can think of division as removing primes.
+In the case of our game: "divides N by any divisor that is either a prime or a product of several distinct prime numbers",
+if we write N in standard form
+N = 2^n1 * 3^n2 * 5^n3 * 7^n4 * 11^n5 ...
+then dividing is equivalent to reducing at least one of n1, n2, n3 ... by at most 1 each.
+
+We can think of there being n1, n2, n3... objects in distinct heaps. You must remove at least one object per turn, and you can remove at most 1 object per heap. The winner is the one who removes the last object(s).
+
+Consider the two cases:
+Case 1. all heaps have an even number of objects.
+or Case 2. otherwise.
+If a player can remove objects such that after their turn the game is in case 1, then they have a winnable position.
+If a player can not do so, they have a losing position.
+If a player starts in case 1, and since she must remove at least one object, there must be an odd number of objects remaining in at least 1 heap. The game will be in case 2 after that turn. Therefore starting in case 1 is a losing position.
+
+If a player starts in case 2, they can remove 1 object from each of the heaps with an odd-numbered object count, returning the game to case 1. Note that the winning state, all heaps have 0 objects, is also in state 1.
+
+What does it mean when n1, n2, n3,... are all even? What can we say about N?
+Recall 
+N = 2^n1 * 3^n2 * 5^n3 * 7^n4 * 11^n5 ...
+let n1 = 2 * n1i
+n2 = 2 * n2i
+n3 = 2 * n3i...
+when n1i, n2i, n3i are integers then N = 2^(2*n1i) * 3^(2*n2i) * 5^(2*n3i)...
+N = (2^n1i)^2 * (3^n2i)^2 * (5^n3i)^2....
+N = ((2^n1i) * (3^n2i) * (5^n3i)....)^2
+
+N is a square number. We can also see this by dividing our objects into two (since there's an even number of each object).
+
+With that part done, we see that Charlie's job is to come up with 4 elements in A, and 4 elements in B such that all 16 possible pairs add to square numbers.
+
+We can make one of the elements 0, without loss of generality say the first element in A, since if we have an arbitrary solution A and B, we can generate an infinite family of new solutions: A-k, B+k for any integer k.
+
+With an element of A=0, then all 4 elements of B must be squares since 4 of the 16 sums are 0+B. We can represent the elements of B by their square roots=b.
+
+We require a+b^2=n^2, for integers a,b, and n.
+a = n^2-b^2
+  = (n-b)(n+b) from the difference of squares.
+which means that a is expressed as a factored pair.
+We want to limit our answers to nonnegative b since we are squaring b anyway.
+So n-b is the smaller factor, and n+b is the larger.
+Find all the factors q of a, where q <= sqrt(a)
+The pairs of factors q * (a/q), correspond to (n-b)(n+b), where
+q <= a/q and
+n-b <= n+b.
+ 
+Solving the simultaneous equations
+q = n-b
+a/q = n+b
+by subtracting the first from the second.
+ a/q - q = 2b.
+(a/q - q) /2 = b
+Now we see that a/q - q must be even, which means that they must have the same parity, so we limit ourselves to factors q such that
+(a/q+q) %2 == 0 ... ( or (a/q-q) %2 == 0)
+If a is negative there's only a sign change. i.e. -a = b^2-n^2.
+
+We ask ourselves, given an 'a', what are the corresponding b solutions?
+
+We code this up in Scala as follows
+ def bsFromA(a: Int) = {
+  for (q <- (1 to math.floor(math.sqrt(a)).toInt).toSet
+   if (a%q == 0 && (a/q + q) % 2 == 0))
+  yield (a/q - q)/2
+ }
+
+--- After discovering the initial run of my program took a long time to execute I replaced the trial division with a prime factorization approach.
+ def bsFromA(a: Long, doPositive: Int) = {
+  factors(primeDecomposition(a, primes).groupBy(identity).mapValues(_.size))
+  .filter(q => (a/q >= q) && (a/q + q) % 2 == 0 ).map(q => (a/q- doPositive * q)/2)
+ }                                               
+
+ def primeStream(s: Stream[Int]): Stream[Int] =
+    Stream.cons(s.head, primeStream(s.tail filter { n => n % s.head != 0 }))
+                                                  //> primeStream: (s: Stream[Int])Stream[Int]
+ // Precompute a giant list of primes so they can be iterated over.
+ val primes = primeStream(Stream.from(2)).takeWhile(_ <= 10000.toLong).toList.toStream
+                                                  //> primes  : scala.collection.immutable.Stream[Int] = Stream(2, ?)
+ // Find all the prime factors of a, with repetition. If a = 12, return List(2,2,3)
+ def primeDecomposition(a: Long, startingFrom: Stream[Int]): List[Long] = {
+  startingFrom.takeWhile(prime => prime <= math.sqrt(a)).find(prime =>  a % prime == 0) match {
+   case Some(prime) => prime :: primeDecomposition( a / prime, Stream.cons(prime, startingFrom))  // Prepend this found prime to the start of the stream in case it's repeated.
+   case _ => List(a)
+  }
+ }
+
+ // To be used in conjunction with the output from primeDecomponsition.
+ // factors takes in the counts of the primes. If a = 12, primeDecomposition returns List(2,2,3).
+ // We get the counts by doing the .groupBy(identity).mapValues(_.size) which gives Map(2->2, 3->1)
+ // factors takes in that map and outputs List(1,2,3,4,6,12) (don't worry about the order)
+ // factors are 2^{0,1,2} * the factors of 3. The factors of 3 are just 3 and 1.
+ // The base case in recursion is factors of 3 = 3^{0, 1} * factors of {empty Map}.
+ // factors of empty map is the multiplicative identity: 1.
+ def factors( pD: Map[Long,Int]): Iterable[Int] = pD.size match {
+  case 0 =>  Iterable(1)
+  case _ =>
+  {
+   val (base,exponent) = pD.head
+   for {
+    f <- factors ( pD - base )
+    e <- 0 to exponent
+   } yield (scala.math.pow(base,e) * f ).toInt
+  }
+ }                                                //> factors: (pD: Map[Long,Int])Iterable[Int]
+
+
+
+Since p and q must be the same parity for b to be an integer. So if a is even, then a = (2qi)(2pi), a must also be congruent to 0 (mod 4). If a is odd (2qi+1)(2pi+1)=4qipi+ 2(qi+pi) + 1, there is no mod 4 restrictions.
+
+In fact, all odd numbers are the difference between consecutive squares.
+
+(n+1)^2-n^2 = 2n+1.
+
+Now that we have equations for generating all the b values from a given a, we can pose the criteria as a search problem.
+
+Let A be an (infinite) set of sets. The first element of A is the solutions to b when a=1, namely Set(0).
+The second element of A is the solutions to b when a=2, namely the empty Set().
+... 675th element of A is the solutions to b when a=675, namely Set(1, 33, 65, 15, 111, 337).
+
+We would like to find a subset of A, of size 3, such that the intersection of all 3 Sets is of at least size 4. Another way of saying this is, we'd like to find 4 b values that are common to 3 a values.
+
+This can be done with a couple lines of scala:
+AandBs.toSet.subsets(3).find { S =>
+  S.map(_._3).reduce(_ intersect _).size >=4}
+
+The good news is that it's really fun to use reduce ( intersect ) like that... the bad news is that it's really inefficient. subsets(3) is cubic, and clearly it's wasting a lot of time because the majority of subsets(2) don't even have 4 common b elements in their intersections.
+
+Trading in a little elegance, we first throw away prime values of a and other candidates that can't even generate 4 b values on their own:
+
+  val bs = bsFromA(a).toSet
+  if (bs.size < 4)
+   f(a+1, as, pairsOfAs)
+
+We explicitly keep track of good pairs of As.
+Then we look for a solution only by considering the previously discovered pairs of a's that contain at least 4 common b's.
+ else
+   pairsOfAs.find( x=>(x._3 intersect bs).size >=4) match {
+If we find a solution, we print it out and we're done.
+case Some(x) =>  println(x._1, x._2, a, x._3 intersect bs)
+If we can't find a solution, we add to the set of pairs of As only ones that have at least 4 common bs. We recursively call f, to keep looking, using the next a.
+
+case None => f(a+1, as + ((a,bs)), pairsOfAs ++ as.map(x=> (x._1, n, x._2 intersect bs )).filter(_._3.size >=4))
+
+The compiler will turn this infinite tail recursion into a nice infinite loop. We have to watch that the as list and pairsOfAs grows without bounds, but the larger they get the more likely they are to lead to a solution.
+All in all, this produced the following output after 75 minutes.
+
+a=[0,54432,119392,263872];b =[1122, 477, 18, 282]
+
+We can verify with a fancy matrix multiplation in Octave.
+octave:27> b=b.^2
+b = 1258884    227529       324     79524
+
+octave:28> b=[b;ones(1,4)]
+b =
+   1258884    227529       324     79524
+         1         1         1         1
+
+octave:29> a=[ones(1,4);a]
+a =
+        1        1        1        1
+        0    54432   119392   263872
+
+octave:31> sqrt(b'*a)
+ans =
+   1122   1146   1174   1234
+    477    531    589    701
+     18    234    346    514
+    282    366    446    586
+All whole numbers, meaning that all 16 additions resulted in square numbers.
+
+My program was easily modified to solve for the bonus question, changing a '4' to a '5' in a couple spots. But after 50 hours it searched all integers less than about 80 million for a, and didn't find a solution. I rewrote it to use mutable (booo!!!) multiMaps and abandoned the clean functional approach. This allowed an order of magnitude speed-up, since search using maps is O(1). But the real breakthrough came by thinking about how to generate all the a's from a set of 4 b's, so each solution to the non-bonus 4x4 could be used to find a potential bonus solution 5x4. This breakthrough, and the speed-up of using only "highly" composite a's, allows this program to find the bonus solution in about 30 seconds.
+
+ // The algorithm works as follows:
+ // Guess at a (iterate over all a's, a={1,-1,2,-2,3,-3...}
+ // Keep a running list (mutable map of a -> Set[b]) of b's that are associated with previously tried a's (i.e. b's that solve a+b^2 is a square)
+ // Limit that list to sets of b that are at least size 4.
+ // Keep a running list (mutable map of (a1,a2) -> Set[b]) of 'b's that are the solutions to pairs of a's. (i.e. b's that solve a1+b^2 is a square and a2+b^2 is another square. Same 4 b's in both equations)
+ // Check to see if this a can form a triplet with an existing pair of as. (a1,a2,a) such that a1+b^2, a2+b^2, a+b^2 work for all 4 b's.
+ // This check is done by iterating over our b's. For each b create a list of pairs of a's such that the pair of a's has that b. We can then easily count if a pair of a's shows up at least 4 times.
+ // If so, we've solved the case for 4 a's and 4 b's. (a=0 is a trivial a).
+ // If not, we see if we can form a new pair (a1,a) that has 4 b's, and add it to the list.
+ // We use mutable multimaps so we can do our checks in O(1) time provided we have lots of memory.
+ // The wrong way to get the bonus question is to try to find a set of 5 b's, with 3 a's. There is no solution with the 3 a's being less than 80 million (which took 50 hours of computer time and 6 GB of memory).
+ // The way I found the bonus question was to look at the factors of the 3 a's solution, and notice they factored with lots of 2s, e. g. 2, 2, 2, 2, 2, 2, 5, 7, 29.
+ // This made me think that they were highly compositive numbers.
+ // They had a very high greatest common factor.
+ // And we could take a big cheat shortcut by considering only a's of the form 2^c * n, where c was something like 10. This let us efficiently find lots of 4 a's, 4 b's solutions.
+ val cheat = math.pow(2,11)*math.pow(3,2)         //> cheat  : Double = 18432.0
+ // The other big breakthrough was instead of trying to find 5 b's, we took the 4 existing b's that work for a triplet of a's, and generated the complete list of a's! (using generateAllAsFromSetOf4Bs)
+ // After only a few triplets of a's, we find a set of b's that can generate 5 a's (including 0) that solve the bonus question.
+ def tryNewA( ): Unit = {
+  var a = 1
+  var doPositive = true
+  var foundSolution = false
+  while (!foundSolution)
+  {
+   val bs = bsFromA( cheat.toLong * a, if (doPositive) 1 else -1).toSet
+   if (a%100000==0)
+    println(a, doPositive, asAsAFunctionOfB.size, pairsOfAsAsAFunctionOfB.size, bs)
+
+   if ( (bs - 0 ).size < bonus )
+   {
+    a+=1
+    doPositive = true
+   }
+   else
+   {
+    bs.flatMap( b => pairsOfAsAsAFunctionOfB.get(b))
+    // Now have to count all the unique APairs and see if there's any APair that has a count of 4
+    // We have a Set[Set[Pair]], how can get some sort of output that looks like a1 -> 3, a2 -> 2, a3 ->5...
+    // Covert to a Set[List[Pair]], then List[List[Pair]], then flatten to List[Pair], then .groupBy(identity).mapValues(_.size)
+    // will give [Pair]->count
+    .map(_.toList)
+    .toList
+    .flatten
+    .groupBy(identity).mapValues(_.size)
+    .find{ case ((a1,a2), count) => count >= bonus} match {
+     case Some( ((a1,a2), count) ) =>  {
+      val possibleSolutionBs = bs intersect bsAsAFunctionOfPairOfAs.getOrElse((a1,a2), Set())
+      println((a1,a2), if (doPositive) a else -a, possibleSolutionBs)
+      val allAs = generateAllAsFromSetOf4Bs(possibleSolutionBs)
+      if (allAs.size > 4)
+       {
+       println("Bonus Solution Found!!", allAs)
+       foundSolution = true
+      }
+      a=math.abs(a)+1
+     }
+     case None => {
+      // Add any possible pairs
+      bs.flatMap( b => asAsAFunctionOfB.get(b))
+      .flatten  // Does the Union on the sets of a to get a list of condidate a's.
+      .filter( possibleA => ( bsAsAFunctionOfA.getOrElse(possibleA, Set()) intersect bs).size >= bonus)
+      .foreach{ possibleA =>
+        val b = bsAsAFunctionOfA.getOrElse(possibleA, Set()) intersect bs
+        b.foreach{ bInt =>
+         bsAsAFunctionOfPairOfAs.addBinding( (possibleA, if (doPositive) a else -a) , bInt)
+         pairsOfAsAsAFunctionOfB.addBinding(bInt, (possibleA, if (doPositive) a else -a))
+       }
+      }
+      // Just add the plain old a and b's. It's important we do this last because if we did this before the other checks
+      // we'd find a intersects a, as a false solution. Boo mutable data structures!
+      bs.foreach{ b=>
+       asAsAFunctionOfB.addBinding(b, if (doPositive) a else -a)
+       bsAsAFunctionOfA.addBinding(if (doPositive) a else -a, b)
+      }
+      // do a= 1,-1,2,-2,3,-3...
+      a = if (doPositive) a else a+1
+      doPositive = !doPositive
+     
+     
+      // Purely immutable way of doing this. Does not work with multimaps because they need to be mutable, (Booo!)
+      //tryNewA( if (doPositive) a else a+1, !doPositive)
+      //               as + ((if (doPositive) a else -a) -> bs),
+      //            pairsOfAs ++ as.mapValues(x => (x._1, if (doPositive) a else -a, x._2 intersect bs )).filter(_._3.size >= bonus))
+          //    pairsOfAs ++ (bs.map(b=> bsMapOfAs.get(b)).reduce(_ union _)).mapValues(x => (x._1, if (doPositive) a else -a, x._2 intersect bs )).filter(_._3.size >= bonus))
+           
+          }
+    }
+   }
+  }
+ }
+ // So we're given 4 b's {b1, b2, b3, b4}, that are known to work with a given 3 a's (we're not given the as). We want to generate the
+ // complete list of a's that will work with those 4 b's.
+ 
+ // Given the 4 b's in:
+ // a = n1^2 - b1^2
+ //   = n2^2 - b2^2
+ //   = n3^2 - b3^2
+ //   = n4^2 - b4^2
+ // Find all a's.
+ // We take the equations pairwise (4 choose 2 = 6) of them.
+ // a = n1^2 - b1^2 = n2^2 - b2^2 is 1 equation. We put both b's on one side.
+ // n1^2 - n2^2 = b1^2 - b2^2. Now we've reduced the problem to a known problem (namely, b1^2 - b2^2 is a constant, we can solve for all solutions n1 and n2).
+ // Our call to bsFromA returns all n2 values (which we call n2s)
+ // Since we are interested in the set of a values a (= n2^2 - b2^2), and we now have a set of n2's, we carry out that equation to get our set of a's (for this pair).
+ // We repeat this process, calculating a new set of a's for each of the 6 pairs.
+ // The a's that are common to all six pairings solve all the original 4 equations. Finding common elements in the 6 sets is done by the sexy .reduce(_ intersect _ ), which is the intersection of all sets.
+ def generateAllAsFromSetOf4Bs(bSet: scala.collection.immutable.Set[Long]): scala.collection.immutable.Set[Long] = {
+  val bPairs = bSet.subsets(2) // There should be 6 pairs (4 choose 2), but this is extendable to more than 4, and also could be used if b is of size less than 4 too (except the reduce will crash if it sees an empty set)
+  val asFromBPairs = bPairs.map{ bs =>
+   val b1SquaredMinusb2Squared = bs.max*bs.max - bs.min*bs.min
+   val n2s = bsFromA(b1SquaredMinusb2Squared , if (b1SquaredMinusb2Squared >=0 ) 1 else -1).toSet
+   n2s.map(n2 => n2*n2 - bs.min*bs.min)
+  }
+  asFromBPairs.reduce(_ intersect _)
+ }                                                //> generateAllAsFromSetOf4Bs: (bSet: scala.collection.immutable.Set[Long])scal
+                                                  //| a.collection.immutable.Set[Long]
+ generateAllAsFromSetOf4Bs(Set(1174, 589, 446, 346))
+                                                  //> res4: scala.collection.immutable.Set[Long] = Set(0, -119392, 144480, -64960)
+
+The running of the program produced the following output:
+                                                  //| ((-465,-731),5814,Set(3696, 10136, 4296, 4944))
+                                                  //| (Bonus Solution Found!!,Set(0, -12374460, -8570880, 107163648, -13473792))
+which corresponds to the A and B sets at the beginning once we multiply the A set by the cheat factor.
+
+Whew, that was a tough one. I didn't think I'd get the bonus part.
+
+Thanks for another fun puzzle,
+
+Chris Shannon
+(from Calgary Canada)
+
