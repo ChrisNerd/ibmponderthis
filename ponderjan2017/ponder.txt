@@ -1,0 +1,141 @@
+Short answer:
+x=(3126/3125)^3126, where the last 10 digits are 2137165824, the last
+8 digits are distinct and do not contain 0 and 9. The first 10 digits
+of x are 2.718716741 which differs from e from the 5th digit on.
+
+The corresponding y value is y=(3126/3125)^3125, which has the first
+10 digits 2.717847030 and the last 10 digits 6359186432.
+
+
+Long answer:
+There are no solutions to the bonus question (no 0 or 9 in the last 8
+digits) for x when x<y. An infinite number of solutions for y are
+shown in the attached pdf.
+
+That was a tricky problem to solve completely. I was looking for
+solutions only in x, where x<y and proved there are none, so I assumed
+that's how people got the * for solving it.
+
+Thanks,
+
+Chris Shannon
+
+From Calgary, Canada
+
+
+
+http://www.cut-the-knot.org/wiki-math/index.php?n=Algebra.RationalSolutionOfXYYX
+
+
+Rational Solutions to x^y = y^x
+
+In integers the equation xy=yx, where x and y are supposed to be distinct, has a unique solution (2, 4). (This is of course assuming that swapping x and y does give a new solution.
+
+The situation is quite different if we are looking for rational solutions.
+
+Let k=yx , then also y=kx. Putting this into xy=yx gives
+	
+
+xkx=(kx)x or (xk)x=(kx)x,
+
+implying
+	
+
+xk=kx, or xk−1=k,
+
+from which we get a general solution:
+	
+
+x=k1k−1, y=kk1k−1=kkk−1.
+
+From y=kx it follows that if k is irrational then so will be either x or y. So, in order to have them both rational, we have to assume k rational as well. Let qp=1k−1 be in lowest terms. Then
+	
+
+k−1=pq, k=pp+q, kk−1=qp+q
+
+so that
+	
+
+x=pp+qpq , y=pp+q(p+q)q 
+
+Since qp is in lowest terms, p and q are mutually prime. and so are p and p+q. In order that both x and y be rational, it is necessary that both p and p+q be q-th powers of natural numbers. However, p=n^q, with q>=2, leads to
+	
+
+n^q < p+q < (1+n)^q= n^q+q*n^(q−1)+...
+
+****which is only possible when q=1
+
+****
+WHAT? No it's not. It's totally fine when q>=2 as well.
+Let q=2, n=3
+p=n^q=3^2=9
+p+q=9+2=11
+(1+n)^q=4^2=16
+So 9 < 11 < 16. Everythings fine!
+
+Oooooh, I see. p+q must also be a square! 11 is not a square. It's saying that if p is a square (9), then the next square is 16, but p+q is less than 16, and therefore p+q is not a square.
+
+So, to reiterate. Assuming p is a q-th power of n, p=n^q. That eventually implies that p+q can not also be a q-th power of a higher base.
+
+
+
+
+. It follows that all positive rational solutions of the equation xy=yx are given by
+
+(*)
+	
+
+x=((p+1)/p)^p  and y=((p+1)/p)^(p+1) ,
+
+where p is an arbitrary integer, except 0 and −1.
+
+The behavior of the solutions as p, is determined by the well known limit
+	
+
+limppp+1p=limp1+p1p=e
+
+
+***
+What if we let p=2^n???
+
+
+x=((p+1)/p)^p  and y=((p+1)/p)^(p+1) ,
+
+x=((2^n+1)/2^n)^(2^n)  and y=((2^n+1)/2^n)^(2^n+1)
+
+In binary it's simple
+x = 100000...001/10000...000 ^ 1000000...000
+the division is simply a shift
+1.00000...1 ^ 1000..000
+Now we can use the binomial theorem?
+(1+1/2^n)^(2^n)=1+2^n*n^(2^n-1)+...?
+(1+1/2^n)^(2^n)=1+2^n*n^(2^n-1)+...?
+(1+x)^n = (n 0) x^0 + (n 1) x^1 + (n 2) x^2 + ... + (n n-1)x^(n-1) + (n n) x^n
+
+x->2^-n
+n->2^n
+(1+2^-n)^(2^n)=(2^n 0) 2^-n^0 + (2^n 1) 2^-n^1 + (2^n 2) 2^-n^2 + ... + (2^n 2^n-1)2^-n^(2^n-1) + (2^n 2^n) 2^-n^2^n
+
+(2^n 0) 2^-n^0 = 1
+(2^n 1) 2^-n^1 = 1
+(2^n 2) 2^-n^2 = 2^n * (2^n - 1) /2 * 2^-2n = 2^(-n-1) * (2^n -1) = 2^-1 - 2^(-n-1) correct
+(2^n 3) 2^-n^3 = 2^n * (2^n - 1) (2^n - 1) /6 * 2^-3n =
+= 2^-2n * (2^n - 1) (2^n - 1) /6
++ ... +
+
+(2^n 2^n-1)2^-n^(2^n-1) = 2^n
+
+
++ (2^n 2^n) 2^-n^2^n = 1 * 2^(-n*2^n) // bit shifted by n*2^n
+
+
+jeez, we might as well as used it right off.
+
+Or even better, let p=10^n, then the conversion to decimal is trivial.
+Nope, the last digits look like ...00001
+
+Almost got it with n=3, (1+1/5^n)^(5^n)
+2.7074878332103145289643190668293393667162604447121572997248000490319739837522608339870968132678581810886455714471965136527077498487065318286459042758955401969093837328466127533332930527714803241917803896836488431899860808672933783040522630009687235367062080312482948631799680571391316162866476865756570918560214679508599976788897045845608568939340295733767070991324261 ends with 57293568
+
+So x will only have "last digits" if p is of the form 2^pi*5^pj.
+

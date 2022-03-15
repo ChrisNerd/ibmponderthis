@@ -1,0 +1,32 @@
+Almost had this super early without making a program brute force it.
+
+You can build a pyramid of the, using just odd numbers spanning a single gap
+
+  1 1
+ 31 13
+531 135
+etc.
+
+The even numbers can span two gaps
+  2  2
+ 42  24
+642  246
+...
+
+Now the part I was missing was how to deal with 3 gaps. I didn't think of the "two birds with one stone approach" until way later. I thought you needed to solve each independantly, like the odds something like (up to 9 for example)
+
+975315135795
+of course this gives a problem with the 5s now, so maybe use an even number
+97 31213279
+And get rid of that pesky 5 with a new gap. Thought that you could repeat this until the gap goes away, maybe involving fibonacci numbers or something.
+
+Turns out it's almost obvious to plug the odds and even sets side by side, and use the largest number to plug the odds gap with one of the evens gap
+
+531 135642  246
+5317135642 7246
+
+No problem scaling this up to any N.
+
+The program I wrote was a fun little random algorithm, found solutions up to N=17 or so.
+
+

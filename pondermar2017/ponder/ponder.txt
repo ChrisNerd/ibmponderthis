@@ -1,0 +1,296 @@
+Short answer:
+A solution for 37 is:
+
+3 1 1 1 3 1 2 1
+3 1 3 1 3 3 3 3
+3 3 1 3 1 1 1 2
+3 3 2 2 2 3 3 1
+1 2 1 3 2 1 3 3
+3 2 2 1 2 3 1 1
+1 1 3 3 2 2 2 1
+1 1 2 3 3 3 1 3
+
+Long answer:
+I started by trying to find a principled way of creating the matrix.
+Mathematically, given an 8x8 candidate matrix, we want to evaluate its
+"score" and determine if it is less than 37.
+The commands to move individual arms can be summarized in a 1x8 vector
+v. There are 3^8=6561 possible vectors v.
+Likewise, the commands to move all arms of an individual octopus is an
+8x1 vector h. If we iterate over all possible v, and add (mod 3) to
+the matrix, we can immediately select the optimum h for each v. For
+each row, select the maximum count of the 0s, 1s or 2s. Each v will
+have a corresponding maximum 0-count, but we are interested in the
+maximum of these maxima. We return that value as the score.
+
+In Scala, this score is defined as follows:
+val scoreToBeat = 37
+
+def allV(n: Int): List[List[Int]] = {
+ n match {
+  case 0 => List(List())
+  case _ => (for {
+   first <- 0 to 2
+   rest <- allV(n-1) }
+  yield first :: rest ).toList
+ }
+}
+
+case class State( arr: List[List[Int]] )
+
+def score(S : State) = {
+ val s = allV(N) map (v =>
+  S.arr map ( r => (r zip v map
+   ( entryTuple => (entryTuple._1 + entryTuple._2 ) %
+3)).groupBy(identity).mapValues(_.size).values.max
+  ) sum
+ ) max
+
+ if(s < scoreToBeat)
+   println(S)
+ s
+}
+
+I created a stream of random ternary matrices and let it run while I
+thought some more.
+ Stream.from(1) find { x =>
+   val randmat = State(List.fill(N)(List.fill(N)(util.Random.nextInt(3))))
+   val result = score(randmat)
+   println("Last results of random mat were " + randmat + " with score
+" + result +". Running again. " + x )
+   result < scoreToBeat
+  }
+
+Given 8 elements of 3 distinct types, there will be at least 3 of the
+most common member. So a simple lower bound on the best possible score
+is 8 rows of 3, or 24 zeroes. It's straightforward to create a matrix
+that has exactly 3 zeroes on every column and row, but it's fairly
+easy to find a v that easily creates a higher score.
+
+I decided I could treat this as a discrete optimization problem, and
+use the simulated annealing algorithm. All I needed to do was
+introduce the concept of a matrix's neighbour, which is just a random
+element incremented or decremented by 1 (mod 3).
+def createNeighbour(s: State): State = {
+ val r = util.Random.nextInt(N)
+ val v = util.Random.nextInt(N)
+ val inc = if (util.Random.nextBoolean()) 1 else 2
+ State(s.arr.updated(r, s.arr(r).updated(v, (s.arr(r)(v) + inc) % 3)))
+}
+
+def simulatedAnnealing( best:State, temp:Double):State = {
+ if (temp > finalTemperature) {
+  val currentEnergy = score(best)
+  val neighbour = createNeighbour( best )
+  val neighbourEnergy = score(neighbour)
+  if (neighbourEnergy < scoreToBeat)
+  {
+   println(neighbour)
+   neighbour
+  }
+  else
+  {   // Decide if we should accept the neighbour
+   val accept = (math.exp((currentEnergy - neighbourEnergy)/temp) > math.random)
+   simulatedAnnealing( if (accept) {
+    // println("\nScore: " + neighbourEnergy, " Temperature: "+ temp)
+     neighbour
+   } else best, (1-coolingRate)*temp)
+  }
+ } else best
+}
+
+Simulated annealing very often found matrices with scores of 37, but
+never any better.
+I decided to take resulting matrices with scores of 37, and looked at
+all 128 (8x8x2) of their neighbours.
+
+def allNeighbours(s: State) = {
+ for {
+  r <- 0 until N
+  v <- 0 until N
+  inc <- 1 to 2
+ } yield State(s.arr.updated(r, s.arr(r).updated(v, (s.arr(r)(v) + inc) % 3)))
+}
+
+allNeighbours(s).minBy { score }
+
+It was trivial to create a greedy algorithm based on the based
+neighbour, seeded with a random matrix.
+
+def greedy(s: State): State = {
+ println("Greedy "+ score(s))
+ val betterNeighbours = allNeighbours(s).filter { x => score(x) <  score(s) }
+ if (betterNeighbours.isEmpty)
+  s
+ else
+  greedy(betterNeighbours.minBy { score })
+}
+
+
+  Stream.from(1) find { x =>
+   //Initialization
+   val bestGreedy =
+greedy(State(List.fill(N)(List.fill(N)(util.Random.nextInt(3)))))
+   val result = score(bestGreedy)
+   println("Last results of greedy algorithm were " + bestGreedy + "
+with score " + result +". Running again. " + x )
+   result < scoreToBeat
+  }
+
+
+This algorithm was quicker but worse than the simulated annealing.
+
+Lastly, I tried a genetic algorithm. I've never used one before, and
+it seems to me that there's a bit of magic going on with the crossover
+breading. How do you combine two "good" matrices to make a third one?
+I chose that the child's elements are individually randomly selected
+from the 2 parents.
+
+def geneticAlgorithm(pop: IndexedSeq[State], generation: Int)
+:IndexedSeq[State] = {
+
+ // Evaluation and selection
+ // Take the best half
+ val bestOfPop = util.Random.shuffle( pop.sortBy{ score
+}.take(populationSize/2) )
+
+ // Crossover
+ // Each couple has 2 children
+ val newPopulation = ((bestOfPop take populationSize/4 ) zip
+(bestOfPop drop populationSize/4)) flatMap { case (i1,i2) =>
+ (1 to 2) map { _ => State( (i1.arr zip i2.arr ) map { case (row1,row2) =>
+   (row1 zip row2) map { case (el1, el2) => if
+(util.Random.nextBoolean()) el1 else el2 }
+  } ) } } // flatMap (x=> IndexedSeq(x,x))
+
+ // Mutation
+ val mutatedPopulation = newPopulation map ( ind => State( ind.arr map
+( row => row map
+ ( ele => if (util.Random.nextDouble() < .01) if
+(util.Random.nextBoolean()) (ele+1)%3 else (ele+2)%3 else ele))))
+
+
+ if (generation < 100)
+  geneticAlgorithm(mutatedPopulation, generation+1)
+ else
+  newPopulation
+}
+
+  Stream.from(1) find { x =>
+   //Initialization
+   val population = (1 to populationSize) map ( _ =>
+State(List.fill(N)(List.fill(N)(util.Random.nextInt(3)))))
+   var result = geneticAlgorithm(population, 0).map( score ).min
+   println("Last results of genetic algorithm were " + result + ".
+Running again. " + x )
+   result < scoreToBeat
+  }
+
+
+The genetic algorithm also did worse than the simulated annealing. The
+concept of mutation is functionally identical to the annealing, but I
+didn't want to play around with the genetic knobs.
+
+Nothing seemed to do better than 37.
+
+I recoded it in C++, which ran way faster, but reminded me of my
+hatred of index errors and segmentation faults, which are pretty well
+non existent in Scala. Once you go functional, you never go back,
+except when performance is hugely important.
+
+
+void createAllV(){
+  for (int i =0; i< N; i++)
+    allV[0][i] =0;
+  bool overflow = false;
+  for (int i = 1; i < len ; i++)
+    {
+      if ( allV[i-1][N-1] == 2 )
+    {
+      overflow = true;
+    }
+      else
+    {
+      overflow = false;
+    }
+      allV[i][N-1] = (allV[i-1][N-1] + 1)%3;
+
+      for (int j = N-2; j >= 0; j--)
+    {
+
+      if ( allV[i-1][j+1] == 2 && overflow )
+        {
+          allV[i][j] = (allV[i-1][j]+1)%3;
+        }
+      else
+        {
+          overflow = false;
+          allV[i][j] = allV[i-1][j];
+        }
+    }
+    }
+}
+
+int score(int S[N][N])
+{
+  int sums[len] = {};
+  for (int i = 0; i < len; i++)
+    {
+      int* v = allV[i];
+      for (int r =0; r < N; r++)
+    {
+      int countArray[3] = {};
+      for (int j=0; j<N; j++)
+        countArray[ (v[j]+S[r][j] )%3]++;
+      sums[i]+= *std::max_element(countArray,countArray+3);
+    }
+    }
+  return *std::max_element(sums,sums+len);
+}
+
+By keeping my code general, I brute forced through all possible 3x3,
+4x4 and 5x5 matrices to see if there's any noticeable patterns about
+the optimal matrices and scores.
+It certainly looks like the scores are the triangle numbers 3x3 is 6,
+4x4 is 10, 5x5 is 15, ... 21,28, 8x8 should there be 36.
+
+Clearly, an arbitrary single row and a single column can easily be
+made to be 0. And the matrix will not change scores with column swaps
+or row swaps. I thought there might be some sort of "determinant" I
+could calculate right away to get the score. I used this principle
+instead to set the first row and first column to 0s in my brute force
+searches.
+
+I thought that the optimal matrix would have the triangular number of
+zeroes in an actual triangle like so:
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 x1
+0 0 0 0 0 1 2 3
+0 0 0 0 1 4 5 6
+0 0 0 1 7 8 9 10
+0 0 1 1 2 3 4 5
+0 1 6 7 8 9 0 1
+0 2 3 4 5 6 7 8
+but the last row only has a single zero, which breaks our rule about
+each row having at least 3 zeroes.
+
+The c++ optimizers ran much faster but could not find a score of 36.
+My last step was a glazy-eyed reading through the online encyclopedia
+of integer sequences page on triangle numbers http://oeis.org/A000217
+which lead to a desperate wander around wikipedia in math articles way
+over my head. Statements about triangle numbers such as: "Equal to the
+rank (minimal cardinality of a generating set) of the semigroup
+PT_n\S_n, where PT_n and S_n denote the partial transformation
+semigroup and symmetric group on [n]." made me slightly hopeful since
+I recognized the word "minimal" but that was about the extent of my
+mathematical understanding.
+
+My last best guess is that the optimal matrix will look something like
+a Sierpinski triangle, or a chaotic cellular automata, or maybe
+somehow related to Costas arrays. In other words, I have no idea. :)
+
+Thanks for a fun month,
+Chris Shannon
+
+From Calgary, Canada.
+

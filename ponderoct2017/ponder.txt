@@ -1,0 +1,58 @@
+solve 131839 x^5 + 17585 x^4 - 13258 x^3 - 18104 x^2 - 419356 x + 52715 = 0 (mod 11100101)
+
+
+(x == 4597286 + 11100101 C[1] && Element[C[1], Integers]) ||
+(x == 5592661 + 11100101 C[1] && Element[C[1], Integers]) ||
+(x == 10835281 + 11100101 C[1] && Element[C[1], Integers]) ||
+(x == 10835285 + 11100101 C[1] && Element[C[1], Integers]) ||
+(x == 10909046 + 11100101 C[1] && Element[C[1], Integers])
+
+11100101 base 2 is 229 decimal
+
+
+24 bits, could be an RGB value?
+4597286  01000110 00100110 00100110 #462626 70 38 38 F&&
+5592661  01010101 01010110 01010101 #555655 85 86 85 UVU
+10835281 10100101 01010101 01010001 #a55551 165 85 81 ¥UQ
+10835285 10100101 01010101 01010101 #a55555 165 85 85 ¥UU
+10909046 10100110 01110101 01110110 #a67576 166 117 118 ¦uv
+
+
+1010
+0110
+0111
+0101
+0111
+0110
+
+Putting them into a binary to ascii converter,
+
+F&&UVU¥UQ¥UU¦uv
+
+Seems to be a TON of 10s and 01s. Like it's a balanced code, intentionally alternating.
+EBCDIC doesn't convert it to anything.
+https://en.wikipedia.org/wiki/Data_Encryption_Standard
+
+
+What if we xor them all?
+01000110 00100110 00100110
+01010101 01010110 01010101
+10100101 01010101 01010001
+10100101 01010101 01010101
+10100110 01110101 01110110
+=
+10110111 00000101 00000001
+
+
+
+Here is the answer:
+
+010001100010011000100110
+101001010101010101010001
+101001010101010101010101
+101001100111010101110110
+010101010101011001010101
+
+The 1s spell out QRADAR. You have to reorder it putting 5592661 last. Jeez.
+
+

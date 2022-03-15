@@ -1,0 +1,64 @@
+Short answer:
+PONDER = 102798, THIS = 3654
+
+Long answer:
+Having more than a 1/5 of the digits being 0 rules out normal numbers. We're looking for a product of two sines that gives a nice simple ratio. Something like sine(45)*sine(45)=1/sqrt(2) * 1/sqrt(2). But that's ruled out for the repeated use of the '5'. sine(15)* sine(75) =1/4 fails for the same reason.
+
+I consulted a table of exact values of the sine function.
+http://intmstat.com/blog/2011/06/exact-values-sin-degrees.pdf
+
+The best candidate jumps out due to it being the simplest form:
+
+sin(18) = 1/4 * (sqrt(5)-1)
+sin(54) = sin(18) + 1/2 = 1/4 * (sqrt(5)+1)
+sin(18)*sin(54) = 0.25
+
+sine(60) was the only other entry without a nested radical or cube root. These two conditions were necessary to create a rational product with just a single multiplication.
+
+Just need to verify the 863,173rd digits.
+
+http://www.wolframalpha.com/input/?i=863,173rd+digit+of+sin(18+degrees)
+
+863173rd digit | sin(18 °) = 9
+
+863173rd digit | sin(54 °) = 9
+
+Since the sine function is odd, and we don't care about the sign, were looking for sine(m) * sine(n)
+where m = +-18 mod 180
+and n = +-54 mod 180.
+
+The problem reduces to finding an m and n such that m is 6 digits long and n is 4 digits and they are all digits are distinct. m could be 4 digits and n 6, of course.
+
+This is simple enough to code in scala. First make a list of all m = +-18 mod 180 and composed of 6 distinct digits. Likewise for n.
+
+Then a simple double for loop over them filtering for cases where all 10 digits are used.
+
+A total of 6876 solutions were found not counting any leading zeroes.
+
+Thanks for another fun problem,
+Chris Shannon
+from Calgary Canada
+
+object ponder {
+  def digitsOf(m: Int) = m.toString.map(_.asDigit).toList
+  val candidateMs = 555 to 5555 flatMap (x => List(x * 180 + 18, x * 180 - 18)) filter (m => digitsOf(m).distinct.size == 6)
+// Vector(102438, 102798, 102978, 103482, 103698, 103842, 104238, 104382, 104598, 104562,...
+  val candidateNs = 5 to 55 flatMap (x => List(x * 180 + 54, x * 180 - 54)) filter (n => digitsOf(n).distinct.size == 4)
+// Vector(1026, 1206, 1386, 1674, 1854, 1746, 2034, 1926, 2106, 2394, 2574, 2754, 2934, 3294, ... 9486, 9846)
+
+  candidateMs.size //> res0: Int = 1608
+  candidateNs.size //> res1: Int = 50
+
+  val solutions = for {
+    m <- candidateMs
+    n <- candidateNs
+    if (digitsOf(m) ++ digitsOf(n)).distinct.size == 10
+  } yield (m, n)
+
+// Vector((102798,3654), (102798,3546), (102798,5346), (102798,5634), (102798,6354)...
+
+  solutions.size //> res2: Int = 3300
+
+// swapping the 18 for 54 (so PONDER is +-54 mod 180) results in another 3576 solutions for a total of 6876 solutions
+}
+

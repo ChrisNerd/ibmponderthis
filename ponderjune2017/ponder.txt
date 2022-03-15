@@ -1,0 +1,144 @@
+Short answer:
+0397799 and 0765533
+
+Long answer:
+I solved this using a Scala program I wrote.
+
+I first started by figuring out a way to generate all the possible solutions of all the equations using all +-*/, and all the order of operations. We start by considering all equations with just 2 variables, a and b.
+
+ // All the outputs possible using +-*/ with just two inputs.
+ // If the second input is 0, we avoid dividing by 0, and we might as well skip adding or subtracting 0.
+ def basicOps(a: Double, b: Double): Set[Double] = b match {
+  case 0 => Set(a,0,-a)
+  case _ => Set(a+b, a-b, a*b, a/b,
+               -a+b,-a-b,-a*b,-a/b)
+
+When there are 3 or more digits, we can use recursion to split them into 2 smaller groups.
+
+ // Given a list of Ints, output a Set of Doubles of all the solutions to all the possible equations.
+ // With just a single Int, we can return the unary -, as well as the Int itself.
+ // With just two Ints, use the above basicOps function.
+ // With 3 or more Ints, we split (i.e. bracket) it first (1)(2 3 4...), then (1 2)(3 4...) etc.
+ //  Recursively evaluate all the solutions to each half.
+ //  Take all the results of all the pairs (yield), then put them into one huge list (flatten), then remove duplicates (toSet) for efficiency
+ def allOutputs(inList: List[Int]): Set[Double] = inList.size match {
+  case 1 => Set(inList(0), -inList(0)) // Hmmm, I'm not sure if the -inList is necessary?
+  case 2 => basicOps(inList(0),inList(1))
+  case _ =>
+   (
+   for {
+    splitPos <- 1 to inList.size - 1
+    firstVal  <- allOutputs( inList.take(splitPos) )
+    secondVal <- allOutputs( inList.drop(splitPos) )
+   }
+   yield basicOps(firstVal,secondVal)
+   ).flatten.toSet
+ }
+
+
+Test it:
+ val allVals = allOutputs(List(2,3,7))            //> allVals  : Set[Double] = Set(0.14285714285714285, -0.14285714285714285, 42.
+                                                  //| 0, -7.0, -8.0, 20.0, -35.0, -12.0, 1.0, -0.2, 0.2, 6.0, -0.7142857142857143
+                                                  //| , -0.09523809523809523, 0.7142857142857143, 0.09523809523809523, -23.0, -19
+                                                  //| .0, 13.0, 2.0, -7.666666666666667, 7.666666666666667, -42.0, -2.42857142857
+                                                  //| 14284, 2.4285714285714284, 12.0, -0.5, 0.5, -20.0, 7.0, -0.8571428571428571
+                                                  //| , 0.8571428571428571, 35.0, -1.5714285714285714, 1.5714285714285714, -1.0, 
+                                                  //| 4.666666666666667, -4.666666666666667, -4.666666666666666, 4.66666666666666
+                                                  //| 6, 23.0, 8.0, -6.0, -13.0, 19.0, 6.333333333333333, -6.333333333333333, -2.
+                                                  //| 0)
+
+Next, make a tester function that sees if 100 is in a Set. We use a cache to avoid duplicating the expensive calculation of creating the set.
+
+ // Is 100 among the set
+ // Worried about rounding errors, less concerned about efficiency
+ val meetsGoalCache = collection.mutable.Map[List[Int],Boolean]()
+
+
+// The slashdot message of the day was about never directly comparing floating point values.
+ def meetsGoal(i: List[Int]) =  meetsGoalCache.getOrElseUpdate(i, allOutputs(i).exists { x => math.abs(100-x) < .0001 })
+
+Going straight for the bonus question about looking for primes:
+// Brute force primality test, doesn't take too long
+ // Could have used Sieve of Eratosthenes if we really want to save 30 seconds.
+ def isPrime(n:Int) = (2 to math.sqrt(n).toInt) forall (n % _ != 0)
+
+// Generates all the prime numbers with 7 digits or less.
+ // The last line 0 pads them and splits the number into a List of single digits of length 7.
+ val allLists = for {
+  n <- 0 to math.pow(10,7).toInt-1
+  if isPrime(n)
+ }
+ yield "%07d".format(n).map(_.asDigit).toList
+
+
+ // Given a 7 digit number, return a list of the 63 (7 digit) numbers that can be obtained by changing any given digit.
+ def allNeibours(inList: List[Int]): Seq[List[Int]] =
+  for {
+   i <- (0 until inList.size)
+   replaceWith <- (0 to 9).filter( _ != inList(i) )
+  } yield inList.updated(i, replaceWith)
+
+ //Find a seven-digit number that is not solvable, but is made solvable by 62 of the 63 single-digit changes.
+ var counter = 0
+ // The .par splits the list into 4, each running in parallel on its own core on my 4-core machine. Got to love how easy that is in Scala!
+ val sol =  allLists.par.filter {
+  inList =>
+  {
+   if (counter % 10000 == 0)
+   {
+    println(Calendar.getInstance().getTime())
+    println(inList)
+    println(counter)
+   }
+   counter = counter +1
+   // Find a seven-digit number that is not solvable,...
+   ! meetsGoal(inList)
+  } && //  but (*and*) is made solvable by 62 of the 63 single-digit changes
+  //  In other words, only 1 neighbour can fail, and exactly 1 neighbour must fail.
+  {
+ // allNeibours(inList).dropWhile { meetsGoal }.drop(1).forall{ meetsGoal }
+ // Except if dropWhile never fails, then we get an empty list. The .drop(1) would be a seg fault.
+ // We avoid this by checking if .dropWhile drops them all.
+   val firstPart = allNeibours(inList).dropWhile { meetsGoal }
+   if (firstPart == List())
+    false // all 63 met the goal
+   else
+   {
+    if (firstPart.drop(1).forall{ meetsGoal }) // Do all the remaining neighbours meet the goal?
+    {
+     println("Solution Found", inList)
+     true
+    }
+    else
+     false
+    }
+   }
+  }
+
+  println("Program done. All solutions:")
+  sol.foreach{println}
+
+These are the only two solutions that are prime.
+
+ // Verify the solutions
+  val sol1 = List(0, 3, 9, 7, 7, 9, 9)
+  val sol2 = List(0, 7, 6, 5, 5, 3, 3)
+  
+ //Find a seven-digit number that is not solvable, but is made solvable by 62 of the 63 single-digit changes.
+  val isSol1aSolution = ! meetsGoal(sol1) && allNeibours(sol1).count{ meetsGoal } == 62
+  //> isSol1aSolution  : Boolean = true
+  val isSol2aSolution = ! meetsGoal(sol2) && allNeibours(sol2).count{ meetsGoal } == 62
+  //> isSol2aSolution  : Boolean = true
+  
+
+Running this program prints solutions as it finds them. It's a fairly slow program, taking about 15 hours, which isn't too slow that I wanted to optimize it further, but is definitely not something to be proud of. I looked into removing the ".flatten.toSet" in the for comprehension with a "breakOut", which would make the compiler not create the intermediate list, but it wasn't as easy to add breakOut as I hoped, and I wasn't sure it was the bottleneck.
+
+On one run of the program I got a
+ java.lang.OutOfMemoryError: GC overhead limit exceeded
+when it was building a Set. It was caused by the Garbage Collector taking at least 98% of the CPU, which was resolved by giving the program more memory. While I love functional programming and immutable variables, it definitely has its hidden overhead. Hiding those details is almost the point of a good language paradigm though. The clarity of the code makes the tradeoff worthwhile, especially for one-off programs like this. For larger projects a deeper understanding of what's going on under the hood would be needed.
+
+Thanks for another fun problem.
+
+Chris Shannon
+
+from Calgary, Canada

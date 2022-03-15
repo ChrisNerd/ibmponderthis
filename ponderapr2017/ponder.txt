@@ -1,0 +1,47 @@
+The three numbers are factored as follows:
+Number: c1
+N = 27771495424394652906650011597233066116343506387184320546233728271726480989807112498372640545334956743914011373
+(110 digits)
+Divisors found:
+r1=27409442019512990822647850170314237623576356233289777 (pp53)
+r2=1013209076077649209484940814946799145391416348710836269949 (pp58)
+
+
+N = 98296593067163321549931012857525979998165090637663230976866143160359417516252340928637985390415053795128313
+(107 digits)
+Divisors found:
+r1=97015113058097176690586226108597571924676074369837 (pp50)
+r2=1013209076077649209484940814946799145391416348710836269949 (pp58)
+
+N = 1412534667091752138605679066750993949837793629454397369052717798704788621599573184763086599428517731585079
+(106 digits)
+Divisors found:
+r1=459204260897478908239259636478617449777306089311 (pp48)
+r2=3076048694171659720381726519691214280505664619002804392489 (pp58)
+
+***
+
+I noticed that the 58 digit factor for the two largest numbers are the
+same! Not sure if that's another level of the puzzle, or a way to
+"cheat" factoring the largest?
+
+I used an open source program called Msieve v. 1.51.
+https://sourceforge.net/projects/msieve/
+It implements a general number field sieve (GNFS).
+
+I ran it without any special parameters, all 3 started at the same
+time. The 3 numbers number took 8.4, 5.5, and 2.7 hours.
+
+The credits of the program are:
+Running factmsieve.py, a Python driver for MSIEVE with GGNFS sieving
+support. It is Copyright, 2010, Brian Gladman and is a conversion of
+factmsieve.pl that is Copyright, 2004, Chris Monico.    Version 0.76
+(Python 2.6 or later) 10th Nov 2010.
+
+
+So Shor's algorithm running on a quantum computer wasn't necessary for
+me. :)  But there's lots of interesting reading for me to do about
+GNFS now. Thanks for introducing me to this.
+
+Chris Shannon
+from Calgary, Canada

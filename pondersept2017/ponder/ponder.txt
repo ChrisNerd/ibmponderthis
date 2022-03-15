@@ -1,0 +1,190 @@
+Short answer: 92
+
+Long answer:
+I wrote this program two different ways. One was sitting down with a chess board, reasoning the strategies.
+Of course, the implementation turned out to be full of special cases, and wasn't nearly as clean as I hoped. I figured it would be easier to code a full blown chess engine. So I did, then compared the solution sets of the two approaches. The ones missing from each helped debug both sets of code.
+
+Sitting with a board in front of you, you can see that there's only a handful of checking moves.
+Black pawns are irrelevant, other than the one move necessarily wasted to allow a piece to move. Black's knights have no hope of checkmating. Black's rooks take too many moves to get out from behind the pawns in a normal game, let alone in a 2-move game. Black's king, would need like 8 moves to help out in a checkmate.
+Black can only checkmate with its Queen or Bishops.
+If Black takes a pawn on rank 2, white's king can capture it, avoiding checkmate. There is no way for black to protect the rank 2 piece.
+Black can move their queen or bishop to the 3rd or 4th ranks, or their queen to the 5th or 6th rank.
+Bishop attacks from the 5th rank or beyond is useless, since white has a minimum of 3 pawns that can block. Black's queen can capture white's king's pawn on rank 4 or 5 to get a frontal assault.
+The queen's frontal assault from rank 3 can not succeed since the king's pawn must not block, and its two neighbours must move to not attack black's queen, necessitating at least 3 moves for white.
+The queen can almost achieve a frontal assault all the way from rank 6! White's king's pawn captures black's pawn on move 2, but then that pawn can take black's queen if it goes for the checkmate.
+Diagonal attacks are equally possible with Black's Queen and Bishop.
+Black's must move diagonal out of rank 8 to get to either rank 3 or 4.
+If Black moves to a3, there is only 1 white pawn that needs to get out of the way. Note that a knight on d1 can't simply move to e3 to avoid the block, it would allow an escape route for the king.
+
+White can also move their king up to the second rank which cuts out the king's neighbours' potential for blocks, except knights.
+
+Let's get into some code. First the Scala code to generate the 960 starting boards map nicely from the wikipedia instructions.
+
+// All remaining white pieces are placed randomly on the first rank, with two restrictions:
+  val allStartingPositions = List('R', 'R', 'N', 'N', 'B', 'B', 'K', 'Q').permutations.toList
+    // The bishops must be placed on opposite-color squares. (Their indices must sum to an odd number.)
+    .filter { board =>
+      board.zipWithIndex
+        .filter { case (piece, pos) => piece == 'B' }
+        .map { case (piece, pos) => pos }.sum % 2 != 0
+    }
+    // The king must be placed on a square between the rooks.
+    .filter { board => board.filter { piece => piece == 'K' || piece == 'R' } == List('R', 'K', 'R') }
+
+My first approach was to reason about the checkmating strategies, such as for a frontal assault, the queen must be 4 squares away from the king...
+
+ def isCheckMatable(board: List[Char]): Boolean = {
+  // Frontal attack is always possible if white's king moves to the second rank, only knights can block
+  (Math.abs(board.indexOf('K') - board.indexOf('Q')) == 4 &&
+   {
+   val k = board.indexOf('K')
+   board(k-1) != 'N' && board(k+1) != 'N'
+   }) ||
+
+There are a huge number of chained &&s and ||s.
+
+Here they all are:
+  (board.indexOf('K') match {
+    // The king on a or h is impossible, as the King must be between 2 rooks.
+    case 0 => false
+    case 7 => false
+    // abcdefgh
+    // 01234567
+    // King on b or g file, diagonal attacks are impossible. If king is on b, then by the
+    // rules of Fisher, a rook must be on a.
+    // Black's rook must also be on a. But a black Q or B must be on a to attack the white King.
+    // A frontal attack is possible though, with the queen going to rank 4 or 5.
+    case 1 => board(2) == 'R' && (board(5) == 'Q' || (board(4) =='Q' && board(3) != 'N'))
+    case 6 => board(5) == 'R' && (board(2) == 'Q' || (board(3) =='Q' && board(4) != 'N'))
+
+    // For the king on c,d,e,f
+    case k if 2 to 5 contains k =>
+     // Frontal attack from Black's queen to King's Pawn on the 5th rank, making the
+     // Queen 4 or 3 over from the king.
+     // King's neighbours must be rooks (B and N can block), and two doors down must not be the knights
+     (3 == Math.abs(k - board.indexOf('Q'))) &&
+       board(k - 1) == 'R' && board(k + 1) == 'R' && board(k - 2) != 'N' && board(k + 2) != 'N' ||
+     // Left diagonal attack to the third rank (not possible for king on f)
+     ((k <= 4) && ((board(k + 3) == 'Q' || board(k + 3) == 'B')) && board(k - 1) == 'B' && board(k + 1) != 'N' &&
+      board(k - 2) != 'B' && board(k - 2) != 'Q' &&
+      (if (k >= 3) board(k - 3) != 'N' else true) &&
+      (if (k >= 4) board(k - 4) != 'Q' && board(k - 4) != 'B' else true)) ||
+     // Left diagonal attack to the fourth rank
+     ((board(k + 1) == 'Q' || board(k + 1) == 'B') && board(k - 1) == 'B' && board(k + 1) != 'N' &&
+      board(k - 2) == 'N' &&
+      (if (k >= 3) board(k - 3) != 'N' else true)) ||
+     // Right diagonal to the third rank
+     ((k >= 3) && ((board(k - 3) == 'Q' || board(k - 3) == 'B')) && board(k + 1) == 'B' && board(k - 1) != 'N' &&
+      board(k + 2) != 'B' && board(k + 2) != 'Q' &&
+      (if (k <= 4) board(k + 3) != 'N' else true) &&
+      (if (k <= 3) board(k + 4) != 'Q' && board(k + 4) != 'B' else true)) ||
+     // Right diagonal to the fourth rank
+     ((board(k - 1) == 'Q' || board(k - 1) == 'B') && board(k + 1) == 'B' && board(k - 1) != 'N' &&
+      board(k + 2) == 'N' &&
+      (if (k <= 4) board(k + 3) != 'N' else true)) ||
+     // Castle queenside left diagonal is possible, right diagonal isn't.
+     (k == 3 && board(2) == 'R' &&
+      // "Move" king to the c file, board(2).
+      ((board(2 + 3) == 'Q' || board(2 + 3) == 'B') && board(2 - 1) == 'B' && board(2 + 1) != 'N' && // Board 3 is the K
+       board(2 - 2) != 'B' && board(2 - 2) != 'Q' &&
+       (if (2 >= 3) board(2 - 3) != 'N' else true)))
+   }) // No knight off the board to the left.
+  }
+
+
+Seeing as there probably will be mistakes in there, I went ahead with the chess engine approach. The board itself was implemented as a Map from coordinates to Pieces. If the Map doesn't have a specific coordinate as a Key, then that square is blank.
+
+ // Create the board, which is just a map with entries like this (5,1)->Piece('P','w')
+  def createBoardFromString(listChar: List[Char]): Board = {
+    val pieces = (0 to 7).zip(listChar)
+        .flatMap { case (pos, piece) => Map((pos, 0) -> Piece(piece, 'w'), (pos, 7) -> Piece(piece, 'b')) }
+    val pawns = (0 to 7) flatMap { pos => Map((pos, 1) -> Piece('P', 'w'), (pos, 6) -> Piece('P', 'b')) }
+    Board(pieces.toMap ++ pawns.toMap)
+  }                                              
+
+The allowed moves were coded in like this for example:
+  def knightMoves(piece: ((Int, Int), Piece), board: Board) = {
+  createBoardListFromMoves(piece, board) (
+   List((1,   2),
+        (1,  -2),
+        (-1,  2),
+        (-1, -2),
+        (2,   1),
+        (2,  -1),
+        (-2,  1),
+        (-2, -1))
+      .map { x =>
+        val oldx = piece._1._1
+        val oldy = piece._1._2
+        val newx = oldx + x._1
+        val newy = oldy + x._2
+        (newx, newy)
+      }.filter { canMoveHere(piece._2.colour, board) })
+  }
+
+The special cases by the pawn and kings allowed moves made code reuse hard. The Bishop, Queen and Rook's codes were nicely factored though.
+
+The game was played by generating a list of all available moves for white, then for each of those moves generate the list of all available moves for black, etc.
+
+ // Create a list of all the boards that are possible from all the moves from this colour.
+  def movesAvailable(board: Board, colour: Char, moveNumber: Int) = {
+   for {
+    piece <- board.pieces.filter(_._2.colour == colour)
+    // For efficiency, there's no point in Black's second move being a Pawn move.
+    if ( !(moveNumber == 2 && piece._2 == Piece('P', 'b')))
+    move <- moves(piece, board, moveNumber)
+   } yield move
+  }  
+
+The resulting nested for loop is 4 deep! Yikes!
+
+ // Note: Here's the only place where we ensure that no moves puts the moving player into check.
+ // This covers the rule that the player must get out of check, as well as the rule that the player can't move into check.
+ // A slightly more general solution would be to make this function recursive, have it yield a list of boards, prepending the current board.
+ val solutionViaBruteForce = allStartingPositions.par.flatMap { startingString =>
+   val startingBoard = createBoardFromString(startingString)
+   (for {
+       bo1 <- movesAvailable(startingBoard, 'w', 1).filter(!isInCheck(_, 'w'))
+       bo2 <- movesAvailable(bo1, 'b', 1).filter(!isInCheck(_, 'b'))
+       bo3 <- movesAvailable(bo2, 'w', 2).filter(!isInCheck(_, 'w'))
+       bo4 <- movesAvailable(bo3, 'b', 2).filter(!isInCheck(_, 'b'))
+     } yield (bo4, bo3, bo2, bo1, startingString))
+     .find { case (bo4, bo3, bo2, bo1, startingString) => isCheckmated(bo4, 'w') }
+
+But one thing I've learnt is to not worry about how hard your computer has to work. The code looks (to me) nice and elegant, and that often translates to error free. The first approach, which is a giant pattern matcher is way easier for the computer to run, but is a mess to read with all the brackets and cases, and contained waaaay more errors than the simpler to code but longer to run chess engine approach. I love that the program was made to be parallel by tucking in that tiny '.par' in the above code segment!
+
+It's also fun to translate into functional code, what it means to be in Check, or checkmated.
+
+  // White is in check when there exists a move for black such that it will capture white's king
+  // We check for the existence of a black move that literally kills white's king (it is removed from the board).
+  // Note that movesAvailable doesn't worry about whether a move puts themselves in check. In fact, it leads to an infinite
+  // loop if you try to do that. I.e. Are you in check? I'll see if you have a move that can take my king. Of your available moves,
+  // does it put you in check? We'll see if *that* move allows me to take *your* king... etc.
+  // This is also not how you play the game. You're allowed to check the opponent with a pinned piece.
+  def isInCheck(board: Board, colour: Char): Boolean = {
+    movesAvailable(board, if (colour == 'b') 'w' else 'b', 0)
+    .exists { hypotheticalBoard => !hypotheticalBoard.pieces.values.exists(_ == Piece('K', colour)) }
+  }                                              
+
+  // White is checkmated when it is in check and all moves it can make are also in check
+  def isCheckmated(board: Board, colour: Char): Boolean = {
+    isInCheck(board, colour) && movesAvailable(board, colour, 0).forall { isInCheck(_, colour) }
+  }       
+
+The two approaches were used to debug each other. By viewing which solutions were in one set and not the other, I could see where the blind spots were in the pattern matching approach, and where an implementation detail was missed in the simulation. It turns out that the simulator only had 1 tiny bug which was found this way. It missed all the castling checks, which was something that I thought hard about in the reasoning approach. Kingside castling will not result in a check, but Queenside will under a few simple conditions. When the simulator didn't catch those case, I found the bug to be a swapping of x and y coordinates. King was moved to (0,2) instead of (2,0), such a small typo! I've concluded that messing with indices is fraught with peril, and that functional programming really does you a solid by avoid them in most cases.
+
+The pattern matching approach missed quite a few cases because I didn't think of them. I never would have thought to have my King move out to the second rank, for example. It just doesn't cross my mind as a chess player. Reminds me of this study on memory I read that good chess players don't even see bad moves, similar to the way that intermediate chess players don't even see illegal moves.
+
+Also the brute force algorithm found ways to get out of what I thought were sure checkmates. It's what a computer's good at, never giving up when the situation looks hopeless.
+
+In the end, I was happy that I did both approaches. I've always wanted to build a chess engine, and in Scala, it wasn't that hard. It will takes some rewriting to add En Passant and various stalemate rules, but it's pretty solid as it is. The Map might be replaced with an array for performance too.
+
+The cross validating of the two codes was quite enlightening about the effectiveness of diversity. Each code was made (probably) perfect because they each had their strengths and weaknesses pointed out. When they reached an agreement, I feel extremely confident in their final answer of 92 cases that allow black to mate in 2.
+
+Thanks for another fun puzzle,
+
+Chris Shannon
+
+(from Calgary Canada)
+
+P.S. The natural bonus challenge is to play Regex Golf with it.  Given 92 Winners, and 960-92 Losers, write the shortest possible regex pattern that matches only the winners.
