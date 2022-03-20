@@ -1,0 +1,209 @@
+What are the last 10 decimal digits of 2^(3^(4^(5^(6^(7^(8^9))))))?
+
+
+http://www.wolframalpha.com/input/?i=2^%283^%284^%285^%286^%287^%288^9%29%29%29%29%29%29
+Last few decimal digits
+...8170340352
+
+Power of 10 representation
+10^(10^(10^(10^(10^(10^(10^8.054716976983573))))))
+(7 powers of 10, there are also 7 bases in the original)
+
+8^9 = 134217728
+10^x1 = 8^9
+x1=log(8^9)/log(10) = 9*log(8) / log(10)
+x1=8.1278098829275
+
+7^10^x1 = 10^10^x2
+10^x1 * log10(7) = 10^x2
+log10(10^x1 * log10(7)) = x2
+x1+log10(log10(7)) = x2
+x2 = 8.05471697740067
+
+6^10^10^x2 = 10^10^10^x3
+10^10^x2 *log(6) = 10^10^x3
+10^x2 + log(log(6)) = 10^x3
+log10(10^x2 + log10(log10(6)))=x3
+x3 = 8.05471697698357 ... same number as wolfram gave us!
+
+5^10^10^10^x3 = 10^10^10^10^x4
+10^10^10^x3*log(5) = 10^10^10^x4
+10^10^x3+log(log(5)) = 10^10^x4
+log(10^10^x3+log(log(5))) = 10^x4
+log10(log10(10^10^x3+log10(log10(5)))) = x4
+
+
+
+******
+To find the last m digits of 2^n
+c(n)= 2^n (mod 10^m)
+Find c as a function of n.
+c will turn out to be a periodic function of n with period 4*5^(m-1)
+construct a table of size 4*5^(10-1)=1562500
+c(0)=
+c(1)=
+c(2)=
+c(3)=
+...
+c(1562500-1)=
+
+each entry in the table is the last m digits of c (c=2^(n+1562500*k))
+
+n = k (mod 1562500)
+
+***
+
+x  = 2^x2 = 2^k2      (mod p2)   p2 = 10^m
+x2 = 3^x3 = 3^k3 = k2 (mod p3)   p3 = 4*5^(m-1)  
+x3 = 4^x4 = 4^k4 = k3 (mod p4)   p4 = 4*5^(m-2)  // makes no difference is p4=2*5^(m-2) or 1*5^(m-2)
+x4 = 5^x5 =        k4 (mod p5)   p5 = 2*5^(m-3)
+
+For all x5 >= m-3, k4=5^(m-3)
+k3 = 4^k4 mod p4 =5^(m-2)-1 this line is surprising. 4^5^(m-3) mod 4*5^(m-2) = 5^(m-2) - 1
+4^5^(m-3) mod 4*5^(m-2) = 5^(m-2) - 1
+4^5^p mod 4*5^(p+1) = 5^(p+1) - 1
+4^5^p mod 4*5*5^p = 5*5^p - 1
+4^5^p mod 20*5^p = 5*5^p - 1
+1+4^5^p mod 20*5^p = 5*5^p
+
+q=5^(m-3)
+1+4^q mod 20*q = 5q
+1+(5-1)^q mod 20q = 5q
+q is odd
+1*5^q mod 20 q = 0
+q*5^(q-1) *(-1)^q  mod 20q = 0
+...
+binomeal(q,2) * 5^3 mod 20q = 0 because 5^3 > 20
+q*5^1 * (-1)^(q-1) mod 20q = 5q 
+1*5^0 + (-1)^q = -1
+everything cancels but q*5^1 QED
+
+
+
+a mod p
+4*4*4*4*4*4... mod 2 * 2* 5 * 5 *5....
+
+4^5^(m-3) = k* 4*5^(m-2) + 5^(m-2) - 1
+4^5^(m-3) - 5^(m-2) + 1 = k* 4*5^(m-2)
+4^5^(m-3) - 5^(m-2) + 1 = k* 4*5^(m-2)
+
+k2 = 3^k3 mod p3 =3^(5^(m-2)-1) = 5765981 for m=10
+x = 2^k2 mod p2 = 8170340352
+
+>>> pow(2,pow(3,5**8-1,4*5**9),10**10)
+8170340352
+
+
+******
+
+
+x = 2^x2 (mod p2)
+where x2 = some large integer and p2 = 10^m
+then
+x = 2^k2 (mod p2)
+if x2 = k2 (mod p3) and k2 > m.  If k2 < m then let k2'=k2+p3
+where p3 = 4*5^(m-1) (7812500 for m=10)
+
+
+2^k2 (mod 2^m 5^m).  Can't find the order since 2 is a factor 2^m 5^m.  So can divide by 2^m.
+
+2^k2 / 2^m mod 5^m
+2^(k2-m) mod 5^m.   Can find the order of this!  And also shows that k2 must be greater than m.
+
+x2 = 3^x3
+3^x3 = k2 mod p3
+3^k3 = k2 mod p3
+when x3 = k3 mod p4.  p4 = order (3,p3). and k3 > k3'.
+The order of (3,p3) is found directly since 3, p3 are relatively prime.
+
+Can find p4 a simple loop.  p4 must be less than p3.
+p4 = 4*5^(m-2) (1562500 for m=10)
+
+
+x3=4^x4
+4^x4 = k3 mod p4
+4^k4 = k3 mod p4
+when x4=k4 mod p5
+
+p5= 2*5^(m-3) is found to be 156250 for m=10.
+
+x4=5^x5
+5^x5 = k4 mod p5
+5^k5 = k4 mod p5
+when x5=k5 mod p6
+
+p6 is found to be 1!
+5^x5 = 5^7 mod p5 when x5>=7
+5^x5 = 5^7 mod 2*5^7
+
+k*(2*5^7) + 5^7 = 5^x5. for some k>0
+2*k +1 = 5^(x5-7)
+1=5^(x5-7) mod 2
+
+vt5 = m-3, x5 needs to be >= m-3.
+x5 = 6^7^8^9 > 7 so this is fine.
+
+So k4 = 5^x5 mod p5 = 5^7
+k3 = 4^k4 mod p4.
+k3= 390624
+
+k2 = 3^k3 mod p3
+k2 = 5765981
+
+x = 2^k2 mod p2
+8170340352
+
+
+
+
+
+
+******
+
+Let c = 1/11 * uniform 2,12
+
+find a and b such that
+a * b = c
+* is convolution. a and b domains are 1 to 6.
+Easy to show it's impossible, so relax the contstraint.
+(a*b - c)^2 is minimum.
+
+(a1*b1 - 1/11)^2 
++ (a1*b2 + a2*b1 - 1/11)^2
++ (a1*b3 + a2*b2 + a3*b1 - 1/11)^2
++...
++ (a6*b1 - 1/11)^2
+
+*** reduce to 2 possible outcomes per die. 1 and 2
+with equal probability
+sums to 2, 3 and 4 with probabilities, 1/4, 1/2, 1/4.
+a1, (1-a1)
+b1, (1-b1)
+
+a1*b1, a1(1-b1)+b1(1-a1), (1-a1)(1-b1)
+a1*b1, a1-a1b1+b1-a1b1, 1-a1-b1 +a1b1
+a1*b1, a1+b1-2a1b1, 1-a1-b1 +a1b1
+want each of them to be 1/3
+
+x, y, z
+b1=1/(3a1)
+
+a+1/3a-2a/3a = 1/3
+
+3a^2+a-3=0
+
+1-a - 1/3a + 1/3=1/3
+3a-3a^2-1=0
+3a^-3a+1=0=3a^2+a-3
+-4a+4=0
+a=1
+
+
+x1y1+x1y2+x2y1+x2y2 =c
+x1y1=a
+x2y2=b
+a+b+x1y2+x2y1=c
+
+looking for (x1*e+x2)*(y1*e+y2) = x1y1*e^2 + (x1y2+x2y1)e + x2y2
+a*e^2+(c-a-b)*e+b
+

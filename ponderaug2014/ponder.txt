@@ -1,0 +1,213 @@
+Short answer: 26.5
+
+Long answer:
+I solved this using dynamic programming with memoization to speed it up.
+
+First thing to note is that a uniform distribution between a and b is the same as a uniform distribution between 0 and b-a.  Also there is no Monte Hall Problem effect that changes the distribution once the black box answers our question.
+
+Since a=51 and b=150, we can equivalently set our limits to 0 and 99.  There are 100 possible answers.  We know that asking if the answer is greater or equal to 0 will definitely be true, there's no need to ask that question.  Asking if it is greater or equal to 1 will result in true 99 out of 100 times, we will then be left with 99 possible answers.  It will be false 1 out of 100 times, and we know for sure that the answer is 0 because 0 is the only remaining case.
+
+Let E(X) be the expected minimum cost of finding the answer with X+1 possible answers (The X+1 is because E is a zero-indexed array).  So E(99) is the expected minimum cost of finding the answer when there are 100 possible answers, as in the original question.  E(0) is when there is only 1 possible answer.  E(0) = 0.  There's no cost for this case, there's no need to ask the black box.
+
+For the first case with 100 possible answers, if we ask if the answer is greater or equal to X, it will be true (100-X)/100 times, and false X/100 times.  If it is true it will cost us 1 and we will have 100-X remaining cases.  If it is false it will cost us 10 and we will have X cases remaining.  Combining the two cases with their respective probabilities and costs we have
+E(X) = (100-X)/100 * (1+ E(100-1-X)) + X/100 * (10+E(X-1))
+
+We would like to pick X such that it minimizes the expected total cost.  We iterated X between 1 and 100 and pick the one with the minimum cost.  The termination of the recursive function is when there's only 1 choice left.
+
+We permanently store the value of E(X) for each X once it is calculated.  Intuitively we can do this because the expected cost of find the answer between 0 and 17, for example, is the same as finding it between 40 and 57.  By using this memoization, we improve the running time complexity from factorial time to quadratic.  Without memoization, calculating E(100) would need to call E(1) through E(99) each twice.  E(99) for example, would need to call E(1) through E(98).  But if we store E(99) from its last run, we can avoid the 99! function calls.  E(100) would need 2*100 lookups or O(n) lookups.  Total number of lookups is exactly n^2.
+
+Coding this was straightforward.  Since it ran so quickly, it was tempting to expand the range to look for a pattern for the general case.
+The sanity check for the base case was correctly 0.
+The first non-trivial case is if we are looking at two possibilities.  There is only one question to ask, to identify the answer.  50% of the time it will cost us 10 cents, and 50% will cost us 1 cent, so we can expect 11/2 or 5.5 cents.  My program correctly calculates E(1) = 5.5.
+
+E(X) continues as 0 5.5 7.66667 9 10 10.8333 11.5714 12.25 12.8889 13.5 14.0909 14.6667 15.1538 15.6429 16.0667 16.4375 16.8235 ...
+
+It's easy to rationalize these numbers.  The denominators are just the indices.  I added a line to output i* E(i) which are:
+0 11 23 36 50 65 81 98 116 135 155 176 197 219 241 263 286 309 332 355...
+Looks like a pattern: add 11, add 12, add 13... But upon a closer look there's a deviation.  I added a line to output the differences between terms:
+11 12 13 14 15 16 17 18 19 20 21 21 22 22 22 23 23 23 23 24 24 24 24 24 25 25 25 25 25 25 26 26 26 26...
+Weird.  What's going on here?  21 appears 2 times, 22 appears 3 times, 23 appears 4 times...  Is this a pattern?  I added yet another line find out.
+11 1
+12 1
+13 1
+14 1
+15 1
+16 1
+17 1
+18 1
+19 1
+20 1
+21 2
+22 3
+23 4
+24 5
+25 6
+26 7
+27 8
+28 9
+29 10
+30 11
+31 13
+32 16
+33 20
+34 25
+35 31
+36 38
+37 46
+38 55
+39 65
+40 76
+41 89
+42 105
+43 125
+44 150
+45 181
+46 219
+47 265
+48 320
+49 385
+50 461
+51 550
+52 655
+53 780
+54 930
+55 1111
+56 1330
+57 1595
+....
+Whoa!  Very peculiar pattern.  Using my Adam West Batman voice, I said "Off to The On-Line Encyclopedia of Integer Sequences!"
+Sure enough, it's there:
+https://oeis.org/A017904
+Expansion of 1/(1 - x^10 - x^11 - ...).
+Generating function: (x-1)/(x-1+x^10)
+For n>=1, a(n) = number of compositions of n in which each part is >=10.
+
+The last line looks reasonable for this problem.  "Each part >=10".  10 being a key factor in the original question.  "Number of compositions" seems like an appropriate concept for our binary search problem.  So let's go with it.  Now we have all the ingredients necessary for the general solution:
+Numerators are cumulative sums of groups of successive numbers starting at 11 where each group has respective count equal to the sequence of the expansion of 1/(1 - x^10 - x^11 - ...).  Denominators are the indices.
+
+Thanks for another fun ponder this!
+
+Chris Shannon
+
+Calgary Canada
+
+
+My C++ code.
+
+// You can use a black box solver to answer the question: "is the correct answer at least X?"
+// If the answer is positive - it costs you one cent, but if not - it costs you 10 cents. 
+#include<vector>
+#include<iostream>
+#include<algorithm>
+#include<limits>
+using namespace std;
+
+double calcE(vector<double>& E, int a, int b);
+
+
+double getE(vector<double>& E, int i)
+{
+  double retval=0;
+  if (E[i] != numeric_limits<double>::max())
+    {
+      retval = E[i];
+    }
+  else
+    {
+      retval = calcE(E,0,i);
+    }
+  // Memoize the result
+  E[i] = retval;
+  return retval;
+}
+
+double min(vector<double> c)
+{
+  double m = numeric_limits<double>::max();
+  for (int i = 0; i < c.size(); i++)
+    {
+      if (c[i] < m)
+	{
+	  m=c[i];
+	}
+    }
+  return m;
+}
+
+double calcE(vector<double>& E, int a, int b)
+{
+  if (a >= b)
+    return 0;
+  // interval a to b is the same as interval 0 to b-a.
+  // let c = b-a
+  // return minimum over i from i=1 to i=c of i/(c+1) * (10+E(i-1)) + (c+1-i)/(c+1)*(1+E(c-i))
+
+  vector<double> candidates;
+  int c = b-a;
+
+  // There's no point testing if the answer is at least as high as "a" since we already know that's true
+  // so X starts at 1.  It still is unknown if X is equal to b, so X can go all the way up to and equal c.
+  for (int X =1 ; X <=c ; X++)
+    {
+      candidates.push_back(1.0*X/(c+1) * (10 +getE(E,X-1))+ 1.0*(c+1-X)/(c+1)*(1+getE(E,c-X)));
+    }
+
+  return min(candidates);
+}
+
+
+int main()
+{
+  int a = 51;
+  int b = 1000; //150
+  int n=b-a+1;
+  vector<double> E(n,numeric_limits<double>::max());
+  E[0]=0;
+  cout <<  "Answer to Ponder this: " << calcE(E,51,150) << endl;
+  calcE(E,a,b);
+  cout << "Solution to subproblems:\n";
+
+  for (int j =0; j < E.size() - 1; j++)
+    {
+      cout << E[j] << " " ;
+    }
+  cout << endl;
+
+  cout << "Numerators (denominators are just the index starting at 1):\n";
+  vector<double> Em1;
+  for (int j =0; j < E.size() - 1; j++)
+    {
+      cout << E[j]*(j+1) << " " ;
+      Em1.push_back(E[j]*(j+1));
+    }
+  cout << endl;
+
+  cout << "Difference between successive numerators:\n";
+  vector<double> diffs;
+  for (int j =0; j < Em1.size() - 2; j++)
+    {
+      cout << Em1[j+1]-Em1[j] << " " ;
+      diffs.push_back(Em1[j+1]-Em1[j]);
+    }
+  cout << endl;
+
+  cout << "Group and count:\n";
+  double currentdiff = diffs[0];
+  int count = 0;
+  for (int j =0; j < diffs.size(); j++)
+    {
+      if ((diffs[j] - currentdiff)*(diffs[j] - currentdiff) > .1)
+	{
+	  cout << currentdiff << " " << count << endl;
+	  currentdiff = diffs[j];
+	  count = 1;
+	}
+      else
+	{
+	  count++;
+	}
+    }
+  
+
+  return 0;
+}

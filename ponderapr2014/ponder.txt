@@ -1,0 +1,76 @@
+Short answer:
+
+937669227 / 67108864
+
+The denominator is 2^26
+
+Long answer:
+
+Knowing that the max value must be a power of 2, and we are dividing by nothing other than 2, we should be able to represent the average value exactly using double floating point representation.
+
+With N=5 we can exhaustively iterate through all possible sequences and weigh each sequence by its probability of occurring.  This is efficiently modeled with a binary tree.  Each child has a 50% probability relative to its parent.  The probabilities of all leaf nodes will sum to 1.
+
+For practice I coded up the calculations using only immutable lists in Scala.  This approach could allow me to scale up using multiple processors and/or machines using Actors (although my attempt at using Futures unmitigated nearly brought down my machine).
+
+Turns out that Double isn't quite sufficient to handle the exact value.  A single change of Double to BigDecimal gave an exact decimal value.  Knowing that the denominator must be a power of 2, I continuously doubled the value until it had no fractional part remained.  I copied and pasted that into WolframAlpha to verify the integer quotient.
+
+object ponder {
+ println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+
+ def compact(list: List[Int]): List[Int] = {
+  list match {
+   // if (list.length <= 1)
+   case head :: Nil => list
+   case Nil => list
+   case head::tail =>
+   {
+    // If the first 2 items are equal, combine
+    // them and recurse on the remainder of the list
+    if (head==tail.head)
+     (2*head) :: compact(tail.tail)
+    else
+     head :: compact(tail)
+   }
+  }
+ }
+ 
+ compact(List(4,2,2))                             //> res0: List[Int] = List(4, 4)
+ 
+ def recurse(list: List[Int], N: Int): BigDecimal = {
+  val lc = compact(list)
+  if (lc.length == N)
+   lc.max
+  else
+   1.0/2 * recurse(lc ::: List(2), N) + 1.0/2 * recurse(lc ::: List(4), N)
+ }
+
+ def rationalize( p: (BigDecimal,Int)): (BigDecimal, Int) ={
+ if (p._1 == p._1.toInt)
+  p
+ else
+  rationalize(2*p._1, 2*p._2)
+ }
+
+ val d1 = recurse(List(),1)                       //> d1  : BigDecimal = 3.0
+ rationalize(d1,1)                                //> res1: (BigDecimal, Int) = (3.0,1)
+
+ val d2 = recurse(List(),2)                       //> d2  : BigDecimal = 5.5000
+ rationalize(d2,1)                                //> res2: (BigDecimal, Int) = (11.0000,2)
+ 
+ val d3 = recurse(List(),3)                       //> d3  : BigDecimal = 8.43750000000
+ rationalize(d3,1)                                //> res3: (BigDecimal, Int) = (135.00000000000,16)
+ 
+ val d4 = recurse(List(),4)                       //> d4  : BigDecimal = 11.53662109375000000000000000
+ rationalize(d4,1)                                //> res4: (BigDecimal, Int) = (23627.00000000000000000000000000,2048)
+ 
+ val d5 = recurse(List(),5)                       //> d5  : BigDecimal = 13.972360298037528991699218750000000
+ rationalize(d5,1)                                //> res5: (BigDecimal, Int) = (937669227.0000000000000000000000000,67108864)
+}
+
+The denominators 1,2,16,2048,67108864 form De Bruijn's sequence: 2^(2^(n-1) - n): ways of arranging 2^n bits in circle so all 2^n consecutive strings of length n are distinct.
+Sequence corresponds also to the largest number that may be determined by asking no more than 2^(n-1) - 1 questions("Yes"-or-"No" answerable)with lying allowed at most once.
+https://oeis.org/A016031
+
+I could not find a sequence that matches 3, 11, 135, 23627, 937669227.
+
+Thank you for the fun puzzle

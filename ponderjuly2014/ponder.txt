@@ -1,0 +1,693 @@
+Short answer:
+There are 4 possible moves
+0 0 3 0 5 6
+0 0 2 0 6 5
+0 0 1 0 7 8
+0 0 0 0 8 7
+
+leaving remaining stones respectively:
+1 2 0 5 3 7
+1 2 1 5 2 8
+1 2 2 5 1 5
+1 2 3 5 0 6
+
+Long answer:
+I immediately recognized this as a variant to the game Nim, which was used as a solution to Ponder This June 2012.  Unfortunately I'm not able to see how to adapt the concept of Nim sums to this game (even after looking at patterns in all the losing states).
+My first thought about solving it was to use a General Game Playing technique, namely Monte Carlo Tree Search.  MCTS is simple since you only need to program in the rules of the game, i.e. the legal moves and the winning state.  But what I really wanted was an exhaustive search of the tree not just a probabilistic approach.
+
+It's fairly straightforward to build the tree from the end game using backward induction.  Our goal is to identify all states as either a winner or a loser.  We start with the 0 0 0 0 0 0 state as a loser, because after a player reaches this state, they hand the game to the other player and call him a "loser". :)  A state is labeled a winner or a loser based it on it being presented to a player before they have made their move.
+
+The end state is a loser.  All the states that are 1 move away from the end state are therefore winners.
+
+A state is a loser if all its legal moves put it in a winner state.  This is intuitive, if you are playing against a flawless opponent, you are going to lose if you can't make a move that puts him into a losing state.
+
+A perfect player would always try to put their opponent into a loser state.  So in general a move is considered a winner if there exists at least 1 legal move to go to a loser.
+
+With these two definitions we can grow the tree, round after round.
+
+Find all the winners by identifying all the states that are 1 move before a loser.
+Find all the losers by identifying all the states which all their legal moves put them in a winner state.
+
+Repeat these two steps until all the states are identified.
+
+Note that this algorithm will eventually cover all states, although during its execution it will encounter states that have not yet been identified as either a winner or a loser.  In this case, it will err on the side of caution and will wait until a subsequent round to try again.  There are no possible cycles in this game since at each step stones are removed.  It is therefore impossible for stones to be replenished, returning to a previously visited state.
+
+We're interested in the loser states that are reachable from the Fibonacci state 1 2 3 5 8 13.
+
+I coded this up in C++.  The winners and losers were just an array of booleans.  It's was fun indexing the arrays, converting the states to and from an index.  The state space is like a number where each digit is in a different base.  The first digit is in binary, the second is in trinary, the last is in base 14.  There are 18144 total states to consider.
+
+I wrote subroutines to find all legal moves from a state, and all legal moves that lead to a given state.  They are not particularly elegant or fast bits of code but they get the job done, and they are easy to inspect for correctness which is far more important in my opinion.
+
+My program identifies a maximum path length between perfect players as 9 moves for player 1 to win.
+
+The last step, which I've so far been unsuccessful, is to infer the simplest "nim-like" short cut for the general case.  Reading on wikipedia makes it look like I need to apply the Sprague–Grundy theorem, or maybe adapt the strategy from Moore's Nim.
+
+I have noticed that all the differences between opposite edges for loser states have the same parity.  Also, all the face sums have the same parity.  And it appears that opposite edges differ by at most 2.  These observations are sufficient to uniquely identify only the losers.
+
+Thanks for another challenging and fun Ponder This!!!
+
+Chris Shannon
+from Calgary, Canada
+
+My C++ code.  Run with g++ ponder.cpp && ./a.out
+
+
+#include<vector>
+#include<iostream>
+using namespace std;
+typedef vector<int> State;
+
+int indexFromState( State list)
+{
+  return  3*4*6*9*14*list[0]+
+    4*6*9*14*list[1]+
+    6*9*14*list[2]+
+    9*14*list[3]+
+    14*list[4]+
+    list[5];
+}
+
+
+State stateFromIndex( int index)
+{
+  int i= index;
+  State s(6);
+  s[0] = index/(3*4*6*9*14);
+  index -= s[0]*3*4*6*9*14;
+  s[1] = index/(4*6*9*14);
+  index -= s[1]*4*6*9*14;
+  s[2] = index/(6*9*14);
+  index -= s[2]*6*9*14;
+  s[3] = index/(9*14);
+  index -= s[3]*9*14;;
+  s[4] = index/(14);
+  index -= s[4]*14;
+  s[5] = index;
+  //  cout << s[0] << " " << s[1] << " " << s[2] << " " << s[3] << " " << s[4] << " " << s[5] << " " << i << endl;
+  return s;
+}
+
+bool areThereUnknowns(vector<bool>& winners, vector<bool>& losers)
+{
+  for (int i =0 ; i < winners.size(); i++)
+    {
+      if (!winners[i] && !losers[i])
+    {
+      State s = stateFromIndex(i);
+      cout << "Lowest unknown " << i << " " << s[0]<< " " <<s[1]<< " "<<s[2]<< " " <<s[3]<< " " <<s[4]<< " " <<s[5]<<endl;
+      return true;
+    }
+    }
+  return false;
+}
+vector<State> movesLeadingToState(State s)
+{
+  vector<State> r;
+  //[a,b,0,0,0,c] 0,1,5
+  //[a,0,b,c,0,0] 0,2,3
+  //[0,a,0,b,c,0] 1,3,4
+  //[0,0,a,0,b,c] 2,4,5
+  //[1, 2, 3, 5, 8, 13]
+
+  for(int a=s[0]; a <= 1; a++)
+    {
+      for(int b=s[1]; b <= 2; b++)
+    {
+      for(int c=s[5]; c <= 13; c++)
+        {
+          if (a==s[0] && b==s[1] && c==s[5])
+        {
+          continue;
+        }
+          int arr[6]= {a,b,s[2],s[3],s[4],c};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+  for(int a=s[0]; a <= 1; a++)
+    {
+      for(int b=s[2]; b <= 3; b++)
+    {
+      for(int c=s[3]; c <= 5; c++)
+        {
+          if (a==s[0] && b==s[2] && c==s[3])
+        {
+          continue;
+        }
+         
+          int arr[6]= {a,s[1],b,c,s[4],s[5]};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+  for(int a=s[1]; a <= 2; a++)
+    {
+      for(int b=s[3]; b <= 5; b++)
+    {
+      for(int c=s[4]; c <= 8; c++)
+        {
+          if (a==s[1] && b==s[3] && c==s[4])
+        {
+          continue;
+        }
+          int arr[6]= {s[0],a,s[2],b,c,s[5]};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+
+  for(int a=s[2]; a <= 3; a++)
+    {
+      for(int b=s[4]; b <= 8; b++)
+    {
+      for(int c=s[5]; c <= 13; c++)
+        {
+          if (a==s[2] && b==s[4] && c==s[5])
+        {
+          continue;
+        }
+          int arr[6]= {s[0],s[1],a,s[3],b,c};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+  return r;
+}
+
+vector<State> movesFromState(State s)
+{
+  vector<State> r;
+  //[a,b,0,0,0,c] 0,1,5
+  //[a,0,b,c,0,0] 0,2,3
+  //[0,a,0,b,c,0] 1,3,4
+  //[0,0,a,0,b,c] 2,4,5
+  for(int a=0; a <= s[0]; a++)
+    {
+      for(int b=0; b <= s[1]; b++)
+    {
+      for(int c=0; c <= s[5]; c++)
+        {
+          // must take at least 1
+          if (a==s[0] && b==s[1] && c==s[5])
+        {
+          continue;
+        }
+          int arr[6]= {a,b,s[2],s[3],s[4],c};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+  for(int a=0; a <= s[0]; a++)
+    {
+      for(int b=0; b <= s[2]; b++)
+    {
+      for(int c=0; c <= s[3]; c++)
+        {
+          // must take at least 1
+          if (a==s[0] && b==s[2] && c==s[3])
+        {
+          continue;
+        }
+          int arr[6]= {a,s[1],b,c,s[4],s[5]};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+  for(int a=0; a <= s[1]; a++)
+    {
+      for(int b=0; b <= s[3]; b++)
+    {
+      for(int c=0; c <= s[4]; c++)
+        {
+          // must take at least 1
+          if (a==s[1] && b==s[3] && c==s[4])
+        {
+          continue;
+        }
+          int arr[6]= {s[0],a,s[2],b,c,s[5]};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+
+  for(int a=0; a <= s[2]; a++)
+    {
+      for(int b=0; b <= s[4]; b++)
+    {
+      for(int c=0; c <= s[5]; c++)
+        {
+          // must take at least 1
+          if (a==s[2] && b==s[4] && c==s[5])
+        {
+          continue;
+        }
+          int arr[6]= {s[0],s[1],a,s[3],b,c};
+          r.push_back( State(arr,arr+6));
+        }
+    }
+    }
+  return r;
+}
+
+void findAllWinners(vector<bool>& winners, vector<bool>& losers)
+{
+  // a winner is a state that is one move before a loser
+  // So filter for all the currently identified losers
+  //    foreach loser in losers
+  for (int i=0; i < losers.size(); i++)
+    {
+      if(!losers[i])
+    {
+      continue;
+    }
+      //      cout << "here1" << endl;
+      vector<State> winnersToAdd = movesLeadingToState(stateFromIndex(i));
+      //      cout << "here2" << endl;
+      for (int j=0; j < winnersToAdd.size(); j++)
+    {
+      winners[indexFromState(winnersToAdd[j])]=true;
+    }
+    }
+}
+
+vector<State> findAllPotentialLosers(vector<bool>& winners, vector<bool>& losers)
+{
+  // a potential loser is one that is
+  // a) one move from a winner
+  // b) not already identified as a winner
+  // c) not already identified as a loser
+  vector<State> s;
+  for (int i =0; i < winners.size(); i++)
+    {
+      if (!winners[i])
+    {
+      continue;
+    }
+      vector<State> potentialLosersToAdd = movesLeadingToState(stateFromIndex(i));
+      for (int j=0; j < potentialLosersToAdd.size(); j++)
+    {
+      int ind = indexFromState(potentialLosersToAdd[j]);
+      if (!winners[ind] && !losers[ind])
+        {
+          s.push_back(potentialLosersToAdd[j]);
+        }
+    }
+    }
+  return s;     
+}
+
+bool allMovesWinner(vector<bool>& winners, vector<State>& movesAvailabletoPotentialLoser)
+{
+  //  foreach move in movesAvailabletoPotentialLoser
+  for (int i =0; i <  movesAvailabletoPotentialLoser.size(); i++)
+    {
+      if (!winners[indexFromState(movesAvailabletoPotentialLoser[i])])
+    {
+      return false;
+    }
+    }
+  return true;
+
+}
+
+void filterForRealLosers(vector<bool>& winners,
+                  vector<bool>& losers,
+                  vector<State>& potentialLosers)
+{
+  // the only moves available to a real losers are winners
+  // if at least one move available to a potential loser is not identified as a winner,
+  // then it is not a loser
+  vector<State> realLosers;
+  //  for each pl in potentialLosers
+  for (int i =0; i < potentialLosers.size();i++)
+    {
+      vector<State> movesAvailabletoPotentialLoser = movesFromState(potentialLosers[i]);
+      // Could probably combine movesFromState and allMovesWinner to short circuit
+      // the "all" operation for efficiency
+      if (allMovesWinner(winners, movesAvailabletoPotentialLoser))
+    {
+      // We found a true loser
+      realLosers.push_back(potentialLosers[i]);
+    }
+    }
+  for (int j=0; j < realLosers.size(); j++)
+    {
+      losers[indexFromState(realLosers[j])]=true;
+    }
+}
+
+
+int main()
+{
+  vector<bool> losers(2*3*4*6*9*14);
+  // start with state at index 0 being a loser
+  // This is the equivalent of the winner handing the game, once it's over
+  // to the loser.
+  losers[0]=true;
+  vector<bool> winners(2*3*4*6*9*14);
+  int round =0;
+    while (areThereUnknowns(winners,losers))
+    {
+      round++;
+      cout << "round"<< round<< endl;
+      findAllWinners(winners,losers);
+   
+      vector<State> pl=findAllPotentialLosers(winners,losers);
+      //from the potential losers, filter for real losers
+      filterForRealLosers(winners,losers,pl);
+      }
+ 
+  // List of loser moves
+  for (int i=0; i < losers.size(); i++)
+    {
+      if (losers[i])
+    {
+      State l = stateFromIndex(i);
+      cout << "loser " << i << " " << l[0] << " "
+           << l[1] << " "
+           << l[2] << " "
+           << l[3] << " "
+           << l[4] << " "
+           << l[5] << endl;
+    }
+
+  // List winning moves from 1,2,3,5,8,13
+  int arrFinal[6]= {1,2,3,5,8,13};
+  State sFinal(arrFinal,arrFinal+6);
+  vector<State> possibleMoves = movesFromState(sFinal);
+  // filter for the losing moves
+  for(int i =0; i < possibleMoves.size(); i++)
+    {
+      if (losers[ indexFromState(possibleMoves[i])])
+    cout << possibleMoves[i][0] << " "
+         << possibleMoves[i][1] << " "
+         << possibleMoves[i][2] << " "
+         << possibleMoves[i][3] << " "
+         << possibleMoves[i][4] << " "
+         << possibleMoves[i][5] << endl;
+     
+    }
+  return 0;
+  // 1 2 0 5 3 7 so took away 0 0 3 0 5 6  face sums are 10,6,10,10.
+  // 1 2 1 5 2 8 so took away 0 0 2 0 6 5  face sums are 11,7,9,11
+  // 1 2 2 5 1 5 so took away 0 0 1 0 7 8  8 8 8 8
+  // 1 2 3 5 0 6 so took away 0 0 0 0 8 7  9 9 7 9
+}
+
+
+
+
+/*
+Identify each position as winning or losing using induction
+Identify all positions when you will win in 1 move.
+From there, identify all positions that are 1 move away from those and are not already in the winning in 1 set.  Those are all losing positions.  Call those Losing in 2.
+Identify all moves 1 move away from Losing in 2 that are not in Losing in 2.  Call those winning in 3.
+Repeat until [1, 2, 3, 5, 8, 13] is found.
+
+Alternatively use a Monty Carlo Tree Search.  This might not solve the problem as stated, itstead it would give a best guess as to the correct move but would probably be beaten by anyone who understands the math of the game.  See Nim.
+
+Winning in 1 are all configurations that have only 1 face remaining.
+[a,b,0,0,0,c]
+[a,0,b,c,0,0]
+[0,a,0,b,c,0]
+[0,0,a,0,b,c]
+where at least one of a,b or c are nonzero. and each is less than [1,2,3,5,8,13]
+Faces are
+1,2,13... 2*3*14-1=83
+1,3,5... 2*4*6-1=47
+2,5,8... 3*6*9-1=161
+3,8,13... 4*9*14-1=503
+
+83+47+161+503 = 794
+
+Fibinacci numbers
+00000,1
+00000,2
+00000,3
+00000,4
+...
+00000,9
+00000,10
+00000,11
+00000,12
+00000,13
+00001,0
+There are 794 winning positions at level 1.
+
+There are also at most 794 possible moves at any time.
+
+=2*3*4*6*9*14=18144 total possible positions including the end game 000000
+
+Create two 18144 binary array.  isWinning and isLosing.
+*/
+indexFromState( Listof6Ints list) = {
+2*list(0)+
+3*list(1)+
+4*list(2)+
+6*list(3)+
+9*list(4)+
+14*list(5);
+}
+
+
+vector<int> stateFromIndex( int index)
+{
+int l0 = floor(index/(3*4*6*9*14));
+index -= l0;
+int l1 = floor(index/(4*6*9*14));
+index -= l1;
+int l2 = floor(index/(6*9*14));
+index -= l2;
+int l3 = floor(index/(9*14));
+index -= l3;
+int l4 = floor(index/(14));
+index -= l4;
+int l5 = index;
+return (l0,l1,l2,l3,l4,l5);
+
+}
+
+main
+{
+start with state at index 0 being a loser
+while (there are unknowns)
+{
+findAllWinners();
+
+findAllPotentialLosers();
+//from the potential losers, filter for real losers
+filterForRealLosers()
+
+}
+}
+
+void findAllWinners()
+{
+// a winner is a state that is one move before a loser
+// So filter for all the currently identified losers
+vector<State> losers = findAllLosers
+
+foreach loser in losers
+{
+vector<State> winners = movesLeadingToState(loser)
+//add winners to the master winners list
+for w in winners
+{
+winnersList.add(w);
+}
+}
+
+}
+
+vector<State> findAllPotentialLosers()
+{
+// a potential loser is one that is
+// a) not already identified as a winner
+// b) not already identified as a loser
+// c) one move from a winner
+
+
+}
+
+vector<State> filterForRealLosers(vector<State> potentialLosers)
+{
+// the only moves available to a real losers are winners
+// if at least one move available to a potential loser is not identified as a winner,
+// then it is not a loser
+vector<State> result;
+for each pl in potentialLosers
+vector<State> movesAvailabletoPotentialLoser = movesFromState(pl)
+// Could probably combine movesFromeState and allMovesWinner to short circuit
+// the "all" operation for efficiency
+if (allMovesWinner(movesAvailabletoPotentialLoser)
+{
+// We found a true loser
+result.append(pl);
+}
+
+
+}
+
+bool allMovesWinner(vector<State> movesAvailabletoPotentialLoser)
+{
+foreach move in movesAvailabletoPotentialLoser
+{
+if (!winnerList(move))
+{
+return false;
+}
+}
+return true;
+
+}
+
+vector<State> movesLeadingToState(State s)
+{
+vector<State> r;
+//[a,b,0,0,0,c] 0,1,5
+//[a,0,b,c,0,0] 0,2,3
+//[0,a,0,b,c,0] 1,3,4
+//[0,0,a,0,b,c] 2,4,5
+//[1, 2, 3, 5, 8, 13]
+
+for(int a=s(0); a <= 1; a++)
+{
+for(int b=s(1); a <= 2; a++)
+{
+for(int c=s(5); a <= 13; a++)
+{
+if (a==s(0) && b==s(1) && c==s(5))
+{
+continue;
+}
+r.append( State(a,b,s(2),s(3),s(4),c));
+}
+}
+}
+
+for(int a=s(0); a <= 1; a++)
+{
+for(int b=s(2); a <= 3; a++)
+{
+for(int c=s(3); a <= 5; a++)
+{
+if (a==s(0) && b==s(2) && c==s(3))
+{
+continuee
+}
+r.append( State(a,s(1),b,c,s(4),s(5)));
+}
+}
+}
+
+for(int a=s(1); a <= 2; a++)
+{
+for(int b=s(3); a <= 5; a++)
+{
+for(int c=s(4); a <= 8; a++)
+{
+if (a==s(1) && b==s(3) && c==s(4))
+{
+continue;
+}
+r.append( State(s(0),a,s(2),b,c,s(5)));
+}
+}
+}
+
+
+for(int a=s(2); a <= 3; a++)
+{
+for(int b=s(4); a <= 8; a++)
+{
+for(int c=s(5); a <= 13; a++)
+{
+if (a==s(2) && b==s(4) && c==s(5))
+{
+continue;
+}
+r.append( State(s(0),s(1),a,s(3),b,c));
+}
+}
+}
+
+return r;
+}
+
+vector<State> movesFromState(State s)
+{
+vector<State> r;
+//[a,b,0,0,0,c] 0,1,5
+//[a,0,b,c,0,0] 0,2,3
+//[0,a,0,b,c,0] 1,3,4
+//[0,0,a,0,b,c] 2,4,5
+for(int a=0; a <= s(0); a++)
+{
+for(int b=0; a <= s(1); a++)
+{
+for(int c=0; a <= s(5); a++)
+{
+// must take at least 1
+if (a==0 && b==0 && c==0)
+{
+continue;
+}
+r.append( State(a,b,s(2),s(3),s(4),c));
+}
+}
+}
+
+for(int a=0; a <= s(0); a++)
+{
+for(int b=0; a <= s(2); a++)
+{
+for(int c=0; a <= s(3); a++)
+{
+// must take at least 1
+if (a==0 && b==0 && c==0)
+{
+continue;
+}
+r.append( State(a,s(1),b,c,s(4),s(5)));
+}
+}
+}
+
+for(int a=0; a <= s(1); a++)
+{
+for(int b=0; a <= s(3); a++)
+{
+for(int c=0; a <= s(4); a++)
+{
+// must take at least 1
+if (a==0 && b==0 && c==0)
+{
+continue;
+}
+r.append( State(s(0),a,s(2),b,c,s(5)));
+}
+}
+}
+
+for(int a=0; a <= s(2); a++)
+{
+for(int b=0; a <= s(4); a++)
+{
+for(int c=0; a <= s(5); a++)
+{
+// must take at least 1
+if (a==0 && b==0 && c==0)
+{
+continue;
+}
+r.append( State(s(0),s(1),a,s(3),b,c));
+}
+}
+}
+return r;
+}

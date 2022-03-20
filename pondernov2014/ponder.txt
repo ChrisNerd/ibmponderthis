@@ -1,0 +1,121 @@
+There are 24 letters in the Greek alphabet, from alpha, beta, and gamma, through chi, psi, and omega. The names of the letters are of different lengths, from short two-letter names like mu or pi through the seven letters in omicron.
+
+We want to generate a random Greek letter, where the probability of a letter is determined by the length of its name, and the following:
+Psi is a special case with a probability of zero (we are actually generating one of 23 letters)
+Letters whose names are composed of an even number of letters have a probability of 2^length times the probability of the letter Tau
+All the other letters (except Psi and Tau) have a probability of 2^(length-2) times the probability of Tau
+
+So, for example, the letter mu (with a length of two letters) should appear 2^2 = 4 times more than tau. Omicron (with a length of seven letters) should appear 2^(7-2), or 32 times more often than tau.
+
+The task is to generate the random Greek letter using six coin tosses, in which the coins are chosen from two types: one with a probability of p_1 of getting a tails and 1-p_1 of getting heads; and the other with a probability of p_2 for tails and 1-p_2 for heads.
+
+You should give p_1, p_2, and the tosses in the following format:
+<Coin>=1 or 2
+<Greek letter>=alpha or beta or gamma or delta or epsilon or zeta or eta or theta or iota or kappa or lambda or mu or nu or xi or omicron or pi or rho or sigma or tau or upsilon or phi or chi or omega
+<solution>= <Greek letter> or <coin> <solution> <solution>
+
+For example, the following solution (the parenthesis were added just for clarity):
+p_1 = 1/2
+p_2 = 1/4
+1 (2 alpha (1 beta gamma)) beta
+
+We toss the first coin p_1
+     If it's tails, we toss the second coin
+         If it's tails
+             We generate alpha
+         Otherwise
+             We toss p_1 and
+                 If it's tails
+                     We chose beta
+                 Otherwise
+                     We chose gamma
+     Otherwise
+         We chose beta
+
+Using the schema above yields:
+Alpha: 1/8
+Beta: 11/16 (= 3/16 + 1/2)
+Gamma: 3/16
+
+Credit for the source of this problem will be provided in the solution.
+
+
+1alpha    5 =2^3
+2beta     4 =2^4
+3gamma    5 =2^3
+4delta    5 =2^3
+5epsilon  7 =2^5
+6zeta     4 =2^4
+7eta      3 =2^1
+8theta    5 =2^3
+9iota     4 =2^4
+10kappa   5 =2^3
+11lambda  6 =2^6
+12mu      2 =2^2
+13nu      2 =2^2
+14xi      2 =2^2
+15omicron 7 =2^5
+16pi      2 =2^2
+17rho     3 =2^1
+18sigma   5 =2^3
+19tau     3 =2^1
+20upsilon 6 =2^6
+21phi     3 =2^1
+22chi     3 =2^1
+23psi     3 0
+24omega   5 =2^3
+
+
+
+(x/17)^2 * (1/x)^2 = 1/17^2!
+
+8/17, and 1/3 will work!
+
+p_1 = 1/2
+p_2 = 1/4
+1 (2 alpha (1 beta gamma)) beta
+
+webmster@us.ibm.com
+Short Answer:
+p_1 = 9/17
+p_2 = 1/3
+1 1 2 2 2 2 tau eta 2 rho mu 2 2 phi nu 2 xi alpha 2 2 2 chi pi 2 omega gamma 2 2 omega delta 2 theta beta 2 2 kappa zeta 2 iota epsilon 1 2 2 sigma omicron 2 omicron upsilon lambda
+
+Long answer:
+I started by entering the Greek alphabet into a spreadsheet.  Used LEN() and ISEVEN to calculate the relative probability of each letter, except I set tau=1 and psi to 0.  I sorted the letters by weight and counted each.
+
+Weight  Count
+1  1
+2  4
+4  4
+8  7
+16 3
+32 3
+64 1
+
+
+The weights sum to 289.  The problem could be represented as a binary tree with at most depth=6 and using only 2 types of branching nodes.  We can set the leaf node tau=1, and the root node to 289.
+
+We must go from 289 to 1 in at most 6 steps, using only 2 branching factors.  My first instinct was to factor 289=17^2.  Using P_1 as 1/17 we can work with nice whole numbers.  Furthermore, P_1's compliment is 16 times P_1, which looks promising for working with powers of 2.  This technique comes so close to achieving the solution using 1/2 as P_2, but would require 7 flips to get all the 8s.
+
+My next guess was to use P_1 as 17^(-1/2) then 17^(-1/3) but they were equally doomed to failure.
+
+In order to improve my trail and error rate, I put the binary tree in cells of the spreadsheet, referencing P_1 and P_2 as fractions.  It didn't take long to discover that 289 * (x/17)^2 * (1/x)^2 = 1.  Meaning I could try various values for x and see what showed promise by returning whole numbers.  Using the fundamental theorem of arithmetic as intuition, I felt that this problem should be solved by sticking to whole numbers.  x=3 looked good but not quite good enough.  I liked how 1/3's compliment was twice as big, in the same way I liked how 1/17's compliment was 16 times as big.  I didn't want to mess with that.  I could change 3/17 into 9/17 and still wind up with whole numbers everywhere.  I just need to run it through two more (1/3)s to get to 1.  So 289*(9/17)^2*(1/3)^4 = 1!  9/17 was nice nice its compliment, 8/17, had that nice 8 in it, helping to create base 2 numbers once those pesky 17s are eliminated.
+
+These values for P_1 and P_2 produce enough 2s, 4s and 8s within a depth of 6!  There's even a single 64 node and but we don't have any ability to split it; fortunately it's not necessary.  There's only one 6 letter Greek letter: lambda.
+
+The last step is to assign each node to a letter, and make sure each letter is assigned to a node.  It turns out that there's a surplus of two 4s, and we're short one 8, and a surplus of two 16s and a deficit of one 32.  Both of these are solved simply by assigned two nodes to the same letter.
+
+The last step is triple checking that we transcribed the solution correctly for your parser. Here it is with parenthesis.
+
+1 (1 (2 (2 (2 (2 tau eta) (2 rho mu)) (2 (2 phi nu) (2 xi alpha))) (2 (2 (2 chi pi) (2 omega gamma)) (2 (2 omega delta) (2 theta beta)))) (2 (2 kappa zeta) (2 iota epsilon))) (1 (2 (2 sigma omicron) (2 omicron upsilon)) lambda)
+
+The bonus part of the problem, determining the author of the question was a bit more challenging.  Clearly there are many equivalent ways of designing this tree.  P_1=8/17 instead of 9/17 would just flip the first two pairs of branches.  Flipping P_2 to its compliment as well would reverse the entire tree.  Further more any node=4 could be assigned any of the four two-letter Greek letters, and so on, so the number of combinations appears to be at least 4* 1*4!*4!*7!*3!*3!*1 = 418037760.  I say "at least" because of the two letters needing 2 nodes each.  Only 4 of the 6 4s are 4s, the other 2 are needed to add to 8.  So we'll have a (6 choose 4) in there, as well as a (5 choose 3) for the 16.
+
+Also, I wasn't sure how each Greek letter translated into English so even enumerating all the permutations seemed unlikely to produce any name I'd recognize.
+
+Thanks for another fun problem!
+
+Chris Shannon
+
+Calgary, Canada

@@ -1,0 +1,39 @@
+Short answer:
+b = 1.5313771553
+
+Somewhat longer answer:
+We can represent b in base e.
+Let b = e^f, so log b = f.
+Since 1 < b < e, then 0 < f < 1 by taking the log of each term.
+Also let x= 3^4^5 which is some large integer.
+So we want to find b = 2^x / e^n.
+We start by taking the natural log of both sides
+log b = x log 2 - n = f
+x log 2 = n + f.
+Since n is an integer and 0 < f < 1 we can break x log 2 into an integer, n, and fractional part, f.
+
+Putting floor(3^4^5 * log(2)) into wolfram alpha gives a value of n as 2.59... * 10^488 (last digits are ...433689) and we find the fractional part f as 0.4261674320657853314448140357997176067457772876....
+
+bc -l
+scale 600
+3^4^5 * l(2)
+
+b=e^f so we have
+b=1.5313771553 to 10 decimal places.
+
+Thanks for another fun problem.  I went down some wrong paths to start this.  Tried taking the log base 2.  Then working at the inverse of b which has a simple binary representation.
+
+Fun times!
+
+Chris Shannon
+
+from Calgary Canada.
+
+
+How do we know that b must pass through the interval of 1 to e?  Why is the interval open?  Why can't it go from e to 1 and keep going?  It's not because it is irrational.  Root 2 could go from 4 to 2 root 2, to 2 to root 2 to 1.  It would mean than 2^y / e^n = 1 for some integer n.  2^y = e^n.  e^n - 2^y = 0.  Since 2^y is an integer this is an agibraic equation.  This means that e needs to be an agebraic number.  But e is not an algebraic number.  The world for that is transendental.
+
+In scientific notation, the most significant digit is not the leftmost number, it is the exponent.  2.99 * 10^8, most signifant digit is not the 2, it is the 8.  It should be written as 10^8 * 2.99, since multiplication is commutative.
+10^8*2.99 = 10^8 * 10^(log10 2.99)
+log (10^8*2.99) = log 10^8 + log 2.99
+= 8 + log 2.99.
+since 0<2.99<10, log 2.99 is between 0 and 1 and is therefore the fractional part.

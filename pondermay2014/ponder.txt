@@ -1,0 +1,146 @@
+Short answer:
+0.1761970520
+
+Long answer.
+I attempted to build an inductive argument from smaller cases.
+When N=2, annihilation will occur when the first bullet moves more slowly than the second.  Since there are no dependencies, this will occur half the time.
+
+When N=4, there are more cases, namely, there could be 0 annihilation if they are in descending order of speed.  Or the first pair to collide are 1 and 2, or 2 and 3, or 3 and 4.  The remaining pair may or may not collide.  The probability of the second pair colliding depends which pair first collided.  At this point I decided to run a batch of simulations to get an empirical probability.
+
+I decided to use a recursive algorithm in Scala that finds the first collision from a list of bullets.  Collisions can only occur between adjacent bullets in a list.  It then updates the possible collision between the pair of bullets before and after the annihilated pair.  It then recurses on the remaining bullets.
+
+This approach lets easily allows an arbitrary number of bullets.  I ran it with N=2,4,6...20 bullets for 10 million trials each.
+The results were
+N=2, probability=0.5002613
+N=4, probability=0.3748617
+N=6, probability=0.3123553
+N=8, probability=0.2736489
+N=10, probability=0.2460799
+N=12, probability=0.2257149
+N=14, probability=0.2093149
+N=16, probability=0.1964792
+N=18, probability=0.1855173
+N=20, probability=0.1760166
+
+The sanity test of N=2 pass.  N=4 looks like 3/8.  I put the rest in wolfram alpha to see if a regression analysis yielded anything.  Nope.
+
+I put the numbers in libreoffice Calc to play around with them.
+1/2
+3/8
+Trying 16 as the denominator for N=6 revealed 5/16.
+
+Looks like the numorators are the odd numbers and the denominators are the powers of two!  But no such luck.
+
+If I went with the denominators being a power of two, I repeatedly doubled the probability for N=8 until I got something close to a whole number, 35.  N=8 looked like 35/128!
+
+I plugged in the sequence of denominators, 2,8,16,128 into The On-Line Encyclopedia of Integer Sequences.  The first result was:
+A046161 Denominator of binomial(2n,n)/4^n.
+
+The corresponding sequence, A001790, numerator of binomial(2n,n)/4^n, matched my list so far, 1, 3, 5, 35.  This was really convincing, especially since the binomial coefficients and the powers of 2 are very common sights when dealing with a probability question like this.
+
+I copied over the remaining values to my spreadsheet and they all agreed with my program with a typical error of 1e-4.
+
+I plugged the binomial(2n,n)/4^n, into wolfram alpha, and read the wikipedia page on the numerators, the central binomial coefficients.  It lead to the approximation using the Wallis product of binomial(2n,n)/4^n ~ 1/sqrt(pi * n).  I plugged that equation into my spreadsheet and sure enough 1/sqrt(10*pi) is very close to the N=20 case.
+
+For N=20, the exact probability is 46189 / 262144 = 0.176197052001953125, I asked Wolfram to do the rounding for me since I wasn't sure about the trailing 0.
+
+Knowing the solution is the central binomial coefficients / the powers of 4, I guess that means that there are "central binomial coefficients" ways of annihilating all the bullets and power of 4 ways of ordering all the speeds and collisions.
+
+While my answer isn't exactly elegant, I had a lot of fun with it.  Thanks for another fun Ponder This!!!
+
+Chris Shannon
+
+Calgary Canada
+
+****************************
+
+My Scala code:
+
+
+object ponder {
+
+  val nTrials = 10000000                          //> nTrials  : Int = 10000000
+
+  class bullet {
+    var t = -1: Int
+    var collideTime = -1: Double
+    var speed = scala.util.Random.nextDouble(): Double
+    var collideWithNext = false: Boolean
+  }
+
+  def calculateCollideTime(b1: bullet, b2: bullet): Double =
+    {
+      (b1.speed * b1.t - b2.speed * b2.t) / (b1.speed - b2.speed)
+    }                                             //> calculateCollideTime: (b1: ponder.bullet, b2: ponder.bullet)Double
+
+  // Find the index of the next collision, or -1 if no collisions left
+  def findMin(b: List[bullet]): Int =
+    {
+      var mini = -1
+      var min = Double.MaxValue
+      for (i <- 0 until b.length - 1) // exclude looking at the last bullet
+        if (b(i).collideWithNext && b(i).collideTime < min) {
+          mini = i
+          min = b(i).collideTime
+        }
+      mini
+    }                                             //> findMin: (b: List[ponder.bullet])Int
+
+  // doAllBulletsAnnihilate is a recursive function that takes a list of bullets and simulates all the collisions.
+  // It returns true if no bullets remain and false otherwise
+  def doAllBulletsAnnihilate(b: List[bullet]): Boolean = {
+    if (b isEmpty)
+      true
+    else {
+      val i = findMin(b)
+      if (i == -1) false // No collisions left
+      else {
+        // With items i and i+1 annihilated, update the collision between item at i-1 and i+2
+        if (i != 0 && i != b.length - 2) {
+          b(i - 1).collideWithNext = b(i - 1).speed < b(i + 2).speed
+          if (b(i - 1).collideWithNext)
+            b(i - 1).collideTime = calculateCollideTime(b(i - 1), b(i + 2))
+        }
+        // remove the 2 annihilated bullets from the list and recurse
+        doAllBulletsAnnihilate((b take i) ::: (b drop (i + 2)))
+      }
+    }
+  }                                               //> doAllBulletsAnnihilate: (b: List[ponder.bullet])Boolean
+
+  def trial(N: Int): Boolean =
+    {
+      var b: List[bullet] = Nil
+      for (i <- 0 to N - 1) {
+        val bul = new bullet
+        // A bullet is fired every second
+        bul.t = i
+        b = b ::: List(bul)
+      }
+
+      for (i <- 0 to N - 2) {
+        b(i).collideWithNext = b(i).speed < b(i + 1).speed
+        if (b(i).collideWithNext)
+          b(i).collideTime = calculateCollideTime(b(i), b(i + 1))
+      }
+
+      doAllBulletsAnnihilate(b)
+    }                                             //> trial: (N: Int)Boolean
+
+  for (N <- 2 to 20 by 2) {
+    var count = 0;
+    for (i <- 1 to nTrials) {
+      if (trial(N))
+        count+=1
+    }
+    println(s"N=$N, probability=0.$count")
+  }                                               //> N=2, probability=0.5002613
+                                                  //| N=4, probability=0.3748617
+                                                  //| N=6, probability=0.3123553
+                                                  //| N=8, probability=0.2736489
+                                                  //| N=10, probability=0.2460799
+                                                  //| N=12, probability=0.2257149
+                                                  //| N=14, probability=0.2093149
+                                                  //| N=16, probability=0.1964792
+                                                  //| N=18, probability=0.1855173
+                                                  //| N=20, probability=0.1760166
+}
