@@ -1,0 +1,78 @@
+Start by assuming 123.  What would p4 say?  Without loss of generalily he would say 4.
+Each number on the hat could be replaced by a fruit.
+By saying 4, he gives information to p3.  So that implies, 12x must be 4 for only x=3.  That is 124!=4, 125!=4, 126!=4.
+Similar reasoning shows that 123, 124, 125 and 126 are all distinct, so 123=4, 124=5, 125=6, 126=3 without loss of generality.
+Now person 2 sees 1x3=4 implies x=2,5 or 6.  So 123=4 and 153!=4, 163!=4.  Now we lose generality in our construction!  We could just cross off the 4?
+
+So far so good.
+
+We also see from person #2's perspective, it's pretty much exactly the same as person 3's.  Since we are given in the problem statement that person 3 ends up being correct, hearing person 3 saying his own number is just as good as seeing it with your own eyes.
+
+So person #2 knows 1x3=4.  This means that the cheatsheet must have only of 123, 153 or 163 be 4.  By symetry, all possibilities must be distinct.  So we can cross off 4 in the list of candidates for 153, leaving only 2 and 6, and likewise cross of 4 for 163, leaving 2 and 5.  143 can still be 2, 5 or 6.  The possible solutions are
+123, 4
+143, 2,5,6
+153, 2,6
+163, 2,5
+
+Playing enough soduku lets you quickly see three solutions.
+123, 4
+143, 2
+153, 6
+163, 5
+
+123, 4
+143, 5
+153, 6
+163, 2
+
+123, 4
+143, 6
+153, 2
+163, 5
+.
+
+Now we're getting to see a general solution pattern.  Once we "guess" at a candidate solution, we can proceed by crossing off that value from the other lists that need to be distinct.  When we guessed 143=2, we cross off the 2 on 153, leaving 6.  The best first strategy would yield the best results if we choose the list with the least number of candidates.  If the list is just one candidate long, we have a given.  If there exist any lists of candidates that are empty, we've made an incorrect assumption and must backtrack to our last guess.  Now we should be able to smell a recursive algorithm.  My hunch is that this is like creating a soduku puzzle from a blank sheet.  It's hard to make an insolvable possible this early on, so we can just keep going with these assumptions as long as we cross off all the candidates while we go.
+
+To formalize our satifiablity conditions.
+xbc are all distinct.
+axc are all distinct.
+abx are all distinct.
+where x is a free variable and a and b are constants.
+
+So lets go with say
+123 4
+143 6
+153 2
+163 5
+
+and from before
+124 5
+125 6
+126 3
+
+
+Now for player 1.  He'll see x23=4.
+123 4
+523 1,6
+623 1,5
+
+
+
+A 216 digit solution is:
+
+000000004563040625065032036204052340005643000000500164306015604301401530060524600145000000250061410602540210032065506031650012000000261003315020046302301604460201612003000000234100054230405310210540531020342100000000
+
+
+I solved this combinatorial puzzle by playing it like a 
+sudoku puzzle, no computer necessary for this month just 
+pen and paper.  It was also necessary to partially create 
+the puzzle while I went.  After choosing the first row, I 
+arbitrarily chose 4 other entries, namely 134=6, 135=4, 
+154=2 and 234=1.
+
+
+Thanks for another fun puzzle.
+
+Chris Shannon
+
+from Calgary Canada

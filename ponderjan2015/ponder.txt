@@ -1,0 +1,77 @@
+Short answer:
+3 A1 A2
+7 B1 B2
+6 A1 B1
+4 A2 B2
+
+A 2x2 board would suffice.
+  6 4
+3 a b
+7 c d
+solves uniquely to 
+
+  6 4
+3 2 1
+7 4 3
+
+The 3 must be composed of 2+1, and the 4 must be composed of 3+1.  The 1 in commom must be at the intersection.  Therefore the solution is unique.
+
+
+But remove any two clues would lead to 1 of 3 cases
+1) Both clues are removed from the columns	 
+  b b
+3 2 1
+7 5 2, 4 3
+leading to arbrary solutions for the second row as well as the arbitrary order of the first row.
+
+
+2) Both clues are removed from the rows
+  6 4
+b 4 3
+b 2 1
+
+  6 4
+b 1 3
+b 5 1
+
+3) One clue is removed from a row, one from a column.  There are 4 instances.  The cell at the intersection of the removed clue could be anything.
+  b 4
+3 2 1
+b x 3
+
+  6 b
+3 1 2
+b 5 x
+
+  b 4
+b x 1
+7 4 3
+
+
+  6 b
+b 2 x
+7 4 3
+
+In each case x can be anything not already used.
+
+
+
+3 = 2 1
+4 = 3 1
+
+6 = 5 1, 4 2
+7 = 6 1, 5 2, 4 3
+
+  6 b
+3 1 2
+b 5 x
+
+x can be anything
+
+  b 4
+3 2 1
+b x 3
+
+  b b
+3 2 1
+7 5 2, 4 3

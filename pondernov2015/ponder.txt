@@ -1,0 +1,317 @@
+snow*on=watson
+3451*54=187354
+
+-at+on*nasa=watson
+-49+73*3414=249173
+
+snow*ant-at*sat=watson
+6479*142-12*612=912674
+
+-snow-ant+sat*nasa
+-1284-726+176*2717=476182
+
+-snow+ant*sat+nasa
+-3251+427*347+2434=147352
+
+snow+at+on*nasa
+7632+40+36*6474=240736
+
+
+at* on+ sat* nasa
+63* 21+ 463* 1646=763421
+
+at* ant- on- sat* snow
+17*  137- 93- 217* 2395=517293
+-93+2395*217-17*137=517293
++*--*
+sat*snow-on-at*ant
+217*2395-93-17*137
+
+snow*at+sat*ant+on
+7083*25+725*205+80=325780
+
+***  ant *sat +on+snow*at =watson
+
+
+List((517293,517293,Set(snow, ant, at, on, sat),List(217, 2395, 93, 137, 17),List(2, 3, 7, 1, 5, 9),List(+, *, -, -, *)))
+List((325780,325780,Set(snow, ant, at, on, sat),List(7083, 25, 725, 205, 80),List(7, 0, 5, 2, 3, 8),List(+, *, +, *, +)))
+List((410576,410576,Set(snow, ant, at, on, nasa),List(10, 5674, 160, 76, 6151),List(5, 6, 0, 1, 4, 7),List(-, *, -, +, *)))
+List((396217,396217,Set(snow, ant, at, on, nasa),List(2713, 96, 17, 7929, 976),List(2, 7, 6, 9, 3, 1),List(+, *, +, *, +)))
+List((168245,168245,Set(snow, ant, at, sat, nasa),List(2541, 5626, 658, 268, 68),List(2, 5, 8, 6, 1, 4),List(-, -, +, *, +)))
+List((120534,120534,Set(ant, at, on, sat, nasa),List(20, 4252, 34, 520, 240),List(5, 4, 0, 2, 1, 3),List(+, -, -, +, *)))
+List((130654,130654,Set(ant, at, on, sat, nasa),List(340, 630, 54, 30, 4363),List(6, 4, 0, 3, 1, 5),List(+, -, +, +, *)))
+List((145762,145762,Set(snow, ant, at, on, sat, nasa),List(7261, 425, 45, 745, 2474, 62),List(7, 2, 5, 4, 1, 6),List(-, +, -, -, +, *)))
+List((127348,127348,Set(snow, ant, at, on, sat, nasa),List(3841, 27, 48, 327, 287, 8232),List(3, 8, 7, 2, 1, 4),List(+, *, +, *, -, +)))\
+
+
+
+
+-745-7261+62*2474+425-45=145762
+-745+425-7261-45+62*2474
+
+
+Short answer:
+a*toast-to=watson
+has a unique solution where 5*71597-71=357914
+
+Long answer:
+I started by grepping my dictionary for words composed of only the letters in watson, with the nifty one-liner
+grep '^[watson]*$' dict
+This gave me a list of possible words to form sentences, such as
+"an ant sat on santa on snow at nasa"
+I wrote a scala program to combine operators to form expressions from a subset of the words, such as
+sat-on*at
+attempting come across expressions that have unique solutions.  Sure enough, there are plenty.
+Here's a relatively long one
+ant * sat + on + snow * at = watson
+205 * 725 + 80 + 7083 * 25 = 325780
+
+I had fun writing this program in a functional language.  I extended it to solve a bit more general problems, where the answer need not be "watson", including the mother of language arithmetic problems
+sent+more=money
+.
+
+
+Thanks for another fun problem,
+
+Chris Shannon
+
+from Calgary, Canada
+
+
+Scala code:
+
+import java.util.Collection
+
+object ponder {
+
+  /*
+val sentence = "send more"
+val solutionWord = "money"
+*/
+
+  val sentence = "a toast to satan"
+  val solutionWord = "watson" //> solutionWord  : String = watson
+
+  // val sentence = "wow town ottawa" // no solutions
+  // val sentence = "ant at nasa sat on snow"
+  val wordsSubsets = sentence.split(" ").toSet.subsets
+
+  // The map that defines the relationship from Characters to Digits
+  val m = scala.collection.mutable.Map[Char, Int]()
+
+  // Convert a single charactor, say w, to its corresponding digit, say 1.
+  def charToDigit(c: Char): Int = m getOrElse (c, 0)
+
+  // Converts an entire word, say "watson", to an integer, say 123456, based on the map m.
+  def wordToNum(word: String): Int = {
+    val wordNumList = (word zipWithIndex) map (x => charToDigit(x._1) * math.pow(10, word.length - x._2 - 1))
+    wordNumList.sum.toInt
+  }
+
+  // Recursively create a list of length 3^n of n elements each of the 3 characters -,+ and *.
+  // alloperators(2) returns
+  // --
+  // -+
+  // -*
+  // +-
+  // ...
+  // **
+  def alloperators(n: Int): List[List[Char]] = n match {
+    case 1 => List(List('-'), List('+'), List('*'))
+    case _ =>
+      for {
+        firstOperator <- alloperators(1)
+        allbutfirstOperators <- alloperators(n - 1)
+      } yield firstOperator ::: allbutfirstOperators
+  }
+
+  // Parses and evaluates a simple mathematical expression
+  // WARNING!: operatorsList must not start with a leading *.  It doesn't make mathematical sense anyway.
+  // calcTree (1,2,3,4), (-,+,*,*))
+  // = -1+2*3*4
+  // = calcTree (1,6,8), (-,+,*))
+  // = calcTree (1,48), (-,+,))
+  // = (-1, 48).sum
+  def calcTree(numbersList: List[Int], operatorsList: List[Char]): Int = {
+    // order of operations: take care of the multiplications first
+    (operatorsList zipWithIndex).find(_._1 == '*') match {
+      case Some((_, operate_INDEX)) =>
+        calcTree((numbersList take (operate_INDEX - 1)) ::: List(numbersList(operate_INDEX - 1) * numbersList(operate_INDEX)) :::
+          (numbersList drop (operate_INDEX + 1)),
+          (operatorsList take (operate_INDEX)) ::: (operatorsList drop (operate_INDEX + 1)))
+      case None => // no multiplications
+        val numbersListWithSign = (numbersList zip operatorsList) map (x => {
+          if (x._2 == '-')
+            -1 * x._1
+          else
+            x._1
+        })
+        numbersListWithSign.sum
+    }
+  }
+
+  // Try all distinct subsets of our sentence
+  // Note that this eliminates duplicate words
+  // "to toast to" would be reduced to "to toast"
+  for {
+    wordsSubset <- wordsSubsets
+    if (wordsSubset.size > 0) // first letter check fails with the empty list
+  } {
+    val wordsSubsetList = wordsSubset.toList
+    // letters countains all the unique letters used and will be used to index into the candidateMap
+    val letters = (solutionWord.toSet ++ wordsSubset.flatten).toList zipWithIndex
+
+    // Create a list of all potential mappings from char to digit for the word "watson"
+    // Its size will be 10 P 6 = 10!/4!=151,200, which isn't too bad for brute forcing.
+    // allCandidates =
+    // 012345
+    // 012354
+    // ...
+    // 987645
+    // 987654
+    // But we need to eliminate leading zeros
+    // So 102345 would be eliminated if y(1) == 0 and letters(1) is a leading letter
+    val allCandidateMapsSet = for {
+      x <- (0 to 9) combinations (letters.size)
+      y <- x.permutations
+      if !((wordsSubset + solutionWord) map (word => word(0)) exists (firstletter =>
+
+        //        (solutionWord zipWithIndex).find(_._1 == firstletter) match {
+        //          case Some((_, indexInSolutionWord)) =>
+        //            y(indexInSolutionWord) == 0
+        letters find (_._1 == firstletter) match {
+          case Some((_, indexInM)) =>
+            y(indexInM) == 0
+        }))
+      /*       if (firstletter == 'w')
+          y(0) == 0
+        else if (firstletter == 'a')
+          y(1) == 0
+        else if (firstletter == 't')
+          y(2) == 0
+        else if (firstletter == 's')
+          y(3) == 0
+        else if (firstletter == 'o')
+          y(4) == 0
+        else //(firstletter == 'n')
+          y(5) == 0))
+   */
+    } yield y.toList
+    // Convert from iterator to list so we can reuse it.
+    val allCandidateMaps = allCandidateMapsSet.toList
+    // Cycle through the operators one at a time first
+    for {
+      operators <- alloperators(wordsSubsetList.size) filter (op => op(0) != '*') // first operator must not be *
+    } yield {
+      // Evalute all candidate mappings for this particular wordSubset and operators -> see if there's only 1 solution.
+      val allEquationsEvaluated =
+        for {
+          candidateMap <- allCandidateMaps
+        } yield {
+          for ((letter, index) <- letters)
+            m.update(letter, candidateMap(index))
+          /*         m.update('w', candidateMap(0))
+            m.update('a', candidateMap(1))
+            m.update('t', candidateMap(2))
+            m.update('s', candidateMap(3))
+            m.update('o', candidateMap(4))
+            m.update('n', candidateMap(5))
+*/
+          val wordNums = wordsSubsetList map wordToNum
+          (calcTree(wordNums, operators), wordToNum(solutionWord), wordsSubsetList, wordNums, candidateMap, operators)
+        }
+
+      val solutions = allEquationsEvaluated.toList filter (f => f._1 == f._2)
+      if (solutions.length == 1)
+        println(solutions)
+    }
+  }
+}
+
+// List((357914,357914,List(a, toast, to),List(5, 71597, 71),List(3, 5, 7, 9, 1 , 4),List(+, *, -)))
+                                                  
+// a * toast - to == watson == 357914
+
+
+// List((10652,10652,Set((send,9567), (more,1085)),List(5, 9, 6, 2, 1, 8, 0, 7),List(+, +)))-
+
+
+/*
+grep '^[watson]*$' dict
+
+a
+an
+anna
+ant
+ants
+as
+ass
+assonant
+at
+nan
+nasa
+no
+non
+noon
+noons
+not
+now
+oats
+on
+onto
+ottawa
+own
+owns
+san
+sans
+santa
+sat
+satan
+saw
+saws
+snow
+snows
+so
+son
+sons
+soon
+soot
+sow
+stanton
+stow
+swan
+swans
+swanson
+swat
+swoon
+tan
+tao
+tattoo
+tattoos
+to
+toast
+toasts
+ton
+tons
+too
+toot
+toss
+tot
+tow
+town
+towns
+two
+twos
+want
+wanton
+wants
+was
+watson
+watt
+watts
+won
+woo
+woos
+wow
+*/
+

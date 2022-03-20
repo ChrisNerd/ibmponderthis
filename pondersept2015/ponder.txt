@@ -1,0 +1,620 @@
+Short answer: 78.
+
+Long answer: Another good problem where I first went down the wrong path.  Seems to be a theme. :)  There's a forward way to do this problem and a backwards.  The forward way is more systematic, and the backwards is more try and verify.
+
+Thinking about this and trying it with simple cases first leads me to realize that the solution set must contain a 2.  That's the only way to satisfy the k=N-1 case.  There are two ways to satisfy the k=N-2 case so the second smallest member must be either a 2 or 3.  k=N-3 or N-4 were a bit more tricky, but it appears you can get by with the Fibonacci numbers.  The largest member is N itself, the only way to satisfy the k=1 case.  The k=2 requires two fairly large numbers that sum to N, one greater than N/2 one less than N/2.
+
+There's a straightforward algorithm to use the Fibonacci numbers to satisfy all the k cases from 1 to N, when N is the numTeams's Fibonacci number.  Start with only N in the set.  Delete the lowest number in the set that's greater than 1 and replace it with the next two smaller Fibonacci numbers (by the Fibonacci construction fn = fn-1 + fn-2, these two numbers will sum to the original).  This will give you one more element yet leaving the sum as an invariant, satisfying the next case.  Repeat.
+
+The eights Fibonacci number is 55, but I saw the update on the webpage saying you can do better than 56.  So this approach was too easy to be true, ... didn't even require any programming.
+
+My first programming attempt was to create a list of all the sets of positive numbers of size k that sum to N, where no more than numTeams is >1.  This lead me to read about Partitions, -> restricted number of parts.  This is a studied problem, so it looked like a promising path to go down.  If I had a function to created the set of all partitions based on (N, k, numTeams), then I could check if there exists a set of numTeams numbers that is a superset of at least one member for each of the partitions, hence solving the problem.
+
+The set of partition sets can be found recursively.  Base case, if you want to divide N into a single partition (k==1), there's only one way to do that.  Otherwise the set of size k would be a first number followed by a recursive call which would return the remaining k-1 elements.  We can return a sorted list by specifying that the first number is smaller or equal to the rest in the list.  Looking from the perspective from inside the function, we can pass in the minimum element, and ensure the next number must be equal to or greater than the one specified by the caller.  The maximum of an element would be when all the remaining elements are minimum; but since the list is sorted, that case occurs when all the elements are equal.  Since there are k elements total, the maximum of the first element is N/k, rounded down. The remaining list only needs to sum to N minus the first element, but must do so with one less element (k-1).  Since there may be multiple ways of making this smaller sum with k-1 elements, append the first element to the start of each list.
+
+Using scala it looks pretty clean so far.
+
+def numsThatSum(n: Int, k: Int, minel: Int) : List[List[Int]] = {
+ if (k==1)
+  List(List(n))
+ else
+ {
+  val a = for { i <- minel to math.floor(n/k).toInt
+   row <- numsThatSum(n-i, k-1, i)
+  }
+  yield i :: row
+  a.toList
+ }
+}
+
+With this list of possible partition sets, I can try to find a covering set of only numTeams elements.  This solution set will have the following properties.  Its size is at most numTeams.  For each k from 1 to N, it is a superset of at least one of the partitions of N into k elements.  We can code this up recursively with the help of the .exists() function.  A candidate will be a solution if it doesn't overflow the solution set and we can make it all the way to the k=N case without going over size.  If somewhere we fail, then try the next candidate.  Recursion takes care of it all.
+
+The maze analogy is helpful.  We want to know if a solution exists.  One will exist if at every depth of the maze, there exist a choice where it will lead to the goal.
+
+In code:
+
+def checkN(N: Int, k: Int, numTeams: Int, members: List[Int]): Boolean = {
+ if (members.size > numTeams)
+  false
+ else if (k==N)
+ {
+  println("Success for N=",N)
+  println("with members", members.sorted)
+  true
+ }
+ else
+ {
+  val candidates = numsThatSum(N, k, 1)
+  candidates.exists(candidate =>
+  {
+   // All the elements greater than 1 that aren't already covered by members
+   // This may be empty
+   val membersToAdd = candidate.filter(_ != 1) diff members
+   checkN(N,k+1,numTeams, members ++ membersToAdd)
+  }
+  )
+ }
+} 
+
+My actual implementation sorts the candidates by the amount that they add to the possible solution set, thereby preferring candidates that are already covered.  This A* -like heuristic speeds up the run time but since this approach is ultimately too slow anyway, this is cleaner.  Finding out if an N is impossible requires an exhaustive search either way, so this heuristic just slows it down.
+
+Since there are 8 teams of size 2 or greater, 7 of them must be less than N.  The sum of a single subset of them can only satisfy a single k case.  Since there are 2^7 subsets, we can only satisfy at most 2^7 k cases.  When we select 0 of the 7 subsets, we can satisfy the k=1 case by choosing the N team, as well as the k=N case by using all the N single teams.  The upper bound on N is therefore 1+2^(numTeams-1).
+
+Find the highest N
+for { numTeams <- 1 to 8 }   // numTeams=8 in the original problem
+{
+ println("numTeams",numTeams)
+ for {N <- 1 to 1+math.pow(2, numTeams-1).toInt }
+  checkN(N,1, numTeams,List(2,N))
+}
+
+Turns out that when N gets to be around 40 or greater, the function is extremely slow.  I used a map to cache previous results, and also filtered out the need to store all the 1s because those aren't of interest.  But alas, this approach did solve up to the numTeams=7 case, and got as far as N=65 until it died with an
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+error.  This was unfortunate, but it appeared it wasn't worth fiddling with the settings to increase the heap size since it was a losing battle since it appeared to grow exponentially.
+
+It did provide an interesting insight however.  It tested all Ns for numTeams <=6, so we got a good look at all the solution sets and was confident of which Ns failed.  First, there were never any duplicate numbers in the solution set.  I made the deliberate design choice to use a List instead of a Set for that reason.  Second, some of the solutions of smaller problems went super-Fibonacci!
+
+With 1 team, the highest N was 2, as expected.
+With 2 teams, the highest N was 3, as expected.
+With 3 teams, the highest N was 5, with a solution set of (2, 3, 5).
+With 4 teams, the highest N was 8, with a solution set of (2, 3, 5, 8). It fails the N=9 check.
+Looks like Fib...
+With 5 teams, that's where we get the surprise, the highest N=14 with (2, 3, 5, 9, 14), not 13.  I needed to verify by outputting some debugging on this run, to ensure all k cases passed.
+14
+5 9
+2 3 9
+1 1 3 9
+1 1 1 2 9
+1 1 1 1 1 9
+1 1 1 1 2 3 5
+1 1 1 1 1 1 3 5
+1 1 1 1 1 1 1 2 5
+1 1 1 1 1 1 1 1 1 5
+1 1 1 1 1 1 1 1 1 2 3
+1 1 1 1 1 1 1 1 1 1 1 3
+1 1 1 1 1 1 1 1 1 1 1 1 2
+1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+Looks like Fibonacci includes some redundancies that can be traded away for a slightly higher N.
+
+Carrying on:
+With 6 teams, the highest N was 24 with a solution set of (2, 3, 5, 8, 16, 24).  But this also had some surprises because the majority of numbers below 22 used a 9 instead of an 8 in the solution set.  Starting to look like chaos; a little bit less predicable.
+
+With 7 teams, the highest N was 44 with a solution set of (2, 3, 5, 9, 14, 30, 44).  Looking over the elements of solutions for smaller N's, I noticed they start 2, 3, 5 then the next element is 8 or 9, then the next is often 14 to 17, then the next is never higher then 33.  This makes me hypothesis that the ith element is at most 2^i +1.
+
+Letting all these observations play around the back of my head for a few days, an easier approach is obvious, the backwards approach: start by guessing at the solution set, and testing if it covers all the 127 k cases.  Now we are pretty sure of the upper bounds of each of the elements (a bit of a conjecture still), but even testing beyond these limits doesn't give us any surprises.
+
+We can construct candidate solutions, then use scala's subsets() function to give us all the sets of subsets.  The sum of these subsets must add to N, the shortfall being made up by the number of 1s.  Then simply finding their sum, subtracting it from N, and adding their cardinality gives us each k case that they satisfy.  If all ks are satisfied from 1 to N, then we've got a solution.
+
+*There was a small bug, subtracting N-x.sum would sometimes be negative, which mistakenly covers a valid k case when the size is added back. So when this approach didn't jive with my earlier approach, I know I had a problem. So the first approach wasn't an entire waste of time.*
+
+for ( x0 <- 2 to 3;
+ x1 <- x0 to 5;
+ x2 <- x1 to 9;
+ x3 <- x2 to 17;
+ x4 <- x3 to 33;
+ x5 <- x4 to 65;
+ N <- 78 to (33+65))
+ {
+ val l = List(2,x0,x1,x2,x3,x4,x5)
+ // slight bug, the .toSet would deduplicate elements
+ // I don't think it makes a difference.
+ val subsList= l.toSet.subsets.toList
+ val kvalues = subsList map (x=>if (N< x.sum) 0 else x.size + N - x.sum))
+ val kvaluesNotCovered = (1 to N) diff kvalues
+ if (kvaluesNotCover.size == 1) // Success if we are only missing the k=1 case.
+    println (N,x0,x1,x2,x3,x4,x5)
+ }                                               //> (78,3,5,8,16,24,54)
+
+This approach worked quickly enough and gave me a maximal N of 78.
+
+The last surprise, is that the sequence of maximal N versus numTeams 2,3,5,8,14,24,44,78 is not in the on-line encyclopedia of integer sequences.  The closest is
+http://oeis.org/A072100 which has a 79 instead of 78.  It is just the cumulative sum down the middle of Pascal's triangle, which is such a usual suspect in combinatorial problems like this that I had to keep checking my code to ensure that 79 is not a solution.
+
+http://oeis.org/A079500 also only differs by one element as well, it has a 43 instead of 44, but matches the last case of 78.  It is the number of compositions of the integer n in which the first part is >= the other parts.  That sounds like a plausible way of rephrasing this problem, so I double checked the 44 case too.  It passes.  So I guess were left with another sequence for Mr. Sloane to add to his database.
+
+With the conciseness of functional programming, I looked over my code a few more times to make sure it was sound.  There's not many places for bugs to hide and it's more fun to read and reason about than other paradigms.
+
+Thanks for another fun problem
+
+
+Chris Shannon
+from Calgary, Canada
+
+
+//> (numTeams,2)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (numTeams,3)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (N,4)
+                                                  //| (Success for N=,4)
+                                                  //| (with members,List(2, 3, 4))
+                                                  //| (N,5)
+                                                  //| (Success for N=,5)
+                                                  //| (with members,List(2, 3, 5))
+                                                  //| (numTeams,4)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (N,4)
+                                                  //| (Success for N=,4)
+                                                  //| (with members,List(2, 3, 4))
+                                                  //| (N,5)
+                                                  //| (Success for N=,5)
+                                                  //| (with members,List(2, 3, 4, 5))
+                                                  //| (N,6)
+                                                  //| (Success for N=,6)
+                                                  //| (with members,List(2, 3, 5, 6))
+                                                  //| (N,7)
+                                                  //| (Success for N=,7)
+                                                  //| (with members,List(2, 3, 5, 7))
+                                                  //| (N,8)
+                                                  //| (Success for N=,8)
+                                                  //| (with members,List(2, 3, 5, 8))
+                                                  //| (N,9)
+                                                  //| (numTeams,5)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (N,4)
+                                                  //| (Success for N=,4)
+                                                  //| (with members,List(2, 3, 4))
+                                                  //| (N,5)
+                                                  //| (Success for N=,5)
+                                                  //| (with members,List(2, 3, 4, 5))
+                                                  //| (N,6)
+                                                  //| (Success for N=,6)
+                                                  //| (with members,List(2, 3, 4, 5, 6))
+                                                  //| (N,7)
+                                                  //| (Success for N=,7)
+                                                  //| (with members,List(2, 3, 5, 6, 7))
+                                                  //| (N,8)
+                                                  //| (Success for N=,8)
+                                                  //| (with members,List(2, 3, 5, 7, 8))
+                                                  //| (N,9)
+                                                  //| (Success for N=,9)
+                                                  //| (with members,List(2, 3, 5, 8, 9))
+                                                  //| (N,10)
+                                                  //| (Success for N=,10)
+                                                  //| (with members,List(2, 3, 5, 9, 10))
+                                                  //| (N,11)
+                                                  //| (Success for N=,11)
+                                                  //| (with members,List(2, 3, 5, 9, 11))
+                                                  //| (N,12)
+                                                  //| (Success for N=,12)
+                                                  //| (with members,List(2, 3, 5, 9, 12))
+                                                  //| (N,13)
+                                                  //| (Success for N=,13)
+                                                  //| (with members,List(2, 3, 5, 8, 13))
+                                                  //| (N,14)
+                                                  //| (Success for N=,14)
+                                                  //| (with members,List(2, 3, 5, 9, 14))
+                                                  //| (N,15)
+                                                  //| (N,16)
+                                                  //| (N,17)
+                                                  //| (numTeams,6)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (N,4)
+                                                  //| (Success for N=,4)
+                                                  //| (with members,List(2, 3, 4))
+                                                  //| (N,5)
+                                                  //| (Success for N=,5)
+                                                  //| (with members,List(2, 3, 4, 5))
+                                                  //| (N,6)
+                                                  //| (Success for N=,6)
+                                                  //| (with members,List(2, 3, 4, 5, 6))
+                                                  //| (N,7)
+                                                  //| (Success for N=,7)
+                                                  //| (with members,List(2, 3, 4, 5, 6, 7))
+                                                  //| (N,8)
+                                                  //| (Success for N=,8)
+                                                  //| (with members,List(2, 3, 5, 6, 7, 8))
+                                                  //| (N,9)
+                                                  //| (Success for N=,9)
+                                                  //| (with members,List(2, 3, 5, 7, 8, 9))
+                                                  //| (N,10)
+                                                  //| (Success for N=,10)
+                                                  //| (with members,List(2, 3, 5, 8, 9, 10))
+                                                  //| (N,11)
+                                                  //| (Success for N=,11)
+                                                  //| (with members,List(2, 3, 5, 9, 10, 11))
+                                                  //| (N,12)
+                                                  //| (Success for N=,12)
+                                                  //| (with members,List(2, 3, 5, 9, 11, 12))
+                                                  //| (N,13)
+                                                  //| (Success for N=,13)
+                                                  //| (with members,List(2, 3, 5, 9, 12, 13))
+                                                  //| (N,14)
+                                                  //| (Success for N=,14)
+                                                  //| (with members,List(2, 3, 5, 8, 13, 14))
+                                                  //| (N,15)
+                                                  //| (Success for N=,15)
+                                                  //| (with members,List(2, 3, 5, 9, 14, 15))
+                                                  //| (N,16)
+                                                  //| (Success for N=,16)
+                                                  //| (with members,List(2, 3, 5, 9, 15, 16))
+                                                  //| (N,17)
+                                                  //| (Success for N=,17)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 17))
+                                                  //| (N,18)
+                                                  //| (Success for N=,18)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 18))
+                                                  //| (N,19)
+                                                  //| (Success for N=,19)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 19))
+                                                  //| (N,20)
+                                                  //| (Success for N=,20)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 20))
+                                                  //| (N,21)
+                                                  //| (Success for N=,21)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 21))
+                                                  //| (N,22)
+                                                  //| (Success for N=,22)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 22))
+                                                  //| (N,23)
+                                                  //| (Success for N=,23)
+                                                  //| (with members,List(2, 3, 5, 8, 15, 23))
+                                                  //| (N,24)
+                                                  //| (Success for N=,24)
+                                                  //| (with members,List(2, 3, 5, 8, 16, 24))
+                                                  //| (N,25)
+                                                  //| (N,26)
+                                                  //| (N,27)
+                                                  //| (N,28)
+                                                  //| (N,29)
+                                                  //| (N,30)
+                                                  //| (N,31)
+                                                  //| (N,32)
+                                                  //| (N,33)
+                                                  //| (numTeams,7)
+                                                  //| (N,1)
+                                                  //| (Success for N=,1)
+                                                  //| (with members,List(2))
+                                                  //| (N,2)
+                                                  //| (Success for N=,2)
+                                                  //| (with members,List(2))
+                                                  //| (N,3)
+                                                  //| (Success for N=,3)
+                                                  //| (with members,List(2, 3))
+                                                  //| (N,4)
+                                                  //| (Success for N=,4)
+                                                  //| (with members,List(2, 3, 4))
+                                                  //| (N,5)
+                                                  //| (Success for N=,5)
+                                                  //| (with members,List(2, 3, 4, 5))
+                                                  //| (N,6)
+                                                  //| (Success for N=,6)
+                                                  //| (with members,List(2, 3, 4, 5, 6))
+                                                  //| (N,7)
+                                                  //| (Success for N=,7)
+                                                  //| (with members,List(2, 3, 4, 5, 6, 7))
+                                                  //| (N,8)
+                                                  //| (Success for N=,8)
+                                                  //| (with members,List(2, 3, 4, 5, 6, 7, 8))
+                                                  //| (N,9)
+                                                  //| (Success for N=,9)
+                                                  //| (with members,List(2, 3, 5, 6, 7, 8, 9))
+                                                  //| (N,10)
+                                                  //| (Success for N=,10)
+                                                  //| (with members,List(2, 3, 5, 7, 8, 9, 10))
+                                                  //| (N,11)
+                                                  //| (Success for N=,11)
+                                                  //| (with members,List(2, 3, 5, 8, 9, 10, 11))
+                                                  //| (N,12)
+                                                  //| (Success for N=,12)
+                                                  //| (with members,List(2, 3, 5, 9, 10, 11, 12))
+                                                  //| (N,13)
+                                                  //| (Success for N=,13)
+                                                  //| (with members,List(2, 3, 5, 9, 11, 12, 13))
+                                                  //| (N,14)
+                                                  //| (Success for N=,14)
+                                                  //| (with members,List(2, 3, 5, 9, 12, 13, 14))
+                                                  //| (N,15)
+                                                  //| (Success for N=,15)
+                                                  //| (with members,List(2, 3, 5, 8, 13, 14, 15))
+                                                  //| (N,16)
+                                                  //| (Success for N=,16)
+                                                  //| (with members,List(2, 3, 5, 9, 14, 15, 16))
+                                                  //| (N,17)
+                                                  //| (Success for N=,17)
+                                                  //| (with members,List(2, 3, 5, 9, 15, 16, 17))
+                                                  //| (N,18)
+                                                  //| (Success for N=,18)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 17, 18))
+                                                  //| (N,19)
+                                                  //| (Success for N=,19)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 18, 19))
+                                                  //| (N,20)
+                                                  //| (Success for N=,20)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 19, 20))
+                                                  //| (N,21)
+                                                  //| (Success for N=,21)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 20, 21))
+                                                  //| (N,22)
+                                                  //| (Success for N=,22)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 21, 22))
+                                                  //| (N,23)
+                                                  //| (Success for N=,23)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 22, 23))
+                                                  //| (N,24)
+                                                  //| (Success for N=,24)
+                                                  //| (with members,List(2, 3, 5, 8, 15, 23, 24))
+                                                  //| (N,25)
+                                                  //| (Success for N=,25)
+                                                  //| (with members,List(2, 3, 5, 8, 16, 24, 25))
+                                                  //| (N,26)
+                                                  //| (Success for N=,26)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 25, 26))
+                                                  //| (N,27)
+                                                  //| (Success for N=,27)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 26, 27))
+                                                  //| (N,28)
+                                                  //| (Success for N=,28)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 27, 28))
+                                                  //| (N,29)
+                                                  //| (Success for N=,29)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 28, 29))
+                                                  //| (N,30)
+                                                  //| (Success for N=,30)
+                                                  //| (with members,List(2, 3, 5, 9, 16, 29, 30))
+                                                  //| (N,31)
+                                                  //| (Success for N=,31)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 30, 31))
+                                                  //| (N,32)
+                                                  //| (Success for N=,32)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 30, 32))
+                                                  //| (N,33)
+                                                  //| (Success for N=,33)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 31, 33))
+                                                  //| (N,34)
+                                                  //| (Success for N=,34)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 32, 34))
+                                                  //| (N,35)
+                                                  //| (Success for N=,35)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 32, 35))
+                                                  //| (N,36)
+                                                  //| (Success for N=,36)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 36))
+                                                  //| (N,37)
+                                                  //| (Success for N=,37)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 32, 37))
+                                                  //| (N,38)
+                                                  //| (Success for N=,38)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 38))
+                                                  //| (N,39)
+                                                  //| (Success for N=,39)
+                                                  //| (with members,List(2, 3, 5, 8, 16, 31, 39))
+                                                  //| (N,40)
+                                                  //| (Success for N=,40)
+                                                  //| (with members,List(2, 3, 5, 9, 12, 28, 40))
+                                                  //| (N,41)
+                                                  //| (Success for N=,41)
+                                                  //| (with members,List(2, 3, 5, 8, 13, 28, 41))
+                                                  //| (N,42)
+                                                  //| (Success for N=,42)
+                                                  //| (with members,List(2, 3, 5, 9, 14, 28, 42))
+                                                  //| (N,43)
+                                                  //| (Success for N=,43)
+                                                  //| (with members,List(2, 3, 5, 9, 14, 29, 43))
+                                                  //| (N,44)
+                                                  //| (Success for N=,44)
+                                                  //| (with members,List(2, 3, 5, 9, 14, 30, 44))
+                                                  //| (N,45)
+                                                  //| (N,46)
+                                                  //| (N,47)\
+
+
+**********
+//> (numTeams,8)
+                                                  //| (N,47)
+                                                  //| (Success for N=,47)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 46, 47))
+                                                  //| (N,48)
+                                                  //| (Success for N=,48)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 46, 48))
+                                                  //| (N,49)
+                                                  //| (Success for N=,49)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 47, 49))
+                                                  //| (N,50)
+                                                  //| (Success for N=,50)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 48, 50))
+                                                  //| (N,51)
+                                                  //| (Success for N=,51)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 48, 51))
+                                                  //| (N,52)
+                                                  //| (Success for N=,52)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 51, 52))
+                                                  //| (N,53)
+                                                  //| (Success for N=,53)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 52, 53))
+                                                  //| (N,54)
+                                                  //| (Success for N=,54)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 52, 54))
+                                                  //| (N,55)
+                                                  //| (Success for N=,55)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 54, 55))
+                                                  //| (N,56)
+                                                  //| (Success for N=,56)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 54, 56))
+                                                  //| (N,57)
+                                                  //| (Success for N=,57)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 55, 57))
+                                                  //| (N,58)
+                                                  //| (Success for N=,58)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 56, 58))
+                                                  //| (N,59)
+                                                  //| (Success for N=,59)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 56, 59))
+                                                  //| (N,60)
+                                                  //| (Success for N=,60)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 58, 60))
+                                                  //| (N,61)
+                                                  //| (Success for N=,61)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 59, 61))
+                                                  //| (N,62)
+                                                  //| (Success for N=,62)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 60, 62))
+                                                  //| (N,63)
+                                                  //| (Success for N=,63)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 60, 63))
+                                                  //| (N,64)
+                                                  //| (Success for N=,64)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 62, 64))
+                                                  //| (N,65)
+                                                  //| (Success for N=,65)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 62, 65))
+                                                  //| (N,66)
+                                                  //| java.lang.OutOfMemoryError: GC overhead limit exceeded
+
+
+
+***
+}                                                 //> (numTeams,8)
+                                                  //| (N,66)
+                                                  //| (Success for N=,66)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 63, 66))
+                                                  //| (N,67)
+                                                  //| (Success for N=,67)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 64, 67))
+}                                                 //> (numTeams,8)
+                                                  //| (N,68)
+                                                  //| (Success for N=,68)
+                                                  //| (with members,List(2, 3, 5, 9, 17, 33, 63, 68))
+
+N=68
+val c= List(2, 3, 5, 9, 17, 33, 63)
+val subs = c.toSet.subsets
+
+val subsWithSumsWithk = subs foreach (s=>(s,s.sum,s.size+N-s.sum))
+
+(1 to N) diff subsWithSumWithk.sortBy(_3).(_3)
+
+Say we choose the subset 2,3,5.  It sums to 10, but we use 3 elements.  We want to get to 68, so we need to use 58 1s.  This results in 61 teams.
+So subset 2,3,5 correspnds to k=61.
+Subset s corresponds to k=s.size+68-s.sum
+
+Success with 69 with members
+val l = List(2,3,5,9,17,33,64)//,69)
+
+  val N=70                                        //> N  : Int = 70
+  val l = List(2,3,5,9,17,33,65)
+Success with 70.
+
+    //| (127,Vector())
+                                                  //| (128,Vector())
+                                                  //| (129,Vector(1))
+
+But wait, 129 fails with k=1.  It's impossible to fail the k=1 case.  Just divide by the largest number.  So 129 also passes.
+
+130 does not pass.
+
+Lets see by in the numTeams=5 case.  Why doesn't (2,3,5,9,17) cover all the way to 17?  It does!
+
+Nope bug.  Need to account for cases where sum > N.
+
+Bug fixed.  70 is the highest N! 65 through 69 fail with List(2,3,5,9,17,33,65,N).
+
+69 and 67 pass with
+List(2,3,5,9,17,33,64,N)
+
+66, 68 pass with
+List(2,3,5,9,17,33,63,N)
+
+
+  val l = List(2,3,5,x1,x2,x3,x4,N)//,33,63,N)//,69)
+  //l.toSet.subsets foreach( sum)
+ 
+//  l.toSet.subsets foreach (println)
+ val it= l.toSet.subsets.toList
+  val subsWithSumsWithk = (it, it map (_.sum), it map (x=>if (N< x.sum) 0 else x.size + N - x.sum))
+ //(it map(_.sum)).sorted.distinct
+ val v = (1 to N) diff subsWithSumsWithk._3
+ if (v.size == 0)
+    println (N,x1,x2,x3,x4,v)
+  }                                               //> (70,9,14,29,56,Vector())
+                                                  //| (71,9,14,29,57,Vector())
+                                                  //| (72,9,14,29,58,Vector())
+                                                  //| (70,9,14,30,56,Vector())
+                                                  //| (71,9,14,30,57,Vector())
+                                                  //| (72,9,14,30,58,Vector())
+                                                  //| (73,9,14,30,59,Vector())
+                                                  //| (70,9,17,33,65,Vector())
+
+So 73 is possible!!!
+
+}                                               //> (74,8,15,23,51,Vector())
+                                                  //| (75,8,15,23,52,Vector())
+                                                  //| (74,8,16,24,50,Vector())
+                                                  //| (75,8,16,24,51,Vector())
+                                                  //| (76,8,16,24,52,Vector())
+                                                  //| (77,8,16,24,53,Vector())
+                                                  //| (78,8,16,24,54,Vector())
+                                                  //| (74,9,17,22,52,Vector())
+                                                  //| (75,9,17,22,53,Vector())
+                                                  //| (76,9,17,22,54,Vector())
+
+78 is possible
+
+http://oeis.org/A072100
+
+1, 2, 3, 5, 8, 14, 24, 44, 79, 149,
+We have 3,5,8,14,24,44,78
+
+
+

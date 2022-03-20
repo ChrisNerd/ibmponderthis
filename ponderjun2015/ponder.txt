@@ -1,0 +1,25 @@
+(-100,0),(100,0),(0,300),(-399,384),(-51,934),(-1233,377),(31,1953),(-163,-1745),(2916,66)
+which has an area of 7701668.
+
+My approach to this problem was based on the assumption that each
+point would be as far from the mean of the previous points as
+possible, to maximize the increase in standard deviation for the next
+points.  That means that each point should lie on a circle centred at
+the previous points' mean, and has a radius 3 sigma.  This allows each
+point to be defined by the angle from the centre, which is a single
+number instead of two.  So only 7 dimensions to optimize over.
+
+I wrote a simple loop in Octave where each iteration of the loop looks
+through 100 possible angles for each of the 7 points then updates the
+point which had the biggest increase in the convex hull area.  Each
+angle is initialized randomly, and it turns out that this approach
+often reaches its local maxima before the 7700000 criteria.  But it
+found an adequate solution on only its second run so I didn't bother
+with a more robust optimization technique.  I was all excited to try
+Particle Swarm Optimization, and if I was competitive I'd try to get
+that asterisk next to my name.
+
+Thanks for the puzzle
+
+Chris Shannon
+From Calgary, Canada

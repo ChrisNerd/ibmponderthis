@@ -1,0 +1,192 @@
+I found the "straightforward" way as they put it in their solution but didn't submit since it didn't have any elegence.
+
+You can count only 3 bits with a single gate.  Since 2 output bits can only count if 0,1,2 or 3 are on.
+
+If you used two gates, you could use 3 output bits to count 4 input bits.  The topology would be out gate takes inputs 0-4.
+
+Now the two outputs, (one two-bit input representing a number 0-3, the other three-bit representing a number 0-4), can be summed.  This will require a total of 5 input bits, and result in a number between 0-7, which will need 3 output bits.  This addition will require two more gates.
+
+So now we are using 4 gates, and have accounted for 7 of the input bits.
+
+The 5 remaining input bits can be counted with 2 gates just like the 4-input case.
+
+The trick now is to sum a 3 bit number representing 0-7 with another 3 bit number representing 0-5.  Thinking about half-adders in binary circuit design will show that if you start by adding least significant bits (LSB) you'll get the LSB of the output and a carry.  So we'll waste a gate using only 2 inputs for that.  The carry, and the next two LSBs will take up another gate outputing the second least significant bit and another carry.  The last gate will take in that carry and the MSBs and we'll use both those outputs with no possibility of carry.
+
+The 0-7 3-bit + 0-5 3-bit adder takes 3 more gates giving a grand total of 9 gates.  No chinese remainder theorem necessary.
+
+If I was keen (read: an exercise to the reader) would be to figure out an optimization algorithm to give the output in 6 gates.
+
+http://booleanbot.com/
+The Boolean Bot can build truth tables, minimize logical expressions and simulate boolean functions. It uses the Quine-McCluskey algorithm and Petrick's method to find the optimal sum of products form of the function.
+s= m'bc+m'ac+m'ab+qm
+m'(bc+ac+ab)  +  qm
+m' and at least 2,  otherwise m and q
+000 m'
+001 m'
+010 
+011 
+100 m'
+101 m'
+
+m' and at least two selects entries 4 and 5
+m selects entries 2 and 3
+
+s is to see if a-e has overflowed, that is if a-e is 4 or 5.  If a-e is a 4 or 5 then at most 1 is off.  This can't be checked with only a subset of 2 of them since if the subset contains 1, then the remaining 3 can containg 0,1,2 or 3 leading to the total of 1, 2, 3,4.  Since 1 and 4 are both valid, this isn't a valid check for overflowing.
+
+Taking the a subset of 3 a-c and checking if at most 1 is off combined with checking for m' is equal to the overflow bit.  If m' is 0, meaning a-e is 0,1,4 or 5, and if a-c is 0 or 1, since d-e is at most 2, then a-e is at most 3 leaving only 0,1 as possibilities.
+
+Proved another way, if a-c is 2 or 3, and since d-e is at least 0, the sum of a-e must be >2, ruling out 0,1 and leaving 4,5.
+
+The pigeon hole pricipal also gives us this proof.  If you have n objects and know for certain that 0,1, n-1 or n of them are on.  You only need to check a sample of 3 of them to illimate either the 0 and 1 states, or the n-1 and n states.
+
+After you draw 1, say it's off, you've eliminate the n state, if it's on you've eliminated the 0 state.
+
+After two draws, you have either 00, which you've eliminated the n-1 and n state, reaching your goal, or 11 likewise eliminating 0,1.
+
+If you got one of each, you've only eliminated 0 and n, so you need at least 1 more draw.  You'll get 011 or 010, 011 leads to n-1, and 010 leads to 1
+
+Keep in mind that s also has that qm term, meaning that s is also on if both gate 1 and 3 are 2 or 3.  Meaning that their sum is 4,5 or 6 (also an overflow).
+
+s is overflow of a-e, likewise u is overflow of gate 2 (f-i + n).
+
+s and u are carred into gate 6 for the final sum.
+
+Need input 6
+w=
+pq'r'u+
+pq'r's+
+su
+
+... looking at gate 3 and pq'r'
+q'r' is when count(pjkl) is 0 or 4.  But count can't be 0 when p, so count must be 4. So pq'r' is when gate 3 sees a count of 3, and the other 9 have a 1 parity.
+pq'r' is the overflow bit of gate 3.
+let z=pq'r' then the symmetry is a bit more obvious
+w=
+zu+zs+us
+w is looking for if at least 2 of the 3 overflow bits are set.  That means that two of them are at least 4, which makes their sum at least 8.  This will set the MSB of the output.  Is this the only way to set it though?  Since their is a maximum of 12, the inputs required to sum to at least 8 are
+530
+531
+532
+533
+540
+541
+542
+543 all overflow!
+440
+441
+442
+443
+341
+342
+343
+332 only 1 overflows! but s is set because of the qm term, meaning the first + the third =5 also leads to an overflow.
+333 only 1 overflows!
+242
+243
+233
+143
+
+w is the MSB which is 1 iff count>=8.
+
+Finally lets look at x.  It's the 2nd MSB.
+
+x=
+pq'r's'u'+
+pq'r'su+
+p's'u+
+p'su'+
+rs'u+
+rsu'+
+qs'u+
+qsu'
+
+
+Replacing pq'r' with z as the overflow of 3
+zs'u'+
+zsu+
+p's'u+
+p'su'+
+rs'u+
+rsu'+
+qs'u+
+qsu'
+
+Notice the symmetry between s and u.
+
+
+breaking it apart
+zs'u'+
+zsu
+is using the 3 overflow bits, z and neither or both.  This is xnor.
+z ( s xor u)'
+
+p's'u+
+p'su'
+=
+p'(s xor u)
+
+
+rs'u+
+rsu'
+=
+r(s xor u)
+
+qs'u+
+qsu'
+=
+q(s xor u)
+
+So s xor u occurs repeatedly so we can collect those.
+x=
+z (s xor u)'
++
+(p'+r+q)(s xor u)
+p'+r+q is the complement of pr'q' by deMorgans theorem remember the z=pr'q'.
+
+So
+x=
+z (s xor u)'
++
+z'(s xor u)
+= z xor s xor u
+
+We're really doing sm0 + uo0 + zq0 + r (almost... s contains the overflow based on qm that's why x=s xor u xor z is valid)
+
+s xor u is if one or the other of the gates 1, and 2 overflow.  But keep in mind that s contains info on gate 3, so x xor u is really about if the 3rd LSB of the sum of all 3.
+
+
+
+
+v= m xor o xor q which is the xors of the 3 MSBs for first 3 gates.
+
+Why is this true?
+m=1 for counts of 2,3.  The sanity test passes, where v unchanged when the gate 1 sees 0 or 4, or between 1 and 5.  Likewise when gate 2 sees 0 or 4.
+
+The 1 in the output needs to take into account the LSB somehow.  In our circuit, the LSB from 1 is added to the count(2) by connecting wire n.  So o,p the output of 2 includes the contribution from the LSB of 1.  This means that if we wanted to add 1 and 2, we could treat the output n as 0, even if we need the input n into 2 to be non-zero.
+
+in other words count
+(a to e) + (f to i) = (mn)+ (f to i) = (mn - n) + (f to i + n)
+= (mn - n) + (op)
+= (m0) + (op)
+now, there's no carry possible from the sum of 0 + p,
+= (m xor o) p
+
+(at least in mod 4).  Clearly m+o could result in a carry, but that's why m and o go on to gates 4 and 5.
+
+So there we go, the mod 4 sum of the first 9 digits is (m xor o),p.
+
+If we wanted to sum the remaining 3 digits we do a similar thing.  p is carried off to be counted as an input to 3 and therefore must be disregarded from the output of 2.
+
+(m xor o) p
++
+count (j to l)
+==
+((m xor o) p - p)  + count (j to l + p)
+== ((m xor o)0)  + qr
+== m xor o xor q + r
+
+All right!  We get our parity bit r, out of the sum of the all 12, and the second bit as m xor o xor q.  We even seen hints of how we can use m, o and q to get the last two bits.  
+
+m xor o xor q is done in gates Gate 4 and 5.  Gate 4 creates t= m xor q, then gate 5 creates v = t xor o.  Since xor is cummunitive, v is the desired m xor o xor q.
+
+
