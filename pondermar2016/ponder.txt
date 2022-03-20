@@ -1,0 +1,119 @@
+Short answer:
+N=182921919071841
+
+
+BONUS 18 digit N!!!
+N = 650700037578750084
+N^2 = 423410538904986771480057875730007056
+N^2 reversed = 650700037578750084177689409835014324
+
+Long answer:
+I starting from the brute force naive approach even though 10^15 nanoseconds is about 11 days. The pattern at lower numbers might give me a clue.
+
+The code was easy enough in Scala:
+def rev(n: BigInt) = BigInt(n.toString.reverse) 
+def numDigits(x: BigInt) = x.toString.length
+def lastNdigits(x: BigInt, n: Int) = BigInt(x.toString.takeRight(n))
+
+Regular Ints overflow very easily when squared so I used BigInts. Reversing, counting digits, and truncating are all pretty trivial when the number is converted to a String.  Otherwise you need to use some tedious code to break up an int into a list of digits, and logarithms for counting digits.
+
+The filtering for solutions was done with an Iterator that was go on forever.
+
+Iterator.iterate(BigInt(1))(_ + 1) filter (x => x == rev(lastNdigits(x * x, numDigits(x)))) foreach(i => println(i))
+
+This printed out 
+1
+5
+6
+963
+9867
+65766
+69714
+6317056
+90899553
+169605719
+4270981082
+while I stepped away to think about it.
+
+I set about thinking what's the "Ponder This" trick to get up to 15 digits. The first clue was the number 15. I figured that 8 digits would be roughly where it's reasonable to ask a computer to count to.
+
+Using long multiplication to carry out a square...
+9867
+9867
+====
+   69069
+  59202
+ 78936
+88803
+========
+97357689
+
+Carrying out one of these by hand we can see that the last m digits of x determines the last m digits of x^2. In this case the 7 determines that the answer ends in 9 because 7^2=49. The 67 determines that the answer ends in 89 because 67^2 ends in 4489. Lastly, 867 squared is 751689 so the 689 ends the answer.
+
+You can prove with (a*10^m + q)^2 = a^2 * 10^2m + 2aq*10^m + q^2. If you take it mod 10^m you're left with q^2 mod 10^m.
+
+If x is a 15 digit solution, i.e. x is squarversed, then the last 8 digits of x can be used to construct the first 7 digits, as we'll show below.
+
+Let x1 be the last 8 digits of x and the first 7 digits of x are unknown for now.
+
+The last 8 digits of x^2 are the same as the last 8 digits of x1^2, as we just showed.
+
+But since x is squareversed, the reverse of the last 8 digits of x^2 are the same as the first 8 digits of x.  Therefore the first 8 digits of x are constructable.  We then go ahead and construct x, but 8+8=16, so one of the numbers overlaps. The 8th least significant digit of x1^2 must equal the 8th least significant digit of x1.
+
+We have everything we need to code.
+
+Just run through all x1 up to 9 digits in length.
+for {
+   q <- 2 to 18
+   m <- List(math.ceil(q*1.0/2).toInt)
+   xl <- BigInt(1) until BigInt(10).pow(m)
+   if ( checkReverse(xl,q,m) )
+ } println (xl,constructX(xl, q, m),constructX(xl,q,m).pow(2))
+
+Constructing x from xl needs to be done slightly differently depending on whether the number of digits in x is odd or even. But in either case it's easily done by appending strings (optionally adding missing zeros if xl has leading zeros).
+
+def constructX(xl: BigInt, q: Int, m: Int): BigInt = {
+  val firstString = if (q % 2 != 0)
+    rev(lastNdigits(xl * xl, m - 1)).toString
+  else
+    rev(lastNdigits(xl * xl, m)).toString
+  BigInt(firstString ++ "0" * (q - firstString.length - numDigits(xl)) ++ xl.toString)
+ }
+
+It turns out we don't need to bother checking the mth least significant digit of xl and its square, since we can assume they match, construct x from xl and check if x is really squareversable which is the ultimate check.
+
+def checkReverse(xl: BigInt, q: Int, m: Int): Boolean = {
+  val x = constructX(xl, q, m)
+  x == rev(lastNdigits(x * x, q))
+}
+
+Our code outputs:
+
+x1,x,x^2
+63,963,927369
+67,9867,97357689
+714,69714,4860041796
+766,65766,4325166756
+7056,6317056,39905196507136
+9553,90899553,8262728735599809
+5719,169605719,28766099917506961 // This entry was found after I added the zero padding code.
+81082,4270981082,18241279402801890724
+287587,96528287587,9317710304478578282569
+256742,465454256742,216647665119247652454564
+612536,692153612536,479076623346635216351296
+19071841,182921919071841,33460428476925148170919129281
+69669834,655785969669834,430055238015804438966969587556
+578750084,650700037578750084,423410538904986771480057875730007056
+
+We can double check there's no funny business with overflows or anything by using 'bc' the command line arbitrary precision calculator, and rev, which reverses characters.
+
+$ echo 650700037578750084^2 | bc
+423410538904986771480057875730007056
+$ echo 650700037578750084^2 | bc | rev
+650700037578750084177689409835014324
+
+Thanks for another fun puzzle
+
+Chris Shannon
+
+From Calgary Canada

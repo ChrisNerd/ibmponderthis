@@ -1,0 +1,63 @@
+This one was fairly easy, even doing it inefficiently.
+1. Find the first occurance of all 5 digit numbers in pi, e, and root2.
+2. Sum them.
+3. Find the minimum.
+
+
+
+Pretty much done in 3 small sections of Scala code.
+
+// 1
+val piFile = Source.fromFile("/home/shannon/outside/ponder/ponderoct2016/Pi - 10 Million Digits @ http___Pi.Karmona.com.html").getLines.mkString.filter(_.isDigit)
+ val lengthToFind = 5
+  // create a map pis of all 5 digit numbers to their first occurance
+  val pis = collection.mutable.Map[String, Int]()
+ piFile.sliding(lengthToFind).zipWithIndex.foreach { x => pis getOrElseUpdate (x._1, x._2 + lengthToFind) }
+
+  // 2
+  val combined = collection.mutable.Map[String, Int]()
+  for (nInt <- 0 until math.pow(10, lengthToFind).toInt) {
+    val n = nInt.toString.reverse.padTo(lengthToFind, '0').reverse.toString
+    if ((pis contains n) &&
+      (es contains n) &&
+      (root2s contains n))
+      combined(n) = pis(n) + es(n) + root2s(n)
+      }
+
+  // 3
+  val minKey = combined.minBy(_._2) //> minKey  : (String, Int) = (46652,2166)
+
+
+
+This totally could have been done more efficiently. No need to go through 10 million digits when the answer we're looking for came after only 2166 (which is 381, 1154 and 631 positions in). The question would be when to stop looking. Instead of a map, we could use a heap to keep track of the smalled so far.
+
+
+while (haven't searched far enough)
+ read a= next pi
+ if a is not in pi yet,
+   if a is in e and root2,
+    furthest we need to search is a+b+c (actually more like a+b+c - min from heap
+ do the same for e and root2
+
+
+But seeing as a computer can search through 10 million digits in seconds, it's hard to justify a more complicated and error prone algorithm. It would have been kind of fun to make my own spigot algorithm to calculate pi, e and root2, outputing a Stream of digits. It does make me worry a bit about the getOrElseUpdate line that basically turns this into a O(n^2) algorithm I think.
+
+
+2166 seconds is 00:36:06 in hh:mm:ss format.
+
+
+
+
+
+  combined.maxBy(_._2)                            //> res1: (String, Int) = (404,11193)
+  val minKey = combined.minBy(_._2)               //> minKey  : (String, Int) = (459,301)
+  pis(minKey._1)                                  //> res2: Int = 63
+  es(minKey._1)                                   //> res3: Int = 13
+  root2s(minKey._1)                               //> res4: Int = 225
+
+ combined.size                                    //> res0: Int = 100000
+  val minKey = combined.minBy(_._2)               //> minKey  : (String, Int) = (46652,2166)
+  pis(minKey._1)                                  //> res2: Int = 381
+  es(minKey._1)                                   //> res3: Int = 1154
+  root2s(minKey._1)                               //> res4: Int = 631
+  

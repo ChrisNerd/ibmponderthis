@@ -1,0 +1,235 @@
+Start with the possibilities of n^i=ban.
+
+n^i=ban
+9^3=729
+6^3=216  *
+5^3=125
+5^4=625 --
+3^5=243
+2^9=512 *
+
+*a can't be 1 or 0
+So a is even.  a is 2, 2, 2, or 4.  So if a =4, then we are in the 3^5=243 case.
+a^connect-toe = 1 mod at
+a^connect-toe = 1 mod cm
+
+Modular inverse of at, and cm.  What would that get us? We don't know t, c or m.
+
+Can we assume that at and cm are prime?
+
+aconetrbmi
+2xx9xxx7x3
+4xx3xxx2x5 leaves 016789
+
+Find 4t that is prime.  41, 43, 47,49,  43 is not possible because 3 is taken.
+
+since a is even, then t and m are odd???!!  Not necessarily. if at = 10 2^2 = 4= 2^6 = 64.
+But a^(connect-toe) = 1 mod at implies that
+
+aaa I screwed up
+
+2^2 = 2^6 mod 10, correct?  Yes. 4 and 64.
+Divide both sides by 2^2, can you do that?  I don't think so.
+If you do, you get
+1=2^4 mod 10, which is 1=16 mod 10, which is garbage.
+
+Ok, so we can't divide in modular arithmatic.  Can we multiply
+2^2 * 13 = 2^6 * 13 mod 10 ?
+13=10+3
+2^2*13 = 2^2*10 + 2^2 * 3
+2^2*10 mod 10 is 0.
+Ok so you can multiply.  If we want to divide each side by 2^2 (4), we can only multiply by 4^-1 mod 10.
+So what is 4^-1 mod 10?
+x*4=1 mod 10.
+
+Pretty sure we're not going to find a number that multiplies 4 and gets you something like 21, 31...
+So the inverse doesn't exist.
+4 and 10 are not coprime, since they have a common factor of 2, they are both even.
+
+So we can only pull this trick of dividing both sides by 2^toe if 2^toe is coprime to at and cm.
+That means that at and cm are odd, if we want this trick to work.
+
+250week inc tax
+1 bed kitc
+clean + internet
+Extra 100. if di doesn't
+
+connect-toe is found by taking the discrete logarithm. Yikes!
+a^(connect-toe) = 1 mod at
+a^(connect-toe) = 1 mod cm
+
+a^(connect-toe) - 1 = k0 * at
+a^(connect-toe) - 1 = k1 * cm
+
+k0 * at = k1 *cm
+
+let a^(connect-toe)=a^z
+a^z-1=k*y
+
+If we guessed connect-toe and at, we can check if it equals 1 quickly.  How many guesses?
+we need coet, out of 6 numbers. So 6 permute 4 = 360.
+
+a**connect = c (mod inter)
+a**connect = a**toe (mod at)
+a**connect = a**toe (mod cm)
+n**i = ban
+
+Wait, if a^b = a^c (mod d)
+doesn't that just mean that a^(b-c) = 1
+a*a*a*a... b times
+equals
+a*a*a c times,
+which means that after c times, the remaining (b-c) times had no effect.  That was a period of the cycle.
+
+Ohhhh, this was like a previous ponder this with the Euler totient function.
+
+a^b*a(c-b) = a^c (mod d) ???
+a^b mod d * a^(c-b) mod d = a^c mod d
+
+
+
+2**8155083 = 8 (mod 45307)
+2**8155083 = 2**310 (mod 23)
+2**8155083 = 2**310 (mod 89)
+5**4 = 625
+
+
+
+
+Chinese remainder theorem??
+b^p = b^q mod a?
+
+Fermat's little theorem?
+
+
+IXC469I
+XCF MODULE ID FILTER NOT ACCEPTED: value reason
+Explanation
+
+XCF found incorrect syntax specified on the TRACE CT command for MODID filtering. reason in the message text describes the error.
+
+In the message text:
+
+value
+    Identifies a MODID or character that is not valid.
+reason
+    Describes the reason why value is not valid. reason is one of the following:
+
+    MORE THAN 8 MODULE IDS SPECIFIED
+        The maximum number of Module IDs that can be specified for MODID trace filtering is eight.
+    MODID CONTAINS INVALID CHARACTERS
+        value identifies a MODID that contains invalid characters. A valid MODID consists of characters A-F and numerics 0-9.
+    IS AN INVALID CHARACTER FOR A MODULE ID
+        value identifies a character that is not valid for a MODID. A valid MODID consists of characters A-F and numerics 0-9.
+    INVALID DELIMITER SPECIFIED OR DELIMITER MISSING
+        The MODID keyword was entered with a non-valid or missing delimiter. The options and list of MODIDs must be enclosed within parenthesis. For example:
+
+        options=(modid=(0a01,0250)),end
+
+    MODULE ID MUST BE FOUR (4) CHARACTERS
+        value must be exactly four characters. XCF MODIDs are four characters in length.
+
+System action
+
+XCF ignores the incorrect module ID filter specification. The TRACE CT command is not successful.
+Operator response
+
+Notify the system programmer.
+System programmer response
+
+Correct the input specified for the MODID filter option and re-enter the TRACE CT command.
+Module
+
+IXCC1TCP
+Routing code
+
+1, 2
+Descriptor code
+
+5
+Parent topic: IXC messages
+
+
+
+
+val solutions = for {IndexedSeq(a,c,o,n,e,t,i,r,b,m) <- (0 to 9).permutations
+if (
+BigInt(a).modPow(c*1000000+o*100000+n*10000+n*1000+e*100+c*10+t, i*10000+n*1000+t*100+e*10+r) == c &&
+BigInt(a).modPow(c*1000000+o*100000+n*10000+n*1000+e*100+c*10+t, a*10+t) == BigInt(a).modPow(t*100+o*10+e, a*10+t) &&
+BigInt(a).modPow(c*1000000+o*100000+n*10000+n*1000+e*100+c*10+t, c*10+m) == BigInt(a).modPow(t*100+o*10+e, c*10+m) &&
+math.pow(n,i) == 100*b+10*a+n
+)
+}
+yield IndexedSeq(a,c,o,n,e,t,i,r,b,m)             //> solutions  : Iterator[IndexedSeq[Int]] = non-empty iterator
+
+val solMap = List("a","c","o","n","e","t","i","r","b","m") zip solutions.toList.head //foreach println(_.2 "=" ._1)
+                                                  //> solMap  : List[(String, Int)] = List((a,2), (c,8), (o,1), (n,5), (e,0), (t,3
+                                                  //| ), (i,4), (r,7), (b,6), (m,9))
+
+"connect" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res0: scala.collection.immutable.IndexedSeq[Int] = Vector(8, 1, 5, 5, 0, 8, 3)
+"inter" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res1: scala.collection.immutable.IndexedSeq[Int] = Vector(4, 5, 3, 0, 7)
+"toe" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res2: scala.collection.immutable.IndexedSeq[Int] = Vector(3, 1, 0)
+"at" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res3: scala.collection.immutable.IndexedSeq[Int] = Vector(2, 3)
+"cm" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res4: scala.collection.immutable.IndexedSeq[Int] = Vector(8, 9)
+"ban" map (let => (solMap.filter(x => x._1 == let.toString)).head._2 )
+                                                  //> res5: scala.collection.immutable.IndexedSeq[Int] = Vector(6, 2, 5)
+a**connect = c (mod inter)
+a**connect = a**toe (mod at)
+a**connect = a**toe (mod cm)
+n**i = ban
+2**8155083 = 8 (mod 45307)
+2**8155083 = 2**310 (mod 23)
+2**8155083 = 2**310 (mod 89)
+5**4 = 625
+
+BigInt(2).modPow(8155083,45307) == 8              //> res0: Boolean = true
+BigInt(2).modPow(8155083,23) == BigInt(2).modPow(310, 23)
+                                                  //> res1: Boolean = true
+BigInt(2).modPow(8155083,89) == BigInt(2).modPow(310, 89)
+                                                  //> res2: Boolean = true
+math.pow(5,4) == 625                              //> res3: Boolean = true
+
+BigInt(2).modPow(8155083,23)                      //> res4: scala.math.BigInt = 4
+BigInt(2).modPow(8155083,89)                      //> res5: scala.math.BigInt = 4
+
+
+2^(x) mod 89=1
+x=11n according to Wolfram Alpha
+
+2^(x) mod 23=1
+also gives x=11n
+
+Wow. So maybe it all works because 88 is a multiple of 22? which are both multiples of 11 when you take out the factors of 2s.
+
+
+But there was another clue: connect = toe (mod 11) (left as an exercise for the reader: David Greer noticed that part). So a**connect = a**toe (mod 2**11-1), which is 2047=89*23, which helps guessing that cm=89 and at=23, leaving a few possibilities to check.
+
+Maybe Mersenne primes?
+
+2^a=2^b mod c
+2^a=2^b mod d
+Look for the order of 2,c and the order 2,d. Where c and d are <100.
+
+From https://en.wikipedia.org/wiki/Order_%28group_theory%29
+a^k = e   if and only if   ord(a) divides k.
+(e=1 the identity)
+so 2^(a-b)=1 iif ord(2,c) divides (a-b)
+so 2^(a-b)=1 iif ord(2,d) divides (a-b)
+
+a-b = 0 mod ord(2,c)
+a-b = 0 mod ord(2,d)
+
+a=b mod 2c
+a=b mod 2d
+
+Chinese remainedr theorem.
+
+a=b mod gcd(ord(2c),ord(2d))
+
+https://en.wikipedia.org/wiki/Multiplicative_order
+
