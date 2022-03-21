@@ -1,0 +1,11 @@
+PONDER.THIS == 625097.1438
+
+My solution wasn't too fancy.  Just an easily coded brute force octave script with 10 embedded for loops.  Ran surprisingly fast, normally brute force solutions aren't successful for ponder this-es.
+
+I wasn't sure if using 0 was permitted, but it must be if we use 10 distinct digits.
+
+Thanks for the easy problem.  March was too hard for me.  My simulated annealing attempt was down the wrong track.
+
+Chris Shannon
+
+Calgary Canada

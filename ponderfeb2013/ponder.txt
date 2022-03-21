@@ -1,0 +1,34 @@
+Here is my solution to February 2013 Ponder This.
+x=31622
+y=24558
+z=999975442
+
+x^2=999950884
+y^2=603095364
+concatenates to form
+z^2=999950884603095364
+
+I used the following Sage code:
+a=9999
+for i in range(1,100000):
+    l1=floor(log(i,10))+1;
+    b=a*(10^l1)+i;
+    l2=floor(log(b^2,10))+1;
+    for j in range(1,l2):
+        secondhalf=b^2%(10^j)
+        firsthalf=(b^2-secondhalf)/10^j
+        firsthalfr=floor(sqrt(firsthalf))
+        secondhalfr=floor(sqrt(secondhalf))
+        if secondhalfr^2==secondhalf and firsthalfr^2==firsthalf and secondhalf>=10^(j-1):
+            print(firsthalf)
+            print(secondhalf)
+            print(b^2)
+            print(firsthalfr)
+            print(secondhalfr)
+            print(b)
+
+This short brute force program gives the provided answer at the top. It simply starts with a z (b in the code) of the form 9999xxxxx and tests all the ways of spitting z^2.   Sage was used because of its large integer handling.
+
+Chris Shannon
+
+Calgary, Canada
