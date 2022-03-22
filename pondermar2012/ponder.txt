@@ -1,0 +1,35 @@
+Short answer:
+1, 62, 63, 2, 3, 5, 8, 58, 59, 47, 53, 57, 50, 56, 48, 21, 7, 16, 17, 9, 6, 20, 14, 54, 22, 4, 25, 26, 27, 24, 12, 30, 31, 61, 60, 29, 11, 45, 40, 43, 15, 55, 18, 42, 38, 13, 34, 33, 39, 36, 49, 35, 51, 23, 41, 52, 37, 10, 46, 28, 32, 19, 44.
+
+Long answer:
+I first started this puzzle by solving the 7 node version by hand.  I quickly realized that 1 and 7 need to be connected because it is the only way to get an edge of 6.  The algorithm I used when I solved it by hand was essentially backtracking.  I coded up this backtracking algorithm to solve the 15 node version.  I noticed that its complexity was probably factorial, which is fine for the 15 node version but would not work for the 31 or 63 node version.  The backtracking algorithm worked recursively down the tree (top to bottom, left to right) and at each node kept track of the available edges and available nodes.  A short circuit check was used to speed up the algorithm to determine if the remaining nodes and edges would not permit a solution.
+
+When it dawned on me that this speed up would not fix the complexity problem, I started thinking more mathematically and noticed that a dual exist for every solution, which is obtained by subtracting each node from 1+the highest node.  The edges would not be moved.  I could not easily see any shortcut to finding a particular solution though.
+
+I also analysed the solutions to the 15 node puzzle and found some commonalities.  I even modified my program to output a SVG image that showed a matrix of all the edge connections between the 15 nodes for each solution.  I thought by looking at the collection of images a pattern would emerge.  Unfortunately they all looked random to me.
+
+By running my solution set through grep, then piping it through cut, then sort, then uniq --count, I was able to see some patterns.  1 was at the top most often, followed closely by 3.  When 1 was at the top, 14 and 15 were the most common children on row 2.  Row 3's most common pattern was 2 3 5 8, which are Fibonacci numbers.  I took a hunch and hard coded this pattern into the first 3 rows of my 63 node initial state, 1, 62, 63, 2, 3, 5, 8.  The basis of this hunch was that Fibonacci numbers appeared in plants in the arrangement of the leaves to avoid other leaves' shadows.  I waved my hands and convinced myself that this was akin to having unique differences between pairs of nodes like in this problem.
+
+Unfortunately the factorial complexity of the backtracking approach meant it was impractical to solve the 63 node problem.  Since only a single solution was required, and it was easy to determine if a given node configuration was a solution or not, I could use an optimization algorithm.  I settled on Simulating Annealing since it is well suited to combinatorial optimization, exactly the problem at hand.  I had used Simulated Annealing before for a continuous variable optimization problem and did not realize that it was actually easier to work with one where the solution space has neighbours.
+
+Simulated Annealing works to minimize an energy function.  The energy function that I defined was based on a count of all the edges used.  The difference from 1 for the count of each edge, squared then summed would provide a good energy function, since it equals 0 when a perfect solution is found, and it weights a greater penalty to configurations that use many of the same edges.  All the nodes are unique at all times because the nodes are only swapped.
+
+The neighbour of a node configuration is simply a swap of a given pair of nodes.  This makes the diameter of the search space equal to n-1, since any configuration can be visited with n-1 steps from any other, which is far more encouraging than n factorial. There are (n choose 2) combinations of pairs of n nodes. (which equals 1953 for the 63 node case, which isn't too bad)  My program evaluates the energy for each of those neighbours and takes the best one half the time, or a random neighbour the other half.  If a neighbour is the solution, of course it takes that.  The random neighbour is only followed based on a probability as defined by the simulated annealing algorithm.  My program also has a recently used cache of the last 10 configurations to avoid needlessly repeating the expensive all-neighbour check.
+
+I ran the algorithm and tweaked the various simulated annealing parameters, to have a good trade off between randomization and deepest-decent energy minimization.  I got it so it could at least reach a local minimum quickly, in a second or two, so I wrapped the whole thing in an loop to restart it with another trial after exploring each minimum and terminate when a solution is found.
+
+To run the program (attached is the C++ code main.cpp) use
+g++ main.cpp && time ./a.out 6
+the 63 node case varies in run time with an average of about 150 trials, which all in all take on average 6 minutes or so.
+
+The 31 node case
+time ./a.out 5
+typically finishes in about 0.2 seconds.
+
+This puzzle was the most challenging I've seen in a while.  I'm surprised to see so many names on the winners board already.  I'm wondering if I missed something...
+
+Thanks again!
+
+Chris Shannon
+
+Calgary Canada

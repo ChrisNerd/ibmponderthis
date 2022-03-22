@@ -1,0 +1,370 @@
+Short answer, M=852,853,854,...870,871.
+
+Long answer:
+
+Perhaps there is an elegant way to compare Alice and Bob's expected times without directly calculating each, but I couldn't find it.
+
+Bob's game is much easier to analyze and turns out to be isomorphic to the Coupon Collector's problem.
+In probability theory, the coupon collector's problem describes the "collect all coupons and win" contests. It asks the following question: Suppose that there are n different coupons, equally likely, from which coupons are being collected with replacement. What is the probability that more than t sample trials are needed to collect all n coupons? An alternative statement is: Given n coupons, how many coupons do you expect you need to draw with replacement before having drawn each coupon at least once? The mathematical analysis of the problem reveals that the expected number of trials needed grows as \Theta(n\log(n)).
+
+
+Bob has an expected value of M * Hm where Hm is the mth harmonic number.
+
+I found Alice's game harder to analyze, since it was much more dynamic than Bob's game.
+
+I was able to calculate by hand the expected number of trials required for the cases of 2, 3 and 4 balls but did not see a simple way to keep going.  It reminded me of using Mason's rule from my Control Theory class.
+
+I started by writing a Monte Carlo simulation for Alice's game, aliceMC.cpp.  The output looked reasonable, and seemed to grow quadratically with the number of balls.  Linear regression strongly indicated the expected number of trials to be (N-1)^2, which matched my hand calculations for the small cases.
+
+For a quick sanity check I also made a Monte Carlo simulation for Bob's game, bobMC.cpp.  It matched the theory.
+
+I gave Alice's game more thought and realized it could be represented as a Markov chain.  The states of the Markov chain are the partitions of N, which I found from small cases of N and a search on The On-Line Encyclopedia of Integer Sequences.
+For example, with 4 coloured balls, it can be partitioned in five distinct ways:
+1 + 1 + 1 + 1,
+2 + 1 + 1,
+2 + 2,
+3 + 1,
+4
+
+The transition probabilities can be somewhat easily calculated.  For each state, iterate over all the colours of the two balls combinations to be picked and update the transition probability to the new generated state.
+
+For example for the state 2,1,1.  There's a 2/4 chance that the 2 colour will be picked as the first ball, and a 1/3 chance that the second ball will be any of the other states.  Regardless, the newly generated state will be 2,1,1 again.  There is also a (1+1)/4 chance that one of the single colour states is picked first and a 2/3 chance that the 2 colour is picked second resulting in a transition to 3,1; and a 1/3 chance of a transition to 2,2.
+
+Once we have the Markov transition matrix I read the following chapter on Markov Chains.
+http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/Chapter11.pdf
+It talks about absorbing Markov chains, which applies to Alice's game where once it gets to all the balls being the same colour, it's stuck in that state.
+
+It gives very useful equations:
+
+Definition 11.3 For an absorbing Markov chain P, the matrix N = (I − Q)^−1 is
+called the fundamental matrix for P. The entry nij of N gives the expected number of times that the process is in the transient state sj if it is started in the transient state si.
+
+Theorem 11.5 Let ti be the expected number of steps before the chain is absorbed, given that the chain starts in state si , and let t be the column vector whose ith entry is ti . Then
+t = Nc ,
+where c is a column vector all of whose entries are 1.
+
+Knowing this, we simply have to compute t1.  My C++ program outputs in Octave format the transition matrix of the transient states P, and an Octave command to extract Q and calculate N and t.   One octave line later we have our exact expected number of trials for a particular value of N.
+
+I was able to verify E(N)=(N-1)^2 for cases up to N=22.  I have no reason to double the trend will continue since the transition probabilities are simple rationals of the form k/(N * (N-1)) and the matrix inverse won't introduce any irrational numbers or anything weird.
+
+Here's a sample output
+
+g++ markov.cpp && ./a.out 8
+1 1 1 1 1 1 1 1 
+2 1 1 1 1 1 1 
+2 2 1 1 1 1 
+2 2 2 1 1 
+2 2 2 2 
+3 1 1 1 1 1 
+3 2 1 1 1 
+3 2 2 1 
+3 3 1 1 
+3 3 2 
+4 1 1 1 1 
+4 2 1 1 
+4 2 2 
+4 3 1 
+4 4 
+5 1 1 1 
+5 2 1 
+5 3 
+6 1 1 
+6 2 
+7 1 
+8 
+
+format long
+p=[[0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0.25 0.535714285714286 0 0 0.214285714285714 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 0.357142857142857 0.214285714285714 0 0.142857142857143 0.285714285714286 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 0 0.321428571428571 0.0357142857142857 0 0.428571428571428 0.214285714285714 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 0 0 0.142857142857143 0 0 0.857142857142857 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 0.267857142857143 0 0 0.107142857142857 0.357142857142857 0 0 0 0.267857142857143 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 0 0.160714285714286 0 0 0.357142857142857 0.107142857142857 0.107142857142857 0 0.107142857142857 0.160714285714286 0 0 0 0 0 0 0 0 0 0]
+[0 0 0 0 0.0535714285714286 0 0 0.464285714285714 0.142857142857143 0.0714285714285714 0 0.214285714285714 0.0535714285714286 0 0 0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0 0.214285714285714 0.214285714285714 0.0357142857142857 0 0.321428571428571 0 0.214285714285714 0 0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0 0 0 0.464285714285714 0 0 0.321428571428571 0.214285714285714 0 0 0 0 0 0 0 0]
+[0 0 0 0 0 0 0.285714285714286 0 0 0 0.214285714285714 0.214285714285714 0 0 0 0.285714285714286 0 0 0 0 0 0]
+[0 0 0 0 0 0 0 0.142857142857143 0.142857142857143 0 0 0.321428571428571 0.0357142857142857 0.0714285714285714 0 0.142857142857143 0.142857142857143 0 0 0 0 0]
+[0 0 0 0 0 0 0 0 0 0.285714285714286 0 0 0.285714285714286 0.142857142857143 0 0 0.285714285714286 0 0 0 0 0]
+[0 0 0 0 0 0 0 0 0 0.0714285714285714 0 0 0.0535714285714286 0.535714285714286 0.0535714285714286 0 0.214285714285714 0.0714285714285714 0 0 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.428571428571429 0 0 0.571428571428571 0 0 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0.267857142857143 0 0 0 0.357142857142857 0.107142857142857 0 0.267857142857143 0 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0.0892857142857143 0.178571428571429 0 0 0.428571428571428 0.0357142857142857 0.178571428571429 0.0892857142857143 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.267857142857143 0 0 0.464285714285714 0 0.267857142857143 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.214285714285714 0 0.535714285714286 0.0357142857142857 0.214285714285714 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.214285714285714 0 0.571428571428571 0.214285714285714 0]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.125 0.75 0.125]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]];
+inv(eye(21)-p(1:21,1:21)) * ones(21,1)
+
+ans =
+
+   48.9999999999997
+   47.9999999999997
+   46.9999999999997
+   45.9999999999996
+   44.9999999999997
+   45.8333333333330
+   44.8333333333330
+   43.8333333333330
+   42.6666666666663
+   41.6666666666664
+   42.2666666666664
+   41.2666666666664
+   40.2666666666665
+   39.0999999999998
+   35.5333333333331
+   36.9499999999998
+   35.9499999999998
+   33.7833333333331
+   29.2999999999998
+   28.2999999999997
+   18.1499999999999
+
+So the answer to N=8 is 49.
+
+To wrap it all up, I calculate the expected times for Alice to play 80 and 81 ball games
+E(N=80) = 79^2 = 6241
+E(N=81) = 80^2 = 6400
+
+and use trial and error with the help of wolframalpha to exactly computer Bob's times
+
+E(M=851) = 6232
+E(M=852) = 6249
+E(M=871) = 6399.6129
+E(M=872) = 6407.96034
+
+Bob has an expected value of M * Hm where Hm is the harmonic number.
+http://www.wolframalpha.com/input/?i=871+*+Harmonic+number+%28871%29
+
+Bob is therefore expected to lose for N=80 and win for N=81 when M=852, 853, ..., 871.
+
+Chris Shannon
+Calgary Canada
+
+
+************************
+We should be able to Markov this
+state 1 
+1,1,1,1 -> 2,1,1 = 1
+
+state 2a
+2,1,1 -> 2,1,1  = 1/2
+2,1,1 -> 3,1 = 1/2*2/3 = 1/3
+2,1,1 -> 2,2 = 1/2*1/3 = 1/6
+
+state 3
+3,1 -> 4,0 = 1/4
+3,1 -> 3,1 = 3/4*2/3 = 1/2
+3,1 -> 2,2 = 3/4*1/3 = 1/4
+
+state 2b
+2,2 -> 3,1 = 2/3
+2,2 -> 2,2 = 1/3
+
+state 4
+4,0 -> 4,0 = 1
+
+So this is a random walk.  Want to know the expected number of steps to go from 1,1,1,1 to 4,0
+
+1 -> 2a   -> 
+    |       \
+     -> 2b<-> 3 -> 4
+
+if we're in state, we can e
+
+in matrix form
+p = 
+1[[0 1   0   0   0]
+2a[0 1/2 1/6 1/3 0] 
+2b[0 0   1/3 2/3 0]
+3 [0 0   1/4 1/2 1/4]
+4 [0 0   0   0   1]
+
+
+[[0 1   0   0   0]
+[0 1/2 1/6 1/3 0] 
+[0 0   1/3 2/3 0]
+[0 0   1/4 1/2 1/4]
+[0 0   0   0   1]
+
+-1 = (p11-1)m15+p12m25+p13m35+p14m45
+-1 = p21m15+(p22-1)m25+p23m35+p24m45
+-1 = p31m15+p32m25+(p33-1)m35+p34m45
+-1 = p41m15+p42m25+p43m35+(p44-1)m45
+
+[[-1 1   0   0 ]
+[0 -1/2 1/6 1/3] 
+[0 0   -2/3 2/3]
+[0 0   1/4 -1/2]
+inv(p(1:4,1:4)-eye(4))*(-1*ones(4,1))
+ans =
+
+   9.0000
+   8.0000
+   7.0000
+   5.5000
+
+
+
+
+2
+1,1
+2
+
+3
+1,1,1
+2,1
+3
+
+
+4
+1,1,1,1
+2,1,1
+2,2
+3,1
+4
+
+
+5
+1,1,1,1,1
+2,1,1,1
+2,2,1
+3,2
+3,1,1
+4,1
+5
+
+
+6
+1,1,1,1,1,1
+2,1,1,1,1
+2,2,1,1
+2,2,2
+3,1,1,1
+3,2,1
+3,3
+4,1,1
+4,2
+5,1
+6
+
+
+7
+1,1,1,1,1,1,1
+2,1,1,1,1,1
+2,2,1,1,1
+2,2,2,1
+3,1,1,1,1
+3,2,1,1
+3,2,2
+3,3,1
+4,1,1,1
+4,2,1
+4,3
+5,1,1
+5,2
+6,1
+7
+
+8
+1,1,1,1,1,1,1,1
+2,1,1,1,1,1,1
+2,2,1,1,1,1
+2,2,2,1,1
+2,2,2,2
+3,1,1,1,1,1
+3,2,1,1,1
+3,2,2,1
+3,3,1,1
+3,3,2
+4,1,1,1,1
+4,2,1,1
+4,2,2
+4,3,1
+4,4
+5,1,1,1
+5,2,1
+5,3
+6,1,1
+6,2
+7,1
+8
+
+2,3,5,7,11,15,22 -- partition function!
+
+transition from say 4,2,1,1
+take from 4, 2 or 1
+if taken from 4 (4*1/8) then put in one of 3,2,1,1 (regroup)
+4,2,1,1 (3/7)
+3,3,1,1 (2/7)
+3,2,2,1-multiplicity 2 (2/7)
+
+if taken from 2 then put into one of 4,1,1,1
+5,1,1,1
+4,2,1,1-multiplicity 3
+
+if taken from 1 then put into 4,2,1
+5,2,1
+4,3,1
+4,2,2
+
+
+
+
+2
+
+1,1,1,1,1,1,1,1 0
+2,1,1,1,1,1,1   1
+2,2,1,1,1,1     2
+2,2,2,1,1       3
+2,2,2,2         4
+3,1,1,1,1,1     5
+3,2,1,1,1
+3,2,2,1
+3,3,1,1
+3,3,2
+4,1,1,1,1
+4,2,1,1
+4,2,2
+4,3,1
+4,4
+5,1,1,1
+5,2,1
+5,3
+6,1,1
+6,2
+7,1
+8
+
+alice has expected value somewhere around
+numUrns = 80 experned trials = 6283.57
+numUrns = 81 experned trials = 6387.86
+calculated with 10000 trials
+numUrns = 80 experned trials = 6235.93
+numUrns = 81 experned trials = 6387.67
+with 100000
+
+
+for alice with 2 balls, there is only 1 trial necessary.
+E(2)=1
+
+3 balls,
+after 1 trial
+2 balls of 1 colour, 1 ball of a second colour
+the second trial has a 1/3 chance of picking the remaining colour first, and a 2/3 chance of picking the "wrong colour first"
+if it picks the wrong colour first, no matter what she picks second, she'll still be in a state where she has 2 balls of 1 colour, 1 ball of the second so she's no better off.
+so E(3) = 1/3*2 + 2/3*(E(3)+1)
+E(3)=4
+
+Totally looks like E(N) = (N-1)^2
+
+
+E(4) after 1 trial, there is 2,1,1.  The second trial has 4P2 = 12 different combinitation of choosing 2 balls in order.
+there is a 2/4 chance that the first ball will be a member of the first pair chosen, and a 2/4 chance that it will be a new member.
+In the first case, there is no improvement or change at all.
+In the second case, there is a 2/3 chance the second ball with be the majority colour, and 1/3 chance it will be the single colour.
+If it's the majority, there will be 3,1.  If not, it will be 2,2.
+From 3,1, it has a 1/4 chance of going to 4,0, and a 3/4*2/3 staying the same and 3/4*1/3 going to 2,2.
+From 2,2 the first ball doesn't matter.  There is 2/3 chance it will go to 3,1 and a 1/3 chance it will stay at 2,2.

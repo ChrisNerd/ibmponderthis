@@ -1,0 +1,93 @@
+Short answer:
+Player 1's first move must be either 7^4, 11^4 or 13^4.  Depending on player 2's first move, player 1's second move can be any of the other prime power factors.  We look to the game of Nim to choose a winning response.
+
+Long answer:
+We start by factoring 1,506,009,006,001,500,000,000:
+2^8 * 
+3 * 
+5^9 * 
+7^4 * 
+11^4 * 
+13^4
+
+The set S of available prime power factors has a cardinality of 30 (8+1+9+4+4+4).  S's elements are
+{2^1, 2^2, 2^3, 2^4, 2^5, 2^6, 2^7, 2^8, 3^1, 5^1, 5^2, 5^3, 5^4, 5^5, 5^6, 5^7, 5^8, 5^9, 7^1, 7^2, 7^3, 7^4, 11^1, 11^2, 11^3, 11^4, 13^1, 13^2, 13^3, 13^4}
+
+Since this game is played by removing prime powers, it would be an illigal move to choose a factor that is composed of two or more prime factors.  Each move can only take elements based a single prime factor, in other words, only elements from this set S are allowed.
+
+The game is isomorphic to the game of Nim, where the prime factors 2,3,5...13, are analogous to nim heaps, and the count of each factor 8,1,9,4,4,4 are analogous to the number of elements in each heap.  We can therefore use nim strategy to find all the winning moves.
+
+We start by renaming the primes (2,3,5,7,11 and 13) with heap letters (A,B,C,D,E and F) and putting the number of elements in each heap (8,1,9,4,4,4) in binary form.
+
+A - 8 - 1,0,0,0
+B - 1 - 0,0,0,1
+C - 9 - 1,0,0,1
+D - 4 - 0,1,0,0
+E - 4 - 0,1,0,0
+F - 4 - 0,1,0,0
+
+The nim sum is 0,1,0,0 = 4 = X.  Since this is not 0, the game is winnable on the first move.
+
+We find possible first winning moves by nim summing each heap with X = 4.
+
+A nim sum X = 1,1,0,0 = 12 increased from 8
+B nim sum X = 0,1,0,1 = 5 increased from 1
+C nim sum X = 1,1,0,1 = 13 increased from 9
+D nim sum X = 0,0,0,0 = 0 reduced from 4
+E nim sum X = 0,0,0,0 = 0 reduced from 4
+F nim sum X = 0,0,0,0 = 0 reduced from 4
+
+The last three heaps are reduced, so we can play in D,E,or F.
+
+Back to the real game, this means player 1 can play 7^4 or 11^4 or 13^4 as the first move.  Introducing a new notation the first move could be D4,E4 or F4.
+
+This results in the following heaps:
+
+A - 8 - 1,0,0,0
+B - 1 - 0,0,0,1
+C - 9 - 1,0,0,1
+D - 0 - 0,0,0,0
+E - 4 - 0,1,0,0
+F - 4 - 0,1,0,0
+
+nim sum is now 0 (as expected), meaning player 2 has no winning moves.
+
+Player 2 has 8+1+9+4+4=26 possible second moves, another 4 are available by simmetry among heaps D, E and F.
+This is how player 1 must respond if player 2 takes from the first pile
+71644
+61744
+51444
+41544
+31244
+21344
+11044
+01144
+Player 1's responses include C-2,3,5,4,7,6,9,8
+
+
+This is how player 1 must respond if player 2 takes from the second pile
+80844
+Player 1's response is C-1
+
+This is how player 1 must respond if player 2 takes from the third pile
+80844
+61744
+71644
+41544
+51444
+21344
+31244
+01144
+11044
+Player 1's response is B-1, A-2,1,4,3,6,5,8,7
+
+This is how player 1 must respond if player 2 takes from the fourth or fifth pile
+81933
+81922
+81911
+81900
+Player 1's response is D,E,F-1,2,3,4
+
+Amongst the 30 possible first moves from player 2, player 1's responses to continue garanteeing a win covers all the available power factors p^m.
+
+Any power factor from the set S is an appropriate winning (second) move for player 1 given the corresponding first move by player 2.

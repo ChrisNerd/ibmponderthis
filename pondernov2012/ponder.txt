@@ -1,0 +1,52 @@
+Short answer: 0.0001020304045296
+
+By symmetry we only need to consider one octant.  The only points of interest are the "visible points" from the origin.  I found these visible points by using a 2D version of the sieve of Eratosthenes.  Interesting the number of visible points is related to the Riemann zeta function.
+
+http://mathworld.wolfram.com/VisiblePoint.html
+
+With this set of visible points in 1 octant, I sorted them by their angle to the x axis, tan(j/i), although sorting them by j/i would suffice.  Every adjacent pair in the sorted set makes a gap.  The gap is filled when the radius reaches a value r.
+
+One catch is that it is possible that a closer tree can rush in to fill the gap.  In order to account for all these, I wrote an event driven simulation.  Each tree is represented by its left and right edge.  And each edge can be blocked by nearer trees, so it has a 'visible' parameter.  I also keep track of whether or not it's part of a gap pair, with a "background" Boolean value.  I placed all "collisions" (events at time r when edges coincide) in a priority_queue and ran it until I ran out of gaps.
+
+An interesting math problem was to solve the following equation for r
+
+arcsin(r/sqrt(i1^2+j1^2))+arcsin(r/sqrt(i2^2+j2^2)) = arctan(j2/i2) - arctan(j1/i1)
+
+Using some obscure trigonometric identities (wikipedia has them all, but even mathworld doesn't mention the first one, and sage doesn't seem to know the first two)
+arcsin(x) + arcsin(y) = arcsin(x*sqrt(1-y^2)+y*sqrt(1-x^2))
+arctan(x) - arctan(y) = arctan((x-y)/(1+xy))
+and
+sin(arctan(x)) = x/sqrt(1+x^2)
+
+and wolframalpha I was able to find a closed form solution for r in terms of the pair of lattice points (i1,j1) and (i2,j2), although I had the same result with my first go at it using Newton's Method.
+
+double directSolve(int i1, int j1, int i2, int j2)
+{
+ unsigned long e = i1*i1+j1*j1;
+ unsigned long f = i2*i2+j2*j2;
+ unsigned long g = i1*j2-j1*i2;
+ unsigned long h = i1*i2+j1*j2;
+ double i = 1.0*g/h;
+ double j = sqrt(1+i*i);
+ double k = sqrt(e*f);
+ double l = k*i/j;
+ double r = sqrt(l*l*(e + f-2*sqrt(e*f-l*l))/(e*e-2*e*f+f*f+4*l*l));
+ return r;
+}
+
+The equation for the case when an edge overtakes another tree just involves changing the sum of arcsins to a difference.
+
+Running the program yields two gaps get filled at the exact same instant.  Plugging the arcsin equation into wolframalpha yields the exact solution of r=1/sqrt(96059602) with the following pairs
+(1,0) - (9800,1) and (6053,956) - (3628,573)
+
+The first pair, by inspection, has no possible trees that can overtake the gap with an earlier r.
+
+I toyed around with sage trying to simplify my closed form solution but to no avail.  Wolframalpha has a "show steps" but admits that it was too hard for it to explain what it did!  Lastly I used wolframalpha to ensure I did my significant figures right, 1/sqrt(96059602) to 13 significant digits.
+
+It starts with an interesting pattern 01 02 03 04... but have no idea why.
+
+Thanks for this month's challenging puzzle.
+
+Chris Shannon
+
+Calgary Canada 

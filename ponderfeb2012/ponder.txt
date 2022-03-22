@@ -1,0 +1,40 @@
+Short answer:
+p ~~ 94668920 / 189373729
+
+Long answer:
+My first instinct was to use continued fractions, since they have the desired property of giving the best rational approximation.
+
+If p is the probability of heads, let q =1-p = the probability of tails.
+The probability that the computer wins is
+ (1-q)*(1+q^13+q^14+q^18+q^19+q^22)=1/2
+
+This polynomial of degree 23 apparently can be solved in continued fraction form directly, but I'm uncertain how.
+
+Putting this into wolframalpha gives me an arbitrary precision decimal solution to p=1-q.
+p=0.499905242928389504529621945225162859221090463453651027277789301914...
+
+Another possible way of solving this would be to use Newton's method.
+
+I wrote a very simple C++ program to loop through the denominators d from 1 to 10^9, and found that 14 matched the double float precision of p exactly at the precision of doubles.  I therefore utilized the arbitrary precision library gmp and found the best approximation is
+94668920 / 189373729
+
+Later, I went back to the continued fraction idea, and in wolframalpha I converted the decimal form to continued fraction, truncated it to a finite number of terms, then converted that to a rational.  I found that with 19 terms it gave a rational approximation with 9 digits in the denominator, and it matched the solution I found with my program.  Using 20 terms of the continued fraction resulted in a denominator with 10 digits.
+
+fromcontinuedfraction[continuedfraction[0.499905242928389504529621945225162859221090463453651027277789301914,19]]
+results in
+94668920 / 189373729, the same answer as before.
+
+As for the significance fo the 6 positions choosen, I thought it might have something to do with the corresponding letters
+1 a
+14 n
+15 o
+19 s
+20 t
+23 w
+but don't see any anagrams to make from it.  Perhaps these 6 positions give a very difficult to approximate root.
+
+Thanks for the interesting problem.
+
+Chris Shannon
+
+Calgary Canada

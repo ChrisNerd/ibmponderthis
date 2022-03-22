@@ -1,0 +1,82 @@
+odd number of unique factors
+ends in 576
+
+
+1048576 = 2^20
+factors are 
+2^i, where i=0, 20 inclusively.  So 21 factors
+  1048576 seconds = 
+
+i*1000+576 needs to be square!
+for i=1:1048
+n=1000*i+576;
+t=round(sqrt(n));
+if(n==t*t)
+i
+end
+end
+i =  226
+i =  274
+i =  952
+i =  1048
+
+
+
+60 sec/ m * 60 m / h * 24 h / d * 7 d/w = 604800 sec / w
+1 week, (1048576-604800=443776) seconds
+443776 seconds = 5 days
+11776 seconds = 3 hours
+976 seconds = 16 minutes
+16 seconds
+
+midnight between Saturday and Sunday + 1 week = same
+midnight between Saturday and Sunday + 5 days = 
+    midnight between Thursday and Friday
+midnight between Thursday and Friday + 3 hours = Friday at 3:00AM
+Friday at 3:00AM + 16minutes + 16 seconds = 
+Friday 3:16:16AM
+
+
+226576 = 2 days 14:56:16 (Tuesday)
+274576 = 3 days 4:16:16 (Wednesday)
+952576 = 1 week 4 days 0:36:16 (Thursday)
+
+
+Square triangular number
+a(n) = 34 * a(n-1) - a(n-2) + 2
+
+
+98286503002057414584576 seconds
+389376 seconds
+
+wolframalpha input
+(98286503002057414584576 mod (60*60*24*7)) seconds
+
+4 days 12 hours 9 minutes 36 seconds
+Thursday 12:09:36PM
+
+
+
+Short answer:
+When did the explosion occur? What day of the week, hour, minutes, and seconds?
+98286503002057414584576 seconds after "the beginning".
+
+It would happen on a Thursday at 12:09:36PM.
+
+
+Long answer:
+All the dwaves finish their lamp switching duties at 1 second after midnight, since that's when the series 1/2^n converges.  The final result is that a lamp is left on if it has been visited by an odd number of dwarves.  The lamp is on if its number has an odd number of factors.  Since factors normally come in pairs (one less than the square root, its partner greater than the square root), it's necessary that the square root itself is a factor for there to be an odd number of factors.  Therefore the only lights left on are perfect squares.
+
+The lamps that the red dragon leaves flammable eggs next to are the triangular numbers.
+
+If an egg is left next to a lamp that was on, it must have been a square triangular number.  Our question is reduced to finding a square triangular number that ends in 576.
+
+I looked up square triangle number in both wikipedia and the Online Encyclopedia of Integer Sequences and thought that using the recurrence relation would be my best bet since it can easily use integers only and modular arithmetic, so it fits the problem nicely.
+
+I wrote a program using the recurrence relation a(n)=34a(n-1)-a(n-2)+2 mod 576 as well as mod (number of seconds in a week) to find the solution.  I was surprised that the answer was returned immediately, at only the 16th square triangular number, which is 98286503002057414584576.  I was also surprised that there did not seem to be any other solution other than this, by running the program for quite some time.  To verify that I converted to the time correctly, I put the following into wolframalpha:
+(98286503002057414584576 mod (60*60*24*7)) seconds
+
+which returned:
+4 days 12 hours 9 minutes 36 seconds
+
+Thank you for another fun and interesting puzzle
