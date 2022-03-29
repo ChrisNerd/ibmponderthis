@@ -1,0 +1,44 @@
+The snake can be arranged in 5922 ways.
+
+26 less than this is 5896, which is the number of US patents secured to IBM during the year 2010.
+
+As the snake grows, the number of ways of arranging it follows the Fibonacci sequence, until the snake has 11 turns in it.  At this point it's possible for its head to touch its tail.  I'm not sure what the expression is after this point, although I would guess it's some sort of recursive formula similar to Fibonacci still.
+
+I solved this by writing the attached C++ program.  This program also prints out an SVG image file for each valid snake of 20 segments.
+
+I converted the 5922 images into a movie which is kind of neat.  Maybe at the end of the month I'll reply to Vi Hart's youtube video with this movie.
+
+The program also prints to standard out some debugging info to follow the recursion and where snakes died.  I plotted the location of the binary tree of where the snakes died but it didn't turn into a beautiful fractal like I hoped.
+
+Number of turns, Number of snake arrangements
+2 2
+3 3
+4 5
+5 8
+6 13
+7 21
+8 34
+9 55
+10 89
+11 141 -- Fibonacci number is 144. 3
+12 226
+13 362
+14 580
+15 921
+16 1468
+17 2344
+18 3740
+19 5922
+
+I've attached the program, and two resulting snakes, one where it tries to turn left as much as possible and one where it tries to turn right as much as possible.
+
+To run the program
+move ponder.cpp to its own directory.
+g++ ponder.cpp && ./a.out
+It will create thousands of files and take less than 100 MB of disk space.
+
+Thanks
+
+Chris Shannon
+
+Calgary Canada

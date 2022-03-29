@@ -1,0 +1,2865 @@
+Population 0 score 80031
+0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 1 0 1 2 0 1 2 0 0 2 0 0 0 2 1 1 1 0 2 1 2 0 0 2 1 1 2 1 1 2 0 2 2 1 1 1 0 1 1 2 1 0 0 2 2 1 1 2 2 0 0 1 1 1 1 0 2 0 2 1 0 2 1 1 1 2 2 2
+1 1 2 1 1 2 0 2 1 2 1 1 1 2 0 2 1 1 0 0 0 1 0 1 0 1 2 2 1 2 2 1 1 2 0 0 1 0 0 0 1 2 1 2 1 2 2 2 2 1 1 2 2 1 0 2 0 1 2 2 0 2 0 2 1 0 0 1 2 1 1 0 1 1 0 2 0 2 0 0
+0 2 2 2 1 1 0 1 2 0 0 2 0 2 0 2 0 0 0 0 2 2 1 0 1 1 1 2 2 1 0 0 1 0 1 2 1 1 0 1 1 1 2 2 1 2 2 0 0 2 1 2 2 0 0 1 2 1 1 2 0 2 0 1 2 1 1 2 0 1 0 1 0 0 2 0 2 1 1 0
+1 2 0 1 0 0 2 0 2 1 0 0 0 0 2 1 1 0 0 1 2 1 1 0 2 0 0 2 2 1 0 1 2 0 2 2 1 0 0 1 2 1 1 0 1 1 2 1 1 2 0 0 1 2 1 1 0 0 1 2 1 2 1 1 0 1 1 2 2 1 0 2 0 2 0 0 0 2 1 2
+2 2 0 0 2 1 2 2 1 1 0 1 1 2 2 1 1 1 0 2 0 1 1 1 0 2 1 1 2 0 0 1 0 0 2 0 2 2 0 1 1 0 2 2 0 2 1 2 1 2 2 2 0 0 0 1 0 0 0 2 0 1 1 1 2 1 1 2 2 2 0 0 0 0 1 1 0 2 1 1
+0 0 1 1 1 0 0 2 0 1 2 1 0 0 0 2 2 1 1 1 0 2 0 1 0 1 0 1 1 1 0 1 2 0 0 1 0 1 0 1 2 2 2 0 0 2 1 2 1 2 2 2 0 2 1 1 1 1 2 2 0 1 1 0 1 2 1 2 0 1 0 0 0 2 2 0 2 0 1 1
+0 0 0 0 0 0 0 1 2 0 0 0 1 2 1 0 2 0 2 0 2 2 2 0 0 1 1 2 1 0 1 1 0 1 0 1 2 0 2 2 0 1 0 0 1 1 0 1 1 1 2 1 1 1 2 1 2 0 1 0 1 2 0 2 2 1 1 1 1 1 0 2 2 0 2 2 0 1 1 1
+2 0 0 0 2 2 0 2 1 1 1 0 2 1 0 1 2 2 0 1 1 2 0 1 0 1 1 0 2 2 0 2 1 0 0 0 1 0 0 0 0 1 1 2 0 2 1 2 2 1 1 1 0 0 2 2 2 2 2 1 1 0 1 2 2 1 0 1 0 1 2 0 0 0 2 1 0 1 1 2
+2 0 0 1 1 1 0 0 0 0 2 2 2 0 0 1 2 1 2 2 0 1 0 1 2 0 2 2 1 0 0 1 1 1 0 2 2 1 0 0 2 2 1 1 0 1 0 0 2 2 0 0 1 1 2 1 2 1 2 1 2 2 0 2 0 0 2 1 2 0 2 1 2 0 1 1 2 1 1 0
+2 2 0 0 1 2 0 1 1 0 0 0 2 0 0 0 1 0 2 0 0 0 2 0 0 0 1 1 2 2 1 2 0 2 2 1 1 0 0 0 0 0 1 0 0 2 2 2 2 1 0 2 1 0 0 0 1 2 1 1 2 0 0 2 2 1 2 1 2 2 1 0 0 2 1 1 2 0 1 2
+0 1 2 1 2 0 2 2 2 1 0 1 1 2 2 0 1 1 1 0 0 0 1 1 1 0 0 0 0 1 0 0 0 2 0 1 0 0 0 2 2 1 2 0 1 1 2 2 2 1 1 2 2 2 2 0 2 2 1 1 1 2 2 2 0 0 0 0 1 1 1 1 1 0 2 2 1 1 2 1
+1 0 1 0 0 0 1 1 2 0 2 1 1 2 1 1 1 2 2 0 1 1 1 2 1 0 2 0 0 1 2 1 2 1 2 1 1 0 2 2 1 2 0 2 2 2 1 0 2 2 0 0 0 1 0 0 0 2 0 0 2 0 2 2 2 1 0 1 2 0 0 0 2 2 1 2 2 2 2 1
+2 1 2 0 0 2 0 0 0 1 1 0 2 0 2 1 1 1 1 0 1 2 2 1 2 0 1 2 0 1 0 0 2 1 1 0 1 2 0 1 0 2 1 1 2 2 0 2 0 1 2 1 1 2 0 0 0 1 0 1 1 2 2 0 0 1 0 1 0 2 1 1 2 2 2 2 2 0 1 2
+Population 1 score 80036
+Population 2 score 80099
+Population 3 score 80185
+Population 4 score 80201
+Population 5 score 80203
+Population 6 score 80236
+Population 7 score 80328
+Population 8 score 80355
+Population 9 score 80376
+Population 10 score 80393
+Population 11 score 80416
+Population 12 score 80435
+Population 13 score 80452
+Population 14 score 80467
+Population 15 score 80472
+Population 16 score 80487
+Population 17 score 80500
+Population 18 score 80517
+Population 19 score 80530
+Population 20 score 80533
+Population 21 score 80552
+Population 22 score 80565
+Population 23 score 80575
+Population 24 score 80583
+Population 25 score 80588
+Population 26 score 80604
+Population 27 score 80609
+Population 28 score 80618
+Population 29 score 80623
+Population 30 score 80630
+Population 31 score 80642
+Population 32 score 80644
+Population 33 score 80656
+Population 34 score 80662
+Population 35 score 80673
+Population 36 score 80677
+Population 37 score 80681
+Population 38 score 80691
+Population 39 score 80697
+Population 40 score 80701
+Population 41 score 80713
+Population 42 score 80715
+Population 43 score 80719
+Population 44 score 80721
+Population 45 score 80726
+Population 46 score 80732
+Population 47 score 80735
+Population 48 score 80739
+Population 49 score 80745
+Population 50 score 80750
+Population 51 score 80755
+Population 52 score 80761
+Population 53 score 80761
+Population 54 score 80763
+Population 55 score 80769
+Population 56 score 80778
+Population 57 score 80790
+Population 58 score 80797
+Population 59 score 80797
+Population 60 score 80801
+Population 61 score 80807
+Population 62 score 80815
+Population 63 score 80822
+Population 64 score 80827
+Population 65 score 80829
+Population 66 score 80829
+Population 67 score 80829
+Population 68 score 80833
+Population 69 score 80835
+Population 70 score 80835
+Population 71 score 80835
+Population 72 score 80844
+Population 73 score 80858
+Population 74 score 80863
+Population 75 score 80866
+Population 76 score 80868
+Population 77 score 80871
+Population 78 score 80874
+Population 79 score 80876
+Population 80 score 80877
+Population 81 score 80879
+Population 82 score 80879
+Population 83 score 80881
+Population 84 score 80881
+Population 85 score 80887
+Population 86 score 80895
+Population 87 score 80898
+Population 88 score 80899
+Population 89 score 80899
+Population 90 score 80904
+Population 91 score 80904
+Population 92 score 80904
+Population 93 score 80905
+Population 94 score 80905
+Population 95 score 80910
+Population 96 score 80915
+Population 97 score 80915
+Population 98 score 80916
+Population 99 score 80916
+Population 100 score 80918
+0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 2 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 1 2 0 2 2 1 1 2 0 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 1 1 1 2 1 2 2 1 0 0 2 2 1 1 2 2 2 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 2
+2 1 2 1 1 2 0 2 1 2 1 1 1 0 0 2 1 2 0 0 0 1 0 0 0 0 0 2 2 2 2 2 1 2 0 0 1 0 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 2 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 0 1 1 1 1 1 0 0 1 0 1 2 0 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 0 1 1 0 0 1 0 1 0 1 0 0 2 0 1 0 1 2
+1 1 0 1 0 0 0 0 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 2 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 1 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 0 1 2 1 0 2 1 0 0 0 0 0 0 0 2 0 0 2 0 1 1 0 2 2 2 0 2 2 1 2 2 2 0 0 2 1 0 2 0 1 2 1 1 1 0 1 1 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 1 2 0 0 1 2 2 0 0 2 1 2 0 2 0 2 1 2 2 2 0 0 1 1 2 2 0 2 1 0 1 0 1 2 0 2 2 1 1 0 0 1 1 0 1 0 1 2 1 2 1 0 1 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 2 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 2 2 2 1 1 1 0 0 2 1 2 0 2 1 1 2 1 1 2 1 2 2 0 1 2 0 1 1 2 1 0 1 1 2
+2 0 0 1 2 0 0 0 0 2 1 2 1 0 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 0 2 0 1 1 1 1 2 1 1 1 0 0 2 2 1 2 0 1 2 2 2 2 2 2 1 2 2 1 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 0 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 0 2 0 1 2
+0 1 0 1 2 2 1 2 2 1 0 1 1 2 2 0 1 0 1 1 0 0 1 1 0 0 0 1 0 1 0 0 0 2 0 1 0 0 2 2 2 0 2 0 1 1 2 2 2 1 1 1 2 2 2 0 0 2 1 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 0 1 0 0 1 0 1 0 1 1 1 2 1 0 2 0 2 1 0 2 2 1 0 1 1 0 1 2 1 2 1 2 1 2 0 0 2 2 0 0 1 1 1 0 0 2 0 0 2 0 0 2 0 1 1 1 2 0 0 2 1 2 1 2 2 1 2 1
+2 1 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 0 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 101 score 80920
+Population 102 score 80922
+Population 103 score 80924
+Population 104 score 80925
+Population 105 score 80927
+Population 106 score 80930
+Population 107 score 80930
+Population 108 score 80931
+Population 109 score 80931
+Population 110 score 80931
+Population 111 score 80934
+Population 112 score 80934
+Population 113 score 80939
+Population 114 score 80939
+Population 115 score 80950
+Population 116 score 80950
+Population 117 score 80950
+Population 118 score 80950
+Population 119 score 80950
+Population 120 score 80950
+Population 121 score 80950
+Population 122 score 80951
+Population 123 score 80952
+Population 124 score 80954
+Population 125 score 80955
+Population 126 score 80955
+Population 127 score 80964
+Population 128 score 80964
+Population 129 score 80968
+Population 130 score 80969
+Population 131 score 80973
+Population 132 score 80974
+Population 133 score 80976
+Population 134 score 80976
+Population 135 score 80978
+Population 136 score 80978
+Population 137 score 80978
+Population 138 score 80978
+Population 139 score 80982
+Population 140 score 80983
+Population 141 score 80983
+Population 142 score 80984
+Population 143 score 80987
+Population 144 score 80988
+Population 145 score 80990
+Population 146 score 80991
+Population 147 score 80994
+Population 148 score 80994
+Population 149 score 80994
+Population 150 score 80994
+Population 151 score 80995
+Population 152 score 80996
+Population 153 score 80997
+Population 154 score 80997
+Population 155 score 81001
+Population 156 score 81001
+Population 157 score 81001
+Population 158 score 81005
+Population 159 score 81005
+Population 160 score 81007
+Population 161 score 81008
+Population 162 score 81008
+Population 163 score 81008
+Population 164 score 81008
+Population 165 score 81008
+Population 166 score 81008
+Population 167 score 81010
+Population 168 score 81012
+Population 169 score 81012
+Population 170 score 81012
+Population 171 score 81012
+Population 172 score 81013
+Population 173 score 81013
+Population 174 score 81015
+Population 175 score 81015
+Population 176 score 81015
+Population 177 score 81018
+Population 178 score 81018
+Population 179 score 81019
+Population 180 score 81019
+Population 181 score 81023
+Population 182 score 81023
+Population 183 score 81023
+Population 184 score 81023
+Population 185 score 81025
+Population 186 score 81025
+Population 187 score 81025
+Population 188 score 81025
+Population 189 score 81025
+Population 190 score 81026
+Population 191 score 81029
+Population 192 score 81030
+Population 193 score 81031
+Population 194 score 81032
+Population 195 score 81033
+Population 196 score 81033
+Population 197 score 81035
+Population 198 score 81035
+Population 199 score 81035
+Population 200 score 81035
+0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 2 1 2 0 1 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 2 1 2 0 2 2 1 1 1 0 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 1 1 1 2 1 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 2
+2 1 2 1 1 2 0 2 1 2 1 1 1 0 0 2 1 2 0 0 0 1 0 0 0 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 2 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 1 1 1 1 0 0 1 0 1 0 0 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 0 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 0 0 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 2 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 0 1 0 0 0 0 2 0 0 2 0 1 1 2 2 2 2 0 2 2 1 2 2 2 0 0 2 1 0 2 0 1 2 0 1 1 0 1 1 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 1 2 0 0 1 2 2 0 2 2 1 2 0 2 0 2 1 2 2 2 0 0 1 1 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 1 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 2 2 2 1 1 1 0 0 1 1 2 0 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 2
+2 0 0 1 2 0 0 0 0 0 1 2 1 0 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 0 2 0 1 1 1 1 2 1 1 1 0 0 1 2 1 2 0 1 2 2 2 2 2 1 1 2 2 1 2 1 0 2 1 2 0 1 1 1 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 0 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 0 1 0 1 0 1 0 2 0 1 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 1 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 0 1 0 0 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 1 0 1 2 1 1 1 2 1 2 0 0 2 2 0 0 1 1 1 0 0 2 0 0 2 0 0 2 0 1 2 1 2 0 0 2 1 2 1 2 2 1 2 1
+2 1 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 0 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 201 score 81036
+Population 202 score 81036
+Population 203 score 81036
+Population 204 score 81036
+Population 205 score 81036
+Population 206 score 81036
+Population 207 score 81038
+Population 208 score 81038
+Population 209 score 81038
+Population 210 score 81038
+Population 211 score 81039
+Population 212 score 81039
+Population 213 score 81039
+Population 214 score 81039
+Population 215 score 81042
+Population 216 score 81043
+Population 217 score 81043
+Population 218 score 81043
+Population 219 score 81043
+Population 220 score 81044
+Population 221 score 81048
+Population 222 score 81048
+Population 223 score 81050
+Population 224 score 81050
+Population 225 score 81052
+Population 226 score 81052
+Population 227 score 81052
+Population 228 score 81058
+Population 229 score 81063
+Population 230 score 81068
+Population 231 score 81072
+Population 232 score 81072
+Population 233 score 81075
+Population 234 score 81075
+Population 235 score 81075
+Population 236 score 81076
+Population 237 score 81076
+Population 238 score 81076
+Population 239 score 81076
+Population 240 score 81076
+Population 241 score 81076
+Population 242 score 81080
+Population 243 score 81080
+Population 244 score 81080
+Population 245 score 81082
+Population 246 score 81082
+Population 247 score 81082
+Population 248 score 81082
+Population 249 score 81082
+Population 250 score 81082
+Population 251 score 81082
+Population 252 score 81082
+Population 253 score 81082
+Population 254 score 81082
+Population 255 score 81082
+Population 256 score 81082
+Population 257 score 81082
+Population 258 score 81082
+Population 259 score 81083
+Population 260 score 81085
+Population 261 score 81085
+Population 262 score 81085
+Population 263 score 81087
+Population 264 score 81087
+Population 265 score 81088
+Population 266 score 81088
+Population 267 score 81088
+Population 268 score 81088
+Population 269 score 81088
+Population 270 score 81090
+Population 271 score 81092
+Population 272 score 81092
+Population 273 score 81093
+Population 274 score 81093
+Population 275 score 81094
+Population 276 score 81094
+Population 277 score 81094
+Population 278 score 81094
+Population 279 score 81094
+Population 280 score 81094
+Population 281 score 81094
+Population 282 score 81094
+Population 283 score 81094
+Population 284 score 81094
+Population 285 score 81094
+Population 286 score 81094
+Population 287 score 81094
+Population 288 score 81094
+Population 289 score 81094
+Population 290 score 81094
+Population 291 score 81094
+Population 292 score 81094
+Population 293 score 81099
+Population 294 score 81099
+Population 295 score 81099
+Population 296 score 81099
+Population 297 score 81099
+Population 298 score 81099
+Population 299 score 81104
+Population 300 score 81104
+0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 0 2 1 2 0 2 2 1 1 1 0 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 1 1 1 2 1 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 2
+2 1 2 1 1 2 0 2 1 2 1 1 1 0 0 2 1 2 0 0 0 1 0 0 0 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 1 1 1 1 0 0 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 0 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 0 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 0 1 0 0 0 0 2 0 0 2 0 1 1 0 2 2 2 0 2 2 1 2 2 2 0 0 2 1 2 2 0 1 0 0 1 1 0 1 2 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 2 2 1 2 0 2 0 2 1 2 2 2 0 0 1 1 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 1 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 2 2 2 1 1 1 0 0 1 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 2
+2 0 0 1 2 0 0 0 0 0 1 2 1 0 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 0 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 1 2 1 0 2 1 2 0 1 1 1 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 0 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 2 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 0 1 0 0 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 2 0 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 1 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 301 score 81105
+Population 302 score 81105
+Population 303 score 81107
+Population 304 score 81107
+Population 305 score 81107
+Population 306 score 81107
+Population 307 score 81107
+Population 308 score 81107
+Population 309 score 81107
+Population 310 score 81107
+Population 311 score 81107
+Population 312 score 81107
+Population 313 score 81107
+Population 314 score 81108
+Population 315 score 81108
+Population 316 score 81108
+Population 317 score 81108
+Population 318 score 81108
+Population 319 score 81108
+Population 320 score 81108
+Population 321 score 81109
+Population 322 score 81109
+Population 323 score 81109
+Population 324 score 81109
+Population 325 score 81109
+Population 326 score 81110
+Population 327 score 81110
+Population 328 score 81110
+Population 329 score 81110
+Population 330 score 81110
+Population 331 score 81110
+Population 332 score 81110
+Population 333 score 81112
+Population 334 score 81112
+Population 335 score 81112
+Population 336 score 81112
+Population 337 score 81112
+Population 338 score 81112
+Population 339 score 81115
+Population 340 score 81116
+Population 341 score 81116
+Population 342 score 81116
+Population 343 score 81116
+Population 344 score 81116
+Population 345 score 81116
+Population 346 score 81119
+Population 347 score 81120
+Population 348 score 81122
+Population 349 score 81124
+Population 350 score 81124
+Population 351 score 81124
+Population 352 score 81124
+Population 353 score 81124
+Population 354 score 81124
+Population 355 score 81124
+Population 356 score 81124
+Population 357 score 81124
+Population 358 score 81124
+Population 359 score 81124
+Population 360 score 81124
+Population 361 score 81124
+Population 362 score 81127
+Population 363 score 81127
+Population 364 score 81127
+Population 365 score 81128
+Population 366 score 81128
+Population 367 score 81128
+Population 368 score 81128
+Population 369 score 81128
+Population 370 score 81128
+Population 371 score 81128
+Population 372 score 81128
+Population 373 score 81128
+Population 374 score 81129
+Population 375 score 81129
+Population 376 score 81129
+Population 377 score 81129
+Population 378 score 81129
+Population 379 score 81129
+Population 380 score 81129
+Population 381 score 81129
+Population 382 score 81129
+Population 383 score 81129
+Population 384 score 81129
+Population 385 score 81129
+Population 386 score 81129
+Population 387 score 81130
+Population 388 score 81135
+Population 389 score 81139
+Population 390 score 81139
+Population 391 score 81139
+Population 392 score 81139
+Population 393 score 81139
+Population 394 score 81139
+Population 395 score 81139
+Population 396 score 81139
+Population 397 score 81143
+Population 398 score 81143
+Population 399 score 81143
+Population 400 score 81143
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 0 1 1 2 2 2 2 1 1 1 0 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 1 1 0 0 2 1 2 0 0 0 1 0 0 0 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 1 1 1 1 0 0 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 0 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 0 1 0 0 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 2 2 0 0 2 1 2 2 0 1 0 0 1 1 0 1 0 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 2 2 1 2 0 2 0 2 1 2 2 2 0 0 1 1 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 1 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 0 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 1 2 1 0 2 1 2 0 1 1 1 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 0 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 2 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 0 1 0 0 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 2 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 1 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 401 score 81143
+Population 402 score 81143
+Population 403 score 81143
+Population 404 score 81145
+Population 405 score 81145
+Population 406 score 81145
+Population 407 score 81145
+Population 408 score 81145
+Population 409 score 81148
+Population 410 score 81148
+Population 411 score 81148
+Population 412 score 81148
+Population 413 score 81148
+Population 414 score 81148
+Population 415 score 81148
+Population 416 score 81148
+Population 417 score 81148
+Population 418 score 81148
+Population 419 score 81148
+Population 420 score 81148
+Population 421 score 81148
+Population 422 score 81150
+Population 423 score 81150
+Population 424 score 81150
+Population 425 score 81150
+Population 426 score 81150
+Population 427 score 81150
+Population 428 score 81150
+Population 429 score 81150
+Population 430 score 81151
+Population 431 score 81151
+Population 432 score 81151
+Population 433 score 81151
+Population 434 score 81151
+Population 435 score 81151
+Population 436 score 81152
+Population 437 score 81152
+Population 438 score 81152
+Population 439 score 81152
+Population 440 score 81152
+Population 441 score 81152
+Population 442 score 81152
+Population 443 score 81152
+Population 444 score 81152
+Population 445 score 81153
+Population 446 score 81153
+Population 447 score 81153
+Population 448 score 81153
+Population 449 score 81153
+Population 450 score 81153
+Population 451 score 81153
+Population 452 score 81153
+Population 453 score 81153
+Population 454 score 81153
+Population 455 score 81153
+Population 456 score 81153
+Population 457 score 81153
+Population 458 score 81153
+Population 459 score 81153
+Population 460 score 81153
+Population 461 score 81153
+Population 462 score 81153
+Population 463 score 81154
+Population 464 score 81154
+Population 465 score 81154
+Population 466 score 81154
+Population 467 score 81154
+Population 468 score 81154
+Population 469 score 81154
+Population 470 score 81154
+Population 471 score 81154
+Population 472 score 81154
+Population 473 score 81154
+Population 474 score 81156
+Population 475 score 81158
+Population 476 score 81158
+Population 477 score 81158
+Population 478 score 81161
+Population 479 score 81161
+Population 480 score 81161
+Population 481 score 81161
+Population 482 score 81161
+Population 483 score 81161
+Population 484 score 81161
+Population 485 score 81161
+Population 486 score 81161
+Population 487 score 81161
+Population 488 score 81161
+Population 489 score 81161
+Population 490 score 81161
+Population 491 score 81161
+Population 492 score 81161
+Population 493 score 81161
+Population 494 score 81161
+Population 495 score 81161
+Population 496 score 81161
+Population 497 score 81161
+Population 498 score 81161
+Population 499 score 81161
+Population 500 score 81161
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 0 1 1 2 2 2 2 1 1 1 0 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 1 1 0 0 2 1 2 0 0 0 1 0 0 0 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 2 2 0 0 2 1 2 2 0 1 0 0 1 1 0 1 0 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 0 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 1 2 1 0 2 1 2 0 1 1 1 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 0 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 2 1 0 0 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 2 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 501 score 81161
+Population 502 score 81161
+Population 503 score 81161
+Population 504 score 81161
+Population 505 score 81161
+Population 506 score 81161
+Population 507 score 81161
+Population 508 score 81161
+Population 509 score 81161
+Population 510 score 81161
+Population 511 score 81161
+Population 512 score 81161
+Population 513 score 81162
+Population 514 score 81162
+Population 515 score 81162
+Population 516 score 81162
+Population 517 score 81162
+Population 518 score 81162
+Population 519 score 81162
+Population 520 score 81164
+Population 521 score 81164
+Population 522 score 81164
+Population 523 score 81164
+Population 524 score 81164
+Population 525 score 81164
+Population 526 score 81164
+Population 527 score 81164
+Population 528 score 81164
+Population 529 score 81164
+Population 530 score 81164
+Population 531 score 81164
+Population 532 score 81164
+Population 533 score 81164
+Population 534 score 81164
+Population 535 score 81164
+Population 536 score 81164
+Population 537 score 81164
+Population 538 score 81164
+Population 539 score 81164
+Population 540 score 81164
+Population 541 score 81164
+Population 542 score 81164
+Population 543 score 81164
+Population 544 score 81164
+Population 545 score 81164
+Population 546 score 81164
+Population 547 score 81164
+Population 548 score 81164
+Population 549 score 81165
+Population 550 score 81165
+Population 551 score 81166
+Population 552 score 81166
+Population 553 score 81166
+Population 554 score 81166
+Population 555 score 81166
+Population 556 score 81166
+Population 557 score 81166
+Population 558 score 81166
+Population 559 score 81166
+Population 560 score 81166
+Population 561 score 81166
+Population 562 score 81166
+Population 563 score 81166
+Population 564 score 81166
+Population 565 score 81166
+Population 566 score 81166
+Population 567 score 81166
+Population 568 score 81166
+Population 569 score 81166
+Population 570 score 81166
+Population 571 score 81166
+Population 572 score 81167
+Population 573 score 81167
+Population 574 score 81167
+Population 575 score 81167
+Population 576 score 81167
+Population 577 score 81167
+Population 578 score 81167
+Population 579 score 81167
+Population 580 score 81167
+Population 581 score 81167
+Population 582 score 81167
+Population 583 score 81167
+Population 584 score 81167
+Population 585 score 81167
+Population 586 score 81167
+Population 587 score 81167
+Population 588 score 81167
+Population 589 score 81167
+Population 590 score 81167
+Population 591 score 81167
+Population 592 score 81167
+Population 593 score 81167
+Population 594 score 81167
+Population 595 score 81167
+Population 596 score 81167
+Population 597 score 81167
+Population 598 score 81167
+Population 599 score 81167
+Population 600 score 81167
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 0 1 1 2 2 2 2 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 2 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 2 2 0 0 2 1 2 2 0 1 0 0 1 1 0 1 0 2 1 1 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 1 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 2 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 1 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 2 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 1 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 2 0 2 1 2 1 0 0 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 2 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 601 score 81167
+Population 602 score 81167
+Population 603 score 81167
+Population 604 score 81167
+Population 605 score 81167
+Population 606 score 81167
+Population 607 score 81167
+Population 608 score 81169
+Population 609 score 81169
+Population 610 score 81169
+Population 611 score 81169
+Population 612 score 81169
+Population 613 score 81169
+Population 614 score 81169
+Population 615 score 81169
+Population 616 score 81169
+Population 617 score 81169
+Population 618 score 81170
+Population 619 score 81170
+Population 620 score 81170
+Population 621 score 81170
+Population 622 score 81170
+Population 623 score 81171
+Population 624 score 81171
+Population 625 score 81171
+Population 626 score 81171
+Population 627 score 81171
+Population 628 score 81171
+Population 629 score 81171
+Population 630 score 81171
+Population 631 score 81171
+Population 632 score 81171
+Population 633 score 81172
+Population 634 score 81172
+Population 635 score 81172
+Population 636 score 81174
+Population 637 score 81174
+Population 638 score 81174
+Population 639 score 81174
+Population 640 score 81174
+Population 641 score 81174
+Population 642 score 81174
+Population 643 score 81174
+Population 644 score 81174
+Population 645 score 81174
+Population 646 score 81174
+Population 647 score 81176
+Population 648 score 81176
+Population 649 score 81176
+Population 650 score 81176
+Population 651 score 81176
+Population 652 score 81176
+Population 653 score 81177
+Population 654 score 81177
+Population 655 score 81177
+Population 656 score 81177
+Population 657 score 81178
+Population 658 score 81178
+Population 659 score 81178
+Population 660 score 81178
+Population 661 score 81178
+Population 662 score 81178
+Population 663 score 81178
+Population 664 score 81178
+Population 665 score 81178
+Population 666 score 81178
+Population 667 score 81178
+Population 668 score 81178
+Population 669 score 81178
+Population 670 score 81180
+Population 671 score 81180
+Population 672 score 81180
+Population 673 score 81180
+Population 674 score 81180
+Population 675 score 81180
+Population 676 score 81182
+Population 677 score 81182
+Population 678 score 81182
+Population 679 score 81182
+Population 680 score 81182
+Population 681 score 81182
+Population 682 score 81183
+Population 683 score 81183
+Population 684 score 81185
+Population 685 score 81186
+Population 686 score 81188
+Population 687 score 81188
+Population 688 score 81188
+Population 689 score 81189
+Population 690 score 81189
+Population 691 score 81189
+Population 692 score 81189
+Population 693 score 81189
+Population 694 score 81189
+Population 695 score 81189
+Population 696 score 81189
+Population 697 score 81189
+Population 698 score 81189
+Population 699 score 81189
+Population 700 score 81189
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 2 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 1 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 2 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 2 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 1 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 2 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 0 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 701 score 81189
+Population 702 score 81189
+Population 703 score 81189
+Population 704 score 81189
+Population 705 score 81189
+Population 706 score 81189
+Population 707 score 81189
+Population 708 score 81189
+Population 709 score 81189
+Population 710 score 81189
+Population 711 score 81189
+Population 712 score 81190
+Population 713 score 81190
+Population 714 score 81190
+Population 715 score 81190
+Population 716 score 81190
+Population 717 score 81191
+Population 718 score 81191
+Population 719 score 81191
+Population 720 score 81191
+Population 721 score 81191
+Population 722 score 81191
+Population 723 score 81191
+Population 724 score 81191
+Population 725 score 81191
+Population 726 score 81191
+Population 727 score 81194
+Population 728 score 81194
+Population 729 score 81194
+Population 730 score 81194
+Population 731 score 81194
+Population 732 score 81195
+Population 733 score 81195
+Population 734 score 81195
+Population 735 score 81195
+Population 736 score 81195
+Population 737 score 81195
+Population 738 score 81195
+Population 739 score 81195
+Population 740 score 81195
+Population 741 score 81195
+Population 742 score 81195
+Population 743 score 81195
+Population 744 score 81195
+Population 745 score 81195
+Population 746 score 81195
+Population 747 score 81195
+Population 748 score 81195
+Population 749 score 81195
+Population 750 score 81195
+Population 751 score 81195
+Population 752 score 81195
+Population 753 score 81195
+Population 754 score 81195
+Population 755 score 81195
+Population 756 score 81195
+Population 757 score 81195
+Population 758 score 81195
+Population 759 score 81195
+Population 760 score 81195
+Population 761 score 81195
+Population 762 score 81195
+Population 763 score 81195
+Population 764 score 81195
+Population 765 score 81195
+Population 766 score 81195
+Population 767 score 81195
+Population 768 score 81195
+Population 769 score 81195
+Population 770 score 81195
+Population 771 score 81199
+Population 772 score 81199
+Population 773 score 81199
+Population 774 score 81199
+Population 775 score 81199
+Population 776 score 81199
+Population 777 score 81199
+Population 778 score 81199
+Population 779 score 81199
+Population 780 score 81199
+Population 781 score 81199
+Population 782 score 81199
+Population 783 score 81199
+Population 784 score 81199
+Population 785 score 81199
+Population 786 score 81199
+Population 787 score 81201
+Population 788 score 81201
+Population 789 score 81201
+Population 790 score 81201
+Population 791 score 81201
+Population 792 score 81201
+Population 793 score 81201
+Population 794 score 81201
+Population 795 score 81201
+Population 796 score 81201
+Population 797 score 81201
+Population 798 score 81201
+Population 799 score 81201
+Population 800 score 81201
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 2 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 801 score 81201
+Population 802 score 81201
+Population 803 score 81201
+Population 804 score 81201
+Population 805 score 81201
+Population 806 score 81201
+Population 807 score 81201
+Population 808 score 81201
+Population 809 score 81201
+Population 810 score 81201
+Population 811 score 81201
+Population 812 score 81201
+Population 813 score 81201
+Population 814 score 81201
+Population 815 score 81201
+Population 816 score 81201
+Population 817 score 81201
+Population 818 score 81201
+Population 819 score 81201
+Population 820 score 81201
+Population 821 score 81201
+Population 822 score 81201
+Population 823 score 81201
+Population 824 score 81201
+Population 825 score 81201
+Population 826 score 81201
+Population 827 score 81201
+Population 828 score 81201
+Population 829 score 81201
+Population 830 score 81201
+Population 831 score 81201
+Population 832 score 81201
+Population 833 score 81201
+Population 834 score 81201
+Population 835 score 81201
+Population 836 score 81201
+Population 837 score 81201
+Population 838 score 81201
+Population 839 score 81201
+Population 840 score 81201
+Population 841 score 81201
+Population 842 score 81201
+Population 843 score 81201
+Population 844 score 81201
+Population 845 score 81201
+Population 846 score 81201
+Population 847 score 81201
+Population 848 score 81201
+Population 849 score 81201
+Population 850 score 81201
+Population 851 score 81201
+Population 852 score 81201
+Population 853 score 81201
+Population 854 score 81201
+Population 855 score 81201
+Population 856 score 81201
+Population 857 score 81201
+Population 858 score 81201
+Population 859 score 81201
+Population 860 score 81201
+Population 861 score 81201
+Population 862 score 81201
+Population 863 score 81201
+Population 864 score 81201
+Population 865 score 81201
+Population 866 score 81201
+Population 867 score 81201
+Population 868 score 81201
+Population 869 score 81201
+Population 870 score 81201
+Population 871 score 81201
+Population 872 score 81201
+Population 873 score 81201
+Population 874 score 81201
+Population 875 score 81201
+Population 876 score 81201
+Population 877 score 81201
+Population 878 score 81201
+Population 879 score 81201
+Population 880 score 81201
+Population 881 score 81201
+Population 882 score 81201
+Population 883 score 81201
+Population 884 score 81201
+Population 885 score 81201
+Population 886 score 81201
+Population 887 score 81201
+Population 888 score 81201
+Population 889 score 81201
+Population 890 score 81201
+Population 891 score 81201
+Population 892 score 81201
+Population 893 score 81201
+Population 894 score 81201
+Population 895 score 81201
+Population 896 score 81201
+Population 897 score 81201
+Population 898 score 81201
+Population 899 score 81201
+Population 900 score 81201
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 0 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 2 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 901 score 81201
+Population 902 score 81201
+Population 903 score 81201
+Population 904 score 81201
+Population 905 score 81201
+Population 906 score 81201
+Population 907 score 81201
+Population 908 score 81201
+Population 909 score 81201
+Population 910 score 81201
+Population 911 score 81201
+Population 912 score 81201
+Population 913 score 81201
+Population 914 score 81201
+Population 915 score 81201
+Population 916 score 81201
+Population 917 score 81201
+Population 918 score 81201
+Population 919 score 81201
+Population 920 score 81201
+Population 921 score 81201
+Population 922 score 81201
+Population 923 score 81202
+Population 924 score 81202
+Population 925 score 81202
+Population 926 score 81202
+Population 927 score 81202
+Population 928 score 81202
+Population 929 score 81202
+Population 930 score 81202
+Population 931 score 81202
+Population 932 score 81202
+Population 933 score 81202
+Population 934 score 81202
+Population 935 score 81202
+Population 936 score 81202
+Population 937 score 81202
+Population 938 score 81202
+Population 939 score 81202
+Population 940 score 81202
+Population 941 score 81202
+Population 942 score 81202
+Population 943 score 81202
+Population 944 score 81202
+Population 945 score 81202
+Population 946 score 81202
+Population 947 score 81202
+Population 948 score 81202
+Population 949 score 81202
+Population 950 score 81202
+Population 951 score 81202
+Population 952 score 81202
+Population 953 score 81202
+Population 954 score 81202
+Population 955 score 81202
+Population 956 score 81202
+Population 957 score 81202
+Population 958 score 81202
+Population 959 score 81202
+Population 960 score 81202
+Population 961 score 81202
+Population 962 score 81202
+Population 963 score 81202
+Population 964 score 81202
+Population 965 score 81202
+Population 966 score 81202
+Population 967 score 81202
+Population 968 score 81202
+Population 969 score 81202
+Population 970 score 81202
+Population 971 score 81202
+Population 972 score 81202
+Population 973 score 81203
+Population 974 score 81203
+Population 975 score 81203
+Population 976 score 81203
+Population 977 score 81203
+Population 978 score 81203
+Population 979 score 81203
+Population 980 score 81203
+Population 981 score 81203
+Population 982 score 81203
+Population 983 score 81203
+Population 984 score 81203
+Population 985 score 81203
+Population 986 score 81203
+Population 987 score 81203
+Population 988 score 81203
+Population 989 score 81203
+Population 990 score 81203
+Population 991 score 81203
+Population 992 score 81203
+Population 993 score 81203
+Population 994 score 81203
+Population 995 score 81203
+Population 996 score 81203
+Population 997 score 81203
+Population 998 score 81203
+Population 999 score 81203
+Population 1000 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1001 score 81203
+Population 1002 score 81203
+Population 1003 score 81203
+Population 1004 score 81203
+Population 1005 score 81203
+Population 1006 score 81203
+Population 1007 score 81203
+Population 1008 score 81203
+Population 1009 score 81203
+Population 1010 score 81203
+Population 1011 score 81203
+Population 1012 score 81203
+Population 1013 score 81203
+Population 1014 score 81203
+Population 1015 score 81203
+Population 1016 score 81203
+Population 1017 score 81203
+Population 1018 score 81203
+Population 1019 score 81203
+Population 1020 score 81203
+Population 1021 score 81203
+Population 1022 score 81203
+Population 1023 score 81203
+Population 1024 score 81203
+Population 1025 score 81203
+Population 1026 score 81203
+Population 1027 score 81203
+Population 1028 score 81203
+Population 1029 score 81203
+Population 1030 score 81203
+Population 1031 score 81203
+Population 1032 score 81203
+Population 1033 score 81203
+Population 1034 score 81203
+Population 1035 score 81203
+Population 1036 score 81203
+Population 1037 score 81203
+Population 1038 score 81203
+Population 1039 score 81203
+Population 1040 score 81203
+Population 1041 score 81203
+Population 1042 score 81203
+Population 1043 score 81203
+Population 1044 score 81203
+Population 1045 score 81203
+Population 1046 score 81203
+Population 1047 score 81203
+Population 1048 score 81203
+Population 1049 score 81203
+Population 1050 score 81203
+Population 1051 score 81203
+Population 1052 score 81203
+Population 1053 score 81203
+Population 1054 score 81203
+Population 1055 score 81203
+Population 1056 score 81203
+Population 1057 score 81203
+Population 1058 score 81203
+Population 1059 score 81203
+Population 1060 score 81203
+Population 1061 score 81203
+Population 1062 score 81203
+Population 1063 score 81203
+Population 1064 score 81203
+Population 1065 score 81203
+Population 1066 score 81203
+Population 1067 score 81203
+Population 1068 score 81203
+Population 1069 score 81203
+Population 1070 score 81203
+Population 1071 score 81203
+Population 1072 score 81203
+Population 1073 score 81203
+Population 1074 score 81203
+Population 1075 score 81203
+Population 1076 score 81203
+Population 1077 score 81203
+Population 1078 score 81203
+Population 1079 score 81203
+Population 1080 score 81203
+Population 1081 score 81203
+Population 1082 score 81203
+Population 1083 score 81203
+Population 1084 score 81203
+Population 1085 score 81203
+Population 1086 score 81203
+Population 1087 score 81203
+Population 1088 score 81203
+Population 1089 score 81203
+Population 1090 score 81203
+Population 1091 score 81203
+Population 1092 score 81203
+Population 1093 score 81203
+Population 1094 score 81203
+Population 1095 score 81203
+Population 1096 score 81203
+Population 1097 score 81203
+Population 1098 score 81203
+Population 1099 score 81203
+Population 1100 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1101 score 81203
+Population 1102 score 81203
+Population 1103 score 81203
+Population 1104 score 81203
+Population 1105 score 81203
+Population 1106 score 81203
+Population 1107 score 81203
+Population 1108 score 81203
+Population 1109 score 81203
+Population 1110 score 81203
+Population 1111 score 81203
+Population 1112 score 81203
+Population 1113 score 81203
+Population 1114 score 81203
+Population 1115 score 81203
+Population 1116 score 81203
+Population 1117 score 81203
+Population 1118 score 81203
+Population 1119 score 81203
+Population 1120 score 81203
+Population 1121 score 81203
+Population 1122 score 81203
+Population 1123 score 81203
+Population 1124 score 81203
+Population 1125 score 81203
+Population 1126 score 81203
+Population 1127 score 81203
+Population 1128 score 81203
+Population 1129 score 81203
+Population 1130 score 81203
+Population 1131 score 81203
+Population 1132 score 81203
+Population 1133 score 81203
+Population 1134 score 81203
+Population 1135 score 81203
+Population 1136 score 81203
+Population 1137 score 81203
+Population 1138 score 81203
+Population 1139 score 81203
+Population 1140 score 81203
+Population 1141 score 81203
+Population 1142 score 81203
+Population 1143 score 81203
+Population 1144 score 81203
+Population 1145 score 81203
+Population 1146 score 81203
+Population 1147 score 81203
+Population 1148 score 81203
+Population 1149 score 81203
+Population 1150 score 81203
+Population 1151 score 81203
+Population 1152 score 81203
+Population 1153 score 81203
+Population 1154 score 81203
+Population 1155 score 81203
+Population 1156 score 81203
+Population 1157 score 81203
+Population 1158 score 81203
+Population 1159 score 81203
+Population 1160 score 81203
+Population 1161 score 81203
+Population 1162 score 81203
+Population 1163 score 81203
+Population 1164 score 81203
+Population 1165 score 81203
+Population 1166 score 81203
+Population 1167 score 81203
+Population 1168 score 81203
+Population 1169 score 81203
+Population 1170 score 81203
+Population 1171 score 81203
+Population 1172 score 81203
+Population 1173 score 81203
+Population 1174 score 81203
+Population 1175 score 81203
+Population 1176 score 81203
+Population 1177 score 81203
+Population 1178 score 81203
+Population 1179 score 81203
+Population 1180 score 81203
+Population 1181 score 81203
+Population 1182 score 81203
+Population 1183 score 81203
+Population 1184 score 81203
+Population 1185 score 81203
+Population 1186 score 81203
+Population 1187 score 81203
+Population 1188 score 81203
+Population 1189 score 81203
+Population 1190 score 81203
+Population 1191 score 81203
+Population 1192 score 81203
+Population 1193 score 81203
+Population 1194 score 81203
+Population 1195 score 81203
+Population 1196 score 81203
+Population 1197 score 81203
+Population 1198 score 81203
+Population 1199 score 81203
+Population 1200 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1201 score 81203
+Population 1202 score 81203
+Population 1203 score 81203
+Population 1204 score 81203
+Population 1205 score 81203
+Population 1206 score 81203
+Population 1207 score 81203
+Population 1208 score 81203
+Population 1209 score 81203
+Population 1210 score 81203
+Population 1211 score 81203
+Population 1212 score 81203
+Population 1213 score 81203
+Population 1214 score 81203
+Population 1215 score 81203
+Population 1216 score 81203
+Population 1217 score 81203
+Population 1218 score 81203
+Population 1219 score 81203
+Population 1220 score 81203
+Population 1221 score 81203
+Population 1222 score 81203
+Population 1223 score 81203
+Population 1224 score 81203
+Population 1225 score 81203
+Population 1226 score 81203
+Population 1227 score 81203
+Population 1228 score 81203
+Population 1229 score 81203
+Population 1230 score 81203
+Population 1231 score 81203
+Population 1232 score 81203
+Population 1233 score 81203
+Population 1234 score 81203
+Population 1235 score 81203
+Population 1236 score 81203
+Population 1237 score 81203
+Population 1238 score 81203
+Population 1239 score 81203
+Population 1240 score 81203
+Population 1241 score 81203
+Population 1242 score 81203
+Population 1243 score 81203
+Population 1244 score 81203
+Population 1245 score 81203
+Population 1246 score 81203
+Population 1247 score 81203
+Population 1248 score 81203
+Population 1249 score 81203
+Population 1250 score 81203
+Population 1251 score 81203
+Population 1252 score 81203
+Population 1253 score 81203
+Population 1254 score 81203
+Population 1255 score 81203
+Population 1256 score 81203
+Population 1257 score 81203
+Population 1258 score 81203
+Population 1259 score 81203
+Population 1260 score 81203
+Population 1261 score 81203
+Population 1262 score 81203
+Population 1263 score 81203
+Population 1264 score 81203
+Population 1265 score 81203
+Population 1266 score 81203
+Population 1267 score 81203
+Population 1268 score 81203
+Population 1269 score 81203
+Population 1270 score 81203
+Population 1271 score 81203
+Population 1272 score 81203
+Population 1273 score 81203
+Population 1274 score 81203
+Population 1275 score 81203
+Population 1276 score 81203
+Population 1277 score 81203
+Population 1278 score 81203
+Population 1279 score 81203
+Population 1280 score 81203
+Population 1281 score 81203
+Population 1282 score 81203
+Population 1283 score 81203
+Population 1284 score 81203
+Population 1285 score 81203
+Population 1286 score 81203
+Population 1287 score 81203
+Population 1288 score 81203
+Population 1289 score 81203
+Population 1290 score 81203
+Population 1291 score 81203
+Population 1292 score 81203
+Population 1293 score 81203
+Population 1294 score 81203
+Population 1295 score 81203
+Population 1296 score 81203
+Population 1297 score 81203
+Population 1298 score 81203
+Population 1299 score 81203
+Population 1300 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1301 score 81203
+Population 1302 score 81203
+Population 1303 score 81203
+Population 1304 score 81203
+Population 1305 score 81203
+Population 1306 score 81203
+Population 1307 score 81203
+Population 1308 score 81203
+Population 1309 score 81203
+Population 1310 score 81203
+Population 1311 score 81203
+Population 1312 score 81203
+Population 1313 score 81203
+Population 1314 score 81203
+Population 1315 score 81203
+Population 1316 score 81203
+Population 1317 score 81203
+Population 1318 score 81203
+Population 1319 score 81203
+Population 1320 score 81203
+Population 1321 score 81203
+Population 1322 score 81203
+Population 1323 score 81203
+Population 1324 score 81203
+Population 1325 score 81203
+Population 1326 score 81203
+Population 1327 score 81203
+Population 1328 score 81203
+Population 1329 score 81203
+Population 1330 score 81203
+Population 1331 score 81203
+Population 1332 score 81203
+Population 1333 score 81203
+Population 1334 score 81203
+Population 1335 score 81203
+Population 1336 score 81203
+Population 1337 score 81203
+Population 1338 score 81203
+Population 1339 score 81203
+Population 1340 score 81203
+Population 1341 score 81203
+Population 1342 score 81203
+Population 1343 score 81203
+Population 1344 score 81203
+Population 1345 score 81203
+Population 1346 score 81203
+Population 1347 score 81203
+Population 1348 score 81203
+Population 1349 score 81203
+Population 1350 score 81203
+Population 1351 score 81203
+Population 1352 score 81203
+Population 1353 score 81203
+Population 1354 score 81203
+Population 1355 score 81203
+Population 1356 score 81203
+Population 1357 score 81203
+Population 1358 score 81203
+Population 1359 score 81203
+Population 1360 score 81203
+Population 1361 score 81203
+Population 1362 score 81203
+Population 1363 score 81203
+Population 1364 score 81203
+Population 1365 score 81203
+Population 1366 score 81203
+Population 1367 score 81203
+Population 1368 score 81203
+Population 1369 score 81203
+Population 1370 score 81203
+Population 1371 score 81203
+Population 1372 score 81203
+Population 1373 score 81203
+Population 1374 score 81203
+Population 1375 score 81203
+Population 1376 score 81203
+Population 1377 score 81203
+Population 1378 score 81203
+Population 1379 score 81203
+Population 1380 score 81203
+Population 1381 score 81203
+Population 1382 score 81203
+Population 1383 score 81203
+Population 1384 score 81203
+Population 1385 score 81203
+Population 1386 score 81203
+Population 1387 score 81203
+Population 1388 score 81203
+Population 1389 score 81203
+Population 1390 score 81203
+Population 1391 score 81203
+Population 1392 score 81203
+Population 1393 score 81203
+Population 1394 score 81203
+Population 1395 score 81203
+Population 1396 score 81203
+Population 1397 score 81203
+Population 1398 score 81203
+Population 1399 score 81203
+Population 1400 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 0 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1401 score 81203
+Population 1402 score 81203
+Population 1403 score 81203
+Population 1404 score 81203
+Population 1405 score 81203
+Population 1406 score 81203
+Population 1407 score 81203
+Population 1408 score 81203
+Population 1409 score 81203
+Population 1410 score 81203
+Population 1411 score 81203
+Population 1412 score 81203
+Population 1413 score 81203
+Population 1414 score 81203
+Population 1415 score 81203
+Population 1416 score 81203
+Population 1417 score 81203
+Population 1418 score 81203
+Population 1419 score 81203
+Population 1420 score 81203
+Population 1421 score 81203
+Population 1422 score 81203
+Population 1423 score 81203
+Population 1424 score 81203
+Population 1425 score 81203
+Population 1426 score 81203
+Population 1427 score 81203
+Population 1428 score 81203
+Population 1429 score 81203
+Population 1430 score 81203
+Population 1431 score 81203
+Population 1432 score 81203
+Population 1433 score 81203
+Population 1434 score 81203
+Population 1435 score 81203
+Population 1436 score 81203
+Population 1437 score 81203
+Population 1438 score 81203
+Population 1439 score 81203
+Population 1440 score 81203
+Population 1441 score 81203
+Population 1442 score 81203
+Population 1443 score 81203
+Population 1444 score 81203
+Population 1445 score 81203
+Population 1446 score 81203
+Population 1447 score 81203
+Population 1448 score 81203
+Population 1449 score 81203
+Population 1450 score 81203
+Population 1451 score 81203
+Population 1452 score 81203
+Population 1453 score 81203
+Population 1454 score 81203
+Population 1455 score 81203
+Population 1456 score 81203
+Population 1457 score 81203
+Population 1458 score 81203
+Population 1459 score 81203
+Population 1460 score 81203
+Population 1461 score 81203
+Population 1462 score 81203
+Population 1463 score 81203
+Population 1464 score 81203
+Population 1465 score 81203
+Population 1466 score 81203
+Population 1467 score 81203
+Population 1468 score 81203
+Population 1469 score 81203
+Population 1470 score 81203
+Population 1471 score 81203
+Population 1472 score 81203
+Population 1473 score 81203
+Population 1474 score 81203
+Population 1475 score 81203
+Population 1476 score 81203
+Population 1477 score 81203
+Population 1478 score 81203
+Population 1479 score 81203
+Population 1480 score 81203
+Population 1481 score 81203
+Population 1482 score 81203
+Population 1483 score 81203
+Population 1484 score 81203
+Population 1485 score 81203
+Population 1486 score 81203
+Population 1487 score 81203
+Population 1488 score 81203
+Population 1489 score 81203
+Population 1490 score 81203
+Population 1491 score 81203
+Population 1492 score 81203
+Population 1493 score 81203
+Population 1494 score 81203
+Population 1495 score 81203
+Population 1496 score 81203
+Population 1497 score 81203
+Population 1498 score 81203
+Population 1499 score 81203
+Population 1500 score 81203
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 1 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1501 score 81203
+Population 1502 score 81203
+Population 1503 score 81203
+Population 1504 score 81203
+Population 1505 score 81203
+Population 1506 score 81203
+Population 1507 score 81203
+Population 1508 score 81203
+Population 1509 score 81203
+Population 1510 score 81203
+Population 1511 score 81203
+Population 1512 score 81203
+Population 1513 score 81203
+Population 1514 score 81203
+Population 1515 score 81203
+Population 1516 score 81203
+Population 1517 score 81203
+Population 1518 score 81203
+Population 1519 score 81203
+Population 1520 score 81203
+Population 1521 score 81203
+Population 1522 score 81203
+Population 1523 score 81203
+Population 1524 score 81203
+Population 1525 score 81203
+Population 1526 score 81203
+Population 1527 score 81203
+Population 1528 score 81203
+Population 1529 score 81203
+Population 1530 score 81203
+Population 1531 score 81203
+Population 1532 score 81203
+Population 1533 score 81203
+Population 1534 score 81203
+Population 1535 score 81203
+Population 1536 score 81203
+Population 1537 score 81203
+Population 1538 score 81204
+Population 1539 score 81204
+Population 1540 score 81204
+Population 1541 score 81204
+Population 1542 score 81204
+Population 1543 score 81204
+Population 1544 score 81204
+Population 1545 score 81204
+Population 1546 score 81204
+Population 1547 score 81204
+Population 1548 score 81204
+Population 1549 score 81204
+Population 1550 score 81204
+Population 1551 score 81204
+Population 1552 score 81204
+Population 1553 score 81204
+Population 1554 score 81204
+Population 1555 score 81204
+Population 1556 score 81204
+Population 1557 score 81204
+Population 1558 score 81204
+Population 1559 score 81204
+Population 1560 score 81204
+Population 1561 score 81204
+Population 1562 score 81204
+Population 1563 score 81204
+Population 1564 score 81204
+Population 1565 score 81204
+Population 1566 score 81204
+Population 1567 score 81204
+Population 1568 score 81204
+Population 1569 score 81204
+Population 1570 score 81204
+Population 1571 score 81204
+Population 1572 score 81204
+Population 1573 score 81204
+Population 1574 score 81204
+Population 1575 score 81204
+Population 1576 score 81204
+Population 1577 score 81204
+Population 1578 score 81204
+Population 1579 score 81204
+Population 1580 score 81204
+Population 1581 score 81204
+Population 1582 score 81204
+Population 1583 score 81204
+Population 1584 score 81204
+Population 1585 score 81204
+Population 1586 score 81204
+Population 1587 score 81204
+Population 1588 score 81204
+Population 1589 score 81204
+Population 1590 score 81204
+Population 1591 score 81204
+Population 1592 score 81204
+Population 1593 score 81204
+Population 1594 score 81204
+Population 1595 score 81204
+Population 1596 score 81204
+Population 1597 score 81204
+Population 1598 score 81204
+Population 1599 score 81204
+Population 1600 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1601 score 81204
+Population 1602 score 81204
+Population 1603 score 81204
+Population 1604 score 81204
+Population 1605 score 81204
+Population 1606 score 81204
+Population 1607 score 81204
+Population 1608 score 81204
+Population 1609 score 81204
+Population 1610 score 81204
+Population 1611 score 81204
+Population 1612 score 81204
+Population 1613 score 81204
+Population 1614 score 81204
+Population 1615 score 81204
+Population 1616 score 81204
+Population 1617 score 81204
+Population 1618 score 81204
+Population 1619 score 81204
+Population 1620 score 81204
+Population 1621 score 81204
+Population 1622 score 81204
+Population 1623 score 81204
+Population 1624 score 81204
+Population 1625 score 81204
+Population 1626 score 81204
+Population 1627 score 81204
+Population 1628 score 81204
+Population 1629 score 81204
+Population 1630 score 81204
+Population 1631 score 81204
+Population 1632 score 81204
+Population 1633 score 81204
+Population 1634 score 81204
+Population 1635 score 81204
+Population 1636 score 81204
+Population 1637 score 81204
+Population 1638 score 81204
+Population 1639 score 81204
+Population 1640 score 81204
+Population 1641 score 81204
+Population 1642 score 81204
+Population 1643 score 81204
+Population 1644 score 81204
+Population 1645 score 81204
+Population 1646 score 81204
+Population 1647 score 81204
+Population 1648 score 81204
+Population 1649 score 81204
+Population 1650 score 81204
+Population 1651 score 81204
+Population 1652 score 81204
+Population 1653 score 81204
+Population 1654 score 81204
+Population 1655 score 81204
+Population 1656 score 81204
+Population 1657 score 81204
+Population 1658 score 81204
+Population 1659 score 81204
+Population 1660 score 81204
+Population 1661 score 81204
+Population 1662 score 81204
+Population 1663 score 81204
+Population 1664 score 81204
+Population 1665 score 81204
+Population 1666 score 81204
+Population 1667 score 81204
+Population 1668 score 81204
+Population 1669 score 81204
+Population 1670 score 81204
+Population 1671 score 81204
+Population 1672 score 81204
+Population 1673 score 81204
+Population 1674 score 81204
+Population 1675 score 81204
+Population 1676 score 81204
+Population 1677 score 81204
+Population 1678 score 81204
+Population 1679 score 81204
+Population 1680 score 81204
+Population 1681 score 81204
+Population 1682 score 81204
+Population 1683 score 81204
+Population 1684 score 81204
+Population 1685 score 81204
+Population 1686 score 81204
+Population 1687 score 81204
+Population 1688 score 81204
+Population 1689 score 81204
+Population 1690 score 81204
+Population 1691 score 81204
+Population 1692 score 81204
+Population 1693 score 81204
+Population 1694 score 81204
+Population 1695 score 81204
+Population 1696 score 81204
+Population 1697 score 81204
+Population 1698 score 81204
+Population 1699 score 81204
+Population 1700 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1701 score 81204
+Population 1702 score 81204
+Population 1703 score 81204
+Population 1704 score 81204
+Population 1705 score 81204
+Population 1706 score 81204
+Population 1707 score 81204
+Population 1708 score 81204
+Population 1709 score 81204
+Population 1710 score 81204
+Population 1711 score 81204
+Population 1712 score 81204
+Population 1713 score 81204
+Population 1714 score 81204
+Population 1715 score 81204
+Population 1716 score 81204
+Population 1717 score 81204
+Population 1718 score 81204
+Population 1719 score 81204
+Population 1720 score 81204
+Population 1721 score 81204
+Population 1722 score 81204
+Population 1723 score 81204
+Population 1724 score 81204
+Population 1725 score 81204
+Population 1726 score 81204
+Population 1727 score 81204
+Population 1728 score 81204
+Population 1729 score 81204
+Population 1730 score 81204
+Population 1731 score 81204
+Population 1732 score 81204
+Population 1733 score 81204
+Population 1734 score 81204
+Population 1735 score 81204
+Population 1736 score 81204
+Population 1737 score 81204
+Population 1738 score 81204
+Population 1739 score 81204
+Population 1740 score 81204
+Population 1741 score 81204
+Population 1742 score 81204
+Population 1743 score 81204
+Population 1744 score 81204
+Population 1745 score 81204
+Population 1746 score 81204
+Population 1747 score 81204
+Population 1748 score 81204
+Population 1749 score 81204
+Population 1750 score 81204
+Population 1751 score 81204
+Population 1752 score 81204
+Population 1753 score 81204
+Population 1754 score 81204
+Population 1755 score 81204
+Population 1756 score 81204
+Population 1757 score 81204
+Population 1758 score 81204
+Population 1759 score 81204
+Population 1760 score 81204
+Population 1761 score 81204
+Population 1762 score 81204
+Population 1763 score 81204
+Population 1764 score 81204
+Population 1765 score 81204
+Population 1766 score 81204
+Population 1767 score 81204
+Population 1768 score 81204
+Population 1769 score 81204
+Population 1770 score 81204
+Population 1771 score 81204
+Population 1772 score 81204
+Population 1773 score 81204
+Population 1774 score 81204
+Population 1775 score 81204
+Population 1776 score 81204
+Population 1777 score 81204
+Population 1778 score 81204
+Population 1779 score 81204
+Population 1780 score 81204
+Population 1781 score 81204
+Population 1782 score 81204
+Population 1783 score 81204
+Population 1784 score 81204
+Population 1785 score 81204
+Population 1786 score 81204
+Population 1787 score 81204
+Population 1788 score 81204
+Population 1789 score 81204
+Population 1790 score 81204
+Population 1791 score 81204
+Population 1792 score 81204
+Population 1793 score 81204
+Population 1794 score 81204
+Population 1795 score 81204
+Population 1796 score 81204
+Population 1797 score 81204
+Population 1798 score 81204
+Population 1799 score 81204
+Population 1800 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1801 score 81204
+Population 1802 score 81204
+Population 1803 score 81204
+Population 1804 score 81204
+Population 1805 score 81204
+Population 1806 score 81204
+Population 1807 score 81204
+Population 1808 score 81204
+Population 1809 score 81204
+Population 1810 score 81204
+Population 1811 score 81204
+Population 1812 score 81204
+Population 1813 score 81204
+Population 1814 score 81204
+Population 1815 score 81204
+Population 1816 score 81204
+Population 1817 score 81204
+Population 1818 score 81204
+Population 1819 score 81204
+Population 1820 score 81204
+Population 1821 score 81204
+Population 1822 score 81204
+Population 1823 score 81204
+Population 1824 score 81204
+Population 1825 score 81204
+Population 1826 score 81204
+Population 1827 score 81204
+Population 1828 score 81204
+Population 1829 score 81204
+Population 1830 score 81204
+Population 1831 score 81204
+Population 1832 score 81204
+Population 1833 score 81204
+Population 1834 score 81204
+Population 1835 score 81204
+Population 1836 score 81204
+Population 1837 score 81204
+Population 1838 score 81204
+Population 1839 score 81204
+Population 1840 score 81204
+Population 1841 score 81204
+Population 1842 score 81204
+Population 1843 score 81204
+Population 1844 score 81204
+Population 1845 score 81204
+Population 1846 score 81204
+Population 1847 score 81204
+Population 1848 score 81204
+Population 1849 score 81204
+Population 1850 score 81204
+Population 1851 score 81204
+Population 1852 score 81204
+Population 1853 score 81204
+Population 1854 score 81204
+Population 1855 score 81204
+Population 1856 score 81204
+Population 1857 score 81204
+Population 1858 score 81204
+Population 1859 score 81204
+Population 1860 score 81204
+Population 1861 score 81204
+Population 1862 score 81204
+Population 1863 score 81204
+Population 1864 score 81204
+Population 1865 score 81204
+Population 1866 score 81204
+Population 1867 score 81204
+Population 1868 score 81204
+Population 1869 score 81204
+Population 1870 score 81204
+Population 1871 score 81204
+Population 1872 score 81204
+Population 1873 score 81204
+Population 1874 score 81204
+Population 1875 score 81204
+Population 1876 score 81204
+Population 1877 score 81204
+Population 1878 score 81204
+Population 1879 score 81204
+Population 1880 score 81204
+Population 1881 score 81204
+Population 1882 score 81204
+Population 1883 score 81204
+Population 1884 score 81204
+Population 1885 score 81204
+Population 1886 score 81204
+Population 1887 score 81204
+Population 1888 score 81204
+Population 1889 score 81204
+Population 1890 score 81204
+Population 1891 score 81204
+Population 1892 score 81204
+Population 1893 score 81204
+Population 1894 score 81204
+Population 1895 score 81204
+Population 1896 score 81204
+Population 1897 score 81204
+Population 1898 score 81204
+Population 1899 score 81204
+Population 1900 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 1901 score 81204
+Population 1902 score 81204
+Population 1903 score 81204
+Population 1904 score 81204
+Population 1905 score 81204
+Population 1906 score 81204
+Population 1907 score 81204
+Population 1908 score 81204
+Population 1909 score 81204
+Population 1910 score 81204
+Population 1911 score 81204
+Population 1912 score 81204
+Population 1913 score 81204
+Population 1914 score 81204
+Population 1915 score 81204
+Population 1916 score 81204
+Population 1917 score 81204
+Population 1918 score 81204
+Population 1919 score 81204
+Population 1920 score 81204
+Population 1921 score 81204
+Population 1922 score 81204
+Population 1923 score 81204
+Population 1924 score 81204
+Population 1925 score 81204
+Population 1926 score 81204
+Population 1927 score 81204
+Population 1928 score 81204
+Population 1929 score 81204
+Population 1930 score 81204
+Population 1931 score 81204
+Population 1932 score 81204
+Population 1933 score 81204
+Population 1934 score 81204
+Population 1935 score 81204
+Population 1936 score 81204
+Population 1937 score 81204
+Population 1938 score 81204
+Population 1939 score 81204
+Population 1940 score 81204
+Population 1941 score 81204
+Population 1942 score 81204
+Population 1943 score 81204
+Population 1944 score 81204
+Population 1945 score 81204
+Population 1946 score 81204
+Population 1947 score 81204
+Population 1948 score 81204
+Population 1949 score 81204
+Population 1950 score 81204
+Population 1951 score 81204
+Population 1952 score 81204
+Population 1953 score 81204
+Population 1954 score 81204
+Population 1955 score 81204
+Population 1956 score 81204
+Population 1957 score 81204
+Population 1958 score 81204
+Population 1959 score 81204
+Population 1960 score 81204
+Population 1961 score 81204
+Population 1962 score 81204
+Population 1963 score 81204
+Population 1964 score 81204
+Population 1965 score 81204
+Population 1966 score 81204
+Population 1967 score 81204
+Population 1968 score 81204
+Population 1969 score 81204
+Population 1970 score 81204
+Population 1971 score 81204
+Population 1972 score 81204
+Population 1973 score 81204
+Population 1974 score 81204
+Population 1975 score 81204
+Population 1976 score 81204
+Population 1977 score 81204
+Population 1978 score 81204
+Population 1979 score 81204
+Population 1980 score 81204
+Population 1981 score 81204
+Population 1982 score 81204
+Population 1983 score 81204
+Population 1984 score 81204
+Population 1985 score 81204
+Population 1986 score 81204
+Population 1987 score 81204
+Population 1988 score 81204
+Population 1989 score 81204
+Population 1990 score 81204
+Population 1991 score 81204
+Population 1992 score 81204
+Population 1993 score 81204
+Population 1994 score 81204
+Population 1995 score 81204
+Population 1996 score 81204
+Population 1997 score 81204
+Population 1998 score 81204
+Population 1999 score 81204
+Population 2000 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 2001 score 81204
+Population 2002 score 81204
+Population 2003 score 81204
+Population 2004 score 81204
+Population 2005 score 81204
+Population 2006 score 81204
+Population 2007 score 81204
+Population 2008 score 81204
+Population 2009 score 81204
+Population 2010 score 81204
+Population 2011 score 81204
+Population 2012 score 81204
+Population 2013 score 81204
+Population 2014 score 81204
+Population 2015 score 81204
+Population 2016 score 81204
+Population 2017 score 81204
+Population 2018 score 81204
+Population 2019 score 81204
+Population 2020 score 81204
+Population 2021 score 81204
+Population 2022 score 81204
+Population 2023 score 81204
+Population 2024 score 81204
+Population 2025 score 81204
+Population 2026 score 81204
+Population 2027 score 81204
+Population 2028 score 81204
+Population 2029 score 81204
+Population 2030 score 81204
+Population 2031 score 81204
+Population 2032 score 81204
+Population 2033 score 81204
+Population 2034 score 81204
+Population 2035 score 81204
+Population 2036 score 81204
+Population 2037 score 81204
+Population 2038 score 81204
+Population 2039 score 81204
+Population 2040 score 81204
+Population 2041 score 81204
+Population 2042 score 81204
+Population 2043 score 81204
+Population 2044 score 81204
+Population 2045 score 81204
+Population 2046 score 81204
+Population 2047 score 81204
+Population 2048 score 81204
+Population 2049 score 81204
+Population 2050 score 81204
+Population 2051 score 81204
+Population 2052 score 81204
+Population 2053 score 81204
+Population 2054 score 81204
+Population 2055 score 81204
+Population 2056 score 81204
+Population 2057 score 81204
+Population 2058 score 81204
+Population 2059 score 81204
+Population 2060 score 81204
+Population 2061 score 81204
+Population 2062 score 81204
+Population 2063 score 81204
+Population 2064 score 81204
+Population 2065 score 81204
+Population 2066 score 81204
+Population 2067 score 81204
+Population 2068 score 81204
+Population 2069 score 81204
+Population 2070 score 81204
+Population 2071 score 81204
+Population 2072 score 81204
+Population 2073 score 81204
+Population 2074 score 81204
+Population 2075 score 81204
+Population 2076 score 81204
+Population 2077 score 81204
+Population 2078 score 81204
+Population 2079 score 81204
+Population 2080 score 81204
+Population 2081 score 81204
+Population 2082 score 81204
+Population 2083 score 81204
+Population 2084 score 81204
+Population 2085 score 81204
+Population 2086 score 81204
+Population 2087 score 81204
+Population 2088 score 81204
+Population 2089 score 81204
+Population 2090 score 81204
+Population 2091 score 81204
+Population 2092 score 81204
+Population 2093 score 81204
+Population 2094 score 81204
+Population 2095 score 81204
+Population 2096 score 81204
+Population 2097 score 81204
+Population 2098 score 81204
+Population 2099 score 81204
+Population 2100 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 2101 score 81204
+Population 2102 score 81204
+Population 2103 score 81204
+Population 2104 score 81204
+Population 2105 score 81204
+Population 2106 score 81204
+Population 2107 score 81204
+Population 2108 score 81204
+Population 2109 score 81204
+Population 2110 score 81204
+Population 2111 score 81204
+Population 2112 score 81204
+Population 2113 score 81204
+Population 2114 score 81204
+Population 2115 score 81204
+Population 2116 score 81204
+Population 2117 score 81204
+Population 2118 score 81204
+Population 2119 score 81204
+Population 2120 score 81204
+Population 2121 score 81204
+Population 2122 score 81204
+Population 2123 score 81204
+Population 2124 score 81204
+Population 2125 score 81204
+Population 2126 score 81204
+Population 2127 score 81204
+Population 2128 score 81204
+Population 2129 score 81204
+Population 2130 score 81204
+Population 2131 score 81204
+Population 2132 score 81204
+Population 2133 score 81204
+Population 2134 score 81204
+Population 2135 score 81204
+Population 2136 score 81204
+Population 2137 score 81204
+Population 2138 score 81204
+Population 2139 score 81204
+Population 2140 score 81204
+Population 2141 score 81204
+Population 2142 score 81204
+Population 2143 score 81204
+Population 2144 score 81204
+Population 2145 score 81204
+Population 2146 score 81204
+Population 2147 score 81204
+Population 2148 score 81204
+Population 2149 score 81204
+Population 2150 score 81204
+Population 2151 score 81204
+Population 2152 score 81204
+Population 2153 score 81204
+Population 2154 score 81204
+Population 2155 score 81204
+Population 2156 score 81204
+Population 2157 score 81204
+Population 2158 score 81204
+Population 2159 score 81204
+Population 2160 score 81204
+Population 2161 score 81204
+Population 2162 score 81204
+Population 2163 score 81204
+Population 2164 score 81204
+Population 2165 score 81204
+Population 2166 score 81204
+Population 2167 score 81204
+Population 2168 score 81204
+Population 2169 score 81204
+Population 2170 score 81204
+Population 2171 score 81204
+Population 2172 score 81204
+Population 2173 score 81204
+Population 2174 score 81204
+Population 2175 score 81204
+Population 2176 score 81204
+Population 2177 score 81204
+Population 2178 score 81204
+Population 2179 score 81204
+Population 2180 score 81204
+Population 2181 score 81204
+Population 2182 score 81204
+Population 2183 score 81204
+Population 2184 score 81204
+Population 2185 score 81204
+Population 2186 score 81204
+Population 2187 score 81204
+Population 2188 score 81204
+Population 2189 score 81204
+Population 2190 score 81204
+Population 2191 score 81204
+Population 2192 score 81204
+Population 2193 score 81204
+Population 2194 score 81204
+Population 2195 score 81204
+Population 2196 score 81204
+Population 2197 score 81204
+Population 2198 score 81204
+Population 2199 score 81204
+Population 2200 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 2201 score 81204
+Population 2202 score 81204
+Population 2203 score 81204
+Population 2204 score 81204
+Population 2205 score 81204
+Population 2206 score 81204
+Population 2207 score 81204
+Population 2208 score 81204
+Population 2209 score 81204
+Population 2210 score 81204
+Population 2211 score 81204
+Population 2212 score 81204
+Population 2213 score 81204
+Population 2214 score 81204
+Population 2215 score 81204
+Population 2216 score 81204
+Population 2217 score 81204
+Population 2218 score 81204
+Population 2219 score 81204
+Population 2220 score 81204
+Population 2221 score 81204
+Population 2222 score 81204
+Population 2223 score 81204
+Population 2224 score 81204
+Population 2225 score 81204
+Population 2226 score 81204
+Population 2227 score 81204
+Population 2228 score 81204
+Population 2229 score 81204
+Population 2230 score 81204
+Population 2231 score 81204
+Population 2232 score 81204
+Population 2233 score 81204
+Population 2234 score 81204
+Population 2235 score 81204
+Population 2236 score 81204
+Population 2237 score 81204
+Population 2238 score 81204
+Population 2239 score 81204
+Population 2240 score 81204
+Population 2241 score 81204
+Population 2242 score 81204
+Population 2243 score 81204
+Population 2244 score 81204
+Population 2245 score 81204
+Population 2246 score 81204
+Population 2247 score 81204
+Population 2248 score 81204
+Population 2249 score 81204
+Population 2250 score 81204
+Population 2251 score 81204
+Population 2252 score 81204
+Population 2253 score 81204
+Population 2254 score 81204
+Population 2255 score 81204
+Population 2256 score 81204
+Population 2257 score 81204
+Population 2258 score 81204
+Population 2259 score 81204
+Population 2260 score 81204
+Population 2261 score 81204
+Population 2262 score 81204
+Population 2263 score 81204
+Population 2264 score 81204
+Population 2265 score 81204
+Population 2266 score 81204
+Population 2267 score 81204
+Population 2268 score 81204
+Population 2269 score 81204
+Population 2270 score 81204
+Population 2271 score 81204
+Population 2272 score 81204
+Population 2273 score 81204
+Population 2274 score 81204
+Population 2275 score 81204
+Population 2276 score 81204
+Population 2277 score 81204
+Population 2278 score 81204
+Population 2279 score 81204
+Population 2280 score 81204
+Population 2281 score 81204
+Population 2282 score 81204
+Population 2283 score 81204
+Population 2284 score 81204
+Population 2285 score 81204
+Population 2286 score 81204
+Population 2287 score 81204
+Population 2288 score 81204
+Population 2289 score 81204
+Population 2290 score 81204
+Population 2291 score 81204
+Population 2292 score 81204
+Population 2293 score 81204
+Population 2294 score 81204
+Population 2295 score 81204
+Population 2296 score 81204
+Population 2297 score 81204
+Population 2298 score 81204
+Population 2299 score 81204
+Population 2300 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 2301 score 81204
+Population 2302 score 81204
+Population 2303 score 81204
+Population 2304 score 81204
+Population 2305 score 81204
+Population 2306 score 81204
+Population 2307 score 81204
+Population 2308 score 81204
+Population 2309 score 81204
+Population 2310 score 81204
+Population 2311 score 81204
+Population 2312 score 81204
+Population 2313 score 81204
+Population 2314 score 81204
+Population 2315 score 81204
+Population 2316 score 81204
+Population 2317 score 81204
+Population 2318 score 81204
+Population 2319 score 81204
+Population 2320 score 81204
+Population 2321 score 81204
+Population 2322 score 81204
+Population 2323 score 81204
+Population 2324 score 81204
+Population 2325 score 81204
+Population 2326 score 81204
+Population 2327 score 81204
+Population 2328 score 81204
+Population 2329 score 81204
+Population 2330 score 81204
+Population 2331 score 81204
+Population 2332 score 81204
+Population 2333 score 81204
+Population 2334 score 81204
+Population 2335 score 81204
+Population 2336 score 81204
+Population 2337 score 81204
+Population 2338 score 81204
+Population 2339 score 81204
+Population 2340 score 81204
+Population 2341 score 81204
+Population 2342 score 81204
+Population 2343 score 81204
+Population 2344 score 81204
+Population 2345 score 81204
+Population 2346 score 81204
+Population 2347 score 81204
+Population 2348 score 81204
+Population 2349 score 81204
+Population 2350 score 81204
+Population 2351 score 81204
+Population 2352 score 81204
+Population 2353 score 81204
+Population 2354 score 81204
+Population 2355 score 81204
+Population 2356 score 81204
+Population 2357 score 81204
+Population 2358 score 81204
+Population 2359 score 81204
+Population 2360 score 81204
+Population 2361 score 81204
+Population 2362 score 81204
+Population 2363 score 81204
+Population 2364 score 81204
+Population 2365 score 81204
+Population 2366 score 81204
+Population 2367 score 81204
+Population 2368 score 81204
+Population 2369 score 81204
+Population 2370 score 81204
+Population 2371 score 81204
+Population 2372 score 81204
+Population 2373 score 81204
+Population 2374 score 81204
+Population 2375 score 81204
+Population 2376 score 81204
+Population 2377 score 81204
+Population 2378 score 81204
+Population 2379 score 81204
+Population 2380 score 81204
+Population 2381 score 81204
+Population 2382 score 81204
+Population 2383 score 81204
+Population 2384 score 81204
+Population 2385 score 81204
+Population 2386 score 81204
+Population 2387 score 81204
+Population 2388 score 81204
+Population 2389 score 81204
+Population 2390 score 81204
+Population 2391 score 81204
+Population 2392 score 81204
+Population 2393 score 81204
+Population 2394 score 81204
+Population 2395 score 81204
+Population 2396 score 81204
+Population 2397 score 81204
+Population 2398 score 81204
+Population 2399 score 81204
+Population 2400 score 81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 0 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0
+Population 2401 score 81204
+Population 2402 score 81204
+Population 2403 score 81204
+Population 2404 score 81204
+Population 2405 score 81204
+Population 2406 score 81204
+Population 2407 score 81204
+Population 2408 score 81204
+Population 2409 score 81204
+Population 2410 score 81204
+Population 2411 score 81204
+Population 2412 score 81204
+Population 2413 score 81204
+Population 2414 score 81204
+Population 2415 score 81204
+Population 2416 score 81204
+Population 2417 score 81204
+Population 2418 score 81204
+Population 2419 score 81204
+Population 2420 score 81204
+Population 2421 score 81204
+Population 2422 score 81204
+Population 2423 score 81204
+Population 2424 score 81204
+Population 2425 score 81204
+Population 2426 score 81204
+Population 2427 score 81204
+Population 2428 score 81204
+Population 2429 score 81204
+Population 2430 score 81204
+Population 2431 score 81204
+Population 2432 score 81204
+Population 2433 score 81204
+Population 2434 score 81204
+Population 2435 score 81204
+Population 2436 score 81204
+Population 2437 score 81204
+Population 2438 score 81204
+Population 2439 score 81204
+Population 2440 score 81204
+Population 2441 score 81204
+Population 2442 score 81204
+Population 2443 score 81204
+Population 2444 score 81204
+Population 2445 score 81204
+Population 2446 score 81204
+Population 2447 score 81204
+Population 2448 score 81204
+Population 2449 score 81204
+Population 2450 score 81204
+Population 2451 score 81204
+Population 2452 score 81204
+Population 2453 score 81204
+Population 2454 score 81204
+Population 2455 score 81204
+Population 2456 score 81204
+Population 2457 score 81204
+Population 2458 score 81204
+Population 2459 score 81204
+Population 2460 score 81204
+Population 2461 score 81204
+Population 2462 score 81204
+Population 2463 score 81204
+Population 2464 score 81204
+Population 2465 score 81204
+Population 2466 score 81204
+Population 2467 score 81204
+Population 2468 score 81204
+Population 2469 score 81204
+Population 2470 score 81204
+Population 2471 score 81204
+Population 2472 score 81204
+Population 2473 score 81204
+Population 2474 score 81204
+Population 2475 score 81204
+Population 2476 score 81204
+Population 2477 score 81204
+Population 2478 score 81204
+Population 2479 score 81204
+Population 2480 score 81204
+Population 2481 score 81204
+Population 2482 score 81204
+Population 2483 score 81204
+Population 2484 score 81204
+Population 2485 score 81204
+Population 2486 score 81204
+Population 2487 score 81204
+Population 2488 score 81204
+Population 2489 score 81204
+Population 2490 score 81204
+Population 2491 score 81204
+Population 2492 score 81204
+Population 2493 score 81204
+Population 2494 score 81204
+Population 2495 score 81204
+Population 2496 score 81204
+Population 2497 score 81204
+Population 2498 score 81204
+Population 2499 score 81204
+81204
+0 1 2 0 1 0 2 1 2 0 2 2 0 0 2 0 2 2 0 1 2 0 1 0 0 1 2 0 2 2 0 1 2 0 1 2 0 2 2 0 1 1 0 1 2 0 1 2 0 1 2 0 1 2 1 1 2 0 2 0 1 1 1 2 2 2 0 1 2 0 1 2 0 1 1 0 1 2 0 1
+2 1 0 1 0 0 0 1 2 1 0 1 0 0 1 1 0 0 2 0 0 2 2 2 0 2 1 1 0 2 2 0 2 0 0 2 1 1 1 2 1 2 0 1 2 0 1 1 2 0 2 2 1 0 1 2 2 1 1 2 2 0 0 0 0 1 1 2 2 2 2 1 0 2 0 1 1 2 1 0
+2 1 2 1 1 2 0 2 1 2 1 2 1 0 0 2 1 2 0 0 0 1 0 0 2 0 0 2 2 2 2 2 1 2 0 0 1 1 0 0 0 1 1 1 1 2 2 2 0 0 1 2 2 1 0 2 0 1 0 1 1 2 0 2 1 0 0 2 2 1 0 0 1 1 0 2 0 2 1 1
+0 2 2 2 1 1 2 0 2 0 0 2 0 2 0 2 0 1 2 0 2 2 1 0 1 1 0 1 1 1 0 2 1 0 1 0 1 2 0 1 1 0 2 2 1 2 2 0 0 2 1 2 2 2 0 2 2 1 1 2 1 2 1 1 1 2 0 1 0 1 0 1 0 0 2 0 1 0 1 1
+1 1 0 1 0 1 1 2 2 2 1 0 0 2 1 1 2 2 0 2 2 0 1 0 2 0 0 2 2 1 0 1 2 0 0 2 0 0 0 1 2 1 1 2 0 1 2 1 1 0 1 0 1 2 1 1 0 0 1 2 0 2 0 1 1 1 2 2 0 1 2 2 0 2 0 1 0 2 1 2
+2 1 0 0 2 1 2 1 1 1 1 2 1 2 2 0 2 1 0 2 1 1 2 1 0 2 1 0 2 1 0 1 0 0 2 2 0 2 0 1 1 0 2 2 2 0 2 2 1 0 1 2 0 0 2 1 2 2 0 1 0 0 1 0 0 1 0 2 1 2 0 0 0 0 1 1 0 2 2 1
+0 0 1 1 2 0 0 2 0 1 2 0 0 0 0 2 1 1 1 0 0 2 0 2 2 1 0 0 2 1 2 0 2 0 1 1 1 1 1 2 1 2 2 2 2 2 1 2 1 2 2 2 0 2 1 1 2 0 2 0 0 1 1 1 1 2 0 0 0 0 0 0 0 2 2 1 2 2 1 1
+0 0 1 2 2 0 0 1 2 1 0 1 2 1 2 0 2 0 2 1 2 2 2 0 0 1 0 2 2 0 2 1 0 0 0 1 2 0 2 2 1 2 1 0 1 1 0 1 0 1 2 1 2 1 0 2 0 0 1 0 1 2 1 0 1 2 1 1 1 1 0 2 1 0 0 2 0 2 0 1
+2 0 0 0 2 2 2 2 2 1 0 0 2 1 0 1 2 2 0 1 1 2 1 0 0 0 1 0 1 2 0 0 1 0 0 0 2 0 2 0 1 1 1 2 0 2 1 2 2 2 1 1 0 0 0 0 2 2 2 1 1 2 1 1 2 1 2 2 0 0 2 0 1 1 2 1 1 0 1 0
+2 0 0 1 2 0 0 0 0 0 1 2 1 2 0 1 0 1 0 2 2 1 0 0 2 0 2 2 0 0 0 2 0 1 1 2 0 1 1 1 1 2 1 1 1 0 2 1 2 1 2 0 1 2 2 2 2 2 2 1 2 2 0 2 1 0 2 1 2 0 1 1 0 0 1 1 2 1 1 0
+2 2 1 0 1 0 0 1 0 0 1 0 2 1 1 2 1 0 2 0 2 0 2 1 0 0 1 1 2 2 0 2 0 2 2 1 1 1 0 0 0 1 2 0 0 1 2 2 2 0 0 2 1 0 0 1 2 0 1 1 2 2 0 1 2 1 2 1 2 1 1 0 1 2 1 2 2 1 1 2
+0 1 0 1 1 2 1 2 2 1 0 1 1 2 2 0 1 0 2 1 0 0 2 1 0 0 2 1 0 1 0 1 0 2 0 0 0 0 2 2 2 0 1 0 1 1 2 2 2 1 1 1 2 2 1 0 0 2 0 1 1 2 2 2 2 0 0 0 2 1 1 1 2 2 2 0 1 1 2 0
+1 2 2 0 0 0 2 2 0 0 2 1 2 1 0 1 1 0 1 0 0 1 1 2 1 2 2 0 2 1 0 2 2 1 0 1 0 0 1 2 1 1 1 2 1 2 1 0 2 2 0 0 1 1 1 0 0 0 2 0 1 0 0 0 2 1 2 1 2 0 0 2 2 2 1 2 2 1 2 1
+2 0 2 0 0 2 2 0 0 1 1 0 2 0 2 0 1 1 1 2 1 2 2 0 2 0 1 2 0 2 0 1 1 1 1 2 1 2 0 1 0 2 0 1 2 2 0 2 1 1 1 1 1 1 1 1 0 1 1 1 0 2 2 0 0 1 0 1 0 2 0 2 2 2 2 2 2 0 1 0

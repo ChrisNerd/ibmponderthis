@@ -1,0 +1,22 @@
+Short answer:
+The network topology is a resistor ladder with 4 rungs.  8 Ohms in parallel with 3 Ohms, in series with 2 Ohms, all in parallel with 4 Ohms and 1 Ohm.
+
+ab bc cd  ae ef fg gh hi ij jk kd  az  al lm mn nz  do oz
+
+Long answer:
+I started by factoring 40320.  From the factors I determined that R must have a repeating decimal period of 8.  I worked out that the 8 numbers that are in R most likely are 1, 2, 3, 4, 5,6, 7 and 8.  It is possible to rearrange the factors to form other numbers in R, but none of those can be reduced when divided by 99999999 (from the division by 3 test).  This was found with some trial and error in a spreadsheet.  The ones that couldn't be reduced were unlikely to work out with only 20 resistors.
+
+I also wrote an Octave program go through all the 8!=40320 combinations of R, and reduce them over 99999999.  I found that the most likely denominator was 137 and had only 21, 39, 45, 64, 73, 92, 98 and 116 as numerators over 137.  By factoring the numerator, I tried finding parallel circuits that had equivalent resistances with denominator 137.  I came very close with 21 -> factored to 3 and 7.  The circuit of 3 in parallel with 7 in parallel with six branches of 1 ohms resistors gives
+1/(1/7+1/3+1+1+1+1+1+1) = 21/136.... so close.  No other combination worked out.
+
+I also wrote a little program, based on the PARI program on OEIS to print out all the integers whose reciprocal had a repeating decimal period of 8, such as 73 and 137...  It turned out that 73 didn't work out since no numerator would result in a R.
+
+I then abandoned all this work and tried a more brute force approach.  I remember the digital circuit that ended up being a seven-segment display as one of the ponder this solutions so I figured this solution probably was something familiar to an engineering undergrad.  I wrote a small Octave program (attached: solveCircuit.m and the helper function to verify if it is an R, con8prod.m).  to brute force all the combinations for a 4 branch ladder network with total resistance value at most 20.  My first go at this had a small bug that yielded a bunch of correct solutions using 21 ohms total.  Fixing that tiny bug yielded the answer above, which is 92/137, on my short list of good R values above.  I double checked it on the back of an envelope and was also confident that this was the expected answer since it used 18 resistors.  The problem statement at the start of the month said to use 18 pairs of nodes in your solution.
+
+I don't know if there are other topologies that yield different R solutions since I only tried ladders.  But of the 4 rung ladders, this is the only solution.
+
+Thank you for another challenging puzzle.
+
+Chris Shannon
+
+Calgary Canada

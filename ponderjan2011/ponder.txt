@@ -1,0 +1,121 @@
+ANSWER:
+XXXXXX XXXX == PONDER THIS
+
+SOLUTION:
+I started by plugging the equation into Wolfram Alpha
+Wolfram alpha
+204193/178481 + 2**-40 in base 8
+1.11160440223415004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111604402234110044702201116044022341100447022011160440223411004470220111..._8
+I pasted the base 8 number into emacs and adjusted the window's width to determine the number's period.  The number 1 appears at the following positions after the point
+1,2,3,13,
+24,25,26,36,37,
+47,48,49,59,60,
+...
+
+Since this puzzle reminded me of the game of Nin, I started reading there, and came across this varient called Substract a Square.  It has a solution that I was able to make a simple modification to do solve this problem.
+
+The numbers above are the "cold" numbers.
+
+http://en.wikipedia.org/wiki/Subtract_a_square
+1) the number 0 is 'cold'.
+
+2) if all numbers 0 .. N-1 have been classified as either 'hot' or 'cold', then
+  2a) the number N is 'cold' if only 'hot' numbers can be reached by subtracting a positive square
+  2b) the number N is 'hot' if at least one 'cold' number can be reached by subtracting a positive square
+
+Here I made a guess.  The first game being "IBM RULES", I guessed that the second game was "PONDER THIS" which correspond to the numbers
+XXXXXX XXXX == PONDER THIS
+16-15-14-4-5-18 20-8-9-19
+
+in order:
+4-5-8-9-14-15-16-18-19-20
+
+Modifying the algorithm of Substract A Square to subtract the numbers of this set verified the sets of cold and hot numbers.
+
+0 is cold,
+1,2,3 are cold
+4 is hot because 4-4=0 which is cold.
+5 is hot because 5-4=1 which is cold.
+6 is hot because 6-4=2 which is cold.
+7 is hot because 7-4=3 which is cold.
+8 is hot because 8-5=3 which is cold.
+9 is hot because 9-9=0 which is cold.
+10 is hot because 10-9=1 which is cold.
+11 is hot because 11-9=2 which is cold.
+12 is hot because 12-9=3 which is cold.
+13 is cold because 13-9=4 which is hot, 13-8=5 which is hot, 13-5=8 which is hot, 13-4=9 which is hot.
+14 is hot because 14-14=0 which is cold.
+15 is hot because 15-14=1 which is cold.
+16 is hot because 16-14=2 which is cold.
+17 is hot because 17-14=3 which is cold.
+18 is hot because 18-18=0 which is cold.
+19 is hot because 19-18=1 which is cold.
+20 is hot because 20-18=2 which is cold.
+21 is hot because 21-18=3 which is cold.
+22 is hot because 22-20=2 which is cold.
+23 is hot because 23-20=3 which is cold.
+24 is cold because 24-20=4 which is hot,
+ 24-19=5 which is hot.
+ 24-18=6 which is hot.
+ 24-16=8 which is hot.
+ 24-15=9 which is hot.
+ 24-14=10 which is hot.
+ 24-9=15 which is hot.
+ 24-8=16 which is hot.
+ 24-5=19 which is hot.
+ 24-4=20 which is hot.
+25 is cold because 25-20=5 which is hot,
+ 25-19=6 which is hot.
+ 25-18=7 which is hot.
+ 25-16=9 which is hot.
+ 25-15=10 which is hot.
+ 25-14=11 which is hot.
+ 25-9=16 which is hot.
+ 25-8=17 which is hot.
+ 25-5=20 which is hot.
+ 25-4=21 which is hot.
+26 is cold because 26-20=6 which is hot,
+ 26-19=7 which is hot.
+ 26-18=8 which is hot.
+ 26-16=10 which is hot.
+ 26-15=11 which is hot.
+ 26-14=12 which is hot.
+ 26-9=17 which is hot.
+ 26-8=18 which is hot.
+ 26-5=21 which is hot.
+ 26-4=22 which is hot.
+27 is hot because 27-14=13 which is cold.
+28 is hot because 28-4=24 which is cold.
+29 is hot because 29-4=25 which is cold.
+30 is hot because 30-4=26 which is cold.
+31 is hot because 31-5=26 which is cold.
+32 is hot because 32-8=24 which is cold.
+33 is hot because 33-8=25 which is cold.
+34 is hot because 34-8=26 which is cold.
+35 is hot because 35-9=26 which is cold.
+36 is cold because 36-20=16 which is hot,
+ 36-19=17 which is hot.
+ 36-18=18 which is hot.
+ 36-16=20 which is hot.
+ 36-15=21 which is hot.
+ 36-14=22 which is hot.
+ 36-9=27 which is hot.
+ 36-8=28 which is hot.
+ 36-5=31 which is hot.
+ 36-4=32 which is hot.
+37 is cold because 37-20=17 which is hot,
+ 37-19=18 which is hot.
+ 37-18=19 which is hot.
+ 37-16=21 which is hot.
+ 37-15=22 which is hot.
+ 37-14=23 which is hot.
+ 37-9=28 which is hot.
+ 37-8=29 which is hot.
+ 37-5=32 which is hot.
+ 37-4=33 which is hot.
+and so on.
+
+At the very least, it verified that D was the first letter alphabetically.  I did not verify that all the letters in "PONDER THIS" are used, but that is not necessary.
+
+Chris Shannon
+Calgary Canada

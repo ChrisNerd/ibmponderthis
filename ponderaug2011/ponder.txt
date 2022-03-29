@@ -1,0 +1,83 @@
+Short answer: the triangle sides have lengths of 3, 4 and 4.
+
+Long answer:
+
+When Charlie says
+
+Charlie: "Alas, I cannot deduce the lengths of the sides from my knowledge of the perimeter."
+
+This does not provide us with much information.  We know that the perimeter can't be 0 or 3 for example, because he'd know the triangle must be 0,0,0 or 1,1,1 respectively.  Otherwise only knowing the perimeter is almost certainly not enough info to know its sides.
+
+Ariella: "I do not know the perimeter, but I cannot deduce the lengths of the sides from just knowing the area. Maybe our father is right and we should cooperate after all."
+
+This is a lot more information.  Most triangles have a unique area, like a signature.  So the fact that Ariella can't map back to a single triangle from the area means that she has a more common area.  Therefore our solution triangle must have an area that can also be formed by at least one other triangle.
+
+
+Charlie: "Oh no, no need. Now I know the lengths of the sides."
+
+This line really narrows down our candidate solution list.  It means that of the set of triangles that Charlie can form knowing only the perimeter, only 1 triangle from that set has an area that has more than 1 triangle that can form that area.  For example, up to this point 1 4 4 is a valid solution candidate.
+
+Charlie would have been given an perimeter = 9.
+
+The only valid triangles with perimeter = 9 are
+
+(all areas are actually area^2, since they are of the form n/16)
+
+1 4 4 perimeter 9 area 3.9375
+2 3 4 perimeter 9 area 8.4375
+3 3 3 perimeter 9 area 15.1875
+
+Out of these three possibilities, the second two have unique areas.  That is, if Ariella was told the area = 8.4375, she should would have known right off the bat the particular triangle.  Likewise for 15.1875.
+
+The last clue:
+
+Ariella: "Well, now I know them as well."
+
+eliminates this candidate though.  Ariella only knows that her two candidates are
+
+1 4 4 perimeter 9 area 3.9375
+2 2 3 perimeter 7 area 3.9375
+
+and for both cases, Charlie would have said the same thing.  I just showed for the case of Charlie being given a perimeter of 9, but if he was given a 7 his triangle candidates would be
+
+1 3 3 area 2.1875 (which is a unique area which is therefor eliminated) or 2 2 3 area 3.9375
+
+So Ariella wouldn't be able to "know them as well".  To put this last line more formally, of the triangles in Ariella's candidate Set A, each perimeter forms a set Pi, such that only 1 set Pi has exactly 1 non-unique area as a member.
+
+Both the member is the sets P1{ 1 4 4,  2 3 4, 3 3 3 } and P2  {1 3 3, 2 2 3} have exactly 1 member that has a non-unique area namely 1 4 4 and 2 2 3.
+
+Using our final solution as an example Charlie's perimeter is  11 and Ariella's area is 30.9375.
+Charlie's candidates are (set P1)
+
+1 5 5 perimeter 11 area 6.1875
+2 4 5 perimeter 11 area 14.4375
+3 3 5 perimeter 11 area 17.1875
+3 4 4 perimeter 11 area 30.9375
+
+He also knows that only the last one has a non-unique area.  The first three have unique areas and Ariella can use those as fingerprints to immediately know her triangle.  So Charlie knows it's 3 4 4 when he hears that Ariella doesn't know.
+
+Ariella knows that the candidates are (set A)
+
+2 6 7 perimeter 15 area 30.9375
+3 4 4 perimeter 11 area 30.9375
+
+Ariella thinks that if Charlie had perimeter 15, then Charlie would have the following candidates (set P2)
+
+1 7 7 perimeter 15 area 12.1875
+2 6 7 perimeter 15 area 30.9375
+3 5 7 perimeter 15 area 42.1875
+3 6 6 perimeter 15 area 75.9375
+4 4 7 perimeter 15 area 45.9375
+4 5 6 perimeter 15 area 98.4375
+5 5 5 perimeter 15 area 117.1875
+
+But 2 of these have non-unique areas, namely 3 5 7 and 4 5 6.  Charlie wouldn't have been able to tell which was the dad's triangle.  Therefore Ariella knows that the perimeter isn't 15.  Using the same logic as Charlie's above, for perimeter = 11, she's able to see that only 1 member has a non unique area.
+
+Thanks for the problem, this was a fun one.  I wrote a C++ program that generates candidate solutions, except for the final logic step at the end.  It was easier for me to grep through my output file for the few candidate cases than to generalize the logic in the program.  The program loops through all valid tringles with 0 <= a <= b <= c <= 100.
+
+I'm still working on July's... using a genetic algorithm.  It didn't pop the answer out, so I'm back to thinking about it.
+
+
+Chris Shannon
+
+Calgary Canada

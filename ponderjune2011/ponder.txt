@@ -1,0 +1,23 @@
+We can call the expected number of cars to fit in a gap of size n, f(n).  This gap has a car on both sides.
+
+A ring of 100 units after 1 car has been placed, will have a gap of 98 units, so the expected number of cars placed in an 100 unit ring is 1+g(98).
+
+When a car finds a gap, it will leave a gap before and after it (which may be size zero).  If the original gap size is n, there are n-1 equally possible places for the cars to park.  For each of the i of the n-1 possible places, the two gap sizes are of size i-1 and n-1-i.  So the number of expected cars is 1 + expected number from each of the two gaps, averaged over all the possibilities.
+
+We can now set up the recurrence relation
+f(n) = sum(i=1 to n-1)  (1 / (n - 1) * (1 + f(i - 1) + f(n - i - 1)))
+
+I wrote a quick little visual basic program to give me f(n) for n from 1 to 98 and put them in a spreadsheet.
+
+It turns out that g(98) = 42.2332..., so the expect number of cars that can fit in a ring of size 100 is 43.2332...
+
+I wanted to find an exact representation of that number.  It's clearly a rational number, and the denominator is at worst (n-1)!  So I multiplied g(n) by (n-1)! and got a series of integers, but didn't recognize them.
+
+1,2,10,48,296,2080...
+
+I plugged them into the OnLine Encyclopedia of Integer Sequences and it found a match with the solution to the "Unfriendly Seating Arrangement" problem.  Reading about this is very similar to this month's ponder this, except for the ring part.  There isn't much a simple solution to the exact solution but others have solved the Unfriendly Seating Arrangement problem so I won't waste time repeating their results.
+
+So, I'll leave my answer as decimal, 43.2332.
+
+Chris Shannon
+Calgary Canada

@@ -1,0 +1,20 @@
+The answer to part A is 11 agents and there could be up to 177147 bits of data, and the answer to part B is 18 agents and there could be up to 146936 bits.
+Bonus answer for part A is ceiling (ln n / ln (t+1)).
+X=77147 which is the amount that Watson won in Jeopardy.
+
+
+For part A, the solution involves breaking the first hour's trial into how many agents will die, and subsequently how many will live.  Suppose, as a guess, we have 11 agents to begin with.  If none are consumed in the first hour, we can use all 11 in the second hour.  In the second hour we can therefore test 2^11 addresses, but since no information is gained during the first hour, we can only use that on one chuck of 2^11 address.
+If we allow 1 agent to be consumed in the first hour, there are 11 possible cases.  We can test 2^10 address in the second hour, so after the two hours we can identify 11 chunks of 2^10 address.
+Proceeding like this we can see that if k agents consumed in the first hour, we can address (11 Choose k) * 2^(11-k) addresses.  We also know that there's only one error present so these cases are mutually exclusive.  The total number of possible addresses is the sum of all 11 cases, namely
+sum(from k=0 to k=11) (11 Choose k) * 2^(11-k) = 177147
+Repeating this with 10 agents you find that there are less than 100000 possible addresses so 11 is the minimum number of agents necessary.  The answer to the bonus question is X=77147, which is the amount of dollars that Watson won in Jeopardy (thanks Google).
+
+Putting the formula for the number of addresses in two hours, sum(from k=0 to k=x)Binomial[x, k]*2^(x-k) into wolfram-alpha tells us that it simplifies to 3^x, where x is the number of agents.  Since we can address 2^x addresses in 1 hour, and 3^x in 2 hours, the pattern emerges.
+The number of address you can test in t hours with k agents is n = (t+1)^k.  Rearranging gives the number of agents needed for n bits and t hours: ln n / ln (t+1).  Of course we would need to round up using the ceiling function.
+
+For Part B we start by knowing that we must have at least 11 agents left over after the second hour.  We use the exact same strategy.  Suppose, as a guess, we have 18 agents to begin with.  A number of agents, k, will be consumed in the first hour, from 0 to 7 inclusively (18-11).  The excess agents over 11 agents can be consumed in the second hour, namely (18-11-k) agents.
+By starting with 18 agents, there are many more combinations of choosing k agents from the set of 18 than there are of choosing k agents from 11.
+18 Choose k >= 11 choose k.
+Which explains why the answer for part B need not be twice the answer of part A.
+The total number of possible addresses for the first of two rounds would be
+sum(from k=0 to k=7) (18 Choose k) * 2^(18-11-k) = 146936
