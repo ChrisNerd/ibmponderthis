@@ -1,0 +1,113 @@
+The solution the October 2010 Ponder This Challenge has pentagon side lenths of 2, 4,  5, 6, 12, where the possible orderings of the edges are 2, 4, 12, 5, 6 and 2, 4, 12, 6, 5, as well as their mirror image.  Both configurations result in a lake area X=  33.995 square kilometers. (see attached image).  The right angles are between the 2 and 4, and 4 and 12 edges in both cases.
+
+I solved it as follows:
+Given the five edge lengths of a pentagon but no edge ordering and no angles, it can be bent to encompass a continuous range of areas.  Once it is known that two of the angles are 90 degrees, but still don't know the edge order, it must mean that the all the valid pentagons give the same area.
+
+Given only the 5 edge lengths, there are 24 ways of creating a cycle, two sets of 12 that mirror each other.  These are starting with side a:
+
+a,b,c,d,e
+a,b,c,e,d
+a,b,d,c,e
+a,b,d,e,c
+a,b,e,c,d
+a,b,e,d,c
+        
+a,c,b,d,e
+a,c,b,e,d
+a,c,d,b,e
+a,c,e,b,d
+        
+a,d,b,c,e
+a,d,c,b,e
+
+
+For a given edge ordering there are 10 ways the 2 right angles can be applied, 10 = 5 Choose 2.  The 2 right angles can be placed on the two vertices for each edge, or they can be placed on the 5 pairs of opposite vertices.
+
+So there are a total of 120 (12*10) possible pentagons given only the edge lengths.  A pentagon will be invalid for the purposes of this problem if it is not convex, or if it is a degenerate pentagon such as a quadralateral, or if it is impossible to physically form such as having 4 tiny lengths and 1 giant one.  The goal is to therefore find a set of 5 edge lengths that every possible valid pentagon has the same area.
+
+I wrote a program (attached ponder.cpp) that first cycles through all pentagons with edge lengths, then cycles through all the leg orderings, then through all right angle placements to determining if all valid pentagons give the same area.
+
+To run the program
+$ g++ ponder.cpp
+$ ./a.out
+The start of the program is as follows (showing valid solutions)
+a = 1
+a = 2
+a 2 b 4 c 5 d 6 e 12 area 33.9948
+a 2 b 5 c 6 d 8 e 15 area 47.3734
+a 2 b 5 c 6 d 9 e 16 area 52.2801
+a 2 b 5 c 6 d 10 e 17 area 56.8675
+a 2 b 5 c 6 d 11 e 18 area 61.3137
+a 2 b 5 c 6 d 13 e 20 area 70
+a 2 b 5 c 7 d 8 e 16 area 52.4162
+....
+I verified in a debugger a couple of the solutions which ordering and angle configurations produced the result and presented the first result in the attached image.
+
+Thanks for this month's challenge
+
+Chris Shannon
+
+Calgary Canada
+
+
+
+#0  CalculateAreaWithOppositeRightAngles (a=1, b=8, c=19, d=12, e=32, area=@0x7fffffffd7e0) at ponder.cpp:309
+#1  0x0000000000401246 in CheckAll10RightAnglePlacements (a=1, b=8, c=19, d=12, e=32, foundFirst=@0x7fffffffd84e, firstArea=@0x7fffffffd840) at ponder.cpp:156
+#2  0x0000000000400c21 in CheckAll12EdgeOrderings (a=1, b=8, c=12, d=19, e=32) at ponder.cpp:50
+#3  0x0000000000400ac9 in main () at ponder.cpp:35
+f = 32.015621187164243
+g = 20.615528128088304
+angleAE = 1.5395564933646284
+angleBC = 1.1722738811284763
+angleD = 0.14596816988836075
+angleCB = 0.3985224456664202
+angleF = 2.7430702079233726
+angleEA = 0.031239833430268277
+angleG = 0.25255427577805961
+
+#0  CalculateAreaWithOppositeRightAngles (a=8, b=32, c=1, d=12, e=19, area=@0x7fffffffd7e0) at ponder.cpp:309
+#1  0x00000000004013d5 in CheckAll10RightAnglePlacements (a=1, b=12, c=19, d=8, e=32, foundFirst=@0x7fffffffd84e, firstArea=@0x7fffffffd840) at ponder.cpp:204
+#2  0x0000000000400db3 in CheckAll12EdgeOrderings (a=1, b=8, c=12, d=19, e=32) at ponder.cpp:57
+f = 20.615528128088304
+g = 32.015621187164243
+angleAE = 1.1722738811284763
+angleBC = 0.031239833430268277
+angleD = 0.14596816988836075
+angleCB = 1.5395564933646284
+angleF = 0.25255427577805961
+angleEA = 0.3985224456664202
+angleG = 2.7430702079233726
+
+area 140
+
+
+*****************************************8
+a 2 b 5 c 6 d 7 e 14 area 40
+#0  Herons (a2=169, b2=36, c2=49) at ponder.cpp:333
+#1  0x0000000000401873 in CalculateAreaWithAdjacentRightAngles (a=5, b=14, c=6, d=7, e=2, area=@0x7fffffffd7e0) at ponder.cpp:286
+#2  0x0000000000401032 in CheckAll10RightAnglePlacements (a=2, b=5, c=14, d=6, e=7, foundFirst=@0x7fffffffd84e, firstArea=@0x7fffffffd840) at ponder.cpp:91
+#3  0x0000000000400ca7 in CheckAll12EdgeOrderings (a=2, b=5, c=6, d=7, e=14) at ponder.cpp:52
+
+*****************************************
+a 2 b 4 c 5 d 6 e 12 area 33.9948
+#0  Herons (a2=116, b2=25, c2=36) at ponder.cpp:357
+#1  0x00000000004018af in CalculateAreaWithAdjacentRightAngles (a=4, b=12, c=5, d=6, e=2, area=@0x7fffffffd7e0) at ponder.cpp:298
+#2  0x0000000000401032 in CheckAll10RightAnglePlacements (a=2, b=4, c=12, d=5, e=6, foundFirst=@0x7fffffffd84e, firstArea=@0x7fffffffd840) at ponder.cpp:91
+#3  0x0000000000400ca7 in CheckAll12EdgeOrderings (a=2, b=4, c=5, d=6, e=12) at ponder.cpp:52
+angleA1 = 0.3805063771123649
+angleC = 0.18661534528271745
+angleA2 = 1.1902899496825317
+angleD = 0.22452251703962969
+f = 10.770329614269007
+
+
+#0  Herons (a2=116, b2=36, c2=25) at ponder.cpp:357
+#1  0x00000000004018af in CalculateAreaWithAdjacentRightAngles (a=4, b=12, c=6, d=5, e=2, area=@0x7fffffffd7e0) at ponder.cpp:298
+#2  0x0000000000401032 in CheckAll10RightAnglePlacements (a=2, b=4, c=12, d=6, e=5, foundFirst=@0x7fffffffd84e, firstArea=@0x7fffffffd840) at ponder.cpp:91
+#3  0x0000000000400cea in CheckAll12EdgeOrderings (a=2, b=4, c=5, d=6, e=12) at ponder.cpp:53
+
+angleA1 = 0.3805063771123649
+angleC = 0.22452251703962969
+angleA2 = 1.1902899496825317
+angleD = 0.18661534528271745
+f = 10.770329614269007

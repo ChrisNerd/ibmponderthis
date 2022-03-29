@@ -1,0 +1,215 @@
+Executive summary:
+ Problem:
+ "Find a natural number n for which the expression round((1+2cos(20o))n) is divisible by 1,000,000,000."
+ Answer: n = 169531249
+**********
+Solution:
+I first approached this problem by finding the numerical value of 1+2cos(20o) (the degree symbol, by the way, renders as a superscript lowercase 'o', which I thought was a second parameter.  There's an html math symbol &deg; (176) which would look better).  I calculated the first 20 or so values of (1+2cos(20o))n in a spreadsheet and noticed that they approached an integer.
+A failed technique I tried was that I thought once I found the first element that was a multiple of 10, I could square it to get a multiple of 100, or raise it to a power of 9 to get a multiple of a billion.
+x_i = k*10 ( k is an integer)
+x_i^9 = (k*10)^9 = k^9 * 10^9, so i * 9 = n would be a solution.
+It doesn't work because the first = isn't exactly true (hence the need to round).
+actually x_i = (k*10 - e) where e is some small number
+so x_i^2 = (k*100 - 10 k e + e^2.  -> 10 k e works out to be greater than 1 which I didn't expect.
+
+I then tried reading about modular exponentiation, which turned out to be a dead end due to needing an unbounded amount of precision in the base.
+
+I turned to wikipedia to read about "Almost Integers" as I've heard of the April Fool's joke that Martin Gardner wrote about a particular one.  I got to Pisot-Vijayaraphavan numbers and this stuck out:
+"A characteristic property of PV numbers is that their powers approach integers at an exponential rate."
+Aha!  I bet 1+2cos(20o) is a PV number.  Let's see what WolframAlpha thinks about it.
+
+Aha!  It's a root of x^3 - 3x^2 +1.  The other roots of this cubic equation are less than 1 in magnitude so it is a PV number.  So we can be certain that the sequence converges to integers.  I needed to know how to generate the sequence of powers, and I researched until I got to Newton's identities which "allow expressing the sums of the k-th powers of all roots of polynomial P (counted with their multiplicity) in terms of the coefficients of P, without actually finding those roots."
+
+Perfect!
+
+P=x^3 - 3x^2 +1 = 0
+psi_i = x_0^i + x_1^i + x_2^i where x_0 = 1+2cos(20o), x_1 and x_2 are the other two roots which are less than 1 in magnitude so their contribution to the sum goes to 0.
+Newton's identity gives a recurrence relation for psi_i, namely:
+psi_i = 3 psi_(i-1) - psi_(i-3)
+
+This is great because psi_i is integers and this equation can be also expressed in modular arithmetic to solve our problem.
+psi_i = 3 psi_(i-1) - psi_(i-3) (mod 10^9)
+Solution will be to find i such that psi_i = 0 (mod 10^9)
+
+I put these into a spreadsheet and verified that they matched up with the exponential closed form results but unfortunately there did not seem to be any pattern to psi_i (mod 10^9).  The more I thought about this recurrence relation I realized a program could calculate an infinite amount of the elements in psi_i with only a very small amount of fixed memory.
+
+I went to implementing this program and found that I needed to use 8 bytes to store my values because with 4 bytes represents a signed integer only up to 2 billion.  The 3*psi_(i-1) term can be larger than that.  Also 3 psi_(i-1) - psi_(i-3) can be negative so that needed to be addressed since g++'s modular implementation gives negative results.  I solved this issue by calculating (3 psi_(i-1) - psi_(i-3) + 10^9 ) (mod 10^9) since adding the modulus does not change its value, but keeps negative numbers away.
+
+Here is the output of that program:
+
+****** Beginning of program's output: ****
+
+#g++ ponderJuly2010.cxx && ./a.out
+a=-1
+sizeof(int) = 4
+sizeof(long unsigned int) = 4
+sizeof(long long int) = 8
+sizeof(long long unsigned int) = 8
+sizeof(x[0]) = 8
+Progress... x[3] = 24
+Progress... x[4] = 69
+Progress... x[5] = 198
+Progress... x[6] = 570
+Progress... x[7] = 1641
+Progress... x[8] = 4725
+Progress... x[9] = 13605
+Progress... x[10] = 39174
+Progress... x[11] = 112797
+Progress... x[12] = 324786
+Progress... x[13] = 935184
+Progress... x[14] = 2692755
+Progress... x[15] = 7753479
+Progress... x[16] = 22325253
+Progress... x[17] = 64283004
+Progress... x[18] = 185095533
+Progress... x[19] = 532961346
+Progress... x[20] = 534601034
+Progress... x[21] = 418707569
+Progress... x[22] = 723161361
+Progress... x[23] = 634883049
+Progress... x[24] = 485941578
+Progress... x[25] = 734663373
+Progress... x[26] = 569107070
+Progress... x[27] = 221379632
+Progress... x[28] = 929475523
+Progress... x[29] = 219319499
+Progress... x[30] = 436578865
+Progress... x[31] = 380261072
+Progress... x[32] = 921463717
+Progress... x[33] = 327812286
+Progress... x[34] = 603175786
+Progress... x[35] = 888063641
+Progress... x[36] = 336378637
+Progress... x[37] = 405960125
+Progress... x[38] = 329816734
+Progress... x[39] = 653071565
+Progress... x[40] = 553254570
+
+
+SOLUTION FOUND!!!
+i = 169531249
+
+Progress... x[1000000000] = 834178138
+Progress... x[2000000000] = 105383002
+
+
+SOLUTION FOUND!!!
+i = 2718937623
+
+Progress... x[3000000000] = 859753381
+
+
+SOLUTION FOUND!!!
+i = 3162622847
+
+
+
+SOLUTION FOUND!!!
+i = 3332154097
+(program output truncated here but produces roughly 1 solution for every billion elements)
+I ran it overnight and generated roughly 600 solutions
+*******************************************
+
+Here is a summary of the results of the program:
+
+n_0 = 169531249
+n_1 = 2718937623
+n_2 = 3162622847
+n_3 = 3332154097
+n_4 = 5909374999
+n_5 = 7659562623
+n_6 = 7829093873
+n_7 = 9677237247
+n_8 = 9846768497
+n_9 = 10610994687
+n_10 = 10780525937
+n_11 = 10849999999
+n_12 = 11019531249
+n_13 = 14012622847
+n_14 = 14182154097
+n_15 = 15586612247
+n_16 = 16520369687
+n_17 = 18509562623
+n_18 = 18679093873
+n_19 = 19921997847
+n_20 = 20527237247
+n_21 = 20696768497
+n_22 = 21460994687
+n_23 = 21630525937
+n_24 = 21699999999
+end of first period
+n_25 = 21869531249 = n0 + 2.17*10^10
+n_26 = 24418937623 = n1 + 2.17*10^10
+.....
+
+I looked for patterns in the result and noticed a bunch of common digits in the answers, and the 99999's really stuck out.
+I plotted the results in a scatter chart in a speadsheet to see if any patterns visually appeared.  I did a poor-man's autocorrelation in the Gimp by overlaying a copy of the chart and shifting it until it matched the original.  I found that the pattern repeats after 25 terms so it was now easy to verify the General solution.
+
+General solution:
+n_(i+25*k) = n_i + k * 2.17 * 10^10 for 0 <= i <= 24 and k >= 0.
+
+I'm suprised that the constant 2.17*10^10 is such a round number but I have a hunch that it comes from the coefficients of the recurrence relation, or the coefficients of the characteristic polynomial and the modulus 10^9.  Its factors are 2^9 * 5^9 * 7 * 31.  I'd be interested to learn more about this number, but it is not necessary since the problem is now solved.  The factors of n_0 + 1 are 2 * 5^8 * 7 * 31, and I'm betting those factors will appear in other solutions.
+
+Thanks for this month's Ponder This,
+I enjoyed it
+
+Chris Shannon
+Calgary Canada
+
+
+Appendix 1: C++ program code to solve July 2010 Ponder This.
+
+#include <iostream>
+#include <math.h>
+int main()
+{
+   // The ring buffer storing the sequence
+   long long int x[] = {3,9,24,-1};
+
+   // The index counter, starting at element x[3] = -1 (invalid)
+   // Since C++ arrays are 0 indexed, n == i + 1
+   long long unsigned int i = 3;
+
+   // The working in mod 1,000,000,000
+   const unsigned int d = static_cast<unsigned int>(pow(10,9));
+
+   const unsigned int progressIncrements = static_cast<unsigned int>(pow(10,9));
+  
+   // Modulus of negative numbers is implementation dependent, the sequence
+   // may have negative numbers but it should not effect the outcome.
+   int a = (-1)% 5;
+   fprintf(stdout, "a=%i\n",a);
+   fprintf(stdout, "sizeof(int) = %i\n", sizeof(int));
+   fprintf(stdout, "sizeof(long unsigned int) = %i\n", sizeof(long unsigned int));
+   fprintf(stdout, "sizeof(long long int) = %i\n", sizeof(long long int));
+   fprintf(stdout, "sizeof(long long unsigned int) = %i\n", sizeof(long long unsigned int));
+   fprintf(stdout, "sizeof(x[0]) = %i\n", sizeof(x[0]));
+
+   while(true)
+   {
+      // The recurrence relation (mod d)
+      // ---- Adding d does not change its value (mod d) but does keep it from
+      // being negative and the modulus operator giving incorrect results.
+      long long int rawint = 3*x[(i-1)%4] - x[(i-3)%4] + d;
+      x[i%4] = (rawint)%d;
+      if (i%progressIncrements == 0 || i <= 40)
+      {
+         fprintf(stdout, "Progress... x[%lli] = %lli\n",
+            i,x[(i-1)%4]);
+      }
+
+      // This test fails if rawint is 4 bytes or if we didn't add d to rawint;
+      if (rawint < 0)
+      {
+         fprintf(stdout, "Negative: %lli\nrawint = %lli\n x[i] = %lli\n", i+1, rawint, x[i%4]);
+      }
+
+      if (x[i%4] == 0)
+      {
+         fprintf(stdout, "\n\nSOLUTION FOUND!!!\ni = %lli\n\n", i+1);
+        // break;
+      }
+      i++;
+   }
+}
+
