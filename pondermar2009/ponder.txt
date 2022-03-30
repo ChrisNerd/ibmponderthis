@@ -1,0 +1,46 @@
+Hi, Here's my solution to the March 2009 Ponder this.
+
+Answer
+{abc def ghi jkl mno} ==
+{6A8 B34 E75 19C D2F}
+
+6A8B3
+4E750
+1900C
+=====
+D200F
+
+D146
+29EA
+0078
+005B
+====
+FC03
+
+
+I wrote a C++ program to go do the dirty work, but I tried to keep it from doing work unnecessarily.
+
+All the variables were looped from 1 to 15 (skipping already used values), except where I made the following simplifications (using int division and the modulo operation):
+
+e = (a + b + c + d) % 16;
+
+t1 = (a + b + c + d) / 16;
+i = 16 - (t1 + f + g + h) % 16;
+
+l = ((t1 + f + g + h + i)/16 + j + k)%16;
+
+m = ((((e+l)/16 + d + i)/16 + c + h)/16 + b + g + k)/16 + a + f + j;
+
+n = ((((e+l)/16 + d + i)/16 + c + h)/16 + b + g + k) % 16;
+
+o = (e + l)%16;
+
+The output of my program tells me the solution is unique.  I'm sure there's more I could have done before handing it over to the program but since it took less than 20 seconds to run.
+
+It's probably a job for a functional programming language, but I've attached my C++ source code.
+
+Thanks for the challenging puzzle, now I'll get back to the February 2009 challenge.
+
+Chris Shannon
+
+Calgary Canada

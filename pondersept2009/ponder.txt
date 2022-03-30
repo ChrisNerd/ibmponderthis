@@ -1,0 +1,128 @@
+Answer: 2^17 = 131072
+
+Solution:
+Find all the possible distances between two squares on a chess board.
+Instead of taking all combinations of squares, the entire set can be covered by taking one of the squares to be a corner square.
+Centers are spaced 0 to 7 units horizontally and vertically.
+The set of distances "d" are the root of sum of squares of 2 numbers between 0 and 7, from Pythagorean theorem.
+d must be chosen from the square root of numbers from the following list (the sum of two squares):
+0
+1
+2
+4
+5
+8
+9
+10
+13
+16
+17
+18
+20
+25
+26
+29
+32
+34
+36
+37
+40
+41
+45
+49
+50
+52
+53
+58
+61
+65
+72
+74
+85
+98
+
+This includes the integers, which are the roots of 0, 1, 4, 9, 16, 25, 36 and 49.
+0 is a special case and is removed from the possible consideration that Diane may choose because it will immediately end the game.
+The rest are integer multiples of smaller distances.  With the integers other than 1 removed, the list becomes.
+
+1
+2
+5
+8 - 2 sqrt 2
+10
+13
+17
+18 3 sqrt 2
+20 2 sqrt 5
+26
+29
+32 4 sqrt 2
+34
+37
+40 2 sqrt 10
+41
+45 3 sqrt 5
+50 5 sqrt 2
+52 2 sqrt 13
+53
+58
+61
+65
+72 6 sqrt 2
+74
+85
+98 7 sqrt 2
+
+We remove the numbers that are multiples of smaller numbers, which leaves us with the following list.
+1
+2
+5
+10
+13
+17
+26
+29
+34
+37
+41
+53
+58
+61
+65
+74
+85
+
+The roots of any of the numbers in this list will have no common multiple.  For example
+
+(m sqrt 17) will not equal (n sqrt 53) for any integers m or n.  For this to be false, m/n must be a square of a rational number.  Since integer multiples are already removed, there will be no such rational number.
+
+There are 17 numbers in this list and they represent the fundamental set of possible choices that Diane can make.  That is, any choice she makes is an integer multiple of the square root of one of these numbers.
+
+This set can be considered an orthogonal basis set since s can be described uniquely by the 17 dimensional vector (a1, a2, ... , a17). where a1, s2,..,.a17 are all integers.
+The product a1 * sqrt(1) + a2 * sqrt(2) + a3 * sqrt(5) + ... + a17 * sqrt(85) = s.
+
+Monty's strategy is to keep s as close to the starting s in this 17 dimensional space while obeying some simple guidelines.  As an example, suppose d=sqrt(50) = 5 sqrt(2).
+
+c can be chosen to be 7!/5, so c*d = 7!.  Next time a sqrt(2) multiple is chosen, say sqrt(98) = 7sqrt(2), c can be chosen to be -7!/7 to undo the first choice.
+
+Using this strategy, Diane will be able to traverse along the vertices of a hypercube in 17 dimensional space without returning to a previously visited vertex.  After all of her 17 fundamental choices are used up, any choice she makes will return her to a neighboring vertex of the hypercube.
+
+To illustrate in 3 dimensions, starting at the origin and normalizing the A vector.
+(0,0,0) -> (0,0,1)
+after only 1 choice and only 2 vertices used, Diane must choose a second fundamental distance.
+(0,0,1) -> (0,1,1)
+(0,1,1) -> (0,1,0)
+now 4 vertices are used, Diane must go into the third dimension.
+(0,1,0) -> (1,1,0)
+(1,1,0) -> (1,1,1)
+(1,1,1) -> (1,0,1)
+(1,0,1) -> (1,0,0)
+Now 8 vertices are used and we are directly neighboring a vertex in each of the 3 dimensions.
+
+Interestingly, the coordinates are the same as counting in Gray code.
+
+Given 17 dimensions, she could use all 2^17 = 131072 vertices of the hypercube.  That is the maximum sequence of distances that Diane can choose.
+
+Chris Shannon
+
+Calgary Canada

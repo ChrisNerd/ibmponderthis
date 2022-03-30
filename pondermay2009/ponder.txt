@@ -1,0 +1,57 @@
+I started by filling a spreadsheet with all the times that the analog clocks makes the bisection but soon saw that the term "bisection" is a bit ambiguous, since the hour-minute angle can be smaller or larger angle, that add to 360.  I decided to only consider the smaller angle, i.e. the minute-hour angle less than or equal to 180, and bisect that.
+
+After filling in the spreadsheet a bit, I decided it would be much quick to compile a complete list of palindrome times and check for each, how close it is to a bisector.
+
+The digital clock format is also a bit ambiguous, the hour could have a leading zero, but all the clocks I see here don't.  It was easy enough to compile the palindrome time list with and without the leading zero.
+
+The entries were sorted by "(hour-second)-(second-hour) mod (2*pi)"
+
+With the leading zero, going from 00:00:00 to 24:59:59, all the analog bisection candidates were bisecting the complementary angle (the angle greater than 180).  So these were all rejected.
+
+Without the leading zero, only a handful of candidates remained, all of which had bisected the correct angle.
+They are (grouped by pattern):
+0:00:00
+3:10:13
+6:20:26
+9:30:39
+
+
+2:13:12
+5:23:25
+8:33:38
+
+
+1:16:11
+4:26:24
+7:36:37
+
+
+0:19:10
+3:29:23
+6:39:36
+9:49:49
+
+There are 4 sets that are seperated by 3 hours, 10 minutes and 13 seconds.
+
+or sorted chronologically:
+0:00:00
+0:19:10
+1:16:11
+2:13:12
+3:10:13
+3:29:23
+4:26:24
+5:23:25
+6:20:26
+6:39:36
+7:36:37
+8:33:38
+9:30:39
+9:49:49
+
+One interesting thing I discovered while trying the first approach (compiling the list of bisecting analog times) was that you only needed to go from noon to 6 o'clock, and there would be a corresponding time if you ran backwards from noon for each.
+
+Thanks for this challenge.  The previous months challenge involved too much research (on error correcting codes etc.) for me.
+
+Chris Shannon
+Calgary Canada

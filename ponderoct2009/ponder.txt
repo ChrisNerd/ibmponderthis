@@ -1,0 +1,13 @@
+A google search for a quotes of mathematicians led to:
+"A mathematician is a blind man in a dark room looking for a black cat which isn't there."
+
+    Charles Darwin
+
+
+The sequence is the number of letters in each word.  The last two words have 4 and 5 letters.
+
+I have read the Origin of Species and this does not sound like something Darwin would have said.
+
+Chris Shannon
+
+Calgary Canada
