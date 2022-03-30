@@ -1,115 +1,128 @@
-Short answer (for the bonus question):
-RPS(11) game with at least 50 automorphisms
-0 -> 1, 2, 3, 4, 5
-1 -> 2, 3, 6, 7, 8
-2 -> 3, 4, 6, 9, 10
-3 -> 4, 5, 7, 8, 9
-4 -> 1, 5, 6, 7, 10
-5 -> 1, 2, 8, 9, 10
-6 -> 0, 3, 5, 8, 10
-7 -> 0, 2, 5, 6, 9
-8 -> 0, 2, 4, 7, 10
-9 -> 0, 1, 4, 6, 8
-10 -> 0, 1, 3, 7, 9
+Short answer:
+//Start
+10 A= 120
+20 B = 25
+30 JMP_ZERO B 80 // goto b
+// a
+40 R = A
+50 B = B mod A
+60 JMP_ZERO B 180 // goto f
+70 CHAOS 40, 80  // goto a or b
+// b
+80 R = B
+90 A = A % B
+100 JMP_ZERO A 180 // goto f
+110 CHAOS 120, 160 // goto c or d
+// c is a swap
+120 T = A
+130 A = B
+140 B = T
+150 CHAOS 40, 80
+// d
+160 A = A % B // this could set A to zero
+so we must check at b if A==0, doing b again
+won't hurt.
+170 CHAOS 80, 160
+// f, the return
+180 RETURN R
+
+
+For the bonus question (*)
+//Start
+10 A= 120
+20 B = 25
+30 JMP_ZERO B 50 /// goto a
+40 JMP 60
+// a
+50 JMP 50
+// b
+60 JMP 70
+// c
+70 R = A
+80 B = B mod A
+90 JMP_ZERO B 120 // goto e
+100 CHAOS 70, 110  // c or d
+// d
+110 R = B
+120 A = A mod B
+130 JMP_ZERO A 140 // goto f
+140 CHAOS 70, 110 // goto c or d
+// e
+120 JMP_ZERO B 140
+130 CHAOS 70, 100
+// f, the return
+140 RETURN R
+
 
 Long answer:
-First off, this is my first submitted solution since April with Oded. So welcome, and thanks for taking on this role as puzzlemaster Gadi! If you have a chance to wish Oded well for me and thank him, I'd appreciate it, even though we've never met.
+We start by finding a graph with the required path counts.
+By inspection, there's no direct path (path length ==1) between start and end.
+Since there are 2 paths of length 2, that means that we have a diamond. start -> a -> end, and start -> b -> end.
+From here on out I found it best program the combinations and find the appropriate graph, enforcing that start goes to both a and b, and that a and b go to end.
 
-This solution process is pretty similar to other combinatorial problems from Ponder This. I can represent the RPS(n) graph as an nxn binary skew matrix, where 1 indicates "row beats column", -1 for vice versa and 0 for a tie.
-There are (n*n-n)/2 independent entries (the upper triangular) corresponding to the n Choose 2 directional edges in the graph.
-My approach was to just fill those entries out, in order, checking to see if we're under the limits of wins or losses allowed at each point. We use recursion and backtracking to run through all the combinations and it's kind of neat and tidy.
-(There is a more efficient way to do this, keeping track of candidate entries remaining, and I thought it would be necessary to implement it for the bonus question, but simply going through the matrix in left to right, top to bottom order worked fine)
+I used a scanLeft, to apply substitution rules. After n applications, we'll return a list of nodes we are in after n steps (or a slice of the tree at depth n).
 
-val n = 11
+ val start = List('a','b') 
+ val bonusRules = Map('e' -> List('c', 'd', 'f'), 'f' -> List(), 'a' -> List('a'),
+     'b' -> List('c'), 'c' -> List( 'c', 'd','e'), 'z' -> List(), 'd' -> List('c', 'd','f'))
+ (0 to 12).scanLeft(start)( (a,b) => a.flatMap(bonusRules)).map( _.count(_ == 'f'))
+//  = Vector(0, 0, 0, 2, 4, 10, 24, 58, 140, 338, 816, 1970, 4756, 11482)
 
-// Housekeeping to represent the upper triangular portion of a matrix as a 1D vector.
-def ijToIndex(i: Int, j: Int): Int =
-  n*(n-1)/2 - (n-i)*(n-i-1)/2 + j-i-1
+And to iterate through the combinations:
 
-// The matrix is skew, reflecting the fact that if Rock beats Scissors, then Scissors losses to Rock. And 0s on the diagonal.
- def matFromIndex(m: Vector[Int], i: Int, j: Int): Int =
-  if (i > j)
-   -matFromIndex(m,j, i)
-  else if (i == j)
-   0
+val sol = for {
+   an <- (1 to 3).toIterator
+   a <- ('a' to 'f').toList.combinations(an).map( l => (l.toSet /* taking out the direct path to f for the bonus question+ 'f'*/).toList).toIterator
+   bn <- 1 to 3
+   b <- ('a' to 'f').toList.combinations(bn).map( l => (l.toSet /*+ 'f'*/).toList)
+   cn <- 1 to 3
+   c <- ('a' to 'f').toList.combinations(cn)
+   dn <- 1 to 3
+   d <- ('a' to 'f').toList.combinations(dn)
+   en <- 0 to 3
+   e <- ('a' to 'f').toList.combinations(en)
+   val rules: Map[Char, List[Char]] = Map(
+    'a' -> a,
+    'b' -> b,
+    'c' -> c,
+    'd' -> d,
+    'e' -> e,
+    'f' -> Nil,
+    'z' -> Nil
+   )
+
+For the bonus question, I had issues with out of memory errors so I switched to a matrix representation of the graph, similar to the COVID spreading Ponder This from a few months ago. Adding 1 to the length of a path is the equivalent of a state vector by the transition matrix. And the state vector will "count" the number of paths to each node, so that's handy.
+
+
+ def recurs(mRunning: IndexedSeq[Int], m: IndexedSeq[List[Int]], d: Int): Boolean  = {
+  if (d==0)
+   recurs(IndexedSeq(1,1,0,0,0,0), m, 1)
+  else if (d == 7 && mRunning.last == 0 || d > 7 && mRunning.last > 10000)
+   false
+  else if (d < 20)
+  {
+  if (mRunning.last == 1970)
+   true
   else
-   m(ijToIndex(i, j))
-
- // Can we insert the entry into position (i,j)?
- def canTake(mat: Vector[Int], entry: Int, i : Int, j: Int): Boolean =
-  ((0 until j).map( jIndex => matFromIndex(mat, i, jIndex)).sum + entry).abs <= n - 1 - j &&
-  ((0 until i).map( iIndex => matFromIndex(mat, iIndex, j)).sum + entry).abs <= n - 1 - i
-
- def generateMatrices(matSoFar: Vector[Int], i: Int, j: Int): Iterator[Vector[Int]] = {
-  if (matSoFar.size == (n*n - n )/2)
-   Iterator(matSoFar)
-  else
-   for { entry <- Iterator(1,-1)
-    if (canTake(matSoFar, entry, i,j))
-    rest <- generateMatrices(matSoFar :+ entry, if (j == n -1) i+1 else i, if (j== n-1) i+2 else j+1)
-   } yield rest
- }                                                //> generateMatrices: (matSoFar: Vector[Int], i: Int, j: Int)Iterator[Vector[In
- 
-Good, so now we have a way to iterate exhaustively through all possible matrix representations of RPS(n). Now we just have to check each of them for the number of isomorphism.
-
-A very similar approach can be used to efficiently run this check too, namely backtracking and recursion. We grow a Vector to represent the mapping, i.e. its value gets mapped to its index. When we append a new value (at index = vector.size) we only have to check against the size-1 other entries so far.
-
- def generatePermutationAndCheckForIsomorphism(mat: Vector[Int], permSoFar: Vector[Int], remaining: Set[Int]): Iterator[Vector[Int]] =
- {
-  if (remaining.isEmpty)
-   Iterator( permSoFar )
-  else
-   for { entry <- remaining.toIterator
-       if (permSoFar.zipWithIndex.forall{ case(p,i) => matFromIndex(mat, p, entry) == matFromIndex(mat, i, permSoFar.size)} )
-       rest <- generatePermutationAndCheckForIsomorphism(mat, permSoFar :+ entry, remaining - entry)
-   } yield rest
- }              
-
-Now all that remains is to glue the two functions together and to count the isomorphisms.
-val out = generateMatrices(Vector(), 0, 1).filter{ m =>
- val isos = generatePermutationAndCheckForIsomorphism(m, Vector(), (0 until n).toSet)
- val isoList = isos.toList
- val isSolution = isoList.size >= 50 // 10
- if (isSolution)
- {
-  println("solution ")
-  printMat(m)
-  println("with isos ")
-  isoList.foreach(println)
+   recurs(multiplyMatColumn(m, mRunning), m, d+1)
   }
-  isSolution
- }                                                //> solution
-                                                  //| Vector(1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1,
-                                                  //|  1, -1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1,
-                                                  //|  1, 1, 1, -1, 1, -1, 1, -1, 1, -1, -1, 1, -1)
-                                                  //| 0 1 1 1 1 1 -1 -1 -1 -1 -1
-                                                  //| -1 0 1 1 -1 -1 1 1 1 -1 -1
-                                                  //| -1 -1 0 1 1 -1 1 -1 -1 1 1
-                                                  //| -1 -1 -1 0 1 1 -1 1 1 1 -1
-                                                  //| -1 1 -1 -1 0 1 1 1 -1 -1 1
-                                                  //| -1 1 1 -1 -1 0 -1 -1 1 1 1
-                                                  //| 1 -1 -1 1 -1 1 0 -1 1 -1 1
-                                                  //| 1 -1 1 -1 -1 1 1 0 -1 1 -1
-                                                  //| 1 -1 1 -1 1 -1 -1 1 0 -1 1
-                                                  //| 1 1 -1 -1 1 -1 1 -1 1 0 -1
-                                                  //| 1 1 -1 1 -1 -1 -1 1 -1 1 0
-                                                  //| 0 -> Vector(1, 2, 3, 4, 5)
-                                                  //| 1 -> Vector(2, 3, 6, 7, 8)
-                                                  //| 2 -> Vector(3, 4, 6, 9, 10)
-                                                  //| 3 -> Vector(4, 5, 7, 8, 9)
-                                                  //| 4 -> Vector(1, 5, 6, 7, 10)
-                                                  //| 5 -> Vector(1, 2, 8, 9, 10)
-                                                  //| 6 -> Vector(0, 3, 5, 8, 10)
-                                                  //| 7 -> Vector(0, 2, 5, 6, 9)
-                                                  //| 8 -> Vector(0, 2, 4, 7, 10)
-                                                  //| 9 -> Vector(0, 1, 4, 6, 8)
-                                                  //| 10 -> Vector(0, 1, 3, 7, 9)
-                                                  //| with isos
-                                                  //| Vector(0, 5, 1, 2, 3, 4, 8, 9, 10, 6, 7)
-                                                  //| ....
- out.take(2).foreach(println)
+  else
+   false
+ }
 
-Thanks for a fun puzzle, and welcome to Ponder This! So glad to have you,
+And similar to the COVID Ponder This, I wasted a lot of compute time by multiplying the matrix by the matrix, instead of matrix by vector.
+
+With the graphs handy, the last thing to do was to shoehorn in a Greatest Common Divisor algorithm.
+
+I used the identity the gcd( a , b) == gcd (a, b %a) == gcd (a%b, b). So it doesn't matter which way you do the mod.
+And a%b = (a%b) %b, i.e. it doesn't matter if you repeat the mod operation.
+So in that sense, gcd is very forgiving in its implementation. Just have to ensure that you are not taking mod 0.
+
+I've attached a couple images of the graphs used.
+
+Thanks for another fun puzzle.
+
 Chris Shannon
+(from Calgary Canada)
 
-(from Calgary, Canada)
+
