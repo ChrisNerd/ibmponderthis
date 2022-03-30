@@ -1,0 +1,54 @@
+The answer I gave gives the last cassette he can label correctly.
+
+The first cassette he can't label correctly is
+2*B.^(B/2)-B + 1
+
+
+On Fri, 30 Apr 2004, Chris Shannon wrote:
+
+> 2*B.^(B/2)-B
+>
+> When B=10, the first bad cassette number is 199990.
+>
+> Proof eh?
+>
+> There are a*b^(a-1) digits the first b^a - 1 numbers.  That's as far as I
+> got before writing a matlab script to see if I could extract a pattern.
+>
+> for b=2:8
+>   t=zeros(1,b);
+> for i=1:10^11;
+> t=t+ones(1,b);
+> c=i;
+> for j=floor(log(i)/log(b) + 1e-9):-1:0
+>   d=floor(c/(b^j));
+>   t(d+1)=t(d+1)-1;
+>   c=c-b^(j)*d;
+> end
+> i
+> t
+> if (any(t<0))
+>    tmaxvector(b-1)=i-1;
+>    break
+> end
+> end
+> end
+>
+> plot(2:8,log10(tmaxvector))
+>
+> %%%%%%%%%%%%%
+>
+> Playing around with 8's answer of 8184, I saw that 2*8^4 -8 gave the
+> answer.  I used the other numbers to verify.
+>
+> I could extrapolate the answer for b=10 is 199990, that is the first
+> cassette your friend will not be able to label.
+>
+> I have been unable to see any pattern with odd B's although it looks like
+> it will have similar form.
+>
+> Thank you,
+>
+> Chris Shannon
+>
+>

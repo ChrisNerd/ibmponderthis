@@ -1,0 +1,45 @@
+Hi, I believe I got the answer to the October 2002 Ponder This challenge.
+ 
+I went about it by first doing some trial games by hand.  All games with
+N<=6.
+ 
+I noticed that all people 1:M have equal probability of being picked last,
+and that probability is the first part of e1 in my pdf file.
+ 
+The remaining M+1 .. N players I derived their probabilities, first in
+terms of a summation of powers, then simplified using a formula that turns
+the summations into closed form expressions.
+ 
+I provided a matlab file that calculates it two different ways.  The
+first, the brute force, matches my hand calculations.  The elegent way
+matches the brute force way for every M and N value I tried.
+ 
+Please let me know one way or the other.
+ 
+Thank you very much.  I really enjoy these challenges and this is the
+first I got before the deadline.
+ 
+Chris Shannon
+
+
+octave:1> game
+M =  3
+N =  5
+k =
+
+   1   2
+
+first =
+
+   2.6667   6.0000
+
+second =  4
+denom =  27
+maxfunc =
+
+   4   6
+
+brute =  0.37037
+e1 =  0.14815
+e2 =  0.22222
+elegant =  0.37037

@@ -1,0 +1,38 @@
+5 moves guarantees the win.
+ 
+Strategy:
+First move, choose adjancent, set them both face down.
+ 
+Second move, choose oposite, set them both face down.
+This guarantees that at least three of them are face down.  If the fourth
+is face down then the game is over.  If the game is not over, it means the
+fourth is face up.
+ 
+Third move, choose oposite.  If they are both face down set one of them to
+face up.  This makes two adjancent cups face up, and the other two face
+down (case 1).  If one is face up the other is face down, set them both to
+face up.  This makes two oposite cups face up, and the other two face
+down (case 2).
+ 
+Fourth move, (case 1), choose adjancent, flip both.  This either wins the
+game if they are the same, or reduces it to case 2 and causes the fifth
+move.
+Fourth move, (case 2), choose oposite, flip both.
+ 
+Fifth move, choose oposite, flip both.
+ 
+View attached picture.
+0 means face down, 1 means face up, x means unknown.
+90 means adjacent, 180 means oposite.
+Numbers beside the arrays are what the cups you feel are.
+Circled numbers are what you just turned.
+ 
+Symmetric cases are ignored.
+ 
+I don't have a proof for this, because I brute forced it.  It doesn't seem
+possible to do this in less than 5 steps.  It takes 2 steps to determine
+that only 1 cup is different, then it takes 3 more to guarantee the win.
+ 
+Thank you.
+ 
+Chris Shannon.

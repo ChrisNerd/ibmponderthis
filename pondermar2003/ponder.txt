@@ -1,0 +1,124 @@
+Tue 11 Mar 2003 08:28:26 AM
+
+Dear Don,
+ 
+> There must be a wrong assumption somewhere, because this solution does
+> not give the largest possible value.
+ 
+You're right, and it resulted in an incorrect equation.  Now that it's
+fixed, my objective function is smooth so I have a lot more confidence in
+this answer.  My equations assumed the center of the $200 circle was in
+the $100 region.  Now they can handle both cases.  This assumption was
+correct for when I evaluated the regions being of equal value.
+ 
+The solution to this "ponder this" is the value of the region enclosed by
+the fence is $114256.54.
+ 
+See the shape of the fence in construct2.png.  It is composed of 3
+circular segments.  The first arc is centered 24.76 m north and 14.03 m
+east (or west) of the tree.  The center is later found to be on the second
+arc.  The second arc is centered 22.38 m due north of the tree.  The
+radius of the first ($100) arc is 28.46 m and the radius of the second
+($200) arc is exactly half, 14.23 m.
+ 
+Because the radii are colinear at the point where the fence crosses the 20
+m line, this means that the fence has the same slope on either side of the
+fence.  In other words there is no angle or corner in the fence.
+ 
+I used the principal from Dido's problem and the isoperimetric theorem
+(the circle encloses the largest area for a given perimeter).
+ 
+Thank you for the hints.
+ 
+Kind regards
+ 
+Chris Shannon
+ 
+http://www.enel.ucalgary.ca/~shannon/
+ 
+Finagle's First Law:
+ If an experiment works, something has gone wrong.
+ 
+***** 
+
+Fri 07 Mar 2003 02:56:52 PM
+
+Dear Redaer,
+ 
+There must be a wrong assumption somewhere, because this solution does not
+give the largest possible value.
+ 
+Incidentally the final answer you give ($11346.66) seems to be off by a
+factor of 10; was there a transcription error?
+But even restoring that factor of 10, it is not the correct value.
+ 
+One might re-examine the assumptions.  In particular, what leads to the
+upper part being exactly a semi-circle?  Could it be a larger or smaller
+part of a circle?
+ 
+Don Coppersmith
+ 
+
+
+
+*****
+
+
+
+The shape is composed of circular segments, see construct.png
+ 
+It is symmetric about the north-south axis.  The fence starts at the tree
+and is a circular arc that is centered 24.72 m North and 11.75 m east of
+the tree.  The radius of that arc (r1) is 27.38 m.
+ 
+Once the fence reaches the 20 m line, it is a circular arc with radius,
+r2, 15.21 m centered at 20 m north of the tree (a few micros into the
+$200 region).
+ 
+The value of the property is $11346.42.
+ 
+I used the principal from Dido's problem and the isoperimetric theorem
+(the circle encloses the largest area for a given perimeter).
+ 
+http://www.cut-the-knot.org/Generalization/isop.shtml
+ 
+l1 covers the $100 region, leaving 50-l1=l2 to cover the $200 region.
+The ends of the fence are fixed at (20,y) and (20,-y), but the shape of
+the fence must be determined.  Since it does not matter how far it extends
+it to the region, a circle covers the largest area given a fixed
+perimeter, l2.  If the shape was anything other than a circle, the
+isoperimetric theorem would be violated.
+ 
+Imagine the rest of the circle is completed with area A1.  If A1 is added
+to the area enclosed by any other shape of length l2, the result must be
+less than that of the complete circle.  Therefore the circular segment is
+the largest area of all curves of length l2.
+ 
+For debugging and for interest I calculated the shape for different cost
+values.
+ 
+The points on the diagram are loci of the center of the circle when the
+value of the expensive region is varied from $100/m to $300/m in steps of
+$10/m.
+ 
+When the regions are of equal value, the answer is as expected, it is one
+circle.
+ 
+I've attached the matlab program (circles.m) I used to maximize the area.
+If you have the optimization toolbox, you can run it with
+ 
+> [aandb area] = fminsearch(@circles,[15 -20])
+ 
+If not try the attached file to iterate through possiple circular shapes,
+it moves a and b on the diagram.
+ 
+> makesurf
+ 
+Thank you for another interesting and challenging problem.
+ 
+Chris Shannon
+ 
+PS, please let me know if I'm incorrect.  I know my answers are not exact,
+in order to achieve exact values, I'd need to learn some calculus of
+variations.
+
