@@ -1,0 +1,12 @@
+I actually solved this years ago with a visual basic program.
+(see http://localhost/math.htm or whatever my ip is now
+Largest circle in a cube
+Unfortunately I don't seem to have that code any more.)
+
+
+The length of a side of the square has length root(9/8).
+
+The vertices of the square are 1/4 units away from the cube's vertices, and along the cubes edges.
+
+Chris Shannon
+

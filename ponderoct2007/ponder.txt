@@ -1,0 +1,40 @@
+I found two convenient planes of symmetry, which works equally well for all 5 platonic solids.
+
+With the edge of interest orientated vertically, one plane of symmetry bisects the edge (divides it top and bottom), while another plane of symmetry includes the edge (divides it left and right).  Both planes pass through the centroid of the solid.
+
+Notice that any edge that is cut by either symmetry plane is either bisected symmetrically or contained in that plane.  We can say that all points along the horizontal plane are at a potential of 1/2 the Thevenin Voltage .  For such as the cube, where an edge is bisected by the horizontal plane but that edge is not contained in the other plane, we replace that resistor with to series resistors of 1/2 value.  If an edge is contained entirely within the horizontal plane, no current will flow through it and it can be removed.
+
+For the vertical plane, we can say that corresponding points on opposite sides are at identical potentials and therefore no current will flow left to right (no current will flow across this plane).  This allows us to remove entire branches.
+
+For resistors, such as the one on the edge of interest, that lie right in the plane of symmetry, we can account for the symmetry by adding an identical duplicate in series, then duplicating that pair in parrallel.
+____
+l     |
+R   R
+|     |
+R   R
+|___|
+
+This allows us to cleanly separate top from bottom, and left from right.  No current flows left to right, and half way up is half the voltage drop.
+
+We analyze 1/4 of the solid.  Its equivalent resistance will be duplicated in series, then that pair will be duplicated in parallel exactly as the case above.  The resulting equivalent resistance of the entire solid will be equal to that of one quarter of the solid!
+
+After applying these simplifications, the equivalent resistance for each case can nearly be found from inspection.
+
+Look at the attached image file (resistor.png) to see my equivalent circuits and equations.
+
+To summerize their resistances,
+Tetrahedron = 1 / 2
+Cube = 7 / 12
+Octahedron = 5 / 12
+Dodecahedron = 19 / 30
+Icosahedron = 8 / 21.
+
+Other than the icosahedron the numbers look like they form a pattern with the number of edges in the denominator.  Perhaps I made a mistake with the icosahedron but I can't find it.
+
+I didn't think I'd ever see Thevenin after my second year electrical engineering course.  Thanks for introducing us again!
+
+Chris Shannon
+Calgary, Canada
+
+I found a mistake with the icosahedron.  I missed the resistor between c and c'.
+Much better as it fits the pattern.  Its equivalent resistance is 11/30.

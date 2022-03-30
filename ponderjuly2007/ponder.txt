@@ -1,0 +1,25 @@
+The total length of fence is 2.63895...
+
+The configuration is illustrated in the attached png image.
+
+A Steiner tree would meet the requirements.  Each corner of the square
+needs to be a vertex, i.e. the fence must go to each corner.
+
+I watched the video on Steiner trees at:
+http://www.archive.org/details/RonaldLG1988
+
+A key point in helping find the steiner vertex was that it had to make 3 -
+120 degree angles.
+
+We can get a bit better than a fully connected Steiner tree.  We connect 3
+corners in a Steiner tree, and for the fourth corner, run the fence to the
+centre of the square.  This involves only creating ( N-2 = ) one Steiner
+vertex.  Its position was found by calculating the total fence length
+f(a) = 2*sqrt((1-a/sqrt(2))^2 + (a/sqrt(2))^2) + a;
+where a is the length of the top right fence (going 45 degrees).
+setting df/da = 0 gets me the position, (with a = .2998858... I know
+there's a simple exact representation).  Adding the sqrt(2)/2 for the
+fourth fence gave me a total fence length of 2.63895...
+
+Chris Shannon
+Calgary Canada
