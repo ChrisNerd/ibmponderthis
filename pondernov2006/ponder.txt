@@ -1,0 +1,92 @@
+I believe I have the solution to November's ponder this.
+
+Part 1, The number 29 is the largest integer that can't be formed with 1, 2, 3 and 4.
+
+Part 2. There are numerous instances that form all the intergers up to 29.  Some of these include:
+octave> ponder
+inlist =
+
+  1  2  3  9
+
+k = 31
+inlist =
+
+   1   2   3  10
+
+k = 34
+inlist =
+
+  1  2  4  5
+
+k = 33
+inlist =
+
+  1  2  4  7
+
+k = 38
+inlist =
+
+  1  2  4  9
+
+k = 41
+inlist =
+
+   1   2   4  10
+
+k = 35
+inlist =
+
+  1  2  5  6
+
+k = 44
+inlist =
+
+  1  2  5  8
+
+k = 44
+inlist =
+
+  1  2  5  9
+
+k = 31
+inlist =
+
+   1   2   5  10
+
+k = 34
+inlist =
+
+  1  2  6  9
+
+k = 34
+inlist =
+
+  2  3  4  5
+
+k = 32
+inlist =
+
+  2  3  4  7
+
+k = 36
+inlist =
+
+  2  3  4  9
+
+k = 34
+inlist =
+
+  2  3  5  6
+
+k = 33
+....
+
+The best sets I found were 1, 2, 5, 6 and 1, 2, 5, 8 which got up to (and excluding) 44.
+
+I pretty much brute forced this problem, by hard coding each combination into an octave script.  The functions nchoosek(1:16,4) and perms(inlist) came in handy in creating all the candidate a,b,c,d sets.
+
+I've attached my source files.  They can be run in matlab or octave by running the command ponder
+
+
+Thanks for this challenge
+Chris Shannon
