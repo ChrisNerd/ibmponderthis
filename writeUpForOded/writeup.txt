@@ -1,0 +1,185 @@
+1. Name: Chris Shannon
+2. Profession: Electrical Engineer. Currently, I'm a forensic fire investigator, electrical expert. Previously I did programming for a living.
+3. Age: 41
+4. I'm a big nerd.
+5. A friend from graduate students told me about Ponder This. He said, erroneously, that if you solve it they'll give a link to your site (he must have been misled by the bold and coloured font used for the names). But that was exciting motivation for our early 2000s websites.
+6. What motivates you to attempt to solve the Ponder This puzzles? Like all good puzzles, they start out as fun, but Ponder This is different. They often start out as a mystery. It's often a challenge to even understand the question. The puzzle strings you along. Once you understand the question, you feel proud of yourself for working that out. Then immediately you realize how hard it is. The motivation comes in fits and starts. You might think of a way to solve it pretty early on, but only to realize after a lot of wasted effort that it was a dead end. This only motivates me further, call it a sunk cost fallacy, but knowing the problem so well, and at least one approach striked out, the real solution is probably closer. The problems are sinister that way, they deceive you into thinking they are easier than they are, up until you think they are near impossible, then if you're lucky your perseverance pays off.
+This comic is appropriate to how I feel about puzzles:
+https://www.smbc-comics.com/comic/the-room
+
+
+7. How long, on average, does it take for you to answer a puzzle? Oh geez, I'm kind of embarrassed to tally up the hours. I'd say very few take under 2 hours, maybe 1 problem per year, takes 5 or 10 minutes. All in all, some of the hardest problems might take me a total of on and off work of 40 hours!!!  On average, I'd say I spend, let's say 8 hours before the problem finally yields. This includes about an hour to make a nice little writeup of my journey, including the false starts and dead ends. It's unusual for me to get to the point where I understand the question, but eventually get defeated by the problem.
+8. What was the hardest challenge? Well, clearly there's still some unsolved challenges back from the Don Coppersmith era. For example: February and August 2000, Sept 2001, have only one solver. Nov 2001 (part 2) still an open problem.
+There are many that I couldn't even start to solve, mostly due to not understanding certain terms in the question (mostly on the early 2000s).
+The hardest one that I have managed to solve would have to be July 2010 (Find a natural number n for which the expression round((1+2cos(20o))n) is divisible by 1,000,000,000.). My search for a solution led to learning about Pisot–Vijayaraghavan numbers, and almost integer. I used the Gimp image editor to do an autocorrelation to find the period to get to the general form of the solution.
+
+
+If you want a real challenge though, (this was like twice as hard as February 2019's Ponder This!), get this 10 line Basic program running, and explain the math concepts it's using. Translate it to your language of choice.
+
+https://oeis.org/A002088/a002088.pdf
+
+  10 ! Sum Euler's TOTIENT or Phi function (n) from L to U
+  20 T=0 @ INPUT 'Low &, Up Nbr. ';L,U
+  30 FOR I=L TO U
+  40 K=1 @ S=1 @ N=I
+  50 R=PRIM(N) @ IF R=1 THEN 110  // There's no GOTO here
+  60 P=N/R
+  70 Q=PRIM(P)
+  80 IF R=Q THEN K=K+1 @ P=P/R @ GOTO 70
+  90 S=S*(R-1)*R^(K-1)
+  100 N=P @ R=Q @ K=1 @ GOTO 50
+  110 T=T+S @ NEXT I @ DISP T @ STOP
+
+
+9. What is your favourite Ponder This puzzle? OOHHH!!! Don't ask that, so many...
+I've drawn a bit of a short list:
+June 2018, arranging tetrominoes. That was a very elegant question, using only the number 5 in the problem, and asking you to draw a picture. You can try to solve it by hand, but the real fun was finding a very simple and concise program to automate the search for a solution. The skill was basically translating the constraints directly from the problem into the program.
+September 2017 Fisher's Fools mate. Solved it two different ways, got different answers each way. It was quite enlightening about the effectiveness of diversity. Both ways had errors, but only by converging was I confident in their answers.
+May 2007 Largest square in a cube. This has a special place in my heart as I did it in Basic in Excel a good decade before 2007, before I had any real training in programming. I've never found the answer to the largest pentagon in a cube though, I google it from time to time.
+Other favourites include:
+January 2012  Dragon -> square triangular numbers.
+July 2018, a generalization of the "ages of three children" puzzle. I wasn't successful because I implemented a discriminator test that wouldn't have false negatives. But the trick is to just be okay with that. Realize that the worst consequence would be that you miss a potential solution. Hopefully, you'll catch another one. The tradeoff turns out to be worth it.
+From July 2002. Prisoners and Hat puzzle, which had a solution involving Hamming Codes, but socially it had a message of conformity. We are very strong together, like Aesop's fable, but we concentrate our bad guesses. We all have the same blind spot. It's interesting to think about analogies to our cultures, and how conformity might have an evolutionary benefit.
+Aug 2004 A nice geometric one with recursion, kind of fractal.
+Feb 2018 came across Stirling numbers of the second kind.
+March 2019 The continued fraction.
+
+Some were too easy, like the average primes magic square (April 2019). The fun part, in my opinion, was working out where it's possible to have any numbers =0 (mod 3), and once you can see that's impossible, can you have a mix of numbers 1 (mod 3) and 2 (mod 3). Once you prove you can't, programming this up is super easy and runs in no time.
+
+I like the ones that seem to flirt with the edges of intractability. Like October 2014, find the last 10 digits of an unfathomably large number. Or April 2018 Power sets of power sets!
+July 2015, about generating a strategy where there's no "math" or programming.  I was able to solve it pen and paper.
+
+10. What skills does it take to become a puzzle solver? Perseverance. Curiosity. Humility. Maybe the nerdy equivalent of the Finnish concept of sisu. But what is not required to solve these problems is an understanding of advanced math (although it doesn't hurt). What certainly helps is a lifelong passion for learning. I sometimes find myself trying to apply the Z transform to the problem, and while it may get me a bit further down the road it almost always just lets me see a simpler solution from afar. An analogy might be if you go hiking and get so lost that you reach a peak where you can see both your starting point and your desired destination, you can probably deduce the likely location of the simple path from A to B.
+I say humility because these problems will not be solved by arguing at them. There's no convincing anyone that you got the right answer, with appeals of authority. The problems often wear a suit of computational complexity armour, so you have to defeat it with cunning and a bit of lateral thinking, and trial and error. Brute force only sometimes works, but is almost always a good starting point.
+11. Did you find yourself doing puzzles as a child? Yes. I've been keen to enter math competitions ever since I started doing math in elementary school. I solved the rubik's cube back in the 80's, and had Rubik's magic, and various other physical disentanglement puzzles.
+12. What tips do you have for the next generation of master puzzle solvers?  Keep updating your skillset. Learn new tools. Wolfram alpha can solve 3 or 4 of the early Ponder Thises, just eats them up for breakfast like this:
+July 2001
+https://www.wolframalpha.com/input/?i=1%2F1+%2B+2%2F(2%2B3)+%2B+3%2F(4%2B5%2B6)+%2B+4%2F(7%2B8%2B9%2B10)+%2B+...
+
+Pretty soon with the advances in natural language processing more will fall. Learn to use these tools like Kasparov advocates working with the descendants of Deep Blue.
+Learn a functional programming language like Scala or Haskell. It'll teach you to simplify the problem, make you focus on what you're really after, and not fiddling around with index variables. It'll lead you to much simpler, more beautiful solutions. Also a general familiarity with concepts like Boolean satisfiability problem, and integer programming might be useful for recognizing the concepts in the problems. But just go with what you know, don't think you have to know anything. Common sense gets you pretty far.
+Most importantly, don't be discouraged. Have fun. And get lots of sleep! So many of these problems are way easier after a good night's sleep.
+13. Do you have special place you work on the puzzles (i.e. sitting in the bathtub in my apartment in London)? It's really always two places that work in conjuction with each other. 1) at the computer. 2) away from the computer (with no distractions, eg the gym, in bed, on a long drive or flight, on a run). A lot of my Eureka moments come to me when I'm nearly dreaming. I'm a fairly big believer in the value in separating these stages. Give them each time to work.
+
+    (i) preparation (preparatory work on a problem that focuses the individual's mind on the problem and explores the problem's dimensions),
+
+    (ii) incubation (where the problem is internalized into the unconscious mind and nothing appears externally to be happening),
+
+    (iii) intimation (the creative person gets a 'feeling' that a solution is on its way),
+
+    (iv) illumination or insight (where the creative idea bursts forth from its preconscious processing into conscious awareness); and 
+
+    (v) verification (where the idea is consciously verified, elaborated, and then applied).
+
+14. If we'll create an IBM PonderThis badge (https://www.youracclaim.com/organizations/ibm/badges) - would you like to get one?
+Absolutely!!!
+
+15. If we'll make a physical meeting of PonderThis solvers - would you like to attend it?
+For sure!!! I'd love to meet some of my fellow solvers. These are my people.
+
+16 Anything else you'd like to suggest and/or tell us.
+I've long had the pipe dream of making a youtube challenge talking about these problems. I find the solutions presented on the websites too minimal, kind of like seeing a solved crossword but no explanation of the clever theme. For example December 2002, the solution was just the list of numbers that solve it followed by
+
+    Sketch of a non-brute-force solution:
+    The sum of all four (a+b+c+d) is the square of the right-hand side of a Pythagorean triple in three different ways (in what ways?), so it has to be divisible by a handful of prime factors (What? Why?), each of which is 1 mod 4 (or else the prime 2) (again, why?). Since it cannot exceed sqrt(4*12000) < 220, there are not that many candidates. The right one turns out to be 130=2*5*13.
+
+
+There's a lot of interesting stuff going on there, that can totally be elucidated upon, and understood by anyone with an exposure to the Pythagorean theorem. And even an example "brute-force" solution would be nice to see, since some brute force solutions are less practical than others (like Bogosort).
+
+My wife and I have talked about making this into an educational youtube channel, where we'd massage the questions into something a bit more practical and hip. For example, for June 2019's sum of square roots matching one, we're thinking how the numbers could represent a particular taste, and you'd like to find 2 people on earth who have nearly identical tastes. The video would go on to dramatize a binary search tree as a "20 questions" like game. In the end, we'll have taken some wrong turns and seen why they don't work, and also name the actual concepts we were using. I'd give some thoughts on some life lessons that can be gleaned from this. That would invite the learner to explore more on their own. I'm not sure if youtube would be the best place for this since ideally I would like it to be interactive, but that might end up being more work and with no audience.
+
+
+Another few comments and thoughts I've had over the various puzzles.
+May 2014 Anhiilating Bullets. I was thinking about how casually bullets are mentioned, and if that related to the gun culture in the states. It would be easy to modify the question into something else, like launching quadcopters and they will crash if a slower was gets hit by a faster one.
+
+There was a recent puzzle where Tolkien's Sauron was introduced unnecessarily, but somehow it fit so naturally in an adjacent nerdy world.
+
+I've also noticed how few female names there are on the solution lists. Do you have any stats on this? I wonder how well it correlates with women in computer science. Has it changed over time?
+
+I didn't know you were keeping a running tally of solution counts. I've solved a bunch of ponder thises without submitting the solution, when I saw there were already tons of solvers. I felt like it was an avalanche of work if too many solvers sent in solutions so I didn't want to contribute.
+
+I've always wanted to suggest a puzzle, but the only things that come close to matching the difficulty are pretty technical, like my grad studies courses in wireless communication and RF engineering. Oh well, I'm glad there's a community out there curating those questions for me. There must be some really good problems out there that don't permit a good "machine-testable" (eg numerical) solution that were ruled out for Ponder This. Care to talk about the programs you use to automate and filter the answers to ponder this?
+
+And thanks so much for being the puzzlemaster.
+
+Chris
+
+************
+
+Ponder This IBM <PONDER@il.ibm.com>
+	
+Tue, May 28, 2019, 7:53 AM
+	
+to
+Dear PonderThis solver,
+
+We're happy to update you that you are one of the top 50 PonderThis solvers.
+
+To celebrate the 255th challenge, we'd like to publish some anecdotes about the challenges and solvers.
+If you agree, please help us by answering the following questions.
+Feel free to skip any question you don't want to answer for any reason.
+
+    Name
+    Profession
+    Age
+    Describe yourself in one sentence
+    How did you hear about PonderThis?
+    What motivates you to attempt to solve the Ponder This puzzles?
+    How long, on average, does it take for you to answer a puzzle?
+    What was the hardest challenge?
+    What is your favorite PonderThis puzzle?
+    What skills does it take to become a puzzle solver?
+    Did you find yourself doing puzzles as a child?
+    What tips do you have for the next generation of master puzzle solvers?  
+    Do you have special place you work on the puzzles (i.e. sitting in the bathtub in my apartment in London)?
+    If we'll create an IBM PonderThis badge (https://www.youracclaim.com/organizations/ibm/badges) - would you like to get one?
+    If we'll make a physical meeting of PonderThis solvers - would you like to attend it?
+    Anything else you'd like to suggest and/or tell us
+
+
+Thanks you all for sending dozens of solutions and I do hope you enjoy solving the challenges at least as much as I enjoy writing them.
+
+Oded
+
+
+
+***********
+
+Dear Chris,
+
+You are correct - the special feature is that a value appears at least 1/2 of the times and as a streaming algorithm it guarantees finding it in O(1) memory and O(1) time per entry.
+
+
+Oded
+
+
+
+From:        Chris Shannon <chris.shannon@gmail.com>
+To:        Ponder This IBM <PONDER@il.ibm.com>
+Date:        17-07-19 01:26 AM
+Subject:        Re: Re: Ponder This questions
+
+
+
+On Mon, Jul 1, 2019 at 11:49 PM Ponder This IBM <PONDER@il.ibm.com> wrote:
+Thanks, Chris, for your interesting answers.
+I loved the basic program - I'll pay you back with a C program:
+
+for(m=k=0;k<n;m+=!(a[k++]-j)<<1)if(!m--)j=a[k];
+
+It computes something when the array a has a special feature... 
+
+The ! takes precedence over the << operator. And the ! tests for a zero/ non-zero integer and outputs boolean, which is converted to either an 0 or 1 integer by the <<. So really the ! is kind of an == tester. The <<1 simply multiplies by 2. So the whole m+= is going to be either an m+=0, or m+=2. And since we have an m-- just before it, we're essentially decrementing or incrementing m by 1. m can only briefly reach -1, before immediately getting +=2. So m will never run into the negatives.
+
+So what this little program is looking for is a majority, ... sort of... j will be the majority element amoungst the tail of the list where it last held the lead.
+
+Finds an element such that is present in more than half the array. Note that if(!m--) will only pass when m is 0. And the parity of m changes on every iteration. So j=a[k] will never occur when k is odd. So if there's a majority, then at least one odd element k must contain that element. At the end of the loop, m will be the "winning margin" of the majority element.
+
+I'm sort of stumped to see the purpose of this program. Tallying votes to determine a winner?
+
+The hint might be here: "It computes something when the array a has a special feature... "
+it doesn't compute anything meaningful when a is random. But if a has a majority element, this program will find it.
+
+Is that correct?
+
+It's pretty crazy how concise you can cram a C program (if you don't mind sacrificing all readability!).
