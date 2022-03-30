@@ -1,0 +1,91 @@
+Hi
+Here's my solution to January 2008 Ponder this.
+Starting by generalizing the strategies, all possible strategies can be represent by at most 7 choices.
+
+Choice 1: Buy the first ball?
+Choice 2: Buy the second ball if first is black?
+Choice 3: Buy the second ball if first is white?
+Choice 4: Buy the third ball if first is black and second is black?
+Choice 5: Buy the third ball if first is black and second is white?
+Choice 6: Buy the third ball if first is white and second is black?
+Choice 7: Buy the third ball if first is white and second is white?
+
+There are 26 unique strategies (down from 2^7 = 128 possible 7 bit combinations because, for example, if choice 1 is 0, then all other bits are meaningless.)
+They are
+strategy = [0 0 0 0 0 0 0; # strategy 1 # don't buy the first
+1 0 0 0 0 0 0; # buy the first, don't buy the second
+1 1 0 0 0 0 0; # buy the first, buy the second if it is black, don't buy the third
+1 0 1 0 0 0 0; # buy the first, buy the second if it is white, don't buy the third
+1 1 1 0 0 0 0; # buy the first and second regardless but not the third
+1 1 0 1 0 0 0; # if first two are black, buy the third
+1 1 0 0 1 0 0; # if b - w, buy third
+1 1 0 1 1 0 0; #--end case of first one being black
+1 0 1 0 0 0 1; # 9
+1 0 1 0 0 1 0;
+1 0 1 0 0 1 1; # 11-- end case of the first one being white
+1 1 1 0 0 0 1; # begin buy the second regardless, but the third on conditions on the first two... 16 cases
+1 1 1 0 0 1 0;
+1 1 1 0 0 1 1;
+1 1 1 0 1 0 0;
+1 1 1 0 1 0 1;
+1 1 1 0 1 1 0;
+1 1 1 0 1 1 1;  # 18
+1 1 1 1 0 0 0;
+1 1 1 1 0 0 1;
+1 1 1 1 0 1 0;
+1 1 1 1 0 1 1;
+1 1 1 1 1 0 0;
+1 1 1 1 1 0 1;
+1 1 1 1 1 1 0;
+1 1 1 1 1 1 1;];  #  26
+
+There are 8 (2^3) possible ball combinations.  They are
+balls = [0 0 0; # occurs with probability 3/12
+1 1 1; # occurs with probability 3/12
+0 0 1; # all rest occur with 1/12 probability
+0 1 0;
+1 0 0;
+1 1 0;
+1 0 1;
+0 1 1;];
+
+Their respective probabilities are stored in a vector
+multfactor = [ 3 3 1 1 1 1 1 1]' / 12;
+
+
+I wrote a simple brute force program to go through all the possible strategies for all the possible ball combinations and count the number of white balls received and the number of balls purchased.
+The number of white balls received is stored in the 26x8 matrix R, while the number of balls purchased is stored in the 26x8 matrix C.
+
+The expected return for each strategy based on a cost "c", is simply (Revenue-Cost) * probability of that ball combination
+sweeping 0<c<1, and plotting (R-cC)*multfactor yielded the attached plot, which showed the expected return for all 26 strategies for all values of c.
+
+The graph reveals 5 strategies of interests, corresponding to rows 26, 18, 11, 9, and 1 from the matrix of strategies.
+
+In English, strategy 26 is to buy all three regardless.
+Strategy 18 is to buy first 2 regardless and the third if either of the first two is white.
+Strategy 11 is to buy a second if the first is white, but then to buy the third regardless.
+Strategy 9 is to buy a second if the first is white, but then to only buy a third if the second is also white.
+Finally strategy 1 is to not buy any, which costs 0 and returns 0.
+
+Equations for the expected return for those 5 strategies are simply taken from the rows of the matrices.
+Expected return for strategy 26 = 1.5 - 3 c
+Expected return for strategy 18 = 17/12 - 8/3 c
+Expected return for strategy 11 = 7/6 - 2 c
+Expected return for strategy 9 = 13/12 - 11/6 c
+Expected return for strategy 1 = 0
+
+Setting the expected returns for two adjacent strategies solves for the cost value at which they intersect.  They are c = 1/4, 3/8, 1/2 and 13/22.
+
+To summarize,
+for c < 1/4, buy all 3.
+for 1/4<c< 3/8 buy first 2, but only buy a third if you've seen a white.
+for 3/8 < c < 1/2 buy a second only if first is white, but buy the third one regardless
+for 1/2 < c < 13/22 buy a second only if first is white, but only buy the third if the second is also white.
+for 13/22 < c do not buy any.
+
+I've attached the octave program I used to iterate through all the strategies and ball combinations.
+
+Thanks for another good puzzle.
+
+Chris Shannon
+Calgary Canada
