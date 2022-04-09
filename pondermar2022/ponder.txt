@@ -1,0 +1,141 @@
+Short answer:
+p = 17923, E(p) = 121.5416716489298
+Bonus:
+p = 1584269, E(p) = 1244.94938583574617
+
+Long answer:
+While a direct assault on this problem works for n=2 or 3, the number of primes to consider grows by a factor of about 9 for every increment in n.
+The prime counting function can be approximated by pi(x)=x/log(x), so the |P| is approximately 10^n/(n*log(10)) - 10^(n-1)/((n-1)*log(10)))
+The naive algorithm will be cubic in |P|. This algorithm will compute take O(|P|) to calculate each value of f(p,q).
+
+This is where we can make our algorithmic improvement. We can essentially find f(p,q) in O(1).
+To calculated E(p) for a given p, we are summing f(p,q) over all q's. We can group the q's by their f value. By definition of the f function, there will be k members with value k. When we sum this group, we'll have k+k+k ... k times which is k^2. So we just need to account for all the q-groups and all the f-values.
+
+My first approach was simply this line:
+def E(p) = {
+        val groupsOfResultsForP = allnDigitPrimesIndexedSeq.groupBy { q => patternFromIndexedSeqs(p, q) }.mapValues(_.size)
+        (1.0 / allnDigitPrimesIndexedSeq.size) * groupsOfResultsForP.map(x => x._2.toLong * x._2.toLong).sum
+}
+and our solution pops out immediately as
+    val minP = allnDigitPrimesIndexedSeq.minBy( E )
+
+This solved the n=5 case in about a minute. And, importantly, it solved the n=2 and n=3 case with the same output as the naive (but almost certainly correct) code. Unfortunately, the n=7 was very large, and after nearly 48 hours of running, by breaking P up into 4 groups and running them as separate jobs, each of the jobs returned a negative E value. I had overflowed the 32-bit signed integers. (I originally didn't have the .toLong in the above code, which is my fix). But my real fix was to do see where we can optimize further.
+
+Instead of using the default groupBy on a pattern (eg Sequence of strings "Green," "Grey", "Yellow"), we can represent that sequence as a trinary number with Green=2, Yellow=1 and Grey=0 (or any other combination).
+This way, any n-digit pattern will be mapped to [0, 3^n), which can efficiently make use of an array.
+All we need to do is have a running counter of each of the mappings, while we traverse the array of q's. When we reach the end, we just add up all the squares of the counters.
+
+We can keep going with the optimizations. Since we are interested in the minimum E(p), we can short circuit a given E(p') if its running sum has already exceeded the minimum E so far. How do we calculate a running sum though?
+Well, if the pattern(p,q) in trinary is k, then our counter[k] will be incremented by 1. But since we're interested in counter[k] ^2, we can expand that out as (counter[k]+1)^2. That will increase the sum, E, by
+(counter[k]+1)^2 - counter[k]^2 = 2* counter[k]+1, since all the other counters are unchanged.
+
+One last little bit of optimization:
+we'll traverse the minimization function by the most "diverse" primes, ie starting with primes composed of 7 unique digits and ending with 9999991.
+and we'll traverse the "f" loop in the opposite way. This first ordering ensures that we'll probably get the minimum value early as the best guess should contain the widest range of digits possible. We'll have the lowest "min so far" The second ordering should help with finding lots of misses, and hence identical patterns early, leading to an earlier short circuit.
+
+So I implemented all this code in Scala only to find out it was going to take another 4 days to run. And this was after the "GroupBy" approach needed to be compiled with a boatload of heap space J-Xms6g -J-Xmx6g or else it has a garbage collection error midway through running.
+
+Knowing that performance was critical, and this algorithm just needed simple data structures, I decided to give my old frenemy C++ a go.
+Happily, it's come a long way since I first learnt it in university in the 90s. Simple to parallelize it too! Just run the "outer loop" in parallel.
+
+int main(int argc, char *argv[])
+{
+  vector<string> allnDigitPrimes;
+  int numDigits = atoi(argv[1]);
+  vector<int> powersOf3;
+  for(int i=0; i < numDigits; i++)
+    powersOf3.push_back( pow(3,i));
+ 
+  for (int i=pow(10,numDigits-1); i < pow(10,numDigits); i++)
+   if (isPrime(i))
+    allnDigitPrimes.push_back(to_string(i));
+  sort (std::execution::par, allnDigitPrimes.begin(), allnDigitPrimes.end(), sortingFunction); // the sortingFunction is the just the number distinct digits
+  vector<string> allnDigitPrimesReversed = allnDigitPrimes;
+  reverse(allnDigitPrimesReversed.begin(), allnDigitPrimesReversed.end());
+ 
+  cout << "There are " << allnDigitPrimes.size() << " primes with " << numDigits << " digits." << endl;
+
+  long long unsigned int minSoFar = ULLONG_MAX;
+  string minElementSoFar;
+  int counter=0;
+  for_each(std::execution::par, begin(allnDigitPrimes), end(allnDigitPrimes), [&](string pi)
+  {
+    vector<int> buckets(pow(3,numDigits), 0);
+    long long unsigned int runningSum = 0;
+    if (counter % 1000 == 0)
+      cout << "counter " << counter << " pi " << pi << " minSoFar " << minSoFar << " minElementSoFar " << minElementSoFar << endl;
+    for(int qi=0; qi < allnDigitPrimesReversed.size(); qi++)
+    {
+     int patternNumber = patternToInt(pi, allnDigitPrimes[qi], powersOf3);
+     int oldBucket = buckets[patternNumber];
+     buckets[patternNumber]++;
+     runningSum += 2*oldBucket + 1;
+     if (runningSum > minSoFar)
+      break;
+    }
+    if (runningSum < minSoFar)
+    {
+     minSoFar = runningSum;
+     minElementSoFar = pi;
+    }
+    counter++;
+  });
+   
+  cout << "Done. minSoFar " << minSoFar << " minSoFar/size " << setprecision(18) << minSoFar*1.0/allnDigitPrimes.size() << " . minElementSoFarIndex " << minElementSoFar <<  endl;
+  cout << "Done with numDigits " << numDigits <<endl;
+  return 0;
+}
+
+
+
+This algorithm solved the n=7 case in 97 minutes! Quite the improvement speed-wise. And it also feels good to corroborate my other code with the same results.
+
+Thanks for a fun trendy puzzle. I like the wavelength resonance with 3blue1brown who made a nice video on the information theory of the wordle first guess.
+
+Chris Shannon 
+(from Calgary Canada)
+
+
+
+with sorting
+ without optimizer 247 m,
+ with optimizer 114 m, running this again hmmm 113 m
+
+without sorting
+ with optimizer  97m 
+ without runningSum 175 m
+
+Done. minSoFar 729641181/ minSoFar/size 1244.94938583574617 . minElementSoFarIndex 1584269
+
+for n=6
+Done. minSoFar 26338294 minSoFar/size 382.23513191884598 . minElementSoFarIndex 124679
+2m17.167s
+
+n=7
+with sorting and with running sum and with countDistinct == numDigits and pi[0]=='1', and sieve of erothosus prime generator
+1 minutes 12 seconds !
+primesFiltered.size 3456
+
+n=8
+primesFiltered[0] 10234589 primesFiltered.size 9139
+
+There are 5096876 primes with 8 digits.
+primesFiltered.size 9139
+
+Done. minSoFar 23654662378 minSoFar/size 4641.01194103996295 . minElementSoFarIndex 10286459
+Done with numDigits 8
+
+real    32m31.139s
+
+
+n=9
+started around 5:00pm taking 2.9GB of ram so far
+
+There are 45086079 primes with 9 digits.
+primesFiltered.size 14062
+
+Done. minSoFar 940231669625 minSoFar/size 20854.1459022196177 . minElementSoFarIndex 104268953
+Done with numDigits 9
+
+real    422m52.911s
+
