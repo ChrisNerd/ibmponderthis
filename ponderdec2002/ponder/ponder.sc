@@ -286,6 +286,25 @@ for {
 
  // 12000 choose 4 = 8.63568065997 × 10^14
  (1 to 12000).toSet.subsets(4).filter( setOf4 => isSquare(setOf4.sum) && setOf4.subsets(2).forall(setOf2 => isSquare(setOf2.sum)))
- 
+/*
+ a^2+b^2=c^2
+ if (a,b,c) is a *primative* pathogorean triple then c = 1 mod 4 and prime (pathogorean prime).
+  https://en.wikipedia.org/wiki/Sum_of_two_squares_theorem
+     An integer greater than one can be written as a sum of two squares if and only if its prime decomposition contains no factor pk, where prime p ≡ 3 ( mod 4 ) {\displaystyle p\equiv 3{\pmod {4}}} p\equiv 3{\pmod {4}} and k is odd.[1]
+ https://en.wikipedia.org/wiki/Sum_of_squares_function#k_=_2
+ The number of ways to write a natural number as sum of two squares is given by r2(n). It is given explicitly by
+
+    r 2 ( n ) = 4 ( d 1 ( n ) − d 3 ( n ) ) {\displaystyle r_{2}(n)=4(d_{1}(n)-d_{3}(n))} {\displaystyle r_{2}(n)=4(d_{1}(n)-d_{3}(n))}
+
+
+The prime factorization n = 2 g p 1 f 1 p 2 f 2 ⋯ q 1 h 1 q 2 h 2 ⋯ {\displaystyle n=2^{g}p_{1}^{f_{1}}p_{2}^{f_{2}}\cdots q_{1}^{h_{1}}q_{2}^{h_{2}}\cdots } {\displaystyle n=2^{g}p_{1}^{f_{1}}p_{2}^{f_{2}}\cdots q_{1}^{h_{1}}q_{2}^{h_{2}}\cdots }, where p i {\displaystyle p_{i}} p_{i} are the prime factors of the form p i ≡ 1 ( mod 4 ) , {\displaystyle p_{i}\equiv 1{\pmod {4}},} {\displaystyle p_{i}\equiv 1{\pmod {4}},} and q i {\displaystyle q_{i}} q_{i} are the prime factors of the form q i ≡ 3 ( mod 4 ) {\displaystyle q_{i}\equiv 3{\pmod {4}}} {\displaystyle q_{i}\equiv 3{\pmod {4}}} gives another formula
+
+    r 2 ( n ) = 4 ( f 1 + 1 ) ( f 2 + 1 ) ⋯ {\displaystyle r_{2}(n)=4(f_{1}+1)(f_{2}+1)\cdots } {\displaystyle r_{2}(n)=4(f_{1}+1)(f_{2}+1)\cdots }, if all exponents h 1 , h 2 , ⋯ {\displaystyle h_{1},h_{2},\cdots } {\displaystyle h_{1},h_{2},\cdots } are even. If one or more h i {\displaystyle h_{i}} h_{i} are odd, then r 2 ( n ) = 0 {\displaystyle r_{2}(n)=0} {\displaystyle r_{2}(n)=0}.
+    
+
+
+
+
+*/
                                                    
 }
