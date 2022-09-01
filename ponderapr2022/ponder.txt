@@ -1,0 +1,43 @@
+Short answer:
+ x=[0.268640424563741, -0.2013195826713901, 0.0651533615848355, 0.09628238383974673, 0.22447637735994244, 0.19969225810181426, -0.054270277780743274, -0.07558233172285324, -0.07854546247189488, 0.20456504538556688, 0.06119927616430542, 0.0622938045174394, 0.0032853073515312636, -0.17563440220220036, -0.2332431217150242, 0.22656573783683193, 0.04183799270075857, -0.201607773081423, 0.25541131763126323, -0.6892003353922475]
+ y=[0.1960921549298141, -0.27387502827256055, -0.007388753071406746, 0.02371731964203968, 0.1519273422326533, 0.12713830567497741, -0.1268255881054685, -0.14811599863017785, -0.15109980682534363, 0.1320227652035022, -0.011353654543310623, -0.010272055612423588, -0.0692312099505931, -0.24817378340989527, -0.3057811515740644, 0.15402263824082452, -0.03069896878164355, -0.2741673709225338, 0.1828583048412401, 0.6892045389343702]
+
+Long answer:
+
+Whew, this was a tough one. The answer in the Reals for n=20 wasn't too bad since you can use algorithmic tricks, but when it came to an exact solution in the rationals, ow, now we have to put our serious mathematician's hat on.
+
+When you take a step back this problem has an interesting tention in it. Orthoganatily has to do with two vectors going in completely different directions with no alignment whatsoever, yet we are asking how similar they can be. f is essentially asking for the difference between their "shapes". We are asked to minimize this difference under the constraint that they are fundamentally different. 
+
+I attacked the first problem by first ignoring the normalization requirement for x and y since the orthogality doesn't care about magnitude. The components of x need to sum to 0 so we can have n-1 free variables and just set the last x component to -sum of the rest. 
+
+Similarly y needs to sum to 0, but we also need to ensure y dot x sums to 0 as well. If we allow the first n-2 y components to be free, we can easily use these two constraints to set up 2 linear equations in 2 unknowns to pin down the last two y components. 
+
+The last step will be to normalize x and y. 
+
+In total we'll have n-1 free variables for x and n-2 for y in a now unconstrained optimization problem. We can put these 2n-3 variables in a Particle Swarm Optimization algorithm, since that's an easy-to-implement algorithm that's well suited to high dimensionality continuous variable optimization problems with little hyper parameter fuss.
+
+So that's how I solved the n=20 case in the Reals.
+
+Thinking about the rational solution I broke out the pen and paper and wrote some equations. If I restricted the x and y vectors to be integers and then normalized them at the end, in order to end up with rational components the sum of squares must also be a square. I did some googling on sums of squares being a square and it led me to some scary math, like what was used in Fermat's Last Theorem. Uh oh. Modular Forms. etc. 
+
+I resorted to what I was capable of, coding up a brute force algorithm for the n=5 case. Restricting the components to a max of 100 yielded no solutions. 
+
+I then returned to the particle swarm optimizer and let it loop, finding solutions with new random seeds, but then for each solution running x and y through a Continued Fraction and Convergents routine to convert the decimal representation to the best rational approximation. I was hoping small rational numbers would pop out. But no luck. 
+
+Some unexpected insights did emerge however. The largest components of x and y were negatives of each other, and through some playing around they were always represented exactly by something like k/sqrt(n). So that gave me a clue to stop searching for the n=5 case and try the n=9 case or n=16 if I was hoping for rational solutions. 
+
+Also one day I had a distant memory of an online course I took on Quantum Algorithms that mentioned the Hadamard Matrix that is an orthogonal matrix. Maybe that'll end up minimizing f too?! Plugged it into f, no such luck. In fact maybe it maximizes f? Haha
+
+I kept trying modifications to the brute force integer search for the n=9 case, relaxing the requirements in various ways. Returned to the particle swarm optimizer in the reals too. Plotting the results revealed that x and y were just constant offsets of each other, except for just one element, which was the negative of the other. 
+
+This fact could sort of be handwaved explained. 
+
+The n-1 elements will have the identical distance matrices and will therefore contribute nothing to f. If y is a solution then so would -y, since they would have the same shape and would still have the same unit magnitude and also be orthogonal to the same set of vectors (x and the ones vector). If the remaining elements of x and y are a and -a, the offset amount must be 2a/(n-1) (based on the constraint of the sums equalling 0). The number of free variables just got totally reduced to just finding a single vector, not 2 vectors. And the f components from each of the remaining (2 times) n-1 terms will just be (a-xi) - (xi+2a/(n-1)--a) = - 2a/(n-1). So f will be independant of the components of x! 
+
+Each of those components will be squared, and there are 2*(n-1) of them resulting in a total f of 8 a^2/(n-1). Somehow that must be shown to equal 4???
+That must mean that (n-1)/2 =p^2/q^2 with p, q integers. This has a solution for n=9 with a=2. But even if I was to find a and the offset, it would bring us no closer to finding a closed form for the remaining components. And with time running out this month (and me writing this write up on vacation haha) I thought I'd throw in the towel for the bonus section this month!
+
+Thanks for the fun puzzle, and looking forward to seeing the solution.
+
+Chris Shannon 
+(from Calgary, Canada)  
