@@ -1,0 +1,142 @@
+Short answer:
+[(855661, 1395050, 1402703, 1575981, 2956165, 4346904, 5516627, 5693538, 6096226, 7359806), (855661, 1395050, 1553462, 1575981, 2805406, 4346904, 5516627, 5693538, 6096226, 7359806), (855661, 1395050, 1553462, 2805406, 3151962, 4346904, 5516627, 5693538, 5783825, 6096226), (267198, 855661, 1395050, 1553462, 2805406, 3151962, 4346904, 5693538, 6096226, 11033254), (534396, 855661, 1395050, 1553462, 2538208, 3151962, 4346904, 5693538, 6096226, 11033254), (534396, 855661, 1553462, 2538208, 2790100, 3151962, 4346904, 5693538, 6096226, 9638204), (855661, 1068792, 1553462, 2003812, 2790100, 3151962, 4346904, 5693538, 6096226, 9638204), (855661, 1068792, 2003812, 2790100, 2793442, 3106924, 3151962, 5693538, 6096226, 9638204), (855661, 1724650, 2003812, 2137584, 2790100, 3106924, 3151962, 5693538, 6096226, 9638204), (855661, 1103112, 1724650, 2137584, 2790100, 3151962, 4007624, 5693538, 6096226, 9638204), (855661, 855662,1103112, 1724650, 2137584, 2790100, 5693538, 6096226, 6303924, 9638204), (855661, 855662, 1103112, 1724650, 2137584, 2790100, 5693538, 6096226, 6303924, 9638204), (855661, 1103112, 1711324, 1724650, 2137584, 2790100, 5448262, 5693538, 6096226, 9638204), (855661, 1103112, 1711324, 1724650, 2790100, 3310678, 4275168, 5693538, 6096226, 9638204), (855661, 1103112, 1586028, 1711324, 2790100, 3449300, 4275168, 5693538, 6096226, 9638204), (855661, 1103112, 1711324, 1863272, 2790100, 3172056, 4275168, 5693538, 6096226, 9638204), (855661, 1711324, 1863272, 2206224, 2790100, 3172056, 3172056, 5693538, 6096226, 9638204), (0, 855661, 1711324, 1863272, 2206224, 2790100, 5693538, 6096226, 6344112, 9638204), (0, 855661, 1711324, 1863272, 2206224, 3554012, 5580200, 5693538, 6096226, 9638204), (0, 855661, 1711324, 1863272, 3487314, 3554012, 4412448, 5580200, 6096226, 9638204), (0, 1007611, 1711322, 1711324, 3487314, 3554012, 4412448, 5580200, 6096226, 9638204)]
+
+The bonus answer:
+The sum must equal a power of 2. So an amount of 29910203 needs to add anywhere to the list. The solution will exist no matter how it is distributed.
+An example would be to add it to the last item only.
+(855661, 1395050, 1402703, 1575981, 2956165, 4346904, 5516627, 5693538, 6096226, 37270009)
+
+
+Long answer:
+My first brute force approach was to go through all (10 choose 2 = 45) ways of selecting 2 indices and make 20 iterations of that. So 45^20. Didn't get too far but was easy enough to code up.
+
+But realizing we have a pretty big search space of 45^20 and a very quick evaluation function, I figured there's a good candidate for simulation annealing optimization.
+
+The objection function I chose was simply the minimum of the list after any of the 20 swap. If we ever achieve a 0 before the 20th swap it will still be after any subsequent swaps.
+
+The input is just a list of 20 pairs of indices. The concept of a neighbour is just taking one index from one pair and either incrementing or decrementing it (mod 10).
+ def neighbourOfInput(input: List[(Int,Int)]): List[(Int,Int)] = {
+  val randomIndex = scala.util.Random.nextInt(input.length)
+  if (scala.util.Random.nextBoolean)
+   if (scala.util.Random.nextBoolean)
+    input.updated(randomIndex, ((input(randomIndex)._1 + 1               ) % A.length, input(randomIndex)._2) )
+   else
+    input.updated(randomIndex, ((input(randomIndex)._1 - 1 + A.length) % A.length, input(randomIndex)._2) )
+  else
+   if (scala.util.Random.nextBoolean)
+    input.updated(randomIndex, (input(randomIndex)._1, (input(randomIndex)._2 + 1               ) % A.length) )
+   else
+    input.updated(randomIndex, (input(randomIndex)._1, (input(randomIndex)._2 - 1 + A.length) % A.length) )
+ }
+
+
+Making a single swap is implemented via:
+ def applySingleSwap(in: List[Long], pairOfIndicesUnsorted: (Int,Int)): List[Long] =
+ {
+  if (pairOfIndicesUnsorted._1 == pairOfIndicesUnsorted._2)
+   in
+  else
+  {
+   val pairOfIndices = if (pairOfIndicesUnsorted._1 > pairOfIndicesUnsorted._2)
+    (pairOfIndicesUnsorted._2,pairOfIndicesUnsorted._1)
+   else
+    pairOfIndicesUnsorted
+   in.updated(pairOfIndices._1, 2*in(pairOfIndices._1)).updated(pairOfIndices._2, in(pairOfIndices._2)-in(pairOfIndices._1)).sorted
+  }
+ }   
+
+and making a list of 20 swaps is:
+ def applyListOfSwaps(input: List[(Int,Int)]): List[List[Long]] = input.scanLeft(A)(applySingleSwap)
+
+where A is the starting vector given in the problem. ScanLeft nicely returns the result in the specified format.
+
+As stated, the evaluation function which we want to reach 0, but are happy seeing progress as it decreases is the minimum of all swaps applied.
+ def score(input : List[(Int,Int)]): Long = applyListOfSwaps(input).map(_.head).min 
+
+We now have all the ingredients for the simulated annealing algorithm so I just pulled one off the shelf.
+ def simulatedAnnealing(best: List[(Int,Int)], temp: Double): List[(Int,Int)] = {
+  if (temp > finalTemperature) {
+   val currentEnergy = score(best)
+   val neighbour = neighbourOfInput( best )
+   val neighbourEnergy = score(neighbour)
+   //println(temp)
+   if (neighbourEnergy <= scoreToBeat)
+   {
+    println("Solution!!!")
+    println(neighbour)
+    neighbour
+   }
+   else
+   {   // Decide if we should accept the neighbour
+    val acceptanceProbability = math.exp( -(neighbourEnergy - currentEnergy)/temp)
+    val accept = (acceptanceProbability > math.random)
+    //println("neighbourEnergy" + neighbourEnergy + "currentEnergy" + currentEnergy + "acceptProb" + acceptanceProbability)
+   
+    simulatedAnnealing( if (accept) neighbour else best, (1-coolingRate)*temp)
+   }
+  } else best
+ }
+
+As you can see, the returned solution found it earlier than the 20 moves so the last few moves were irrelevant.
+
+For the bonus question, I went back to the drawing board. Worked backwards from smaller cases. With n=2, we need them to be equal at one point. To get them to be equal a bit of algebra shows that the larger element must be 3 times the smaller. So that means that the larger must be a multiple of 3.
+Doing mod 2 we also see that it is impossible to solve when we have exactly 1 odd. The sum is an invariant, and the sum must be even since they must be equal at one point.
+I drew a recurrence relation that maps on the x-axis the smallest of the pair as a fraction of the invariant sum, and on the y-axis the smallest element of the pair after the swap, also as a fraction of the sum.
+It's a simple piecewise linear function, going from the origin to (1/4, 1/2), then back down to (1/2,0). Formally f(a)=
+2a for 0 <= a <= 1/4
+-2a + 1 for 1/4 <= a <= 1/2
+a is real in general, but in our domain problem it must be a rational number.
+
+The range of this function is 0 to 1/2 so it forms a closed set (or a field or a ring or whatever it's called where the range maps back to the domain, invertible?). It has a fixed point at a=0.  The other fixed point is a=1/3. (So possibly both of these points are strange attractors?) The a=1/3 corresponds to a pair where one element is twice as large as the other. (a,2a) => (2a, 2a-a)=(2a,a)=(a,2a), right back where we started.
+
+So we want to get to that 0, so we want our smallest element to be 1/2 the sum, which is another way of saying we want the elements to be equal.
+Take another step, we can get to 1/2 when x = 1/4, which as I deduced earlier is the larger being 3 times the smaller.
+But let's keep going, we can get to 1/4 two ways! The horizontal line y=1/4 intersects the function twice. This corresponds to the two cases of the 2a or the b-a being smaller.
+These two intersection points are 1/8 and 3/8. So if we iterate one more time we'll have solutions at 1/16, 1/8, 3/16, 1/4, 5/16, 3/8, 7/16, and 1/2.
+The pattern is clear: any fraction odd / power of 2 <= 1/2 will work. Furthermore, the denominator grows with the number of swaps required, 2^i.
+
+At this point I played around with a spreadsheet trying to set a tournament of the 10 elements where there's close fractions between pairs. But I found it really tedious to go back and adjust previous games, which leads to recursive adjustments needed.
+
+I went back to the power of 2 in the denominator and thought that must correspond to the sum of the two elements. And then if it's an invariant between 2 elements, maybe it's an invariant between n elements! Just as a hunch I checked out the nearest powers of 2 to the sum of the original 10 elements. Took the log 2 of the sum, then the floor and ceiling. Raised it back up. So that the next highest power of two is conspicuously close the 30 million given in the problem as a constraint! It would also track with you not requiring the full solution path, as you can tell (in a zero-knowledge proof kind of a way) if the elements are solvable just by looking at the sum.
+
+So I took that as a hint and started on a proof as this as a necessary and sufficient condition of the existence of a solution.
+Consider the pair of integer a<b. They are solvable if the ratio of a to the sum can be reduced to a fraction with no other powers but 2 in the denominator.
+a/(a+b) = (2n+1)/2^m
+If the numerator was even, we can just simply divide out all the factors of 2 until it is odd.
+
+So the question is how to go from n=2 to n>2 or even just n=3, where we want all but one elements to be 0. What strategy can reduce one of the elements to 0? Once it reaches zero, the problem reduces to just a pair with the same sum as the 3.
+If there is a solution to an n=3 case, and we know the sum is invariant when we reduce it to n=2 and we need a power of 2 sum for n=2, so the sum must be a power of 2 no matter the n number of elements in the swaps.
+But this does not prove the existence of a solution, just a required condition of the problem to be solvable.
+
+The n=2 case can also be seen by representing the two numbers in binary
+00001xxxxx100000
+11110yyyyy100000
+
+Where x's are arbitrary and the y's are the complement. That way they sum to
+1000000000000, a power of 2.
+
+When a swap occurs, the first (smaller) number gets double, or shifted to the left in binary.
+The second number (the larger one) also undergoes a shift to the left of sorts except that the leftmost leading 1 gets dropped.
+This occurs until we get
+01xxxxx100000000
+10yyyyy100000000
+ the next swap yields
+1xxxxx1000000000
+1xxxxx1000000000
+as desired.
+
+With n=3 we might have
+
+00001xxxxx100000
+00010yyyyyyyy1000
+1110zzzzzzzzz1000
+
+When they sum to a power of 2.
+A similar algorithm can be employed to shift them all to the left, step by step. In the above example, the first swap should be between the y and z numbers. This method can be extended to any n, thus completing the proof. QED.
+
+Thanks for another fun puzzle!
+
+Chris Shannon
+
+(from Calgary Canada).
+

@@ -1,0 +1,728 @@
+Short answer:
+for n=2^24 it is
+2 524 614 399
+
+For n=2^256
+920321499
+
+Long answer:
+This was a fun one! I felt like I was walking in the dark but somehow walked straight to the solution. Started by seeing if I could generate the 16 states of a routine of length 1.
+
+
+  case class State(left: Char, right: Char)
+  type Routine = List[State]
+  val generate16States: List[State] = {
+    val dancers = ('A' to 'D').toList
+    val dancersOnSides = dancers.combinations(2).map(x => State(x(0), x(1))).toList
+    val dancersOnSidesReversed = dancersOnSides.map(x => State(x.right, x.left))
+    val dancersInMiddle = dancers.map(x => State(x, x))
+
+    dancersInMiddle ::: dancersOnSides ::: dancersOnSidesReversed
+  }                                               //> generate16States  : List[ponder.State] = List(State(A,A), State(B,B), State
+                                                  //| (C,C), State(D,D), State(A,B), State(A,C), State(A,D), State(B,C), State(B,
+                                                  //| D), State(C,D), State(B,A), State(C,A), State(D,A), State(C,B), State(D,B),
+                                                  //|  State(D,C))
+  generate16States.size                           //> res0: Int = 16
+
+So far so good. Then I got to coding up the rules of the dance transitions.
+
+  // doesn't apply until we get to n=4
+  // Rule 1 - When on the sides of the stage, each dancer can dance for 1, 2, or 3 units of time before being replaced by a dancer currently not on the stage.
+  def doesntViolateRule1(routine: Routine) = {
+    routine.size < 4 ||
+      routine.map(_.left).distinct.size >= 2 && routine.map(_.right).distinct.size >= 2
+  }
+  // Rule 2 - A dancer in the middle section must be replaced in 1 unit of time, either by another dancer in the middle or two others in the side sections.
+  def doesntViolateRule2(firstState: State, secondState: State) = {
+    // are they all the same?
+    !(firstState.left == firstState.right && firstState.left == secondState.left && firstState.left == secondState.right)
+  }
+
+  // Rule 3 - Dancers cannot switch places on stage directly from one unit of time to the next.
+  def doesntViolateRule3(firstState: State, secondState: State) = {
+    firstState == secondState ||
+      // allow for a middle dance to be replaced by another middle dancer
+      firstState != secondState && firstState.left == firstState.right && secondState.left == secondState.right ||
+      // if the two states differ then they must contain at least 3 dancers total
+      firstState != secondState && Set(firstState.left, firstState.right, secondState.left, secondState.right).size >= 3
+  }
+
+  // Rule 4 - If two dancers need to be replaced at the same time, they must be replaced by a single dancer in the middle.
+  def doesntViolateRule4(firstState: State, secondState: State) = {
+    firstState.left == firstState.right || // rule doesn't apply when we start with a dancer in the middle
+      firstState == secondState || // also don't worry about it if there are no replacements
+      !(firstState.left != secondState.left && firstState.right != secondState.right && secondState.left != secondState.right)
+  }
+
+  def doesntViolateAnyRules(statesSoFar: Routine, stateToAppend: State) = {
+    val firstState = statesSoFar.last
+    doesntViolateRule1(statesSoFar.drop(statesSoFar.size - 3) :+ stateToAppend) &&
+      doesntViolateRule2(firstState, stateToAppend) &&
+      doesntViolateRule3(firstState, stateToAppend) &&
+      doesntViolateRule4(firstState, stateToAppend)
+  }
+
+Tested these rules pretty good. I then wrote a double for loop to go through all routines of length n=2, filtering out the ones that violate a rule. We got all 120 so I'm happy and moving on!
+
+Now, to test up to routines of length n=8, I built it up recursively and used a cache to speed up the run time.
+
+
+  val cacheOfRoutines = scala.collection.mutable.Map[Int, List[Routine]]()
+
+  def generateRoutinesOfLengthN(n: Int): List[Routine] = n match {
+    case 1 => generate16States.map(s => List(s))
+    case _ => {
+      for {
+        statesSoFar <- cacheOfRoutines.getOrElseUpdate(n - 1, generateRoutinesOfLengthN(n - 1))
+        stateToAppend <- generate16States
+        if (doesntViolateAnyRules(statesSoFar, stateToAppend))
+      } yield statesSoFar :+ stateToAppend
+    }
+  }                                               //> generateRoutinesOfLengthN: (n: Int)List[ponder.Routine]
+
+I was able to test this up to n=8
+(3 to 8).map(i =>
+      println("" + i + " " + generateRoutinesOfLengthN(i).size))
+3 912
+4 6300
+5 45876
+6 331884
+7 2401092
+8 17342172
+
+Now we're going to have to put our thinking caps on. There's no way we're generating all the routines to 2^24 and certainly not to 2^256. Even 2^3 was reaching the limits of my computer's hardware.
+
+First thing we noticed is that we only need to pay attention to the last 3 States, all previous states are irrelevant to the validity of future states.
+
+    val three_States = generateRoutinesOfLengthN(3)
+There are 912 routines of length 3.
+We can make a map of the 912 3-state "meta-states" to the 16 possible appendable states.
+This can be represented in a 912x16 transition matrix.
+Better yet, we can create a simple 912x912 binary matrix that we can be iterated mathematically with multiplication representing the counting of all the ways of appending a new state. When we append a fourth state to a 3-state, we can drop the first state to represent it as a new 3-state.
+ For example, say one of our 3-states is index 1, ->
+ AAA
+ AAA
+ We know that there are at most 16 4-states buildable from that. For each 4-state, we drop the first state to get a new 3-state. Since all the 3-states are indexed, we
+ can refer to them by their indices.
+
+
+    val three_States_Map = three_States.toArray.map { routine =>
+      generate16States.filter(stateToAppend => doesntViolateAnyRules(routine, stateToAppend))
+        .map(stateToAppend => three_States.indexOf(routine.drop(1) :+ stateToAppend))
+    }                                             //> three_States_Map  : Array[List[Int]] = Array(List(69, 70, 71, 72, 73, 74, 75...
+
+At this point, Ints are nowhere big enough and it turns out Longs are too small too. Our matrix's elements need to handle values up to magnitude (N-1)^2.
+
+    type Matrix = Array[Array[BigInt]]
+    val N = BigInt("3141592653")
+    val T: Matrix = three_States_Map.map { list => (0 until three_States.size).toArray.map(i =>
+     if (list.contains(i)) BigInt("1") else BigInt("0") ) }
+
+This way if we have a row vector (1x912) that contains the counts of all our stating states, (which we do, it's all 1s because there's exactly 1 way of creating each 3-state in a n=3 routine), then we can multiply it by T to get a row vector representing the counts of all the n=4 routines merged by their last 3 states. To get the full count of all n=4 routines, we simply sum up that row, or to do it with a matrix operation we multiply it by a column of 1s.
+
+To get the n=5 routines we do row of 1s * T * T * column of 1s. The pattern is clear to get all the n routines
+row of 1s * T ^ (n-3) * column of 1s.
+
+We have a choice here. If n is small we can perform this operation as a (((((ones * T ) * T ) * T .... but as n gets larger it's more efficient to do T^n. We should never have to do ones * (((((T * T) * T ) * T)... since that is n matrix multiplications, instead of n row times matrix multiplications. The difference being a factor of 912.
+
+The last trick up our sleeve is to efficiently do T^n. This can be done in O(log(n)) by using the square and multiply algorithm for matrix exponentiation.
+
+Consider if you want T^13, you can get it from T^8 * T^4 * T^1. These powers of 2 can be generated by repeatedly squaring. You can build up the desired multiplication by combining them in the exact same way as the binary representation of n.
+
+Just about done. Now all we have to do is create the matrix multiplication function that does the modulus. We're doing the modulus operation twice because for some reason the memory usage blew up when I didn't do the mod after each element. It shouldn't have been necessary though. Maybe the way BigInts work?
+    def rowTimesMatrix(r: Array[BigInt], m: Matrix): Array[BigInt] = {
+     for ( column <- m.transpose )
+       yield  (r.zip(column).map(x => x._1 * x._2 % N).sum ) % N
+    }
+
+    def matrixTimesMatrix(m1: Matrix, m2: Matrix): Matrix = {
+     // Take out the .par to run this with >=scala-2.13
+     (for (row <- m1.par)
+      yield rowTimesMatrix(row, m1)
+      ).toArray
+     }
+
+    def matrixSquared(m: Matrix): Matrix = {
+      matrixTimesMatrix(m, m)
+    }                                      
+
+Now, we can wrap it all up using a sweet little foldLeft to avoid the need to store any more than 2 matrices in memory at any time. Unfortunately it does one more matrixSquare than is necessary but that's ok.
+   val bonusSolution = for { nMinus3 <- List(24, 256).map( power => BigInt(2).pow(power) -3 ) }
+   yield {
+    val nBinaryStringReversed = nMinus3.toString(2).reverse
+    val s = nBinaryStringReversed.toCharArray().foldLeft( Array.fill(three_States.size)(BigInt("1")), T )  { case ((row, matrix), bit) =>
+     println(" intermediate answer with bit " + bit + " " + (row.sum % N))
+     bit match {
+      case '1' => (rowTimesMatrix(row, matrix), matrixSquared(matrix))
+      case '0' => (row,                         matrixSquared(matrix))
+     }
+    }
+    println("Final answer " + (s._1.sum % N))
+    s._1.sum % N
+   }
+
+3 intermediate answer with bit 1 912
+multiplying two matrices... 0
+4 intermediate answer with bit 0 6300
+multiplying two matrices... 1
+ intermediate answer with bit 1 6300
+multiplying two matrices... 2
+8=2^3 intermediate answer with bit 1 17342172
+multiplying two matrices... 3
+
+...
+
+ intermediate answer with bit 1 1057043085156
+multiplying two matrices... 22
+ intermediate answer with bit 1 425183908176
+multiplying two matrices... 23
+ intermediate answer with bit 1 1425666086208
+So this is the answer to 2^24 1425666086208
+Whoops forgot to do %N so it is
+=1425666086208 % 3141592653
+2524614399
+
+
+multiplying two matrices... 24
+ intermediate answer with bit 1 1077420193272
+multiplying two matrices... 25
+....
+ intermediate answer with bit 1 1061199497628
+multiplying two matrices... 254
+ intermediate answer with bit 1 840617955576
+multiplying two matrices... 255
+Final answer 920321499
+
+Lastly I looked into using the GPU for the matrix multiplication but it really wasn't worth it. It ran easily overnight, and was trivial to parallelize with scala's .par function. Googling showed that you'd only get like a 3X speed improvement and you'd have to consider memory access times too. And writing the modulo function in CUDA could be a bit tricky. But overall, nice fun problem. I'd be interested to know who was able to solve the non-bonus but not the bonus. There didn't seem to be any leap at all in terms of code implementation or solution. Just a single number.
+
+My last thought was perhaps there's a nice way to avoid doing the row times matrix multiplications. We can see that T^(2^256- 3 )= T^(2^256) * (T^-1)^3. So that would involve finding the matrix inverse or doing some sort of matrix division, which would be totally complicated by the modulo operator deep inside. Perhaps that's the trick we're supposed to work out for the bonus question???
+
+Thanks for another fun problem,
+Chris Shannon
+
+(from Calgary, Canada)
+
+
+
+
+val bonusSolution = for { nMinus3 <- List(/*24, */256).map( power => BigInt(2).pow(power) -3 ) }
+3 intermediate answer with bit 1 912
+multiplying two matrices... 0
+4 intermediate answer with bit 0 6300
+multiplying two matrices... 1
+ intermediate answer with bit 1 6300
+multiplying two matrices... 2
+8=2^3 intermediate answer with bit 1 17342172
+multiplying two matrices... 3
+4 intermediate answer with bit 1 1497347962380
+multiplying two matrices... 4
+5 intermediate answer with bit 1 1659591287316
+multiplying two matrices... 5
+6 intermediate answer with bit 1 1640529298764
+multiplying two matrices... 6
+7 intermediate answer with bit 1 1413059551092
+multiplying two matrices... 7
+8 intermediate answer with bit 1 1385828709516
+multiplying two matrices... 8
+9 intermediate answer with bit 1 1704457052892
+multiplying two matrices... 9
+10 intermediate answer with bit 1 1453986940644
+multiplying two matrices... 10
+11 intermediate answer with bit 1 1505845195200
+multiplying two matrices... 11
+12 intermediate answer with bit 1 1529422293456
+multiplying two matrices... 12
+ intermediate answer with bit 1 1137445294428
+multiplying two matrices... 13
+ intermediate answer with bit 1 1558980220752
+multiplying two matrices... 14
+ intermediate answer with bit 1 1626204820032
+multiplying two matrices... 15
+ intermediate answer with bit 1 1488034546416
+multiplying two matrices... 16
+ intermediate answer with bit 1 1472265853812
+multiplying two matrices... 17
+ intermediate answer with bit 1 1682739589464
+multiplying two matrices... 18
+ intermediate answer with bit 1 1110014725320
+multiplying two matrices... 19
+ intermediate answer with bit 1 1567544269032
+multiplying two matrices... 20
+ intermediate answer with bit 1 1515283010568
+multiplying two matrices... 21
+ intermediate answer with bit 1 1057043085156
+multiplying two matrices... 22
+ intermediate answer with bit 1 425183908176
+multiplying two matrices... 23
+ intermediate answer with bit 1 1425666086208
+So this is the answer to 2^24 1425666086208
+Whoops forgot to do %N so it is
+=1425666086208 % 3141592653
+2524614399
+
+
+multiplying two matrices... 24
+ intermediate answer with bit 1 1077420193272
+multiplying two matrices... 25
+ intermediate answer with bit 1 1705700159352
+multiplying two matrices... 26
+ intermediate answer with bit 1 1425524822172
+multiplying two matrices... 27
+ intermediate answer with bit 1 685888759152
+multiplying two matrices... 28
+ intermediate answer with bit 1 1425854347416
+multiplying two matrices... 29
+ intermediate answer with bit 1 1281204660528
+multiplying two matrices... 30
+ intermediate answer with bit 1 1024484296824
+multiplying two matrices... 31
+ intermediate answer with bit 1 1982334425868
+multiplying two matrices... 32
+ intermediate answer with bit 1 799362623160
+multiplying two matrices... 33
+ intermediate answer with bit 1 1094943278016
+multiplying two matrices... 34
+ intermediate answer with bit 1 1416233081628
+multiplying two matrices... 35
+ intermediate answer with bit 1 1459187869680
+multiplying two matrices... 36
+ intermediate answer with bit 1 1575882921096
+multiplying two matrices... 37
+ intermediate answer with bit 1 1156687663284
+multiplying two matrices... 38
+ intermediate answer with bit 1 2058285965688
+multiplying two matrices... 39
+ intermediate answer with bit 1 1326690356328
+multiplying two matrices... 40
+ intermediate answer with bit 1 1326156619140
+multiplying two matrices... 41
+ intermediate answer with bit 1 1595994146136
+multiplying two matrices... 42
+ intermediate answer with bit 1 2110108106916
+multiplying two matrices... 43
+ intermediate answer with bit 1 1857516247080
+multiplying two matrices... 44
+ intermediate answer with bit 1 1445434178184
+multiplying two matrices... 45
+ intermediate answer with bit 1 1375853804964
+multiplying two matrices... 46
+ intermediate answer with bit 1 2137386767940
+multiplying two matrices... 47
+ intermediate answer with bit 1 1571254984368
+multiplying two matrices... 48
+ intermediate answer with bit 1 1062543293892
+multiplying two matrices... 49
+ intermediate answer with bit 1 1521278031744
+multiplying two matrices... 50
+ intermediate answer with bit 1 1519009364412
+multiplying two matrices... 51
+ intermediate answer with bit 1 1887501904092
+multiplying two matrices... 52
+ intermediate answer with bit 1 1255057713036
+multiplying two matrices... 53
+ intermediate answer with bit 1 1804373134488
+multiplying two matrices... 54
+ intermediate answer with bit 1 949896306540
+multiplying two matrices... 55
+ intermediate answer with bit 1 1255002726492
+multiplying two matrices... 56
+ intermediate answer with bit 1 2120130754452
+multiplying two matrices... 57
+ intermediate answer with bit 1 1235079110592
+multiplying two matrices... 58
+ intermediate answer with bit 1 881878865832
+multiplying two matrices... 59
+ intermediate answer with bit 1 1065097966212
+multiplying two matrices... 60
+ intermediate answer with bit 1 1792979284464
+multiplying two matrices... 61
+ intermediate answer with bit 1 1710363847032
+multiplying two matrices... 62
+ intermediate answer with bit 1 521922635208
+multiplying two matrices... 63
+ intermediate answer with bit 1 1121224996620
+multiplying two matrices... 64
+ intermediate answer with bit 1 959772178800
+multiplying two matrices... 65
+ intermediate answer with bit 1 1570171935456
+multiplying two matrices... 66
+ intermediate answer with bit 1 1629316784952
+multiplying two matrices... 67
+ intermediate answer with bit 1 1074910418604
+multiplying two matrices... 68
+ intermediate answer with bit 1 2025782733924
+multiplying two matrices... 69
+ intermediate answer with bit 1 705347996904
+multiplying two matrices... 70
+ intermediate answer with bit 1 1340120590200
+multiplying two matrices... 71
+ intermediate answer with bit 1 1582305921216
+multiplying two matrices... 72
+ intermediate answer with bit 1 973372238892
+multiplying two matrices... 73
+ intermediate answer with bit 1 1565965381788
+multiplying two matrices... 74
+ intermediate answer with bit 1 1181694050460
+multiplying two matrices... 75
+ intermediate answer with bit 1 1036754008272
+multiplying two matrices... 76
+ intermediate answer with bit 1 955873077696
+multiplying two matrices... 77
+ intermediate answer with bit 1 1204542776808
+multiplying two matrices... 78
+ intermediate answer with bit 1 1520032613760
+multiplying two matrices... 79
+ intermediate answer with bit 1 1126880854596
+multiplying two matrices... 80
+ intermediate answer with bit 1 1721840270292
+multiplying two matrices... 81
+ intermediate answer with bit 1 949100687352
+multiplying two matrices... 82
+ intermediate answer with bit 1 882232082928
+multiplying two matrices... 83
+ intermediate answer with bit 1 997745822640
+multiplying two matrices... 84
+ intermediate answer with bit 1 1739533349628
+multiplying two matrices... 85
+ intermediate answer with bit 1 1794919526388
+multiplying two matrices... 86
+ intermediate answer with bit 1 1549461947976
+multiplying two matrices... 87
+ intermediate answer with bit 1 888023460924
+multiplying two matrices... 88
+ intermediate answer with bit 1 1266288045012
+multiplying two matrices... 89
+ intermediate answer with bit 1 1486859956956
+multiplying two matrices... 90
+ intermediate answer with bit 1 1472720708412
+multiplying two matrices... 91
+ intermediate answer with bit 1 1214237628324
+multiplying two matrices... 92
+ intermediate answer with bit 1 1989317853576
+multiplying two matrices... 93
+ intermediate answer with bit 1 1967504616432
+multiplying two matrices... 94
+ intermediate answer with bit 1 1555197248340
+multiplying two matrices... 95
+ intermediate answer with bit 1 918919529784
+multiplying two matrices... 96
+ intermediate answer with bit 1 968390717004
+multiplying two matrices... 97
+ intermediate answer with bit 1 1874449885212
+multiplying two matrices... 98
+ intermediate answer with bit 1 2119737573540
+multiplying two matrices... 99
+ intermediate answer with bit 1 1719117805176
+multiplying two matrices... 100
+ intermediate answer with bit 1 1101310775352
+multiplying two matrices... 101
+ intermediate answer with bit 1 1748804077980
+multiplying two matrices... 102
+ intermediate answer with bit 1 1750510976904
+multiplying two matrices... 103
+ intermediate answer with bit 1 1276099381224
+multiplying two matrices... 104
+ intermediate answer with bit 1 1794195692496
+multiplying two matrices... 105
+ intermediate answer with bit 1 1903282906212
+multiplying two matrices... 106
+ intermediate answer with bit 1 1935967683132
+multiplying two matrices... 107
+ intermediate answer with bit 1 1940223216132
+multiplying two matrices... 108
+ intermediate answer with bit 1 1080877660056
+multiplying two matrices... 109
+ intermediate answer with bit 1 2097320768424
+multiplying two matrices... 110
+ intermediate answer with bit 1 1511915489460
+multiplying two matrices... 111
+ intermediate answer with bit 1 1028426702832
+multiplying two matrices... 112
+ intermediate answer with bit 1 1413482656392
+multiplying two matrices... 113
+ intermediate answer with bit 1 1648115080128
+multiplying two matrices... 114
+ intermediate answer with bit 1 2009211282900
+multiplying two matrices... 115
+ intermediate answer with bit 1 1498888962864
+multiplying two matrices... 116
+ intermediate answer with bit 1 940529192976
+multiplying two matrices... 117
+ intermediate answer with bit 1 1200399732216
+multiplying two matrices... 118
+ intermediate answer with bit 1 1032734235636
+multiplying two matrices... 119
+ intermediate answer with bit 1 1216983843324
+multiplying two matrices... 120
+ intermediate answer with bit 1 1343136382128
+multiplying two matrices... 121
+ intermediate answer with bit 1 559421226504
+multiplying two matrices... 122
+ intermediate answer with bit 1 1521725181552
+multiplying two matrices... 123
+ intermediate answer with bit 1 1659805624152
+multiplying two matrices... 124
+ intermediate answer with bit 1 1863530749332
+multiplying two matrices... 125
+ intermediate answer with bit 1 1232361218736
+multiplying two matrices... 126
+ intermediate answer with bit 1 1928595191976
+multiplying two matrices... 127
+ intermediate answer with bit 1 1567076347872
+multiplying two matrices... 128
+ intermediate answer with bit 1 2231283132252
+multiplying two matrices... 129
+ intermediate answer with bit 1 787129922808
+multiplying two matrices... 130
+ intermediate answer with bit 1 952158935628
+multiplying two matrices... 131
+ intermediate answer with bit 1 2105022260880
+multiplying two matrices... 132
+ intermediate answer with bit 1 893966167332
+multiplying two matrices... 133
+ intermediate answer with bit 1 969467567436
+multiplying two matrices... 134
+ intermediate answer with bit 1 659819519892
+multiplying two matrices... 135
+ intermediate answer with bit 1 1825631387496
+multiplying two matrices... 136
+ intermediate answer with bit 1 1073044594440
+multiplying two matrices... 137
+ intermediate answer with bit 1 873156366972
+multiplying two matrices... 138
+ intermediate answer with bit 1 1487096133228
+multiplying two matrices... 139
+ intermediate answer with bit 1 927711744228
+multiplying two matrices... 140
+ intermediate answer with bit 1 2176285001400
+multiplying two matrices... 141
+ intermediate answer with bit 1 1210450227444
+multiplying two matrices... 142
+ intermediate answer with bit 1 951623138340
+multiplying two matrices... 143
+ intermediate answer with bit 1 1101327783444
+multiplying two matrices... 144
+ intermediate answer with bit 1 2072159586432
+multiplying two matrices... 145
+ intermediate answer with bit 1 1563684622056
+multiplying two matrices... 146
+ intermediate answer with bit 1 1224612118908
+multiplying two matrices... 147
+ intermediate answer with bit 1 1606200598224
+multiplying two matrices... 148
+ intermediate answer with bit 1 1747004009400
+multiplying two matrices... 149
+ intermediate answer with bit 1 2362325697252
+multiplying two matrices... 150
+ intermediate answer with bit 1 1565549195256
+multiplying two matrices... 151
+ intermediate answer with bit 1 1628418975408
+multiplying two matrices... 152
+ intermediate answer with bit 1 1463896993536
+multiplying two matrices... 153
+ intermediate answer with bit 1 1754025312708
+multiplying two matrices... 154
+ intermediate answer with bit 1 1986008104152
+multiplying two matrices... 155
+ intermediate answer with bit 1 984389168484
+multiplying two matrices... 156
+ intermediate answer with bit 1 836456618700
+multiplying two matrices... 157
+ intermediate answer with bit 1 1083445035516
+multiplying two matrices... 158
+ intermediate answer with bit 1 1071746480988
+multiplying two matrices... 159
+ intermediate answer with bit 1 1400447604384
+multiplying two matrices... 160
+ intermediate answer with bit 1 1275178578948
+multiplying two matrices... 161
+ intermediate answer with bit 1 1365626308644
+multiplying two matrices... 162
+ intermediate answer with bit 1 1605841269588
+multiplying two matrices... 163
+ intermediate answer with bit 1 1970168816376
+multiplying two matrices... 164
+ intermediate answer with bit 1 1776342153060
+multiplying two matrices... 165
+ intermediate answer with bit 1 1898795728656
+multiplying two matrices... 166
+ intermediate answer with bit 1 1128965273208
+multiplying two matrices... 167
+ intermediate answer with bit 1 1495750345920
+multiplying two matrices... 168
+ intermediate answer with bit 1 1345768792668
+multiplying two matrices... 169
+ intermediate answer with bit 1 1645470558504
+multiplying two matrices... 170
+ intermediate answer with bit 1 1031006548764
+multiplying two matrices... 171
+ intermediate answer with bit 1 1328826923928
+multiplying two matrices... 172
+ intermediate answer with bit 1 2441190245472
+multiplying two matrices... 173
+ intermediate answer with bit 1 1752546519936
+multiplying two matrices... 174
+ intermediate answer with bit 1 1044126530568
+multiplying two matrices... 175
+ intermediate answer with bit 1 1918458110484
+multiplying two matrices... 176
+ intermediate answer with bit 1 1395081866952
+multiplying two matrices... 177
+ intermediate answer with bit 1 1314470343780
+multiplying two matrices... 178
+ intermediate answer with bit 1 1290899112660
+multiplying two matrices... 179
+ intermediate answer with bit 1 1492946676324
+multiplying two matrices... 180
+ intermediate answer with bit 1 1225030578084
+multiplying two matrices... 181
+ intermediate answer with bit 1 1207063424016
+multiplying two matrices... 182
+ intermediate answer with bit 1 730373813532
+multiplying two matrices... 183
+ intermediate answer with bit 1 1172274949548
+multiplying two matrices... 184
+ intermediate answer with bit 1 1993335368148
+multiplying two matrices... 185
+ intermediate answer with bit 1 1698782404788
+multiplying two matrices... 186
+ intermediate answer with bit 1 1441637197524
+multiplying two matrices... 187
+ intermediate answer with bit 1 1265685429960
+multiplying two matrices... 188
+ intermediate answer with bit 1 838077102720
+multiplying two matrices... 189
+ intermediate answer with bit 1 1955449235304
+multiplying two matrices... 190
+ intermediate answer with bit 1 989490143376
+multiplying two matrices... 191
+ intermediate answer with bit 1 1510575616440
+multiplying two matrices... 192
+ intermediate answer with bit 1 1485418907412
+multiplying two matrices... 193
+ intermediate answer with bit 1 1462314810744
+multiplying two matrices... 194
+ intermediate answer with bit 1 2403469136412
+multiplying two matrices... 195
+ intermediate answer with bit 1 1674673708536
+multiplying two matrices... 196
+ intermediate answer with bit 1 1282505780412
+multiplying two matrices... 197
+ intermediate answer with bit 1 2260962382680
+multiplying two matrices... 198
+ intermediate answer with bit 1 1409719509252
+multiplying two matrices... 199
+ intermediate answer with bit 1 1595698925292
+multiplying two matrices... 200
+ intermediate answer with bit 1 1759730215680
+multiplying two matrices... 201
+ intermediate answer with bit 1 1385088940908
+multiplying two matrices... 202
+ intermediate answer with bit 1 1459294086024
+multiplying two matrices... 203
+ intermediate answer with bit 1 642886516404
+multiplying two matrices... 204
+ intermediate answer with bit 1 1410798075084
+multiplying two matrices... 205
+ intermediate answer with bit 1 1507257252756
+multiplying two matrices... 206
+ intermediate answer with bit 1 1607925910356
+multiplying two matrices... 207
+ intermediate answer with bit 1 1537079604588
+multiplying two matrices... 208
+ intermediate answer with bit 1 1715489352504
+multiplying two matrices... 209
+ intermediate answer with bit 1 1667028497544
+multiplying two matrices... 210
+ intermediate answer with bit 1 1469043680364
+multiplying two matrices... 211
+ intermediate answer with bit 1 1478833650828
+multiplying two matrices... 212
+ intermediate answer with bit 1 1737660376656
+multiplying two matrices... 213
+ intermediate answer with bit 1 2190934744128
+multiplying two matrices... 214
+ intermediate answer with bit 1 1795742318160
+multiplying two matrices... 215
+ intermediate answer with bit 1 1419203267028
+multiplying two matrices... 216
+ intermediate answer with bit 1 1358123078016
+multiplying two matrices... 217
+ intermediate answer with bit 1 1504018518552
+multiplying two matrices... 218
+ intermediate answer with bit 1 1562685059700
+multiplying two matrices... 219
+ intermediate answer with bit 1 1126299580272
+multiplying two matrices... 220
+ intermediate answer with bit 1 1326232513692
+multiplying two matrices... 221
+ intermediate answer with bit 1 1160667584928
+multiplying two matrices... 222
+ intermediate answer with bit 1 1638827732196
+multiplying two matrices... 223
+ intermediate answer with bit 1 996034851540
+multiplying two matrices... 224
+ intermediate answer with bit 1 1765898022852
+multiplying two matrices... 225
+ intermediate answer with bit 1 1439128668168
+multiplying two matrices... 226
+ intermediate answer with bit 1 1647606790332
+multiplying two matrices... 227
+ intermediate answer with bit 1 1096462512612
+multiplying two matrices... 228
+ intermediate answer with bit 1 2217162494736
+multiplying two matrices... 229
+ intermediate answer with bit 1 1836712584360
+multiplying two matrices... 230
+ intermediate answer with bit 1 1309466487816
+multiplying two matrices... 231
+ intermediate answer with bit 1 1523435566680
+multiplying two matrices... 232
+ intermediate answer with bit 1 1365884025120
+multiplying two matrices... 233
+ intermediate answer with bit 1 1202396683536
+multiplying two matrices... 234
+ intermediate answer with bit 1 1612996049988
+multiplying two matrices... 235
+ intermediate answer with bit 1 1468724711148
+multiplying two matrices... 236
+ intermediate answer with bit 1 2093448181248
+multiplying two matrices... 237
+ intermediate answer with bit 1 1437315838740
+multiplying two matrices... 238
+ intermediate answer with bit 1 1984237107984
+multiplying two matrices... 239
+ intermediate answer with bit 1 1414020232116
+multiplying two matrices... 240
+ intermediate answer with bit 1 1519534087956
+multiplying two matrices... 241
+ intermediate answer with bit 1 1361082457692
+multiplying two matrices... 242
+ intermediate answer with bit 1 614290957020
+multiplying two matrices... 243
+ intermediate answer with bit 1 1061784279756
+multiplying two matrices... 244
+ intermediate answer with bit 1 1211780569500
+multiplying two matrices... 245
+ intermediate answer with bit 1 1268818575984
+multiplying two matrices... 246
+ intermediate answer with bit 1 1091357138664
+multiplying two matrices... 247
+ intermediate answer with bit 1 613638227520
+multiplying two matrices... 248
+ intermediate answer with bit 1 1732478139936
+multiplying two matrices... 249
+ intermediate answer with bit 1 2025421555428
+multiplying two matrices... 250
+ intermediate answer with bit 1 1339270046424
+multiplying two matrices... 251
+ intermediate answer with bit 1 846037206684
+multiplying two matrices... 252
+ intermediate answer with bit 1 1717233670116
+multiplying two matrices... 253
+ intermediate answer with bit 1 1061199497628
+multiplying two matrices... 254
+ intermediate answer with bit 1 840617955576
+multiplying two matrices... 255
+Final answer 920321499
+bonusSolution  : List[Unit] = List(())
